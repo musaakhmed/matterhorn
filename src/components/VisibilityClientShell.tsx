@@ -12,8 +12,10 @@ import MetricsGrid from './MetricsGrid';
 import LiveWebcam from './LiveWebcam';
 import HistoricalTable from './HistoricalTable';
 import ViewpointAdvice from './ViewpointAdvice';
+import FaqSection from './FaqSection';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
+import { getDashboardFaqs } from '@/lib/schema';
 import { Activity, Info, BookOpen, ArrowUpRight } from 'lucide-react';
 import logoImg from '../../public/logo.jpeg';
 
@@ -29,6 +31,7 @@ export default function VisibilityClientShell({
   );
 
   const activeData = initialData.viewpoints[activeViewpointId];
+  const dashboardFaqs = getDashboardFaqs(initialData);
 
   const viewpointsMap = {
     gornergrat: initialData.viewpoints.gornergrat.viewpoint,
@@ -164,7 +167,14 @@ export default function VisibilityClientShell({
           </div>
         </section>
 
-        {/* 10. Alpine Field Guides Quick-Access Strip */}
+        {/* 10. Frequently Asked Questions (FAQPage Schema-Backed Accordion) */}
+        <FaqSection
+          faqs={dashboardFaqs}
+          groupName="dashboard-faq"
+          badgeLabel="FAQPage Schema • Live Telemetry Indexed"
+        />
+
+        {/* 11. Alpine Field Guides Quick-Access Strip */}
         <section
           aria-label="Zermatt & Matterhorn Alpine Field Guides"
           className="rounded-2xl border border-slate-200/90 bg-gradient-to-r from-sky-50/80 via-white to-slate-50/90 p-5 sm:p-6 shadow-2xs"

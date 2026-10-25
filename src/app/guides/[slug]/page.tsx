@@ -16,6 +16,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { GUIDES, getGuideBySlug } from '@/lib/guides';
+import { fetchMatterhornVisibility } from '@/lib/weather';
+import { buildGuideArticleJsonLd, serializeJsonLd } from '@/lib/schema';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import HistoricalTable from '@/components/HistoricalTable';
 import ContingencyCard from '@/components/ContingencyCard';
@@ -81,77 +83,14 @@ export default async function GuideArticlePage({
   }
 
   const relatedGuides = GUIDES.filter((g) => g.slug !== guide.slug).slice(0, 3);
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Article',
-        headline: guide.title,
-        description: guide.description,
-        datePublished: guide.publishedAt,
-        dateModified: guide.updatedAt,
-        author: {
-          '@type': 'Organization',
-          name: 'Is The Matterhorn Visible? Alpine Telemetry',
-          url: 'https://isthematterhornvisible.com',
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'Is The Matterhorn Visible?',
-          url: 'https://isthematterhornvisible.com',
-          logo: {
-            '@type': 'ImageObject',
-            url: 'https://isthematterhornvisible.com/logo.jpeg',
-          },
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': `https://isthematterhornvisible.com/guides/${guide.slug}`,
-        },
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: guide.faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer,
-          },
-        })),
-      },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Live Dashboard',
-            item: 'https://isthematterhornvisible.com',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Alpine Field Guides',
-            item: 'https://isthematterhornvisible.com/guides',
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: guide.shortTitle,
-            item: `https://isthematterhornvisible.com/guides/${guide.slug}`,
-          },
-        ],
-      },
-    ],
-  };
+  const telemetry = await fetchMatterhornVisibility();
+  const jsonLd = buildGuideArticleJsonLd(guide, telemetry);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <LiveVisibilityBanner />

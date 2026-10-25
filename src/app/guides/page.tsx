@@ -16,7 +16,14 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { GUIDES, GuideCategory } from '@/lib/guides';
+import { fetchMatterhornVisibility } from '@/lib/weather';
+import {
+  buildGuidesIndexJsonLd,
+  GUIDES_INDEX_FAQS,
+  serializeJsonLd,
+} from '@/lib/schema';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
+import FaqSection from '@/components/FaqSection';
 import logoImg from '../../../public/logo.jpeg';
 
 export const revalidate = 900; // Revalidate live banner every 15 minutes
@@ -71,30 +78,15 @@ const CATEGORY_STYLE: Record<
   },
 };
 
-export default function GuidesIndexPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'Matterhorn Alpine Field Guides & Weather Climatology',
-    description:
-      'Data-backed field guides for Zermatt travelers: viewpoint comparisons, 30-year monthly visibility statistics, sunrise photography spots, and banner cloud physics.',
-    url: 'https://isthematterhornvisible.com/guides',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: GUIDES.map((guide, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: `https://isthematterhornvisible.com/guides/${guide.slug}`,
-        name: guide.title,
-      })),
-    },
-  };
+export default async function GuidesIndexPage() {
+  const telemetry = await fetchMatterhornVisibility();
+  const jsonLd = buildGuidesIndexJsonLd(telemetry);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <LiveVisibilityBanner />
@@ -197,6 +189,15 @@ export default function GuidesIndexPage() {
             );
           })}
         </section>
+
+        {/* Schema-Backed Field Guides FAQ Section */}
+        <FaqSection
+          title="Zermatt & Matterhorn Planning FAQs"
+          subtitle="Essential answers before booking Gornergrat or Matterhorn Glacier Paradise excursions"
+          faqs={GUIDES_INDEX_FAQS}
+          groupName="guides-index-faq"
+          badgeLabel="FAQPage Schema • Field Guide Verified"
+        />
 
         {/* Bottom Funnel CTA Card */}
         <section className="rounded-2xl border border-sky-200 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 text-white p-6 sm:p-8 shadow-sm">

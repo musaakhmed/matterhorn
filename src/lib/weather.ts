@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import {
   AtmosphericMetrics,
   BadgeColor,
@@ -686,32 +687,34 @@ async function fetchSingleViewpointForecast(
   };
 }
 
-export async function fetchMatterhornVisibility(): Promise<VisibilityApiResponse> {
-  const now = new Date();
-  const { dateIso, hourNumber, formattedClock } = getSwissClockParts(now);
+export const fetchMatterhornVisibility = cache(
+  async (): Promise<VisibilityApiResponse> => {
+    const now = new Date();
+    const { dateIso, hourNumber, formattedClock } = getSwissClockParts(now);
 
-  const [gornergratData, glacierParadiseData] = await Promise.all([
-    fetchSingleViewpointForecast(
-      VIEWPOINTS.gornergrat,
-      now,
-      dateIso,
-      hourNumber
-    ),
-    fetchSingleViewpointForecast(
-      VIEWPOINTS['glacier-paradise'],
-      now,
-      dateIso,
-      hourNumber
-    ),
-  ]);
+    const [gornergratData, glacierParadiseData] = await Promise.all([
+      fetchSingleViewpointForecast(
+        VIEWPOINTS.gornergrat,
+        now,
+        dateIso,
+        hourNumber
+      ),
+      fetchSingleViewpointForecast(
+        VIEWPOINTS['glacier-paradise'],
+        now,
+        dateIso,
+        hourNumber
+      ),
+    ]);
 
-  return {
-    defaultViewpoint: 'gornergrat',
-    viewpoints: {
-      gornergrat: gornergratData,
-      'glacier-paradise': glacierParadiseData,
-    },
-    updatedAt: now.toISOString(),
-    swissTimeFormatted: formattedClock,
-  };
-}
+    return {
+      defaultViewpoint: 'gornergrat',
+      viewpoints: {
+        gornergrat: gornergratData,
+        'glacier-paradise': glacierParadiseData,
+      },
+      updatedAt: now.toISOString(),
+      swissTimeFormatted: formattedClock,
+    };
+  }
+);

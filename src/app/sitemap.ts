@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(guide.updatedAt),
     changeFrequency: 'weekly',
     priority: 0.85,
+    images: [`${BASE_URL}/logo.jpeg`],
   }));
 
   return [
@@ -17,12 +18,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'hourly',
       priority: 1,
+      images: [
+        `${BASE_URL}/logo.jpeg`,
+        `${BASE_URL}/icons/crystal-clear.jpeg`,
+        `${BASE_URL}/icons/partially-visible.jpeg`,
+        `${BASE_URL}/icons/barely-visible.jpeg`,
+        `${BASE_URL}/icons/not-visible.jpeg`,
+      ],
     },
     {
       url: `${BASE_URL}/guides`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
+      images: [`${BASE_URL}/logo.jpeg`],
     },
     ...guideEntries,
     {

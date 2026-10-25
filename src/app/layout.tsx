@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { buildRootLayoutJsonLd, serializeJsonLd } from '@/lib/schema';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -12,6 +13,17 @@ export const metadata: Metadata = {
   description:
     'Check real-time 1–10 AM/PM visibility scores for the Matterhorn in Zermatt across Gornergrat (East) and Glacier Paradise (South), with 10-day horizon forecasts and 4 live Roundshot webcams.',
   metadataBase: new URL('https://isthematterhornvisible.com'),
+  category: 'weather',
+  keywords: [
+    'is the matterhorn visible',
+    'matterhorn visibility forecast',
+    'zermatt weather webcam',
+    'gornergrat visibility',
+    'matterhorn glacier paradise weather',
+    'best time to see the matterhorn',
+    'matterhorn cloud cover',
+    'zermatt live webcams',
+  ],
   alternates: {
     canonical: '/',
   },
@@ -49,54 +61,23 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
-const jsonLdSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Is The Matterhorn Visible?',
-      url: 'https://isthematterhornvisible.com',
-      image: 'https://isthematterhornvisible.com/logo.jpeg',
-      applicationCategory: 'WeatherApplication',
-      operatingSystem: 'All',
-      description:
-        'Check real-time visibility for the Matterhorn summit (4,478m) in Zermatt. Powered by high-altitude atmospheric data and live Gornergrat webcams.',
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'CHF',
-      },
-      contentLocation: {
-        '@type': 'Place',
-        name: 'Matterhorn Summit, Zermatt, Switzerland',
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 45.9765,
-          longitude: 7.7491,
-          elevation: '4478 m',
-        },
-      },
-    },
-    {
-      '@type': 'WeatherForecast',
-      name: 'Matterhorn 10-Day AM/PM Visibility Forecast (Gornergrat & Glacier Paradise)',
-      description:
-        '10-day Morning (AM) and Afternoon (PM) 1–10 visibility index, cloud layer diagnostics, Föhn wind banner risk, and historical monthly clear-sky probabilities for Zermatt, Switzerland.',
-      spatialCoverage: {
-        '@type': 'Place',
-        name: 'Matterhorn, Zermatt, Valais, Switzerland',
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 45.9765,
-          longitude: 7.7491,
-        },
-      },
-    },
-  ],
-};
+/**
+ * Root site-level JSON-LD (`Organization`, `WebSite`, `WebApplication`).
+ * Route-specific `WeatherForecast` and `FAQPage` schemas are dynamically emitted
+ * in `src/app/page.tsx`, `src/app/guides/page.tsx`, and `src/app/guides/[slug]/page.tsx`
+ * via `src/lib/schema.ts`.
+ */
+const rootJsonLd = buildRootLayoutJsonLd();
 
 export default function RootLayout({
   children,
@@ -108,7 +89,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(rootJsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 alpine-backdrop selection:bg-sky-500/20 selection:text-sky-900">
