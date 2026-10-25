@@ -15,6 +15,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
   openGraph: {
     title: 'Is The Matterhorn Visible Today? | Real-Time Live Visibility & Webcams',
     description:
@@ -23,12 +30,21 @@ export const metadata: Metadata = {
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
     type: 'website',
+    images: [
+      {
+        url: '/logo.jpeg',
+        width: 1024,
+        height: 1024,
+        alt: 'Is The Matterhorn Visible? logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Is The Matterhorn Visible Today?',
     description:
       'Instant Matterhorn 1–10 AM/PM visibility index, 10-day forecast horizon, and live Zermatt webcams.',
+    images: ['/logo.jpeg'],
   },
   robots: {
     index: true,
@@ -43,6 +59,7 @@ const jsonLdSchema = {
       '@type': 'WebApplication',
       name: 'Is The Matterhorn Visible?',
       url: 'https://isthematterhornvisible.com',
+      image: 'https://isthematterhornvisible.com/logo.jpeg',
       applicationCategory: 'WeatherApplication',
       operatingSystem: 'All',
       description:

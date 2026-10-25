@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, MapPin, Compass, BookOpen } from 'lucide-react';
 import { BadgeColor, Viewpoint } from '@/lib/types';
-import VisibilityIcon from './VisibilityIcon';
+import logoImg from '../../public/logo.jpeg';
 
 interface HeaderProps {
   initialSwissTime: string;
   activeViewpoint: Viewpoint;
-  activeBadgeColor: BadgeColor;
+  activeBadgeColor?: BadgeColor;
 }
 
 export default function Header({
   initialSwissTime,
   activeViewpoint,
-  activeBadgeColor,
 }: HeaderProps) {
   const [swissTime, setSwissTime] = useState<string>(initialSwissTime);
 
@@ -56,11 +56,17 @@ export default function Header({
         {/* Brand Identity */}
         <div className="flex items-center gap-3 min-w-0">
           <div className="relative shrink-0">
-            <VisibilityIcon
-              badgeColor={activeBadgeColor}
-              size="md"
-              className="shadow-sm"
-            />
+            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-11 h-11 rounded-[20%] bg-slate-800 ring-1 ring-sky-500/35 shadow-sm select-none">
+              <Image
+                src={logoImg}
+                alt="Is The Matterhorn Visible? logo"
+                width={176}
+                height={176}
+                unoptimized
+                preload
+                className="w-full h-full object-cover pointer-events-none"
+              />
+            </span>
             <span
               className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"
               title="Live Atmospheric Telemetry"

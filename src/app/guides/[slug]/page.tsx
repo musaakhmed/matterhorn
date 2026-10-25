@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -11,7 +12,6 @@ import {
   ArrowRight,
   ArrowLeft,
   Info,
-  ShieldCheck,
   Activity,
   Sparkles,
 } from 'lucide-react';
@@ -19,6 +19,7 @@ import { GUIDES, getGuideBySlug } from '@/lib/guides';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import HistoricalTable from '@/components/HistoricalTable';
 import ContingencyCard from '@/components/ContingencyCard';
+import logoImg from '../../../../public/logo.jpeg';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from '@/components/VisibilityIcon';
 
 export const revalidate = 900; // Refresh live banner every 15 minutes
@@ -99,6 +100,10 @@ export default async function GuideArticlePage({
           '@type': 'Organization',
           name: 'Is The Matterhorn Visible?',
           url: 'https://isthematterhornvisible.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://isthematterhornvisible.com/logo.jpeg',
+          },
         },
         mainEntityOfPage: {
           '@type': 'WebPage',
@@ -512,8 +517,17 @@ export default async function GuideArticlePage({
 
       <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-medium text-slate-700">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" aria-hidden="true" />
+          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
+              <Image
+                src={logoImg}
+                alt="Is The Matterhorn Visible? logo"
+                width={48}
+                height={48}
+                unoptimized
+                className="w-full h-full object-cover pointer-events-none"
+              />
+            </span>
             <span>
               isthematterhornvisible.com • Swiss Alpine Telemetry Utility
             </span>

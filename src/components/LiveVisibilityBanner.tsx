@@ -1,15 +1,23 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Radio, BookOpen } from 'lucide-react';
 import { fetchMatterhornVisibility } from '@/lib/weather';
 import { BadgeColor } from '@/lib/types';
-import VisibilityIcon from './VisibilityIcon';
+import logoImg from '../../public/logo.jpeg';
 
 const SCORE_PILL_STYLES: Record<BadgeColor, string> = {
   emerald: 'bg-emerald-50 border-emerald-300 text-emerald-900',
   amber: 'bg-amber-50 border-amber-300 text-amber-900',
   orange: 'bg-orange-50 border-orange-300 text-orange-900',
   rose: 'bg-rose-50 border-rose-300 text-rose-900',
+};
+
+const SCORE_DOT_STYLES: Record<BadgeColor, string> = {
+  emerald: 'bg-emerald-500',
+  amber: 'bg-amber-500',
+  orange: 'bg-orange-500',
+  rose: 'bg-rose-500',
 };
 
 export default async function LiveVisibilityBanner() {
@@ -27,11 +35,17 @@ export default async function LiveVisibilityBanner() {
             className="flex items-center gap-3 min-w-0 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 rounded-xl"
           >
             <div className="relative shrink-0">
-              <VisibilityIcon
-                badgeColor={gornergrat.currentBadgeColor}
-                size="md"
-                className="shadow-sm"
-              />
+              <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-11 h-11 rounded-[20%] bg-slate-800 ring-1 ring-sky-500/35 shadow-sm select-none group-hover:ring-sky-500/60 transition-all">
+                <Image
+                  src={logoImg}
+                  alt="Is The Matterhorn Visible? logo"
+                  width={176}
+                  height={176}
+                  unoptimized
+                  preload
+                  className="w-full h-full object-cover pointer-events-none"
+                />
+              </span>
               <span
                 className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"
                 title="Live Atmospheric Telemetry"
@@ -67,12 +81,12 @@ export default async function LiveVisibilityBanner() {
             {/* Gornergrat Live Pill */}
             <Link
               href="/"
-              className={`inline-flex items-center gap-1.5 pl-1.5 pr-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-transform hover:-translate-y-0.5 ${SCORE_PILL_STYLES[gornergrat.currentBadgeColor]}`}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-transform hover:-translate-y-0.5 ${SCORE_PILL_STYLES[gornergrat.currentBadgeColor]}`}
               title={`Gornergrat (3,089m): ${gornergrat.currentScore}/10 ${gornergrat.currentStatus}`}
             >
-              <VisibilityIcon
-                badgeColor={gornergrat.currentBadgeColor}
-                size="xs"
+              <span
+                className={`w-2 h-2 rounded-full ${SCORE_DOT_STYLES[gornergrat.currentBadgeColor]}`}
+                aria-hidden="true"
               />
               <span>Gornergrat: {gornergrat.currentScore}/10</span>
             </Link>
@@ -80,12 +94,12 @@ export default async function LiveVisibilityBanner() {
             {/* Glacier Paradise Live Pill */}
             <Link
               href="/"
-              className={`inline-flex items-center gap-1.5 pl-1.5 pr-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-transform hover:-translate-y-0.5 ${SCORE_PILL_STYLES[glacier.currentBadgeColor]}`}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-transform hover:-translate-y-0.5 ${SCORE_PILL_STYLES[glacier.currentBadgeColor]}`}
               title={`Glacier Paradise (3,883m): ${glacier.currentScore}/10 ${glacier.currentStatus}`}
             >
-              <VisibilityIcon
-                badgeColor={glacier.currentBadgeColor}
-                size="xs"
+              <span
+                className={`w-2 h-2 rounded-full ${SCORE_DOT_STYLES[glacier.currentBadgeColor]}`}
+                aria-hidden="true"
               />
               <span>Glacier Paradise: {glacier.currentScore}/10</span>
             </Link>
