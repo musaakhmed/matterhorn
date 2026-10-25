@@ -3,7 +3,8 @@ export type GuideCategory =
   | 'Climatology'
   | 'Bad Weather'
   | 'Photography'
-  | 'Meteorology';
+  | 'Meteorology'
+  | 'Day Trips';
 
 export interface GuideComparisonTable {
   caption: string;
@@ -515,6 +516,138 @@ export const GUIDES: GuideArticle[] = [
         question: 'Why does the banner cloud disappear at night?',
         answer:
           'When daytime solar heating stops, thermal updrafts feeding valley moisture into the leeward vortex subside, often allowing the summit to clear around dusk and remain sharp through early morning.',
+      },
+    ],
+  },
+  {
+    slug: 'zurich-geneva-to-zermatt-day-trip',
+    title: 'Zurich or Geneva to Zermatt Day Trip: Is It Worth the Train Ride Today?',
+    shortTitle: 'Zurich & Geneva Day Trip Guide',
+    seoTitle:
+      'Zurich & Geneva to Zermatt Day Trip (2026) | Train Times, Costs & Live Go/No-Go',
+    description:
+      'Planning a day trip from Zurich (3h 14m) or Geneva (3h 45m) to Zermatt? Use our live AM/PM Matterhorn visibility Go/No-Go rules, SBB train transfer tips at Visp, and 1-day itinerary.',
+    category: 'Day Trips',
+    publishedAt: '2026-03-01',
+    updatedAt: '2026-10-25',
+    readingTimeMinutes: 6,
+    heroStat: {
+      label: 'Round-Trip Rail Time',
+      value: '6.5 – 7.5 hrs',
+      detail: '3h 14m each way from Zurich HB • 3h 45m from Geneva',
+    },
+    keyTakeaways: [
+      'A Zermatt day trip from Zurich or Geneva requires 6.5 to 7.5 hours of total train travel—making it 100% worth it on a ≥8/10 clear day, and a costly regret on a ≤4/10 cloudy day.',
+      'Because even a 06:30 CET departure from Zurich or Geneva gets you to Zermatt around 10:00 CET, your summit viewing window falls across late morning and early afternoon—so check BOTH our AM and PM scores before boarding.',
+      'In summer (June–August), afternoon cumulus clouds often form by 13:00 CET; day-trippers must take the earliest morning SBB connection and head straight up Gornergrat upon arrival before exploring Zermatt village.',
+      'If our live Matterhorn score is ≤5/10 when you wake up in Zurich or Geneva, use your Swiss Travel Pass or Saver Day Pass for a clearer region (e.g., Lucerne/Rigi, Bernese Oberland, or Montreux) and save Zermatt for a higher-scoring day.',
+    ],
+    comparisonTable: {
+      caption: 'SBB Rail Logistics to Zermatt from Major Swiss Hubs',
+      headers: [
+        'Origin Station',
+        'One-Way Time',
+        'Transfer Hub',
+        'Target Departure',
+        'Zermatt Arrival',
+      ],
+      rows: [
+        [
+          'Zurich HB',
+          '3h 14m',
+          '1 change at Visp (7–9 min cross-platform)',
+          '06:02 or 07:02 CET',
+          '09:14 or 10:14 CET',
+        ],
+        [
+          'Geneva Airport / Cornavin',
+          '3h 45m',
+          '1 change at Visp (IR90 to MGB cogwheel)',
+          '05:50 or 06:24 CET',
+          '09:51 or 10:14 CET',
+        ],
+        [
+          'Bern',
+          '2h 10m',
+          '1 change at Visp (via Lötschberg Base Tunnel)',
+          '07:07 or 08:07 CET',
+          '09:14 or 10:14 CET',
+        ],
+        [
+          'Basel SBB',
+          '3h 12m',
+          '1 change at Visp (or Bern + Visp)',
+          '06:03 or 06:56 CET',
+          '09:14 or 10:14 CET',
+        ],
+        [
+          'Interlaken Ost',
+          '2h 18m',
+          '2 changes at Spiez & Visp',
+          '07:00 or 08:00 CET',
+          '09:14 or 10:14 CET',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'go-no-go-matrix',
+        heading: '1. The 06:00 CET "Go / No-Go" Decision Rule Before You Board',
+        paragraphs: [
+          'The biggest mistake travelers make in Switzerland is booking non-refundable Zermatt mountain excursions weeks in advance for a single rigid day trip from Zurich or Geneva. Because Zermatt sits inside a deep southern alpine pocket along the Italian border, its weather is completely disconnected from northern Switzerland: it can be pouring rain in Zurich while the Matterhorn is 10/10 crystal clear—or sunny in Geneva while a southerly Föhn wall completely hides the Matterhorn.',
+          'Check the live Gornergrat and Glacier Paradise AM/PM scores at the top of this page before leaving your hotel in Zurich or Geneva:',
+        ],
+        bulletPoints: [
+          {
+            bold: 'GO — Both AM & PM Scores are 8/10 to 10/10:',
+            text: 'Board the train immediately. Stable high pressure is locked in across the Pennine Alps and you will enjoy unobstructed views all afternoon.',
+          },
+          {
+            bold: 'EARLY-BIRD GO — AM is 8–10/10, but PM drops to 5–6/10:',
+            text: 'Very common in May–August due to afternoon thermal clouds. Only go if you catch the 06:02 (Zurich) or 05:50/06:24 (Geneva) train and ride the Gornergrat railway immediately at 09:36/10:24 CET BEFORE eating lunch or walking the village.',
+          },
+          {
+            bold: 'NO-GO — Both AM & PM Scores are ≤ 4/10:',
+            text: 'Cancel or reschedule your Zermatt day trip. Spending 7 hours on a train and CHF 200+ to stare into gray fog at 3,089m is never worth it—use our 10-Day Forecast slider to pick the highest-scoring day of your itinerary.',
+          },
+        ],
+        proTip: {
+          label: 'The Visp Connection Secret',
+          text: 'Don’t panic over the 7-minute transfer at Visp! SBB mainline trains arrive right next to the red Matterhorn Gotthard Bahn (MGB) narrow-gauge tracks on surface platforms 1–3. Sit on the LEFT side of the MGB train going uphill from Visp to Zermatt for the deepest canyon and glacier views.',
+        },
+      },
+      {
+        id: 'perfect-day-trip-itinerary',
+        heading: '2. The Optimal 1-Day Zermatt Timeline (Summit First, Village Second)',
+        paragraphs: [
+          'Because clouds almost always build later in the day, reverse the typical tourist schedule. Never waste clear morning sky wandering Bahnhofstrasse shops or eating a long breakfast on arrival.',
+          'When your train pulls into Zermatt Bahnhof at 09:14 or 10:14 CET, walk straight across the station square (60 meters) to the Gornergrat Bahn terminal. Ride the cogwheel train 33 minutes up to Gornergrat (3,089m) while the East Face is lit by morning sun. On your descent around noon, hop off one stop below the summit at Rotenboden (2,757m) to photograph the Matterhorn reflection in Riffelsee, then return to Zermatt village around 13:30 CET for a relaxed lunch, a walk across Kirchbrücke bridge, and the historic Hinterdorf wooden barns—activities that remain great even if afternoon banner clouds appear.',
+        ],
+      },
+      {
+        id: 'gornergrat-vs-glacier-daytrip',
+        heading: '3. Gornergrat vs. Glacier Paradise on a Tight Day-Trip Clock',
+        paragraphs: [
+          'When visiting Zermatt on a day trip from Zurich or Geneva, Gornergrat is almost always the smarter choice over Matterhorn Glacier Paradise (3,883m). The Gornergrat cogwheel station sits directly across the street from the Zermatt SBB arrival platform—saving you the 15-minute walk or e-bus ride to the southern end of the village required for the Glacier Paradise gondola.',
+          'Even more importantly, ascending from Zurich (408m) or Geneva (375m) straight to 3,883m at Glacier Paradise in a single morning represents a 3,500-meter altitude jump that frequently triggers headaches and dizziness, whereas Gornergrat (3,089m) is gentler and shows the classic Toblerone silhouette the entire ride up.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Does the Swiss Travel Pass cover the train from Zurich or Geneva to Zermatt?',
+        answer:
+          'Yes! The Swiss Travel Pass (and SBB Saver Day Pass) covers 100% of the journey from Zurich, Geneva, Basel, or Bern all the way into Zermatt village (including the Matterhorn Gotthard Bahn segment from Visp to Zermatt). It also gives you a 50% discount on the Gornergrat Bahn and Matterhorn Glacier Paradise mountain lifts.',
+      },
+      {
+        question: 'Can I do a Zermatt day trip from Zurich or Geneva in winter?',
+        answer:
+          'Yes—in fact, November through February have the highest clear-sky probabilities of the year (84%–89%). Just remember that sunset is around 16:45 CET in December/January, so catching a 06:02 or 07:02 CET morning train is essential to maximize daylight.',
+      },
+      {
+        question: 'What is the last train back from Zermatt to Zurich or Geneva?',
+        answer:
+          'Trains depart Zermatt every 30 to 60 minutes until roughly 20:37 CET (reaching Zurich HB around 00:05 and Geneva around 00:20). Most day-trippers take the 16:37, 17:37, or 18:37 CET departure after watching sunset alpenglow from Kirchbrücke.',
       },
     ],
   },

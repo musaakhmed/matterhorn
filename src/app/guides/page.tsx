@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   BookOpen,
@@ -10,12 +11,13 @@ import {
   CloudRain,
   Camera,
   Wind,
-  ShieldCheck,
+  TrainFront,
   Activity,
   Sparkles,
 } from 'lucide-react';
 import { GUIDES, GuideCategory } from '@/lib/guides';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
+import logoImg from '../../../public/logo.jpeg';
 
 export const revalidate = 900; // Revalidate live banner every 15 minutes
 
@@ -62,6 +64,10 @@ const CATEGORY_STYLE: Record<
   Meteorology: {
     badge: 'bg-slate-100 border-slate-300 text-slate-800',
     icon: Wind,
+  },
+  'Day Trips': {
+    badge: 'bg-rose-50 border-rose-200 text-rose-800',
+    icon: TrainFront,
   },
 };
 
@@ -221,8 +227,17 @@ export default function GuidesIndexPage() {
 
       <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-medium text-slate-700">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" aria-hidden="true" />
+          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
+              <Image
+                src={logoImg}
+                alt="Is The Matterhorn Visible? logo"
+                width={48}
+                height={48}
+                unoptimized
+                className="w-full h-full object-cover pointer-events-none"
+              />
+            </span>
             <span>
               isthematterhornvisible.com • Swiss Alpine Telemetry Utility
             </span>

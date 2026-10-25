@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import Header from './Header';
 import ViewpointSwitcher from './ViewpointSwitcher';
@@ -13,7 +14,8 @@ import HistoricalTable from './HistoricalTable';
 import ViewpointAdvice from './ViewpointAdvice';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
-import { Activity, Info, ShieldCheck, BookOpen, ArrowUpRight } from 'lucide-react';
+import { Activity, Info, BookOpen, ArrowUpRight } from 'lucide-react';
+import logoImg from '../../public/logo.jpeg';
 
 interface VisibilityClientShellProps {
   initialData: VisibilityApiResponse;
@@ -182,7 +184,7 @@ export default function VisibilityClientShell({
               href="/guides"
               className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors shrink-0"
             >
-              <span>Browse All 5 Field Guides</span>
+              <span>Browse All 6 Field Guides</span>
               <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
@@ -191,8 +193,17 @@ export default function VisibilityClientShell({
 
       <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-medium text-slate-700">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" aria-hidden="true" />
+          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
+              <Image
+                src={logoImg}
+                alt="Is The Matterhorn Visible? logo"
+                width={48}
+                height={48}
+                unoptimized
+                className="w-full h-full object-cover pointer-events-none"
+              />
+            </span>
             <span>
               isthematterhornvisible.com • Swiss Alpine Telemetry Utility
             </span>
