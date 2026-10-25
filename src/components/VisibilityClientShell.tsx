@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Header from './Header';
 import ViewpointSwitcher from './ViewpointSwitcher';
 import HeroStatus from './HeroStatus';
@@ -10,8 +11,9 @@ import MetricsGrid from './MetricsGrid';
 import LiveWebcam from './LiveWebcam';
 import HistoricalTable from './HistoricalTable';
 import ViewpointAdvice from './ViewpointAdvice';
+import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
-import { Activity, Info, ShieldCheck } from 'lucide-react';
+import { Activity, Info, ShieldCheck, BookOpen, ArrowUpRight } from 'lucide-react';
 
 interface VisibilityClientShellProps {
   initialData: VisibilityApiResponse;
@@ -49,6 +51,7 @@ export default function VisibilityClientShell({
       <Header
         initialSwissTime={initialData.swissTimeFormatted}
         activeViewpoint={activeData.viewpoint}
+        activeBadgeColor={activeData.currentBadgeColor}
       />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
@@ -92,10 +95,10 @@ export default function VisibilityClientShell({
         {/* 8. Tactical Zermatt Sector Guide */}
         <ViewpointAdvice viewpoints={activeData.sectorRecommendations} />
 
-        {/* 9. Meteorological Scoring Formula Reference Card */}
+        {/* 9. Meteorological Scoring Formula & Visual Scale Reference Card */}
         <section
           aria-label="Visibility Scoring Methodology"
-          className="rounded-2xl border border-slate-200/90 bg-white/85 p-5 sm:p-6 text-xs sm:text-sm text-slate-600 shadow-2xs"
+          className="rounded-2xl border border-slate-200/90 bg-white/85 p-5 sm:p-6 text-xs sm:text-sm text-slate-600 shadow-2xs space-y-5"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="space-y-1.5 max-w-3xl">
@@ -112,7 +115,14 @@ export default function VisibilityClientShell({
                 <strong className="text-slate-900">
                   Glacier Paradise (3,883m South)
                 </strong>
-                , averaging 6-hour Morning (06:00–12:00) and Afternoon (12:00–18:00) blocks mapped to a 1–10 index.
+                , averaging 6-hour Morning (06:00–12:00) and Afternoon (12:00–18:00) blocks mapped to a 1–10 index.{' '}
+                <Link
+                  href="/guides/matterhorn-banner-cloud-fohn-wind"
+                  className="inline-flex items-center gap-1 font-bold text-sky-700 hover:text-sky-900 underline underline-offset-4"
+                >
+                  <span>Why the Matterhorn gets a banner cloud</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
               </p>
             </div>
 
@@ -124,6 +134,57 @@ export default function VisibilityClientShell({
                 1–10 Index: 8–10 Visible • 6–7 Partially • 3–5 Barely • 1–2 Not Visible
               </div>
             </div>
+          </div>
+
+          {/* 4-Tier Visual Icon Scale Reference */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-4 border-t border-slate-200/80">
+            {VISIBILITY_SCALE_TIERS.map((tier) => (
+              <div
+                key={tier.status}
+                className="flex items-center gap-3 rounded-xl bg-slate-50/90 border border-slate-200/80 p-3"
+              >
+                <VisibilityIcon badgeColor={tier.badgeColor} size="lg" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-mono text-xs font-extrabold text-slate-900">
+                      {tier.scoreRange}/10
+                    </span>
+                    <span className="text-xs font-bold text-slate-800 truncate">
+                      • {tier.status}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 truncate mt-0.5">
+                    {tier.shortCaption}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 10. Alpine Field Guides Quick-Access Strip */}
+        <section
+          aria-label="Zermatt & Matterhorn Alpine Field Guides"
+          className="rounded-2xl border border-slate-200/90 bg-gradient-to-r from-sky-50/80 via-white to-slate-50/90 p-5 sm:p-6 shadow-2xs"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-slate-900 font-extrabold text-sm sm:text-base">
+                <BookOpen className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
+                <span>Planning a Zermatt Excursion? Read Our Alpine Field Guides</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600">
+                Deep-dive guides on Gornergrat vs. Glacier Paradise tickets, sunrise reflection lakes, 30-year monthly clarity, and rainy-day backup plans.
+              </p>
+            </div>
+
+            <Link
+              href="/guides"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors shrink-0"
+            >
+              <span>Browse All 5 Field Guides</span>
+              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
           </div>
         </section>
       </main>
@@ -141,6 +202,13 @@ export default function VisibilityClientShell({
               <Activity className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
               <span>ISR Cache: 15m • 10-Day Dual Aspect</span>
             </span>
+            <span>•</span>
+            <Link
+              href="/guides"
+              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+            >
+              Field Guides (/guides)
+            </Link>
             <span>•</span>
             <a
               href="/api/visibility"

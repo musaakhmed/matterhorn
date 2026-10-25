@@ -1,17 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Mountain, Clock, MapPin, Compass } from 'lucide-react';
-import { Viewpoint } from '@/lib/types';
+import Link from 'next/link';
+import { Clock, MapPin, Compass, BookOpen } from 'lucide-react';
+import { BadgeColor, Viewpoint } from '@/lib/types';
+import VisibilityIcon from './VisibilityIcon';
 
 interface HeaderProps {
   initialSwissTime: string;
   activeViewpoint: Viewpoint;
+  activeBadgeColor: BadgeColor;
 }
 
 export default function Header({
   initialSwissTime,
   activeViewpoint,
+  activeBadgeColor,
 }: HeaderProps) {
   const [swissTime, setSwissTime] = useState<string>(initialSwissTime);
 
@@ -51,8 +55,12 @@ export default function Header({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         {/* Brand Identity */}
         <div className="flex items-center gap-3 min-w-0">
-          <div className="relative shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-sky-600 to-sky-500 text-white shadow-sm">
-            <Mountain className="w-5 h-5" strokeWidth={2.2} aria-hidden="true" />
+          <div className="relative shrink-0">
+            <VisibilityIcon
+              badgeColor={activeBadgeColor}
+              size="md"
+              className="shadow-sm"
+            />
             <span
               className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"
               title="Live Atmospheric Telemetry"
@@ -103,6 +111,14 @@ export default function Header({
             />
             <span>{swissTime}</span>
           </div>
+
+          <Link
+            href="/guides"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-sky-700 text-white text-[11px] sm:text-xs font-bold shadow-xs transition-colors"
+          >
+            <BookOpen className="w-3.5 h-3.5 text-sky-300 shrink-0" aria-hidden="true" />
+            <span>Field Guides</span>
+          </Link>
         </div>
       </div>
     </header>

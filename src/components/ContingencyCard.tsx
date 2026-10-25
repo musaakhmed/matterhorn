@@ -1,11 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 import {
   Landmark,
   Waves,
   Sparkles,
-  CloudRain,
   ArrowUpRight,
 } from 'lucide-react';
+import VisibilityIcon from './VisibilityIcon';
 
 interface ContingencyCardProps {
   currentScore: number;
@@ -64,9 +65,11 @@ export default function ContingencyCard({
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
         <div className="flex items-start sm:items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-amber-100 border border-amber-300 text-amber-800 shrink-0">
-            <CloudRain className="w-5 h-5" aria-hidden="true" />
-          </span>
+          <VisibilityIcon
+            score={currentScore}
+            size="lg"
+            className="shadow-xs"
+          />
           <div>
             <div className="inline-flex items-center gap-2">
               <span className="px-2 py-0.5 rounded-full bg-amber-200/80 text-amber-950 text-[10px] font-mono font-bold uppercase tracking-wider">
@@ -81,6 +84,14 @@ export default function ContingencyCard({
             </p>
           </div>
         </div>
+
+        <Link
+          href="/guides/zermatt-cloudy-rainy-day-guide"
+          className="inline-flex items-center gap-1 self-start sm:self-auto px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200/80 border border-amber-300 text-xs font-bold text-amber-950 transition-colors shrink-0"
+        >
+          <span>Full Cloudy &amp; Rainy Day Guide</span>
+          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -11,6 +11,7 @@ import {
   Sunset,
 } from 'lucide-react';
 import { BadgeColor, ScoreBlock, ViewpointForecastData } from '@/lib/types';
+import VisibilityIcon from './VisibilityIcon';
 
 interface HeroStatusProps {
   data: ViewpointForecastData;
@@ -81,19 +82,6 @@ const LIGHT_THEME_STYLES: Record<
   },
 };
 
-function StatusIcon({ badgeColor }: { badgeColor: BadgeColor }) {
-  switch (badgeColor) {
-    case 'emerald':
-      return <Sparkles className="w-4 h-4 text-emerald-700" aria-hidden="true" />;
-    case 'amber':
-      return <CloudSun className="w-4 h-4 text-amber-700" aria-hidden="true" />;
-    case 'orange':
-      return <CloudFog className="w-4 h-4 text-orange-700" aria-hidden="true" />;
-    case 'rose':
-      return <CloudRainWind className="w-4 h-4 text-rose-700" aria-hidden="true" />;
-  }
-}
-
 function DualPeriodCard({
   block,
   isActive,
@@ -111,7 +99,7 @@ function DualPeriodCard({
           : 'border-slate-200 bg-slate-50/80'
       }`}
     >
-      <div className="flex items-center justify-between gap-2 mb-2">
+      <div className="flex items-center justify-between gap-2 mb-2.5">
         <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700">
           {block.period === 'AM' ? (
             <Sunrise className="w-4 h-4 text-amber-600" aria-hidden="true" />
@@ -134,25 +122,32 @@ function DualPeriodCard({
         )}
       </div>
 
-      <div className="flex items-baseline justify-between gap-2 mt-1">
-        <div className="flex items-baseline gap-1">
-          <span
-            className={`text-3xl font-extrabold font-mono ${blockStyle.scoreText}`}
-          >
-            {block.score}
-          </span>
-          <span className="text-sm font-bold text-slate-500">/10</span>
+      <div className="flex items-center justify-between gap-3 mt-1">
+        <div className="flex items-center gap-3">
+          <VisibilityIcon
+            badgeColor={block.badgeColor}
+            size="lg"
+            className="shadow-xs"
+          />
+          <div className="flex items-baseline gap-1">
+            <span
+              className={`text-3xl font-extrabold font-mono ${blockStyle.scoreText}`}
+            >
+              {block.score}
+            </span>
+            <span className="text-sm font-bold text-slate-500">/10</span>
+          </div>
         </div>
 
         <span
-          className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border text-xs font-bold ${blockStyle.pillBg} ${blockStyle.pillBorder} ${blockStyle.pillText}`}
+          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-bold ${blockStyle.pillBg} ${blockStyle.pillBorder} ${blockStyle.pillText}`}
         >
-          <StatusIcon badgeColor={block.badgeColor} />
+          <VisibilityIcon badgeColor={block.badgeColor} size="xs" />
           <span>{block.status}</span>
         </span>
       </div>
 
-      <div className="mt-2.5 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-mono text-slate-600">
+      <div className="mt-3 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-mono text-slate-600">
         <span>{block.timeRangeLabel}</span>
         <span>Mid-Cloud: {block.metrics.cloudCoverMid}%</span>
       </div>
@@ -162,7 +157,7 @@ function DualPeriodCard({
 
 export default function HeroStatus({ data }: HeroStatusProps) {
   const style = LIGHT_THEME_STYLES[data.currentBadgeColor];
-  const radius = 68;
+  const radius = 72;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset =
     circumference - (data.currentScore / 10) * circumference;
@@ -185,7 +180,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
         {/* Left: 1–10 Circular Index Ring */}
         <div className="lg:col-span-4 min-w-0 flex flex-col items-center justify-center">
-          <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center bg-white/80 rounded-full shadow-inner border border-slate-200/70">
+          <div className="relative w-48 h-48 sm:w-52 sm:h-52 flex items-center justify-center bg-white/80 rounded-full shadow-inner border border-slate-200/70">
             <svg
               className="w-full h-full -rotate-90 transform"
               viewBox="0 0 168 168"
@@ -198,7 +193,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                 r={radius}
                 fill="transparent"
                 stroke="#E2E8F0"
-                strokeWidth="12"
+                strokeWidth="10"
               />
               <circle
                 cx="84"
@@ -206,7 +201,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                 r={radius}
                 fill="transparent"
                 stroke={style.ringStroke}
-                strokeWidth="12"
+                strokeWidth="10"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
@@ -214,46 +209,64 @@ export default function HeroStatus({ data }: HeroStatusProps) {
               />
             </svg>
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500 leading-none">
                 {data.activePeriod} Index
               </span>
-              <div className="flex items-baseline gap-0.5 mt-0.5">
+              <div className="flex items-baseline justify-center gap-0.5 my-1 leading-none">
                 <span
-                  className={`text-5xl sm:text-6xl font-extrabold tracking-tight font-mono ${style.scoreText}`}
+                  className={`text-5xl sm:text-[54px] font-extrabold tracking-tight font-mono leading-none ${style.scoreText}`}
                 >
                   {data.currentScore}
                 </span>
-                <span className="text-xl font-bold text-slate-400">/10</span>
+                <span className="text-base sm:text-lg font-bold text-slate-400 leading-none">
+                  /10
+                </span>
               </div>
-              <span className="mt-1 text-[11px] font-semibold text-slate-600">
+              <span className="text-[10px] sm:text-[10.5px] font-semibold tracking-tight text-slate-600 leading-tight whitespace-nowrap">
                 {data.viewpoint.shortLabel}
               </span>
             </div>
           </div>
 
-          {/* High-Contrast Status Pill */}
+          {/* High-Contrast Status Pill with Custom Visibility Icon */}
           <div
-            className={`mt-3.5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs sm:text-sm font-bold tracking-wide uppercase shadow-2xs`}
+            className={`mt-3.5 inline-flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs sm:text-sm font-bold tracking-wide uppercase shadow-2xs`}
           >
-            <StatusIcon badgeColor={data.currentBadgeColor} />
+            <VisibilityIcon badgeColor={data.currentBadgeColor} size="sm" />
             <span>{data.currentStatus}</span>
           </div>
         </div>
 
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}
         <div className="lg:col-span-8 min-w-0 flex flex-col justify-between space-y-5 text-center lg:text-left">
-          <div className="space-y-1.5">
-            <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-1.5 text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-sky-700">
-              <Eye className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-              <span>
-                {data.viewpoint.name} ({data.viewpoint.elevation.toLocaleString()}m) • {style.answerWord}
-              </span>
-            </div>
+          <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
+            <VisibilityIcon
+              badgeColor={data.currentBadgeColor}
+              size="xl"
+              decorative={false}
+              preload={true}
+              className="shadow-md ring-2 ring-white shrink-0"
+            />
+            <div className="space-y-1.5 min-w-0">
+              <p className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wide text-sky-700 leading-relaxed">
+                <Eye
+                  className="inline-block w-3.5 h-3.5 mr-1.5 -mt-0.5 align-middle shrink-0"
+                  aria-hidden="true"
+                />
+                <span>
+                  {data.viewpoint.name} ({data.viewpoint.elevation.toLocaleString()}m)
+                </span>
+                <span className="mx-1.5" aria-hidden="true">
+                  •
+                </span>
+                <span className="whitespace-nowrap">{style.answerWord}</span>
+              </p>
 
-            <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight break-words">
-              {data.verdictSummary}
-            </h2>
+              <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight break-words">
+                {data.verdictSummary}
+              </h2>
+            </div>
           </div>
 
           {/* Today's Morning (AM) & Afternoon (PM) Dual Index Split */}
@@ -298,6 +311,10 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                   ({data.bestBlockNext48h.score}/10 — {data.bestBlockNext48h.status})
                 </span>
               </span>
+              <VisibilityIcon
+                badgeColor={data.bestBlockNext48h.badgeColor}
+                size="xs"
+              />
             </div>
 
             <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-700 shadow-2xs">

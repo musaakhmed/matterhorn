@@ -10,6 +10,7 @@ import {
   ViewpointId,
   ViewpointRecommendation,
   VisibilityApiResponse,
+  VisibilityIconPath,
   VisibilityStatus,
 } from './types';
 
@@ -120,6 +121,7 @@ export function getVerdictForTenScore(score: number): {
   status: VisibilityStatus;
   shortLabel: ShortVisibilityLabel;
   badgeColor: BadgeColor;
+  iconPath: VisibilityIconPath;
   verdictSummary: string;
 } {
   if (score >= 8) {
@@ -127,6 +129,7 @@ export function getVerdictForTenScore(score: number): {
       status: 'Visible',
       shortLabel: 'Visible',
       badgeColor: 'emerald',
+      iconPath: '/icons/crystal-clear.jpeg',
       verdictSummary: 'Crisp, unobstructed views of the Matterhorn pyramid.',
     };
   }
@@ -135,6 +138,7 @@ export function getVerdictForTenScore(score: number): {
       status: 'Partially Visible',
       shortLabel: 'Partially',
       badgeColor: 'amber',
+      iconPath: '/icons/partially-visible.jpeg',
       verdictSummary:
         'Good visibility with passing clouds or light ridge banner.',
     };
@@ -144,6 +148,7 @@ export function getVerdictForTenScore(score: number): {
       status: 'Barely Visible',
       shortLabel: 'Barely',
       badgeColor: 'orange',
+      iconPath: '/icons/barely-visible.jpeg',
       verdictSummary:
         'Limited visibility; summit frequently obscured by mid-level cloud decks.',
     };
@@ -152,6 +157,7 @@ export function getVerdictForTenScore(score: number): {
     status: 'Not Visible',
     shortLabel: 'Not Visible',
     badgeColor: 'rose',
+    iconPath: '/icons/not-visible.jpeg',
     verdictSummary:
       'Socked in; zero summit visibility due to thick clouds or precipitation.',
   };
@@ -480,7 +486,7 @@ function computeScoreBlock(
   const count = safeIndices.length;
   const rawAverage = Math.round(sumRaw / count);
   const score = mapRawToTenScale(rawAverage);
-  const { status, shortLabel, badgeColor, verdictSummary } =
+  const { status, shortLabel, badgeColor, iconPath, verdictSummary } =
     getVerdictForTenScore(score);
 
   const avgVisMeters = Math.round(sumVis / count);
@@ -510,6 +516,7 @@ function computeScoreBlock(
     status,
     shortLabel,
     badgeColor,
+    iconPath,
     verdictSummary,
     metrics,
   };
@@ -621,6 +628,8 @@ async function fetchSingleViewpointForecast(
     period: 'AM' as 'AM' | 'PM',
     score: today.morning.score,
     status: today.morning.status,
+    badgeColor: today.morning.badgeColor,
+    iconPath: today.morning.iconPath,
   };
 
   for (const day of days.slice(0, 3)) {
@@ -631,6 +640,8 @@ async function fetchSingleViewpointForecast(
         period: 'AM',
         score: day.morning.score,
         status: day.morning.status,
+        badgeColor: day.morning.badgeColor,
+        iconPath: day.morning.iconPath,
       };
     }
     if (day.afternoon.score > bestBlock.score) {
@@ -639,6 +650,8 @@ async function fetchSingleViewpointForecast(
         period: 'PM',
         score: day.afternoon.score,
         status: day.afternoon.status,
+        badgeColor: day.afternoon.badgeColor,
+        iconPath: day.afternoon.iconPath,
       };
     }
   }
@@ -661,6 +674,7 @@ async function fetchSingleViewpointForecast(
     currentScore: activeBlock.score,
     currentStatus: activeBlock.status,
     currentBadgeColor: activeBlock.badgeColor,
+    currentIconPath: activeBlock.iconPath,
     verdictSummary: activeBlock.verdictSummary,
     advice: guideAdvice,
     guideAdvice,

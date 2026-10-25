@@ -3,6 +3,7 @@
 import React from 'react';
 import { TrainFront, CableCar, Compass } from 'lucide-react';
 import { Viewpoint, ViewpointId } from '@/lib/types';
+import VisibilityIcon from './VisibilityIcon';
 
 interface ViewpointSwitcherProps {
   viewpoints: Record<ViewpointId, Viewpoint>;
@@ -89,15 +90,18 @@ export default function ViewpointSwitcher({
                   </div>
                 </div>
 
-                <span
-                  className={`shrink-0 px-2 py-0.5 rounded-md font-mono text-xs font-extrabold border ${
-                    isSelected
-                      ? 'bg-sky-50 border-sky-200 text-sky-800'
-                      : 'bg-slate-200/70 border-slate-300/80 text-slate-700'
-                  }`}
-                >
-                  {sc.active}/10
-                </span>
+                <div className="flex items-center gap-2 shrink-0">
+                  <VisibilityIcon score={sc.active} size="sm" />
+                  <span
+                    className={`px-2 py-0.5 rounded-md font-mono text-xs font-extrabold border ${
+                      isSelected
+                        ? 'bg-sky-50 border-sky-200 text-sky-800'
+                        : 'bg-slate-200/70 border-slate-300/80 text-slate-700'
+                    }`}
+                  >
+                    {sc.active}/10
+                  </span>
+                </div>
               </button>
             );
           })}

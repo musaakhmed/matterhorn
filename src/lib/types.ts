@@ -12,6 +12,12 @@ export type ShortVisibilityLabel =
 
 export type BadgeColor = 'emerald' | 'amber' | 'orange' | 'rose';
 
+export type VisibilityIconPath =
+  | '/icons/crystal-clear.jpeg'
+  | '/icons/partially-visible.jpeg'
+  | '/icons/barely-visible.jpeg'
+  | '/icons/not-visible.jpeg';
+
 export type ViewpointId = 'gornergrat' | 'glacier-paradise';
 
 export interface Viewpoint {
@@ -49,6 +55,7 @@ export interface ScoreBlock {
   status: VisibilityStatus;
   shortLabel: ShortVisibilityLabel;
   badgeColor: BadgeColor;
+  iconPath: VisibilityIconPath;
   verdictSummary: string;
   metrics: AtmosphericMetrics;
 }
@@ -80,6 +87,7 @@ export interface ViewpointForecastData {
   currentScore: number; // 1 to 10
   currentStatus: VisibilityStatus;
   currentBadgeColor: BadgeColor;
+  currentIconPath: VisibilityIconPath;
   verdictSummary: string;
   advice: string;
   guideAdvice: string;
@@ -92,6 +100,8 @@ export interface ViewpointForecastData {
     period: 'AM' | 'PM';
     score: number;
     status: VisibilityStatus;
+    badgeColor: BadgeColor;
+    iconPath: VisibilityIconPath;
   };
 }
 

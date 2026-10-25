@@ -1,5 +1,6 @@
 import React from 'react';
-import { BarChart3, Sun, CloudLightning, Snowflake } from 'lucide-react';
+import Link from 'next/link';
+import { BarChart3, Sun, CloudLightning, Snowflake, ArrowUpRight } from 'lucide-react';
 
 interface MonthStat {
   monthShort: string;
@@ -137,11 +138,19 @@ export default function HistoricalTable() {
           While travelers instinctively book Alpine trips for mid-summer, <strong>June (48%) and July (52%)</strong> statistically record the lowest full-day visibility scores of the year. Strong solar radiation heats the dark rock faces of the Mattertal and Italian Val Tournenche, triggering vigorous <strong>anabatic thermal updrafts</strong> by 11:00 CET. As warm valley air rises and cools adiabatically past 3,000 meters, moisture condenses directly onto the Matterhorn’s Hörnli and Furgg ridges, forming afternoon convective cumulus towers and local banner clouds.
         </p>
 
-        <div className="pt-1 flex flex-wrap items-center gap-3 text-xs text-slate-600">
+        <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
           <span className="inline-flex items-center gap-1.5 font-semibold text-sky-800 bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-lg">
             <Sun className="w-3.5 h-3.5 text-amber-500" aria-hidden="true" />
             <span>Summer Pro-Tip: Always target the 06:00–10:00 CET Morning (AM) block before thermal convection initiates.</span>
           </span>
+
+          <Link
+            href="/guides/best-time-to-see-matterhorn"
+            className="inline-flex items-center gap-1 font-bold text-sky-700 hover:text-sky-900 underline underline-offset-4"
+          >
+            <span>Read 30-Year Climatology &amp; Best Month Guide</span>
+            <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </section>
