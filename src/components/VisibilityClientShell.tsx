@@ -57,6 +57,14 @@ export default function VisibilityClientShell({
         initialSwissTime={initialData.swissTimeFormatted}
         activeViewpoint={activeData.viewpoint}
         activeBadgeColor={activeData.currentBadgeColor}
+        telemetrySummary={{
+          gornergratScore: initialData.viewpoints.gornergrat.currentScore,
+          gornergratBadge: initialData.viewpoints.gornergrat.currentBadgeColor,
+          gornergratStatus: initialData.viewpoints.gornergrat.currentStatus,
+          glacierScore: initialData.viewpoints['glacier-paradise'].currentScore,
+          glacierBadge: initialData.viewpoints['glacier-paradise'].currentBadgeColor,
+          glacierStatus: initialData.viewpoints['glacier-paradise'].currentStatus,
+        }}
       />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
