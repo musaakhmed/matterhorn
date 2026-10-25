@@ -29,17 +29,16 @@ import logoImg from '../../../public/logo.jpeg';
 export const revalidate = 900; // Revalidate live banner every 15 minutes
 
 export const metadata: Metadata = {
-  title:
-    'Zermatt & Matterhorn Alpine Field Guides | Viewpoints, Weather & Climatology',
+  title: 'Matterhorn Field Guides | Viewpoints & Weather in Zermatt',
   description:
-    'Data-backed field guides for seeing the Matterhorn in Zermatt: Gornergrat vs. Glacier Paradise comparisons, 30-year monthly clear-sky statistics, sunrise photo spots, and bad-weather contingency plans.',
+    'Field guides for seeing the Matterhorn: Gornergrat vs Glacier Paradise, 30-year weather stats, sunrise photo spots, and rainy-day plans.',
   alternates: {
     canonical: '/guides',
   },
   openGraph: {
-    title: 'Zermatt & Matterhorn Alpine Field Guides | isthematterhornvisible.com',
+    title: 'Matterhorn Field Guides | Viewpoints & Weather in Zermatt',
     description:
-      'Tactical Zermatt field guides covering Gornergrat vs. Glacier Paradise, best months and times of day to see the Matterhorn, banner cloud physics, and rainy-day plans.',
+      'Field guides for seeing the Matterhorn: Gornergrat vs Glacier Paradise, 30-year weather stats, sunrise spots & rainy-day plans.',
     url: 'https://isthematterhornvisible.com/guides',
     type: 'website',
   },

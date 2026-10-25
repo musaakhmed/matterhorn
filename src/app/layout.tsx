@@ -10,9 +10,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://isthematterhornvisible.com'),
-  title: 'Is The Matterhorn Visible Today? | Live 1–10 Visibility & Webcams',
+  title: 'Is The Matterhorn Visible Today? | Live Zermatt Score',
   description:
-    'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
+    'Live Matterhorn visibility score in Zermatt (4,478m). Real-time summit telemetry, Gornergrat webcams, and 10-day high-altitude alpine forecasts.',
   category: 'weather',
   keywords: [
     'is the matterhorn visible',
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'Is The Matterhorn Visible Today? | Live 1–10 Visibility & Webcams',
+    title: 'Is The Matterhorn Visible Today? | Live Zermatt Score',
     description:
-      'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
+      'Check live Matterhorn visibility in Zermatt (4,478m). Real-time summit telemetry, webcam views & 10-day alpine forecasts.',
     url: 'https://isthematterhornvisible.com',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Is The Matterhorn Visible Today? | Live 1–10 Visibility & Webcams',
+    title: 'Is The Matterhorn Visible Today? | Live Zermatt Score',
     description:
-      'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
+      'Check live Matterhorn visibility in Zermatt (4,478m). Real-time summit telemetry, webcam views & 10-day alpine forecasts.',
     images: ['/opengraph-image', '/banner.jpeg'],
   },
   robots: {
@@ -85,7 +85,7 @@ const rootJsonLd = {
       '@type': 'WeatherForecast',
       name: 'Matterhorn Summit Live 1–10 Visibility Forecast',
       description:
-        'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
+        'Live Matterhorn visibility score in Zermatt (4,478m). Real-time summit telemetry, Gornergrat webcams, and 10-day high-altitude alpine forecasts.',
       url: 'https://isthematterhornvisible.com',
       spatialCoverage: {
         '@type': 'Place',

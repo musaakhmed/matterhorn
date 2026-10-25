@@ -31,10 +31,9 @@ import logoImg from '../../../public/logo.jpeg';
 export const revalidate = 900; // Refresh live telemetry every 15 minutes
 
 export const metadata: Metadata = {
-  title:
-    'Free Matterhorn Live Visibility Widget for Zermatt Hotels & Websites',
+  title: 'Matterhorn Live Widget | Free Embed for Websites',
   description:
-    'Embed a live 1–10 Matterhorn summit visibility widget on your Zermatt hotel, chalet, or travel website. Auto-updates every 15 minutes across Gornergrat (3,089m) and Glacier Paradise (3,883m) in EN, DE, and FR.',
+    'Embed a live 1–10 Matterhorn summit visibility widget on your Zermatt website. Auto-updates every 15 min with Gornergrat telemetry in EN/DE/FR.',
   keywords: [
     'matterhorn visibility widget',
     'zermatt hotel weather widget',
@@ -47,10 +46,9 @@ export const metadata: Metadata = {
     canonical: '/widget',
   },
   openGraph: {
-    title:
-      'Publish Live Matterhorn Visibility on Your Website | Hotel & Partner Widget',
+    title: 'Matterhorn Live Widget | Free Embed for Websites',
     description:
-      'Give your hotel guests real-time 1–10 Matterhorn summit telemetry across Gornergrat (3,089m) and Glacier Paradise (3,883m). Free Script, Iframe, and SVG Email embeds in EN/DE/FR.',
+      'Embed a live 1–10 Matterhorn visibility widget on your website. Free script, iframe & badge embeds with Gornergrat data.',
     url: 'https://isthematterhornvisible.com/widget',
     type: 'website',
   },

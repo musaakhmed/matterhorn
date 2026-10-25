@@ -30,18 +30,16 @@ import logoImg from '../../../public/logo.jpeg';
 export const revalidate = 900; // Revalidate every 15 minutes
 
 export const metadata: Metadata = {
-  title:
-    'Matterhorn Viewpoints Live Visibility | Gornergrat, Klein Matterhorn & Riffelsee',
+  title: 'Matterhorn Viewpoints Live Visibility | Zermatt Cams',
   description:
-    'Compare live Matterhorn visibility scores across Gornergrat (3,089m), Matterhorn Glacier Paradise / Klein Matterhorn (3,883m), and Sunnegga–Riffelsee reflection lakes before buying lift tickets.',
+    'Compare live Matterhorn visibility scores across Gornergrat (3,089m), Klein Matterhorn, and Riffelsee before buying mountain lift tickets.',
   alternates: {
     canonical: '/viewpoints',
   },
   openGraph: {
-    title:
-      'Matterhorn Viewpoints Live Visibility | Gornergrat, Klein Matterhorn & Riffelsee',
+    title: 'Matterhorn Viewpoints Live Visibility | Zermatt Cams',
     description:
-      'Real-time 1–10 AM/PM visibility index, cloud layer diagnostics, and Riffelsee mirror reflection conditions across Zermatt’s 3 primary Matterhorn viewpoints.',
+      'Compare live visibility across Gornergrat (3,089m), Klein Matterhorn, and Riffelsee before buying mountain lift tickets.',
     url: 'https://isthematterhornvisible.com/viewpoints',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
