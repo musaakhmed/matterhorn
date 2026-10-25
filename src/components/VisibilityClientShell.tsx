@@ -16,7 +16,7 @@ import FaqSection from './FaqSection';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
-import { Activity, Info, BookOpen, ArrowUpRight } from 'lucide-react';
+import { Activity, Info, BookOpen, ArrowUpRight, Code2 } from 'lucide-react';
 import logoImg from '../../public/logo.jpeg';
 
 interface VisibilityClientShellProps {
@@ -174,29 +174,53 @@ export default function VisibilityClientShell({
           badgeLabel="FAQPage Schema • Live Telemetry Indexed"
         />
 
-        {/* 11. Alpine Field Guides Quick-Access Strip */}
+        {/* 11. Alpine Field Guides & Live Status Widget Quick-Access Strip */}
         <section
-          aria-label="Zermatt & Matterhorn Alpine Field Guides"
-          className="rounded-2xl border border-slate-200/90 bg-gradient-to-r from-sky-50/80 via-white to-slate-50/90 p-5 sm:p-6 shadow-2xs"
+          aria-label="Zermatt Field Guides and Embeddable Live Status Widget"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="space-y-1">
+          <div className="rounded-2xl border border-slate-200/90 bg-gradient-to-r from-sky-50/80 via-white to-slate-50/90 p-5 sm:p-6 shadow-2xs flex flex-col justify-between gap-4">
+            <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-slate-900 font-extrabold text-sm sm:text-base">
                 <BookOpen className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
-                <span>Planning a Zermatt Excursion? Read Our Alpine Field Guides</span>
+                <span>Planning a Zermatt Excursion? Read Our Field Guides</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-600">
                 Deep-dive guides on Gornergrat vs. Glacier Paradise tickets, sunrise reflection lakes, 30-year monthly clarity, and rainy-day backup plans.
               </p>
             </div>
 
-            <Link
-              href="/guides"
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors shrink-0"
-            >
-              <span>Browse All 6 Field Guides</span>
-              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
+            <div>
+              <Link
+                href="/guides"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors"
+              >
+                <span>Browse All 6 Field Guides</span>
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-sky-200/90 bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950 text-white p-5 sm:p-6 shadow-2xs flex flex-col justify-between gap-4">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 font-extrabold text-sm sm:text-base text-white">
+                <Code2 className="w-4 h-4 text-sky-400 shrink-0" aria-hidden="true" />
+                <span>Publish Live Matterhorn Status on Your Website</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Embed our free, auto-updating 1–10 Matterhorn Visibility Widget on any blog, travel guide, community portal, or website in EN, DE, or FR.
+              </p>
+            </div>
+
+            <div>
+              <Link
+                href="/widget"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-extrabold shadow-xs transition-colors"
+              >
+                <span>Customize &amp; Embed Live Widget</span>
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </section>
       </main>
@@ -223,6 +247,13 @@ export default function VisibilityClientShell({
               <Activity className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
               <span>ISR Cache: 15m • 10-Day Dual Aspect</span>
             </span>
+            <span>•</span>
+            <Link
+              href="/widget"
+              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+            >
+              Embed Widget (/widget)
+            </Link>
             <span>•</span>
             <Link
               href="/guides"
