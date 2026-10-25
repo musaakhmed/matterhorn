@@ -9,10 +9,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Is The Matterhorn Visible Today? | 10-Day AM/PM Visibility Index & Live Webcams',
-  description:
-    'Check real-time 1–10 AM/PM visibility scores for the Matterhorn in Zermatt across Gornergrat (East) and Glacier Paradise (South), with 10-day horizon forecasts and 4 live Roundshot webcams.',
   metadataBase: new URL('https://isthematterhornvisible.com'),
+  title: 'Is The Matterhorn Visible Today? | Live 1–10 Visibility & Webcams',
+  description:
+    'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
   category: 'weather',
   keywords: [
     'is the matterhorn visible',
@@ -35,28 +35,34 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'Is The Matterhorn Visible Today? | Real-Time Live Visibility & Webcams',
+    title: 'Is The Matterhorn Visible Today? | Live 1–10 Visibility & Webcams',
     description:
-      'Check real-time visibility for the Matterhorn summit (4,478m) in Zermatt. Powered by high-altitude atmospheric data and live Gornergrat webcams.',
+      'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
     url: 'https://isthematterhornvisible.com',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
     type: 'website',
     images: [
       {
-        url: '/logo.jpeg',
-        width: 1024,
-        height: 1024,
-        alt: 'Is The Matterhorn Visible? logo',
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Is The Matterhorn Visible Today? Live Alpine Visibility Score',
+      },
+      {
+        url: '/banner.jpeg',
+        width: 1424,
+        height: 752,
+        alt: 'Is The Matterhorn Visible Today? Alpine Banner',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Is The Matterhorn Visible Today?',
+    title: 'Is The Matterhorn Visible Today? | Live 1–10 Visibility & Webcams',
     description:
-      'Instant Matterhorn 1–10 AM/PM visibility index, 10-day forecast horizon, and live Zermatt webcams.',
-    images: ['/logo.jpeg'],
+      'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
+    images: ['/opengraph-image', '/banner.jpeg'],
   },
   robots: {
     index: true,
@@ -71,13 +77,64 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Root site-level JSON-LD (`Organization`, `WebSite`, `WebApplication`).
- * Route-specific `WeatherForecast` and `FAQPage` schemas are dynamically emitted
- * in `src/app/page.tsx`, `src/app/guides/page.tsx`, and `src/app/guides/[slug]/page.tsx`
- * via `src/lib/schema.ts`.
- */
-const rootJsonLd = buildRootLayoutJsonLd();
+const rootJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ...buildRootLayoutJsonLd()['@graph'],
+    {
+      '@type': 'WeatherForecast',
+      name: 'Matterhorn Summit Live 1–10 Visibility Forecast',
+      description:
+        'Check real-time Matterhorn summit visibility (4,478m) in Zermatt. Powered by high-altitude atmospheric data, Gornergrat & Klein Matterhorn webcams, and 10-day forecasts.',
+      url: 'https://isthematterhornvisible.com',
+      spatialCoverage: {
+        '@type': 'Place',
+        name: 'Matterhorn Summit',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Zermatt',
+          addressRegion: 'Valais',
+          addressCountry: 'CH',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 45.9765,
+          longitude: 7.7491,
+          elevation: '4478m',
+        },
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Can you see the Matterhorn from Zermatt today?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Check our live 1–10 Matterhorn Visibility Score updated every 15 minutes using high-altitude Open-Meteo cloud layer telemetry (2,000m–6,000m) and live Gornergrat & Klein Matterhorn webcams. A score of 8–10 indicates crystal-clear views of the 4,478m summit pyramid.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What is the best time of day to see the Matterhorn?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Early morning (06:00–11:00 CET) is statistically the clearest viewing window 78% of the year. Afternoon solar heating of the Mattertal valley walls triggers rising thermal updrafts (anabatic winds) that frequently form cumulus banner clouds around the summit after noon.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Which viewpoint is better: Gornergrat or Klein Matterhorn?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Gornergrat (3,089m) offers the iconic East/Northeast "Toblerone" pyramid profile and Riffelsee mirror lake reflections via cogwheel train. Klein Matterhorn / Matterhorn Glacier Paradise (3,883m) sits nearly 800m higher overlooking the Southern face, making it ideal for rising above low valley fog inversions.',
+          },
+        },
+      ],
+    },
+  ],
+};
 
 export default function RootLayout({
   children,

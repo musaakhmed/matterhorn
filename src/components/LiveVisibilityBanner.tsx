@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Radio, BookOpen } from 'lucide-react';
+import { ArrowUpRight, Radio, BookOpen, Code2 } from 'lucide-react';
 import { fetchMatterhornVisibility } from '@/lib/weather';
 import { BadgeColor } from '@/lib/types';
 import logoImg from '../../public/logo.jpeg';
@@ -80,7 +80,7 @@ export default async function LiveVisibilityBanner() {
 
             {/* Gornergrat Live Pill */}
             <Link
-              href="/"
+              href="/viewpoints/gornergrat"
               className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-transform hover:-translate-y-0.5 ${SCORE_PILL_STYLES[gornergrat.currentBadgeColor]}`}
               title={`Gornergrat (3,089m): ${gornergrat.currentScore}/10 ${gornergrat.currentStatus}`}
             >
@@ -93,7 +93,7 @@ export default async function LiveVisibilityBanner() {
 
             {/* Glacier Paradise Live Pill */}
             <Link
-              href="/"
+              href="/viewpoints/glacier-paradise"
               className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-transform hover:-translate-y-0.5 ${SCORE_PILL_STYLES[glacier.currentBadgeColor]}`}
               title={`Glacier Paradise (3,883m): ${glacier.currentScore}/10 ${glacier.currentStatus}`}
             >
@@ -106,6 +106,14 @@ export default async function LiveVisibilityBanner() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Link
+              href="/widget"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-xs font-bold text-slate-800 transition-colors"
+            >
+              <Code2 className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
+              <span>Embed Widget</span>
+            </Link>
+
             <Link
               href="/guides"
               className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-xs font-bold text-slate-800 transition-colors"

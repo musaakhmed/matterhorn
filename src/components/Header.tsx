@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Clock, MapPin, Compass, BookOpen } from 'lucide-react';
+import { Clock, MapPin, Compass, BookOpen, Code2 } from 'lucide-react';
 import { BadgeColor, Viewpoint } from '@/lib/types';
 import logoImg from '../../public/logo.jpeg';
 
@@ -117,6 +117,22 @@ export default function Header({
             />
             <span>{swissTime}</span>
           </div>
+
+          <Link
+            href="/viewpoints"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white hover:bg-sky-50 border border-slate-200 text-slate-800 hover:text-sky-800 text-[11px] sm:text-xs font-bold shadow-2xs transition-colors"
+          >
+            <Compass className="w-3.5 h-3.5 text-sky-600 shrink-0" aria-hidden="true" />
+            <span>Viewpoints</span>
+          </Link>
+
+          <Link
+            href="/widget"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white hover:bg-sky-50 border border-slate-200 text-slate-800 hover:text-sky-800 text-[11px] sm:text-xs font-bold shadow-2xs transition-colors"
+          >
+            <Code2 className="w-3.5 h-3.5 text-sky-600 shrink-0" aria-hidden="true" />
+            <span>Embed Widget</span>
+          </Link>
 
           <Link
             href="/guides"
