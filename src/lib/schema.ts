@@ -1,5 +1,11 @@
 import { GuideArticle, GuideFaq, GUIDES } from './guides';
 import { VisibilityApiResponse } from './types';
+import {
+  evaluateLakeReflectionConditions,
+  getLiveForecastForViewpointPage,
+  VIEWPOINT_PAGES,
+  ViewpointPageConfig,
+} from './viewpoints';
 
 export const SITE_URL = 'https://isthematterhornvisible.com';
 export const SITE_NAME = 'Is The Matterhorn Visible?';
@@ -521,6 +527,249 @@ export function buildGuideArticleJsonLd(
             '@type': 'ListItem',
             position: 3,
             name: guide.shortTitle,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+/**
+ * Enrich Viewpoint Page FAQs with live telemetry so the visible FAQ accordion
+ * and `FAQPage` JSON-LD always reflect real-time 1–10 visibility and wind data.
+ */
+export function getViewpointPageFaqs(
+  page: ViewpointPageConfig,
+  data?: VisibilityApiResponse
+): RichFaqItem[] {
+  if (!data) {
+    return page.faqs;
+  }
+
+  const forecast = getLiveForecastForViewpointPage(page, data);
+  const reflection =
+    page.slug === 'sunnegga-riffelsee'
+      ? evaluateLakeReflectionConditions(forecast)
+      : null;
+
+  return page.faqs.map((faq, idx) => {
+    if (idx !== 0) return faq;
+
+    if (page.slug === 'sunnegga-riffelsee' && reflection) {
+      return {
+        ...faq,
+        answer: `Right now (${data.swissTimeFormatted}), Riffelsee & Stellisee reflection status is "${reflection.overallVerdict}" — East-Face Visibility is ${forecast.currentScore}/10 (${forecast.currentStatus}; AM: ${forecast.today.morning.score}/10, PM: ${forecast.today.afternoon.score}/10) with surface wind at ${forecast.metrics.windSpeedKmh} km/h ${forecast.metrics.windCardinal}. ${faq.answer}`,
+        guideHref: '/guides/best-matterhorn-photo-viewpoints',
+        guideLabel: 'Read our complete Zermatt Photo & Mirror Lake Guide',
+      };
+    }
+
+    return {
+      ...faq,
+      answer: `Right now (${data.swissTimeFormatted}), ${page.shortName} scores ${forecast.currentScore}/10 (${forecast.currentStatus} — Morning AM: ${forecast.today.morning.score}/10, Afternoon PM: ${forecast.today.afternoon.score}/10, Mid-Cloud: ${forecast.metrics.cloudCoverMid}%, Visibility: ${forecast.metrics.visibilityKm} km). ${faq.answer}`,
+      guideHref: '/guides/gornergrat-vs-glacier-paradise',
+      guideLabel: 'Compare Gornergrat vs. Glacier Paradise viewpoints',
+    };
+  });
+}
+
+/**
+ * Complete Viewpoints Index (`/viewpoints`) JSON-LD `@graph`.
+ */
+export function buildViewpointsIndexJsonLd(data?: VisibilityApiResponse) {
+  const pageUrl = `${SITE_URL}/viewpoints`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#collection`,
+        name: 'Matterhorn Viewpoints Live Visibility & Conditions (Gornergrat, Glacier Paradise & Riffelsee)',
+        description:
+          'Compare live 1–10 visibility scores, 10-day AM/PM forecasts, wind speeds, and lake reflection conditions across Zermatt’s top Matterhorn viewpoints.',
+        url: pageUrl,
+        inLanguage: 'en-CH',
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`,
+        },
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: VIEWPOINT_PAGES.map((vp, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${SITE_URL}/viewpoints/${vp.slug}`,
+            name: vp.title,
+          })),
+        },
+      },
+      buildWeatherForecastNode(data),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Live Dashboard',
+            item: SITE_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Matterhorn Viewpoints',
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+/**
+ * Complete Viewpoint Page (`/viewpoints/[slug]`) JSON-LD `@graph` combining
+ * `TouristAttraction`, `WeatherForecast`, `FAQPage`, and `BreadcrumbList`.
+ */
+export function buildViewpointPageJsonLd(
+  page: ViewpointPageConfig,
+  data?: VisibilityApiResponse
+) {
+  const pageUrl = `${SITE_URL}/viewpoints/${page.slug}`;
+  const faqs = getViewpointPageFaqs(page, data);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'TouristAttraction',
+        '@id': `${pageUrl}#viewpoint`,
+        name: page.name,
+        description: page.description,
+        url: pageUrl,
+        inLanguage: 'en-CH',
+        isAccessibleForFree: false,
+        publicAccess: true,
+        touristType: [
+          'Mountain Sightseeing',
+          'Alpine Photography',
+          'Hiking & Ski Excursion',
+        ],
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: page.latitude,
+          longitude: page.longitude,
+          elevation: `${page.elevationMeters} m`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Zermatt',
+          addressRegion: 'Valais',
+          addressCountry: 'CH',
+        },
+      },
+      buildWeatherForecastNode(data),
+      buildFaqPageNode(faqs, pageUrl),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Live Dashboard',
+            item: SITE_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Matterhorn Viewpoints',
+            item: `${SITE_URL}/viewpoints`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: page.shortName,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export const WIDGET_PAGE_FAQS: RichFaqItem[] = [
+  {
+    question:
+      'Is the Matterhorn Live Visibility Widget free for Zermatt hotels, chalets, and tourism websites?',
+    answer:
+      'Yes. Our live 1–10 Matterhorn Visibility Widget, auto-resizing JavaScript embed, universal iframe, and dynamic SVG status badges are 100% free for Zermatt hotels, alpine chalets, mountain guide agencies, ski schools, and travel bloggers to publish with attribution.',
+  },
+  {
+    question:
+      'How often does the embedded hotel widget update its Matterhorn visibility score?',
+    answer:
+      'The widget updates automatically every 15 minutes using high-altitude Open-Meteo cloud layer telemetry (2,000m–6,000m), horizontal summit visibility, and southerly Föhn wind diagnostics across both Gornergrat (3,089m East) and Matterhorn Glacier Paradise (3,883m South).',
+  },
+  {
+    question:
+      'Can we display the Matterhorn widget in German (DE) or French (FR) for our hotel guests?',
+    answer:
+      'Yes. The widget natively supports English (lang="en"), German (lang="de"), and French (lang="fr"), automatically translating all visibility verdicts, Morning/Afternoon periods, and atmospheric metrics for international guests in Valais.',
+  },
+  {
+    question:
+      'Does the widget use tracking cookies or slow down our hotel website?',
+    answer:
+      'No. The widget sets zero cookies, collects zero personal guest data (100% GDPR and Swiss FADP compliant), and is edge-cached with 15-minute Incremental Static Regeneration (ISR) so it loads instantaneously without impacting your Core Web Vitals.',
+  },
+];
+
+/**
+ * Complete Partner Widget Studio (`/widget`) JSON-LD `@graph` combining
+ * `SoftwareApplication`, `WeatherForecast`, `FAQPage`, and `BreadcrumbList`.
+ */
+export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
+  const pageUrl = `${SITE_URL}/widget`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${pageUrl}#widget-app`,
+        name: 'Matterhorn Live Visibility Status Widget for Hotels & Websites',
+        applicationCategory: 'WeatherApplication',
+        operatingSystem: 'Web, WordPress, Webflow, Squarespace, Wix, HTML, Email',
+        url: pageUrl,
+        inLanguage: ['en-CH', 'de-CH', 'fr-CH'],
+        description:
+          'Free embeddable live 1–10 Matterhorn visibility widget for Zermatt hotels, chalets, lobby screens, and travel portals. Displays real-time Gornergrat (3,089m) and Glacier Paradise (3,883m) AM/PM scores.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'CHF',
+        },
+        provider: {
+          '@id': `${SITE_URL}/#organization`,
+        },
+      },
+      buildWeatherForecastNode(data),
+      buildFaqPageNode(WIDGET_PAGE_FAQS, pageUrl),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Live Dashboard',
+            item: SITE_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Hotel & Partner Live Widget',
             item: pageUrl,
           },
         ],

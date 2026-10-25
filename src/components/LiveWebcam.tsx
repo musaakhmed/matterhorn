@@ -62,8 +62,14 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
   },
 ];
 
-export default function LiveWebcam() {
-  const [selectedId, setSelectedId] = useState<WebcamFeed['id']>('gornergrat');
+interface LiveWebcamProps {
+  defaultCamId?: WebcamFeed['id'];
+}
+
+export default function LiveWebcam({
+  defaultCamId = 'gornergrat',
+}: LiveWebcamProps = {}) {
+  const [selectedId, setSelectedId] = useState<WebcamFeed['id']>(defaultCamId);
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [userVote, setUserVote] = useState<'yes' | 'no' | null>(null);
   const [voteCounts, setVoteCounts] = useState({ yes: 42, no: 19 });

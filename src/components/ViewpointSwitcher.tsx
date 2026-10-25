@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { TrainFront, CableCar, Compass } from 'lucide-react';
+import Link from 'next/link';
+import { TrainFront, CableCar, Compass, Waves, ArrowUpRight } from 'lucide-react';
 import { Viewpoint, ViewpointId } from '@/lib/types';
 
 interface ViewpointSwitcherProps {
@@ -101,6 +102,39 @@ export default function ViewpointSwitcher({
               </button>
             );
           })}
+        </div>
+      </div>
+
+      {/* Direct Viewpoint Sub-Route Links Strip */}
+      <div className="mt-3 pt-2.5 border-t border-slate-200/70 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <span className="font-mono text-[11px] text-slate-500 font-semibold">
+          Dedicated Viewpoint Pages:
+        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/viewpoints/gornergrat"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-sky-50 border border-slate-200 hover:border-sky-200 text-slate-700 hover:text-sky-800 font-semibold transition-colors"
+          >
+            <TrainFront className="w-3 h-3 text-sky-600" aria-hidden="true" />
+            <span>Gornergrat (3,089m)</span>
+            <ArrowUpRight className="w-3 h-3 text-slate-400" aria-hidden="true" />
+          </Link>
+          <Link
+            href="/viewpoints/glacier-paradise"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-sky-50 border border-slate-200 hover:border-sky-200 text-slate-700 hover:text-sky-800 font-semibold transition-colors"
+          >
+            <CableCar className="w-3 h-3 text-sky-600" aria-hidden="true" />
+            <span>Glacier Paradise (3,883m)</span>
+            <ArrowUpRight className="w-3 h-3 text-slate-400" aria-hidden="true" />
+          </Link>
+          <Link
+            href="/viewpoints/sunnegga-riffelsee"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-sky-50 border border-slate-200 hover:border-sky-200 text-slate-700 hover:text-sky-800 font-semibold transition-colors"
+          >
+            <Waves className="w-3 h-3 text-sky-600" aria-hidden="true" />
+            <span>Riffelsee &amp; Sunnegga Reflection</span>
+            <ArrowUpRight className="w-3 h-3 text-slate-400" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </section>

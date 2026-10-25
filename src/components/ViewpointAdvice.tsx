@@ -43,6 +43,12 @@ function ViewpointIcon({ id }: { id: ViewpointRecommendation['id'] }) {
   }
 }
 
+const VIEWPOINT_ROUTE_MAP: Record<ViewpointRecommendation['id'], string> = {
+  gornergrat: '/viewpoints/gornergrat',
+  sunnegga: '/viewpoints/sunnegga-riffelsee',
+  'glacier-paradise': '/viewpoints/glacier-paradise',
+};
+
 export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
   return (
     <section aria-label="Zermatt Viewpoint Strategy" className="space-y-3">
@@ -117,11 +123,21 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-mono text-slate-500">
-                <span>Access:</span>
-                <span className="text-slate-700 font-semibold">
-                  {vp.transportType}
-                </span>
+              <div className="mt-4 pt-3 border-t border-slate-200/80 space-y-2">
+                <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
+                  <span>Access:</span>
+                  <span className="text-slate-700 font-semibold">
+                    {vp.transportType}
+                  </span>
+                </div>
+
+                <Link
+                  href={VIEWPOINT_ROUTE_MAP[vp.id]}
+                  className="inline-flex items-center justify-between w-full px-3 py-1.5 rounded-xl bg-sky-50/90 hover:bg-sky-100 border border-sky-200/80 text-xs font-bold text-sky-800 transition-colors"
+                >
+                  <span>Open {vp.name} Live Page</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
               </div>
             </div>
           );
