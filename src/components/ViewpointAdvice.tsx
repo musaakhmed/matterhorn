@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { Mountain, TrainFront, CableCar, Compass, ArrowUpRight } from 'lucide-react';
 import { BadgeColor, ViewpointRecommendation } from '@/lib/types';
-import VisibilityIcon from './VisibilityIcon';
 
 interface ViewpointAdviceProps {
   viewpoints: ViewpointRecommendation[];
@@ -103,10 +102,9 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
                   </div>
 
                   <span
-                    className={`inline-flex items-center gap-1.5 pl-1.5 pr-2.5 py-0.5 rounded-full border text-xs font-bold ${style.pill}`}
+                    className={`px-2.5 py-0.5 rounded-full border text-xs font-bold ${style.pill}`}
                   >
-                    <VisibilityIcon badgeColor={vp.badgeColor} size="xs" />
-                    <span>{vp.suitability}</span>
+                    {vp.suitability}
                   </span>
                 </div>
 

@@ -10,7 +10,7 @@ import {
   Cloud,
 } from 'lucide-react';
 import { BadgeColor, DayForecast, ScoreBlock } from '@/lib/types';
-import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
+import VisibilityIcon from './VisibilityIcon';
 
 interface HourlyTimelineProps {
   days: DayForecast[];
@@ -79,8 +79,8 @@ function PeriodPill({ block }: { block: ScoreBlock }) {
       </div>
 
       <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2 min-w-0">
-          <VisibilityIcon badgeColor={block.badgeColor} size="sm" />
+        <div className="flex items-center gap-2.5 min-w-0">
+          <VisibilityIcon badgeColor={block.badgeColor} size="md" />
           <span className={`text-xs font-bold truncate ${style.text}`}>
             {block.shortLabel}
           </span>
@@ -188,16 +188,13 @@ export default function HourlyTimeline({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-right">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-slate-500 block">
-                      Peak
-                    </span>
-                    <span className="text-sm font-mono font-extrabold text-slate-900">
-                      {day.dailyPeakScore}/10
-                    </span>
-                  </div>
-                  <VisibilityIcon score={day.dailyPeakScore} size="sm" />
+                <div className="text-right">
+                  <span className="text-[10px] font-mono uppercase text-slate-500 block">
+                    Peak
+                  </span>
+                  <span className="text-sm font-mono font-extrabold text-slate-900">
+                    {day.dailyPeakScore}/10
+                  </span>
                 </div>
               </div>
 
@@ -212,19 +209,24 @@ export default function HourlyTimeline({
       </div>
 
       {/* Scale Legend Footer */}
-      <div className="mt-4 pt-3.5 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-700">
-        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-          {VISIBILITY_SCALE_TIERS.map((tier) => (
-            <span
-              key={tier.status}
-              className="inline-flex items-center gap-2 font-semibold"
-            >
-              <VisibilityIcon badgeColor={tier.badgeColor} size="xs" />
-              <span>
-                {tier.scoreRange} {tier.status}
-              </span>
-            </span>
-          ))}
+      <div className="mt-4 pt-3.5 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
+        <div className="flex flex-wrap items-center gap-4">
+          <span className="inline-flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+            <span>8–10 Visible</span>
+          </span>
+          <span className="inline-flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+            <span>6–7 Partially Visible</span>
+          </span>
+          <span className="inline-flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-orange-500" />
+            <span>3–5 Barely Visible</span>
+          </span>
+          <span className="inline-flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+            <span>1–2 Not Visible</span>
+          </span>
         </div>
         <span className="font-mono text-[11px] text-slate-500">
           Swipe or use arrows to view all 10 days

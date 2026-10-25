@@ -82,6 +82,19 @@ const LIGHT_THEME_STYLES: Record<
   },
 };
 
+function StatusGlyph({ badgeColor }: { badgeColor: BadgeColor }) {
+  switch (badgeColor) {
+    case 'emerald':
+      return <Sparkles className="w-3.5 h-3.5 text-emerald-700" aria-hidden="true" />;
+    case 'amber':
+      return <CloudSun className="w-3.5 h-3.5 text-amber-700" aria-hidden="true" />;
+    case 'orange':
+      return <CloudFog className="w-3.5 h-3.5 text-orange-700" aria-hidden="true" />;
+    case 'rose':
+      return <CloudRainWind className="w-3.5 h-3.5 text-rose-700" aria-hidden="true" />;
+  }
+}
+
 function DualPeriodCard({
   block,
   isActive,
@@ -127,7 +140,7 @@ function DualPeriodCard({
           <VisibilityIcon
             badgeColor={block.badgeColor}
             size="lg"
-            className="shadow-xs"
+            className="shadow-sm"
           />
           <div className="flex items-baseline gap-1">
             <span
@@ -142,7 +155,7 @@ function DualPeriodCard({
         <span
           className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-bold ${blockStyle.pillBg} ${blockStyle.pillBorder} ${blockStyle.pillText}`}
         >
-          <VisibilityIcon badgeColor={block.badgeColor} size="xs" />
+          <StatusGlyph badgeColor={block.badgeColor} />
           <span>{block.status}</span>
         </span>
       </div>
@@ -178,8 +191,19 @@ export default function HeroStatus({ data }: HeroStatusProps) {
       />
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-        {/* Left: 1–10 Circular Index Ring */}
+        {/* Left: Hero Visibility Illustration + 1–10 Circular Index Ring */}
         <div className="lg:col-span-4 min-w-0 flex flex-col items-center justify-center">
+          {/* Primary Hero Illustration Badge */}
+          <div className="mb-4 flex flex-col items-center">
+            <VisibilityIcon
+              badgeColor={data.currentBadgeColor}
+              size="xl"
+              decorative={false}
+              preload={true}
+              className="shadow-md ring-4 ring-white"
+            />
+          </div>
+
           <div className="relative w-48 h-48 sm:w-52 sm:h-52 flex items-center justify-center bg-white/80 rounded-full shadow-inner border border-slate-200/70">
             <svg
               className="w-full h-full -rotate-90 transform"
@@ -229,44 +253,35 @@ export default function HeroStatus({ data }: HeroStatusProps) {
             </div>
           </div>
 
-          {/* High-Contrast Status Pill with Custom Visibility Icon */}
+          {/* High-Contrast Status Pill */}
           <div
-            className={`mt-3.5 inline-flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs sm:text-sm font-bold tracking-wide uppercase shadow-2xs`}
+            className={`mt-3.5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs sm:text-sm font-bold tracking-wide uppercase shadow-2xs`}
           >
-            <VisibilityIcon badgeColor={data.currentBadgeColor} size="sm" />
+            <StatusGlyph badgeColor={data.currentBadgeColor} />
             <span>{data.currentStatus}</span>
           </div>
         </div>
 
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}
         <div className="lg:col-span-8 min-w-0 flex flex-col justify-between space-y-5 text-center lg:text-left">
-          <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
-            <VisibilityIcon
-              badgeColor={data.currentBadgeColor}
-              size="xl"
-              decorative={false}
-              preload={true}
-              className="shadow-md ring-2 ring-white shrink-0"
-            />
-            <div className="space-y-1.5 min-w-0">
-              <p className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wide text-sky-700 leading-relaxed">
-                <Eye
-                  className="inline-block w-3.5 h-3.5 mr-1.5 -mt-0.5 align-middle shrink-0"
-                  aria-hidden="true"
-                />
-                <span>
-                  {data.viewpoint.name} ({data.viewpoint.elevation.toLocaleString()}m)
-                </span>
-                <span className="mx-1.5" aria-hidden="true">
-                  •
-                </span>
-                <span className="whitespace-nowrap">{style.answerWord}</span>
-              </p>
+          <div className="space-y-1.5">
+            <p className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wide text-sky-700 leading-relaxed">
+              <Eye
+                className="inline-block w-3.5 h-3.5 mr-1.5 -mt-0.5 align-middle shrink-0"
+                aria-hidden="true"
+              />
+              <span>
+                {data.viewpoint.name} ({data.viewpoint.elevation.toLocaleString()}m)
+              </span>
+              <span className="mx-1.5" aria-hidden="true">
+                •
+              </span>
+              <span className="whitespace-nowrap">{style.answerWord}</span>
+            </p>
 
-              <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight break-words">
-                {data.verdictSummary}
-              </h2>
-            </div>
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight break-words">
+              {data.verdictSummary}
+            </h2>
           </div>
 
           {/* Today's Morning (AM) & Afternoon (PM) Dual Index Split */}
@@ -311,10 +326,6 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                   ({data.bestBlockNext48h.score}/10 — {data.bestBlockNext48h.status})
                 </span>
               </span>
-              <VisibilityIcon
-                badgeColor={data.bestBlockNext48h.badgeColor}
-                size="xs"
-              />
             </div>
 
             <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-700 shadow-2xs">
