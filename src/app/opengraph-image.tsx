@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/og';
+import { readFile } from 'node:fs/promises';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
+export const revalidate = 900;
 export const alt =
   'Is The Matterhorn Visible Today? Live Alpine Visibility Score';
 export const size = { width: 1200, height: 630 };
@@ -128,12 +130,19 @@ export default async function Image() {
   let bannerSrc: string | null = null;
 
   try {
-    const bannerBuffer = await fetch(
+    const bannerBuffer = await readFile(
       new URL('../../public/banner.jpeg', import.meta.url)
-    ).then((res) => res.arrayBuffer());
-    bannerSrc = arrayBufferToBase64DataUrl(bannerBuffer, 'image/jpeg');
+    );
+    bannerSrc = `data:image/jpeg;base64,${bannerBuffer.toString('base64')}`;
   } catch {
-    bannerSrc = null;
+    try {
+      const bannerBuffer = await fetch(
+        new URL('../../public/banner.jpeg', import.meta.url)
+      ).then((res) => res.arrayBuffer());
+      bannerSrc = arrayBufferToBase64DataUrl(bannerBuffer, 'image/jpeg');
+    } catch {
+      bannerSrc = null;
+    }
   }
 
   try {
