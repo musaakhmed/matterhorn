@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { buildRootLayoutJsonLd, serializeJsonLd } from '@/lib/schema';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -145,15 +146,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('matterhorn-theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');document.documentElement.style.colorScheme='dark';}else{document.documentElement.classList.remove('dark');document.documentElement.setAttribute('data-theme','light');document.documentElement.style.colorScheme='light';}}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(rootJsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 alpine-backdrop selection:bg-sky-500/20 selection:text-sky-900">
-        {children}
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 alpine-backdrop selection:bg-sky-500/20 selection:text-sky-900 dark:selection:text-sky-100 transition-colors duration-200">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

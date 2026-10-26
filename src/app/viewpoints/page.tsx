@@ -48,20 +48,20 @@ export const metadata: Metadata = {
 };
 
 const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
-  emerald: 'bg-emerald-100 border-emerald-300 text-emerald-900',
-  amber: 'bg-amber-100 border-amber-300 text-amber-900',
-  orange: 'bg-orange-100 border-orange-300 text-orange-900',
-  rose: 'bg-rose-100 border-rose-300 text-rose-900',
+  emerald: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
+  amber: 'bg-amber-100 dark:bg-amber-950/80 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200',
+  orange: 'bg-orange-100 dark:bg-orange-950/80 border-orange-300 dark:border-orange-700 text-orange-900 dark:text-orange-200',
+  rose: 'bg-rose-100 dark:bg-rose-950/80 border-rose-300 dark:border-rose-700 text-rose-900 dark:text-rose-200',
 };
 
 function ViewpointIcon({ slug }: { slug: ViewpointPageSlug }) {
   switch (slug) {
     case 'gornergrat':
-      return <TrainFront className="w-5 h-5 text-sky-600" aria-hidden="true" />;
+      return <TrainFront className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
     case 'glacier-paradise':
-      return <CableCar className="w-5 h-5 text-sky-600" aria-hidden="true" />;
+      return <CableCar className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
     case 'sunnegga-riffelsee':
-      return <Waves className="w-5 h-5 text-sky-600" aria-hidden="true" />;
+      return <Waves className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
   }
 }
 
@@ -85,29 +85,29 @@ export default async function ViewpointsIndexPage() {
         {/* Breadcrumb */}
         <nav
           aria-label="Breadcrumb"
-          className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500"
+          className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400"
         >
           <Link
             href="/"
-            className="hover:text-sky-700 transition-colors font-semibold"
+            className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
           >
             Live Dashboard
           </Link>
           <ChevronRight
-            className="w-3.5 h-3.5 text-slate-400"
+            className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500"
             aria-hidden="true"
           />
-          <span className="text-slate-900 font-bold">
+          <span className="text-slate-900 dark:text-white font-bold">
             Matterhorn Viewpoints
           </span>
         </nav>
 
         {/* Hero Section */}
-        <section className="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
+        <section className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
               <Compass
-                className="w-3.5 h-3.5 text-sky-600"
+                className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
                 aria-hidden="true"
               />
               <span>
@@ -115,11 +115,11 @@ export default async function ViewpointsIndexPage() {
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight text-balance">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance">
               Zermatt Matterhorn Viewpoints: Live Visibility &amp; Lake Reflection Conditions
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
               Because the Matterhorn (4,478m) sits on the Swiss-Italian meteorological divide, visibility, wind holds, and lake mirror reflections vary dramatically by viewpoint altitude and aspect. Select your target sector below to inspect live 10-day AM/PM telemetry before purchasing mountain passes.
             </p>
           </div>
@@ -137,12 +137,12 @@ export default async function ViewpointsIndexPage() {
             return (
               <article
                 key={vp.slug}
-                className="group relative rounded-3xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between"
+                className="group relative rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 transition-all flex flex-col justify-between"
               >
                 <div className="space-y-5">
                   {/* Top Badge Row */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="p-2.5 rounded-2xl bg-sky-50 border border-sky-200">
+                    <span className="p-2.5 rounded-2xl bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800">
                       <ViewpointIcon slug={vp.slug} />
                     </span>
 
@@ -159,8 +159,8 @@ export default async function ViewpointsIndexPage() {
 
                   {/* Title & Coordinates */}
                   <div className="space-y-2">
-                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-500">
-                      <span className="inline-flex items-center gap-1 text-sky-700 font-bold">
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400">
+                      <span className="inline-flex items-center gap-1 text-sky-700 dark:text-sky-400 font-bold">
                         <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
                         <span>{vp.elevationLabel}</span>
                       </span>
@@ -168,7 +168,7 @@ export default async function ViewpointsIndexPage() {
                       <span>{vp.coordinatesLabel}</span>
                     </div>
 
-                    <h2 className="text-xl font-extrabold text-slate-900 tracking-tight group-hover:text-sky-700 transition-colors text-balance">
+                    <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors text-balance">
                       <Link
                         href={`/viewpoints/${vp.slug}`}
                         className="focus:outline-none"
@@ -178,13 +178,13 @@ export default async function ViewpointsIndexPage() {
                       </Link>
                     </h2>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       {vp.description}
                     </p>
                   </div>
 
                   {/* Live Today AM/PM Telemetry Box */}
-                  <div className="rounded-2xl bg-slate-50 border border-slate-200/80 p-4 space-y-3">
+                  <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <VisibilityIcon
@@ -192,11 +192,11 @@ export default async function ViewpointsIndexPage() {
                           size="sm"
                         />
                         <div>
-                          <div className="text-xs font-extrabold text-slate-900">
+                          <div className="text-xs font-extrabold text-slate-900 dark:text-white">
                             Today AM: {forecast.today.morning.score}/10 • PM:{' '}
                             {forecast.today.afternoon.score}/10
                           </div>
-                          <div className="text-[11px] font-mono text-slate-500">
+                          <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                             Mid-Cloud: {forecast.metrics.cloudCoverMid}% • Wind:{' '}
                             {forecast.metrics.windSpeedKmh} km/h
                           </div>
@@ -205,20 +205,20 @@ export default async function ViewpointsIndexPage() {
                     </div>
 
                     {isLakePage ? (
-                      <div className="pt-2 border-t border-slate-200/70 flex items-center justify-between text-xs">
-                        <span className="font-bold text-slate-700">
+                      <div className="pt-2 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-xs">
+                        <span className="font-bold text-slate-700 dark:text-slate-300">
                           Mirror Status:
                         </span>
-                        <span className="font-mono font-bold text-sky-800">
+                        <span className="font-mono font-bold text-sky-800 dark:text-sky-300">
                           {reflectionStatus.overallVerdict}
                         </span>
                       </div>
                     ) : (
-                      <div className="pt-2 border-t border-slate-200/70 flex items-center justify-between text-xs">
-                        <span className="font-bold text-slate-700">
+                      <div className="pt-2 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-xs">
+                        <span className="font-bold text-slate-700 dark:text-slate-300">
                           {vp.heroStat.label}:
                         </span>
-                        <span className="font-mono font-bold text-sky-800">
+                        <span className="font-mono font-bold text-sky-800 dark:text-sky-300">
                           {vp.heroStat.value}
                         </span>
                       </div>
@@ -226,10 +226,10 @@ export default async function ViewpointsIndexPage() {
                   </div>
 
                   {/* Transport & Best Window */}
-                  <div className="space-y-1.5 text-xs text-slate-600 font-mono">
+                  <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 font-mono">
                     <div className="flex items-center gap-1.5">
                       <Clock
-                        className="w-3.5 h-3.5 text-sky-600 shrink-0"
+                        className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0"
                         aria-hidden="true"
                       />
                       <span className="truncate">{vp.transportSummary}</span>
@@ -245,7 +245,7 @@ export default async function ViewpointsIndexPage() {
                 </div>
 
                 {/* Footer CTA */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700 group-hover:text-sky-900">
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400 group-hover:text-sky-900 dark:group-hover:text-sky-300">
                   <span>Open Live Viewpoint Forecast</span>
                   <ArrowRight
                     className="w-4 h-4 transition-transform group-hover:translate-x-1"
@@ -258,7 +258,7 @@ export default async function ViewpointsIndexPage() {
         </section>
 
         {/* Bottom CTA to Main Dual-Viewpoint Dashboard */}
-        <section className="rounded-2xl border border-sky-200 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 text-white p-6 sm:p-8 shadow-sm">
+        <section className="rounded-2xl border border-sky-200 dark:border-slate-800 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 text-white p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
@@ -295,9 +295,9 @@ export default async function ViewpointsIndexPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image
                 src={logoImg}
@@ -315,21 +315,21 @@ export default async function ViewpointsIndexPage() {
           <div className="flex flex-wrap items-center gap-4 font-mono">
             <Link
               href="/"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Live Dashboard
             </Link>
             <span>•</span>
             <Link
               href="/guides"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Field Guides
             </Link>
             <span>•</span>
             <Link
               href="/api/visibility"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               JSON API (/api/visibility)
             </Link>

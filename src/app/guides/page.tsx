@@ -52,27 +52,27 @@ const CATEGORY_STYLE: Record<
   }
 > = {
   Viewpoints: {
-    badge: 'bg-sky-50 border-sky-200 text-sky-800',
+    badge: 'bg-sky-50 dark:bg-sky-950/60 border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-300',
     icon: Compass,
   },
   Climatology: {
-    badge: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+    badge: 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300',
     icon: BarChart3,
   },
   'Bad Weather': {
-    badge: 'bg-amber-50 border-amber-200 text-amber-900',
+    badge: 'bg-amber-50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-300',
     icon: CloudRain,
   },
   Photography: {
-    badge: 'bg-indigo-50 border-indigo-200 text-indigo-800',
+    badge: 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-200 dark:border-indigo-800 text-indigo-800 dark:text-indigo-300',
     icon: Camera,
   },
   Meteorology: {
-    badge: 'bg-slate-100 border-slate-300 text-slate-800',
+    badge: 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-300',
     icon: Wind,
   },
   'Day Trips': {
-    badge: 'bg-rose-50 border-rose-200 text-rose-800',
+    badge: 'bg-rose-50 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300',
     icon: TrainFront,
   },
 };
@@ -92,18 +92,18 @@ export default async function GuidesIndexPage() {
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8 sm:space-y-10">
         {/* Hero Header */}
-        <section className="rounded-3xl border border-slate-200/90 bg-white/90 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
+        <section className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800">
-              <BookOpen className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
+              <BookOpen className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
               <span>ALPINE TELEMETRY FIELD GUIDES • ZERMATT (4,478m)</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight text-balance">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance">
               Tactical Field Guides for Seeing the Matterhorn Clearly
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               Mountain lift passes in Zermatt cost over CHF 100 per person, and valley weather apps regularly misread summit cloud layers by 2,800 vertical meters. Use these data-backed guides to pick the right viewpoint, time of day, and weather window.
             </p>
           </div>
@@ -119,8 +119,8 @@ export default async function GuidesIndexPage() {
             return (
               <article
                 key={guide.slug}
-                className={`group rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between ${
-                  isFeatured ? 'md:col-span-2 bg-gradient-to-br from-white via-white to-sky-50/40' : ''
+                className={`group rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 transition-all flex flex-col justify-between ${
+                  isFeatured ? 'md:col-span-2 bg-gradient-to-br from-white via-white to-sky-50/40 dark:from-slate-900 dark:via-slate-900 dark:to-sky-950/30' : ''
                 }`}
               >
                 <div className="space-y-4">
@@ -133,7 +133,7 @@ export default async function GuidesIndexPage() {
                       <span>{guide.category}</span>
                     </span>
 
-                    <div className="flex items-center gap-3 text-xs font-mono text-slate-500">
+                    <div className="flex items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400">
                       <span className="inline-flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
                         <span>{guide.readingTimeMinutes} min read</span>
@@ -144,7 +144,7 @@ export default async function GuidesIndexPage() {
                   {/* Title & Description */}
                   <div className="space-y-2">
                     <h2
-                      className={`font-extrabold text-slate-900 tracking-tight group-hover:text-sky-700 transition-colors text-balance ${
+                      className={`font-extrabold text-slate-900 dark:text-white tracking-tight group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors text-balance ${
                         isFeatured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
                       }`}
                     >
@@ -154,30 +154,30 @@ export default async function GuidesIndexPage() {
                       </Link>
                     </h2>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                       {guide.description}
                     </p>
                   </div>
 
                   {/* Key Data Highlight Pill */}
-                  <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
-                      <span className="text-xs font-bold text-slate-700">
+                      <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+                      <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                         {guide.heroStat.label}:
                       </span>
-                      <span className="text-xs font-mono font-extrabold text-sky-800 bg-sky-100/80 px-2 py-0.5 rounded-md">
+                      <span className="text-xs font-mono font-extrabold text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/80 px-2 py-0.5 rounded-md">
                         {guide.heroStat.value}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-slate-500">
+                    <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                       {guide.heroStat.detail}
                     </span>
                   </div>
                 </div>
 
                 {/* Card Footer */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700 group-hover:text-sky-900">
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400 group-hover:text-sky-900 dark:group-hover:text-sky-300">
                   <span>Read Full Field Guide</span>
                   <ArrowRight
                     className="w-4 h-4 transition-transform group-hover:translate-x-1"
@@ -199,7 +199,7 @@ export default async function GuidesIndexPage() {
         />
 
         {/* Bottom Funnel CTA Card */}
-        <section className="rounded-2xl border border-sky-200 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 text-white p-6 sm:p-8 shadow-sm">
+        <section className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-white p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
@@ -225,9 +225,9 @@ export default async function GuidesIndexPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image
                 src={logoImg}
@@ -245,14 +245,14 @@ export default async function GuidesIndexPage() {
           <div className="flex flex-wrap items-center gap-4 font-mono">
             <Link
               href="/"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Live Dashboard
             </Link>
             <span>•</span>
             <Link
               href="/api/visibility"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               JSON API (/api/visibility)
             </Link>

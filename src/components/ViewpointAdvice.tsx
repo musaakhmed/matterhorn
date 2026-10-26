@@ -15,31 +15,31 @@ const BADGE_MAP: Record<
   }
 > = {
   emerald: {
-    pill: 'bg-emerald-100 border-emerald-300 text-emerald-900',
-    border: 'border-emerald-300/90',
+    pill: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
+    border: 'border-emerald-300/90 dark:border-emerald-700/60',
   },
   amber: {
-    pill: 'bg-amber-100 border-amber-300 text-amber-900',
-    border: 'border-slate-200/90',
+    pill: 'bg-amber-100 dark:bg-amber-950/80 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200',
+    border: 'border-slate-200/90 dark:border-slate-800',
   },
   orange: {
-    pill: 'bg-orange-100 border-orange-300 text-orange-900',
-    border: 'border-slate-200/90',
+    pill: 'bg-orange-100 dark:bg-orange-950/80 border-orange-300 dark:border-orange-700 text-orange-900 dark:text-orange-200',
+    border: 'border-slate-200/90 dark:border-slate-800',
   },
   rose: {
-    pill: 'bg-rose-100 border-rose-300 text-rose-900',
-    border: 'border-slate-200/90',
+    pill: 'bg-rose-100 dark:bg-rose-950/80 border-rose-300 dark:border-rose-700 text-rose-900 dark:text-rose-200',
+    border: 'border-slate-200/90 dark:border-slate-800',
   },
 };
 
 function ViewpointIcon({ id }: { id: ViewpointRecommendation['id'] }) {
   switch (id) {
     case 'gornergrat':
-      return <TrainFront className="w-4 h-4 text-sky-600" aria-hidden="true" />;
+      return <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
     case 'sunnegga':
-      return <Compass className="w-4 h-4 text-sky-600" aria-hidden="true" />;
+      return <Compass className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
     case 'glacier-paradise':
-      return <CableCar className="w-4 h-4 text-sky-600" aria-hidden="true" />;
+      return <CableCar className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
   }
 }
 
@@ -55,12 +55,12 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-1">
         <div>
           <div className="flex items-center gap-2">
-            <Mountain className="w-4 h-4 text-sky-600" aria-hidden="true" />
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            <Mountain className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
               Where to View Right Now: Zermatt Sector Guide
             </h3>
           </div>
-          <p className="text-xs sm:text-sm text-slate-600">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             Tactical viewpoint selection comparing Gornergrat, Sunnegga, and Matterhorn Glacier Paradise
           </p>
         </div>
@@ -68,17 +68,17 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/guides/gornergrat-vs-glacier-paradise"
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-xs font-bold text-sky-800 transition-colors"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 border border-sky-200 dark:border-sky-800 text-xs font-bold text-sky-800 dark:text-sky-300 transition-colors"
           >
             <span>Gornergrat vs. Glacier Paradise Guide</span>
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
           <Link
             href="/guides/best-matterhorn-photo-viewpoints"
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 transition-colors"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 transition-colors"
           >
             <span>Photo &amp; Sunrise Spots</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -89,19 +89,19 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
           return (
             <div
               key={vp.id}
-              className={`rounded-2xl border ${style.border} bg-white/90 backdrop-blur-md p-5 flex flex-col justify-between transition-all shadow-xs hover:shadow-md`}
+              className={`rounded-2xl border ${style.border} bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-5 flex flex-col justify-between transition-all shadow-xs hover:shadow-md`}
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <div className="inline-flex items-center gap-2.5">
-                    <span className="p-2 rounded-xl bg-sky-50 border border-sky-200">
+                    <span className="p-2 rounded-xl bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800">
                       <ViewpointIcon id={vp.id} />
                     </span>
                     <div>
-                      <h4 className="text-sm font-extrabold text-slate-900">
+                      <h4 className="text-sm font-extrabold text-slate-900 dark:text-white">
                         {vp.name}
                       </h4>
-                      <span className="text-xs font-mono font-semibold text-sky-700">
+                      <span className="text-xs font-mono font-semibold text-sky-700 dark:text-sky-400">
                         {vp.elevation}
                       </span>
                     </div>
@@ -114,26 +114,26 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
                   </span>
                 </div>
 
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
                   {vp.tagline}
                 </p>
 
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   {vp.advice}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-200/80 space-y-2">
-                <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
+              <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800 space-y-2">
+                <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
                   <span>Access:</span>
-                  <span className="text-slate-700 font-semibold">
+                  <span className="text-slate-700 dark:text-slate-300 font-semibold">
                     {vp.transportType}
                   </span>
                 </div>
 
                 <Link
                   href={VIEWPOINT_ROUTE_MAP[vp.id]}
-                  className="inline-flex items-center justify-between w-full px-3 py-1.5 rounded-xl bg-sky-50/90 hover:bg-sky-100 border border-sky-200/80 text-xs font-bold text-sky-800 transition-colors"
+                  className="inline-flex items-center justify-between w-full px-3 py-1.5 rounded-xl bg-sky-50/90 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 border border-sky-200/80 dark:border-sky-800 text-xs font-bold text-sky-800 dark:text-sky-300 transition-colors"
                 >
                   <span>Open {vp.name} Live Page</span>
                   <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
@@ -15,6 +17,19 @@
   color-scheme: light;
 }
 
+.dark {
+  --background: #0b1120;
+  --foreground: #f8fafc;
+  --color-primary: #38bdf8;
+  --color-secondary: #0ea5e9;
+  --color-accent: #f59e0b;
+  --color-card: #0f172a;
+  --color-muted: #1e293b;
+  --color-muted-foreground: #94a3b8;
+  --color-border: #1e293b;
+  color-scheme: dark;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -24,8 +39,8 @@
 
 html,
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
 }
@@ -37,6 +52,17 @@ body {
     radial-gradient(ellipse 85% 45% at 50% -10%, rgba(14, 165, 233, 0.14), transparent),
     radial-gradient(ellipse 55% 35% at 90% 10%, rgba(2, 132, 199, 0.08), transparent),
     linear-gradient(180deg, #f0f9ff 0%, #f8fafc 380px, #f8fafc 100%);
+}
+
+/* Night-time Alpine Glacier & Midnight Sky Backdrop */
+.dark .alpine-backdrop,
+.dark.alpine-backdrop,
+:where(.dark) body.alpine-backdrop {
+  background-color: #0b1120;
+  background-image:
+    radial-gradient(ellipse 85% 45% at 50% -10%, rgba(14, 165, 233, 0.12), transparent),
+    radial-gradient(ellipse 55% 35% at 90% 10%, rgba(2, 132, 199, 0.08), transparent),
+    linear-gradient(180deg, #0f172a 0%, #0b1120 380px, #0b1120 100%);
 }
 
 /* Hidden scrollbar for 10-day horizontal horizon slider */

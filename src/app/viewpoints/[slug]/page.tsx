@@ -107,10 +107,10 @@ export async function generateMetadata({
 }
 
 const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
-  emerald: 'bg-emerald-100 border-emerald-300 text-emerald-900',
-  amber: 'bg-amber-100 border-amber-300 text-amber-900',
-  orange: 'bg-orange-100 border-orange-300 text-orange-900',
-  rose: 'bg-rose-100 border-rose-300 text-rose-900',
+  emerald: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
+  amber: 'bg-amber-100 dark:bg-amber-950/80 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200',
+  orange: 'bg-orange-100 dark:bg-orange-950/80 border-orange-300 dark:border-orange-700 text-orange-900 dark:text-orange-200',
+  rose: 'bg-rose-100 dark:bg-rose-950/80 border-rose-300 dark:border-rose-700 text-rose-900 dark:text-rose-200',
 };
 
 function ViewpointRouteIcon({ slug }: { slug: ViewpointPageSlug }) {
@@ -167,29 +167,29 @@ export default async function ViewpointDetailPage({
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
           <nav
             aria-label="Breadcrumb"
-            className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500"
+            className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400"
           >
             <Link
               href="/"
-              className="hover:text-sky-700 transition-colors font-semibold"
+              className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
             >
               Live Dashboard
             </Link>
             <ChevronRight
-              className="w-3.5 h-3.5 text-slate-400"
+              className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500"
               aria-hidden="true"
             />
             <Link
               href="/viewpoints"
-              className="hover:text-sky-700 transition-colors font-semibold"
+              className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
             >
               Matterhorn Viewpoints
             </Link>
             <ChevronRight
-              className="w-3.5 h-3.5 text-slate-400"
+              className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500"
               aria-hidden="true"
             />
-            <span className="text-slate-900 font-bold truncate">
+            <span className="text-slate-900 dark:text-white font-bold truncate">
               {page.shortName}
             </span>
           </nav>
@@ -197,7 +197,7 @@ export default async function ViewpointDetailPage({
           {/* 3-Viewpoint Sub-Route Switcher */}
           <nav
             aria-label="Switch Matterhorn Viewpoint Page"
-            className="flex flex-wrap items-center gap-1.5 bg-white/90 border border-slate-200/90 p-1.5 rounded-xl shadow-2xs"
+            className="flex flex-wrap items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-1.5 rounded-xl shadow-2xs"
           >
             {VIEWPOINT_PAGES.map((vp) => {
               const isCurrent = vp.slug === page.slug;
@@ -210,7 +210,7 @@ export default async function ViewpointDetailPage({
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     isCurrent
                       ? 'bg-sky-600 text-white shadow-2xs'
-                      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <span>{vp.shortName}</span>
@@ -218,7 +218,7 @@ export default async function ViewpointDetailPage({
                     className={`font-mono text-[11px] px-1.5 py-0.2 rounded ${
                       isCurrent
                         ? 'bg-sky-800/80 text-sky-100'
-                        : 'bg-slate-200/80 text-slate-800'
+                        : 'bg-slate-200/80 dark:bg-slate-700 text-slate-800 dark:text-slate-200'
                     }`}
                   >
                     {vpForecast.currentScore}/10
@@ -230,26 +230,26 @@ export default async function ViewpointDetailPage({
         </div>
 
         {/* Viewpoint Hero Header & Tactical Specs Card */}
-        <header className="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-6 sm:p-8 shadow-xs space-y-6">
+        <header className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-6 sm:p-8 shadow-xs space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-2.5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
                 <ViewpointRouteIcon slug={page.slug} />
                 <span>VIEWPOINT TELEMETRY • {page.elevationLabel}</span>
               </span>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-mono font-semibold text-slate-700">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
                 <MapPin
-                  className="w-3.5 h-3.5 text-sky-600"
+                  className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
                   aria-hidden="true"
                 />
                 <span>{page.coordinatesLabel}</span>
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-mono font-bold text-emerald-900">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs font-mono font-bold text-emerald-900 dark:text-emerald-300">
               <Clock
-                className="w-3.5 h-3.5 text-emerald-600"
+                className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400"
                 aria-hidden="true"
               />
               <span>Live Zermatt Update: {telemetry.swissTimeFormatted}</span>
@@ -257,10 +257,10 @@ export default async function ViewpointDetailPage({
           </div>
 
           <div className="space-y-3 max-w-4xl">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight text-balance leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance leading-tight">
               {page.title}
             </h1>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
               {page.description}
             </p>
           </div>
@@ -270,15 +270,15 @@ export default async function ViewpointDetailPage({
             {page.quickFacts.map((fact) => (
               <div
                 key={fact.label}
-                className="rounded-2xl bg-slate-50/90 border border-slate-200/80 p-4 space-y-1"
+                className="rounded-2xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-800 p-4 space-y-1"
               >
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 block">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   {fact.label}
                 </span>
-                <span className="text-base sm:text-lg font-extrabold text-slate-900 block">
+                <span className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white block">
                   {fact.value}
                 </span>
-                <p className="text-xs text-slate-600 leading-snug">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug">
                   {fact.detail}
                 </p>
               </div>
@@ -286,21 +286,21 @@ export default async function ViewpointDetailPage({
           </div>
 
           {/* Access, First Train/Lift & Optimal Lighting Strip */}
-          <div className="rounded-2xl bg-sky-50/70 border border-sky-200/90 p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs sm:text-sm">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-slate-800">
-              <span className="inline-flex items-center gap-1.5 font-bold text-sky-900">
-                <Compass className="w-4 h-4 text-sky-600" aria-hidden="true" />
+          <div className="rounded-2xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200/90 dark:border-sky-800/80 p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs sm:text-sm">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-slate-800 dark:text-slate-200">
+              <span className="inline-flex items-center gap-1.5 font-bold text-sky-900 dark:text-sky-300">
+                <Compass className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
                 <span>Aspect: {page.aspectLabel}</span>
               </span>
-              <span className="text-slate-300 hidden sm:inline">•</span>
+              <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">•</span>
               <span className="font-medium">
-                <strong className="text-slate-900">Access:</strong>{' '}
+                <strong className="text-slate-900 dark:text-white">Access:</strong>{' '}
                 {page.transportSummary} ({page.journeyTime})
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-              <span className="px-2.5 py-1 rounded-lg bg-white border border-sky-200 text-sky-900 font-bold">
+              <span className="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800 text-sky-900 dark:text-sky-300 font-bold">
                 Best Window: {page.bestTimeWindow}
               </span>
             </div>
@@ -311,18 +311,18 @@ export default async function ViewpointDetailPage({
         {reflectionStatus && (
           <section
             aria-label="Live Riffelsee and Stellisee Mirror Reflection Conditions"
-            className="rounded-3xl border border-sky-300/90 bg-gradient-to-br from-sky-50/90 via-white to-emerald-50/50 p-6 sm:p-8 shadow-sm space-y-5"
+            className="rounded-3xl border border-sky-300/90 dark:border-sky-800 bg-gradient-to-br from-sky-50/90 via-white to-emerald-50/50 dark:from-slate-900/90 dark:via-slate-900/80 dark:to-emerald-950/30 p-6 sm:p-8 shadow-sm space-y-5"
           >
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-sky-800">
-                  <Waves className="w-4 h-4 text-sky-600" aria-hidden="true" />
+                <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-sky-800 dark:text-sky-300">
+                  <Waves className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
                   <span>
                     LIVE ALPINE LAKE MIRROR DIAGNOSTIC • RIFFELSEE (2,757m) &amp;
                     STELLISEE (2,537m)
                   </span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Riffelsee Matterhorn Reflection Verdict Today
                 </h2>
               </div>
@@ -339,34 +339,34 @@ export default async function ViewpointDetailPage({
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Factor 1: Surface Wind & Ripple Physics */}
-              <div className="rounded-2xl bg-white/95 border border-slate-200/90 p-4 sm:p-5 space-y-2 shadow-2xs">
+              <div className="rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-4 sm:p-5 space-y-2 shadow-2xs">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     1. Surface Wind &amp; Ripple
                   </span>
-                  <Wind className="w-4 h-4 text-sky-600" aria-hidden="true" />
+                  <Wind className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
                 </div>
-                <div className="text-base sm:text-lg font-extrabold font-mono text-slate-900">
+                <div className="text-base sm:text-lg font-extrabold font-mono text-slate-900 dark:text-white">
                   {reflectionStatus.windStatusLabel}
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   {reflectionStatus.waterSurfaceDetail}
                 </p>
               </div>
 
               {/* Factor 2: East-Face Pyramid Sightline */}
-              <div className="rounded-2xl bg-white/95 border border-slate-200/90 p-4 sm:p-5 space-y-2 shadow-2xs">
+              <div className="rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-4 sm:p-5 space-y-2 shadow-2xs">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     2. East-Face Cloud Sightline
                   </span>
-                  <Eye className="w-4 h-4 text-sky-600" aria-hidden="true" />
+                  <Eye className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
                 </div>
-                <div className="text-base sm:text-lg font-extrabold font-mono text-slate-900">
+                <div className="text-base sm:text-lg font-extrabold font-mono text-slate-900 dark:text-white">
                   Score {activeForecast.currentScore}/10 • Mid-Cloud{' '}
                   {activeForecast.metrics.cloudCoverMid}%
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   Morning (AM): {activeForecast.today.morning.score}/10 (
                   {activeForecast.today.morning.status}) • Afternoon (PM):{' '}
                   {activeForecast.today.afternoon.score}/10 (
@@ -375,33 +375,33 @@ export default async function ViewpointDetailPage({
               </div>
 
               {/* Factor 3: Seasonal Lake Thaw Window */}
-              <div className="rounded-2xl bg-white/95 border border-slate-200/90 p-4 sm:p-5 space-y-2 shadow-2xs">
+              <div className="rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-4 sm:p-5 space-y-2 shadow-2xs">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     3. Lake Ice &amp; Thaw Status
                   </span>
                   <Snowflake
-                    className="w-4 h-4 text-sky-600"
+                    className="w-4 h-4 text-sky-600 dark:text-sky-400"
                     aria-hidden="true"
                   />
                 </div>
-                <div className="text-sm sm:text-base font-extrabold text-slate-900">
+                <div className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
                   {reflectionStatus.isOpenWaterSeason
                     ? 'Open Liquid Water Window'
                     : 'Winter Ice / Snow Window'}
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   {reflectionStatus.thawSeasonStatus}
                 </p>
               </div>
             </div>
 
-            <div className="rounded-2xl bg-slate-900 text-white p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="rounded-2xl bg-slate-900 dark:bg-slate-950 dark:border dark:border-slate-800 text-white p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div className="space-y-1">
                 <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-sky-300 block">
                   Photographer Action Dispatch
                 </span>
-                <p className="text-xs sm:text-sm text-slate-100 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-100 dark:text-slate-200 leading-relaxed">
                   {reflectionStatus.photographerAction}
                 </p>
               </div>
@@ -445,22 +445,22 @@ export default async function ViewpointDetailPage({
         {/* Key Takeaways (TL;DR Box) */}
         <section
           aria-label={`Key Takeaways for ${page.shortName}`}
-          className="rounded-2xl border border-emerald-200/90 bg-gradient-to-br from-emerald-50/70 via-white to-sky-50/40 p-6 sm:p-7 shadow-2xs space-y-4"
+          className="rounded-2xl border border-emerald-200/90 dark:border-emerald-800/80 bg-gradient-to-br from-emerald-50/70 via-white to-sky-50/40 dark:from-emerald-950/40 dark:via-slate-900/80 dark:to-slate-900/50 p-6 sm:p-7 shadow-2xs space-y-4"
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2 text-sm sm:text-base font-extrabold text-slate-900">
+            <div className="flex items-center gap-2 text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
               <CheckCircle2
-                className="w-5 h-5 text-emerald-600 shrink-0"
+                className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0"
                 aria-hidden="true"
               />
               <h2>{page.shortName} Visibility Takeaways (TL;DR)</h2>
             </div>
 
             <div className="inline-flex items-center gap-2 text-xs font-mono">
-              <span className="text-slate-600 font-semibold">
+              <span className="text-slate-600 dark:text-slate-400 font-semibold">
                 {page.heroStat.label}:
               </span>
-              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100 border border-emerald-300 text-emerald-950 font-extrabold">
+              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-300 font-extrabold">
                 {page.heroStat.value}
               </span>
             </div>
@@ -470,9 +470,9 @@ export default async function ViewpointDetailPage({
             {page.keyTakeaways.map((item, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
+                className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
               >
-                <span className="font-mono font-bold text-emerald-700 mt-0.5 shrink-0">
+                <span className="font-mono font-bold text-emerald-700 dark:text-emerald-400 mt-0.5 shrink-0">
                   0{idx + 1}.
                 </span>
                 <span>{item}</span>
@@ -484,16 +484,16 @@ export default async function ViewpointDetailPage({
         {/* Viewpoint Comparison / Route Table */}
         <section
           aria-label={page.comparisonTable.caption}
-          className="rounded-2xl border border-slate-200/90 bg-white/95 p-5 sm:p-6 shadow-xs space-y-4"
+          className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 sm:p-6 shadow-xs space-y-4"
         >
-          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
             {page.comparisonTable.caption}
           </h2>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-200">
+          <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-100/90 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                <tr className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
                   {page.comparisonTable.headers.map((header) => (
                     <th key={header} className="py-3 px-4">
                       {header}
@@ -501,19 +501,19 @@ export default async function ViewpointDetailPage({
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200/70 text-xs sm:text-sm">
+              <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800 text-xs sm:text-sm">
                 {page.comparisonTable.rows.map((row, rowIdx) => (
                   <tr
                     key={rowIdx}
-                    className="hover:bg-slate-50/90 transition-colors"
+                    className="hover:bg-slate-50/90 dark:hover:bg-slate-800/60 transition-colors"
                   >
                     {row.map((cell, cellIdx) => (
                       <td
                         key={cellIdx}
                         className={`py-3 px-4 leading-relaxed ${
                           cellIdx === 0
-                            ? 'font-bold text-slate-900 whitespace-nowrap'
-                            : 'text-slate-700'
+                            ? 'font-bold text-slate-900 dark:text-white whitespace-nowrap'
+                            : 'text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         {cell}
@@ -532,9 +532,9 @@ export default async function ViewpointDetailPage({
             <section
               key={section.id}
               id={section.id}
-              className="rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs space-y-4"
+              className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs space-y-4"
             >
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight text-balance">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance">
                 {section.heading}
               </h2>
 
@@ -542,7 +542,7 @@ export default async function ViewpointDetailPage({
                 {section.paragraphs.map((paragraph, pIdx) => (
                   <p
                     key={pIdx}
-                    className="text-sm sm:text-base text-slate-700 leading-relaxed"
+                    className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed"
                   >
                     {paragraph}
                   </p>
@@ -554,9 +554,9 @@ export default async function ViewpointDetailPage({
                   {section.bulletPoints.map((bp, bIdx) => (
                     <li
                       key={bIdx}
-                      className="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
+                      className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
                     >
-                      <strong className="text-slate-900 font-bold">
+                      <strong className="text-slate-900 dark:text-white font-bold">
                         {bp.bold}
                       </strong>{' '}
                       {bp.text}
@@ -566,13 +566,13 @@ export default async function ViewpointDetailPage({
               )}
 
               {section.proTip && (
-                <div className="rounded-xl bg-sky-50/90 border border-sky-200 p-4 flex items-start gap-3">
+                <div className="rounded-xl bg-sky-50/90 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 p-4 flex items-start gap-3">
                   <Lightbulb
-                    className="w-5 h-5 text-sky-600 shrink-0 mt-0.5"
+                    className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5"
                     aria-hidden="true"
                   />
-                  <div className="text-xs sm:text-sm text-sky-950 leading-relaxed">
-                    <strong className="font-extrabold uppercase tracking-wider text-sky-800 mr-1.5">
+                  <div className="text-xs sm:text-sm text-sky-950 dark:text-sky-200 leading-relaxed">
+                    <strong className="font-extrabold uppercase tracking-wider text-sky-800 dark:text-sky-300 mr-1.5">
                       {section.proTip.label}:
                     </strong>
                     <span>{section.proTip.text}</span>
@@ -598,12 +598,12 @@ export default async function ViewpointDetailPage({
           className="space-y-4"
         >
           <div className="flex items-center justify-between">
-            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
               Compare Other Zermatt Matterhorn Viewpoints Right Now
             </h2>
             <Link
               href="/viewpoints"
-              className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 hover:text-sky-900"
+              className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300"
             >
               <span>All Viewpoints</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -620,11 +620,11 @@ export default async function ViewpointDetailPage({
                 <Link
                   key={other.slug}
                   href={`/viewpoints/${other.slug}`}
-                  className="group rounded-2xl border border-slate-200/90 bg-white/95 p-5 shadow-xs hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between"
+                  className="group rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 shadow-xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 transition-all flex flex-col justify-between"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-700">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-700 dark:text-sky-400">
                         <ViewpointRouteIcon slug={other.slug} />
                         <span>{other.elevationLabel}</span>
                       </span>
@@ -639,16 +639,16 @@ export default async function ViewpointDetailPage({
                       </span>
                     </div>
 
-                    <h3 className="text-base font-extrabold text-slate-900 group-hover:text-sky-700 transition-colors">
+                    <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
                       {other.name}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">
                       {other.description}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700">
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400">
                     <span>
                       AM {otherForecast.today.morning.score}/10 • PM{' '}
                       {otherForecast.today.afternoon.score}/10
@@ -670,12 +670,12 @@ export default async function ViewpointDetailPage({
         {/* Related Field Guides */}
         <section aria-label="Related Alpine Field Guides" className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
               Related Zermatt &amp; Matterhorn Field Guides
             </h2>
             <Link
               href="/guides"
-              className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 hover:text-sky-900"
+              className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300"
             >
               <span>All 6 Guides</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -687,21 +687,21 @@ export default async function ViewpointDetailPage({
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="group rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between"
+                className="group rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 transition-all flex flex-col justify-between"
               >
                 <div className="space-y-2">
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-sky-700">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400">
                     {guide.category}
                   </span>
-                  <h3 className="text-sm font-extrabold text-slate-900 group-hover:text-sky-700 transition-colors leading-snug">
+                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors leading-snug">
                     {guide.shortTitle}
                   </h3>
-                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                     {guide.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400">
                   <span>{guide.readingTimeMinutes} min read</span>
                   <ArrowRight
                     className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5"
@@ -714,9 +714,9 @@ export default async function ViewpointDetailPage({
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image
                 src={logoImg}
@@ -734,7 +734,7 @@ export default async function ViewpointDetailPage({
           <div className="flex flex-wrap items-center gap-4 font-mono">
             <span className="inline-flex items-center gap-1.5">
               <Activity
-                className="w-3.5 h-3.5 text-sky-600"
+                className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
                 aria-hidden="true"
               />
               <span>ISR Cache: 15m</span>
@@ -742,21 +742,21 @@ export default async function ViewpointDetailPage({
             <span>•</span>
             <Link
               href="/"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Live Dashboard
             </Link>
             <span>•</span>
             <Link
               href="/viewpoints"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Viewpoints
             </Link>
             <span>•</span>
             <Link
               href="/guides"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Field Guides
             </Link>
