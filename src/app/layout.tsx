@@ -75,6 +75,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    yandex: '4cc9659169b5ec8a',
+  },
 };
 
 const rootJsonLd = {
