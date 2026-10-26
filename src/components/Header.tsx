@@ -18,6 +18,7 @@ import {
   ArrowUpRight,
   Layers,
   Sparkles,
+  Map as MapIcon,
 } from 'lucide-react';
 import { BadgeColor, Viewpoint } from '@/lib/types';
 import logoImg from '../../public/logo.jpeg';
@@ -172,6 +173,7 @@ export default function Header({
   }, [pathname]);
 
   const isHome = pathname === '/';
+  const isMap = pathname.startsWith('/map') || pathname.startsWith('/3d-map');
   const isViewpoints = pathname.startsWith('/viewpoints');
   const isGuides = pathname.startsWith('/guides');
   const isWidget = pathname.startsWith('/widget');
@@ -254,6 +256,28 @@ export default function Header({
               aria-hidden="true"
             />
             <span>Forecast</span>
+          </Link>
+
+          {/* 3D Map Link */}
+          <Link
+            href="/map"
+            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all min-h-[40px] ${
+              isMap
+                ? 'bg-sky-50 text-sky-800 font-bold border border-sky-200/90 shadow-2xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+            }`}
+            aria-current={isMap ? 'page' : undefined}
+          >
+            <MapIcon
+              className={`w-4 h-4 shrink-0 ${isMap ? 'text-sky-600' : 'text-slate-500'}`}
+              aria-hidden="true"
+            />
+            <span className="flex items-center gap-1">
+              <span>3D Map</span>
+              <span className="text-[10px] font-mono font-bold bg-amber-100 text-amber-800 px-1 py-0.2 rounded border border-amber-200">
+                3D
+              </span>
+            </span>
           </Link>
 
           {/* Viewpoints Dropdown */}
@@ -480,6 +504,19 @@ export default function Header({
                 >
                   <Mountain className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
                   <span className="text-xs font-bold">Live Forecast</span>
+                </Link>
+
+                <Link
+                  href="/map"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
+                    isMap
+                      ? 'bg-sky-50 border-sky-300 text-sky-900 font-bold shadow-2xs'
+                      : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
+                  }`}
+                >
+                  <MapIcon className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
+                  <span className="text-xs font-bold">3D Terrain Map</span>
                 </Link>
 
                 <Link
