@@ -23,6 +23,7 @@ import {
   serializeJsonLd,
   WIDGET_PAGE_FAQS,
 } from '@/lib/schema';
+import { getAlternateUrls } from '@/lib/i18n/config';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import WidgetBuilderClient from '@/components/WidgetBuilderClient';
 import FaqSection from '@/components/FaqSection';
@@ -42,9 +43,7 @@ export const metadata: Metadata = {
     'zermatt tourism website widget',
     'matterhorn webcam weather embed',
   ],
-  alternates: {
-    canonical: '/widget',
-  },
+  alternates: getAlternateUrls('/widget'),
   openGraph: {
     title: 'Matterhorn Live Widget | Free Embed for Websites',
     description:
@@ -117,7 +116,7 @@ export default async function PartnerWidgetPage() {
 
       <LiveVisibilityBanner />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8 sm:space-y-10">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8 sm:space-y-10">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
@@ -324,8 +323,8 @@ export default async function PartnerWidgetPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-600 dark:text-slate-400">
+        <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image

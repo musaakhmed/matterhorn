@@ -19,6 +19,7 @@ import {
   Terminal,
 } from 'lucide-react';
 import { VisibilityApiResponse } from '@/lib/types';
+import { LOCALES, LOCALE_METAS } from '@/lib/i18n/config';
 import PartnerWidgetCard, {
   WidgetLangOption,
   WidgetLayoutOption,
@@ -366,27 +367,26 @@ console.log(\`Today AM: \${gornergrat.today.morning.score}/10 | PM: \${gornergra
               <Globe className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
               <span>Guest Language</span>
             </label>
-            <div className="grid grid-cols-3 gap-1.5">
-              {(
-                [
-                  { id: 'en', label: 'EN' },
-                  { id: 'de', label: 'DE' },
-                  { id: 'fr', label: 'FR' },
-                ] as const
-              ).map((lg) => (
-                <button
-                  key={lg.id}
-                  type="button"
-                  onClick={() => setLang(lg.id)}
-                  className={`px-2.5 py-2 rounded-xl border text-xs font-mono font-bold transition-all cursor-pointer ${
-                    lang === lg.id
-                      ? 'border-sky-600 bg-sky-50 dark:bg-sky-950/60 text-sky-950 dark:text-sky-200 ring-2 ring-sky-500/20'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
-                >
-                  {lg.label}
-                </button>
-              ))}
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 max-h-48 overflow-y-auto pr-0.5">
+              {LOCALES.map((code) => {
+                const meta = LOCALE_METAS[code];
+                return (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => setLang(code)}
+                    title={`${meta.name} (${meta.englishName})`}
+                    className={`px-2 py-1.5 rounded-xl border text-xs font-mono font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                      lang === code
+                        ? 'border-sky-600 bg-sky-50 dark:bg-sky-950/60 text-sky-950 dark:text-sky-200 ring-2 ring-sky-500/20'
+                        : 'border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    <span className="text-sm leading-none">{meta.flag}</span>
+                    <span>{code.toUpperCase()}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -607,7 +607,7 @@ console.log(\`Today AM: \${gornergrat.today.morning.score}/10 | PM: \${gornergra
             <button
               type="button"
               onClick={() => handleCopy(currentCodeSnippet, activeTab)}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold shadow-xs transition-all cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold shadow-xs transition-all duration-150 active:scale-95 cursor-pointer shrink-0"
             >
               {copiedTab === activeTab ? (
                 <>
@@ -666,7 +666,7 @@ console.log(\`Today AM: \${gornergrat.today.morning.score}/10 | PM: \${gornergra
                   type="button"
                   aria-selected={isSelected}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`rounded-xl border p-2.5 text-left transition-all cursor-pointer ${
+                  className={`rounded-xl border p-2.5 text-left transition-all duration-150 active:scale-[0.98] cursor-pointer ${
                     isSelected
                       ? 'border-sky-600 bg-sky-50/90 dark:bg-sky-950/60 text-slate-900 dark:text-white ring-2 ring-sky-500/20'
                       : 'border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
