@@ -21,7 +21,7 @@ import { VisibilityApiResponse, BadgeColor } from '@/lib/types';
 import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import Header from '@/components/Header';
-import logoImg from '../../public/logo.jpeg';
+import Footer from '@/components/Footer';
 
 interface TrainsComparisonViewProps {
   initialData?: VisibilityApiResponse;
@@ -790,54 +790,7 @@ export default function TrainsComparisonView({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-600 dark:text-slate-400 mt-12">
-        <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
-            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
-              <Image
-                src={logoImg}
-                alt="Is The Matterhorn Visible? logo"
-                width={48}
-                height={48}
-                unoptimized
-                className="w-full h-full object-cover pointer-events-none"
-              />
-            </span>
-            <span>
-              isthematterhornvisible.com • Scenic Swiss Railways Telemetry & Guides
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-4 font-mono">
-            <Link
-              href={getLocalizedHref('/', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
-            >
-              Live Dashboard
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/widget', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
-            >
-              Widget & API
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/viewpoints', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
-            >
-              Viewpoints
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/guides', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
-            >
-              Alpine Guides
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer locale={locale} />
     </>
   );
 }

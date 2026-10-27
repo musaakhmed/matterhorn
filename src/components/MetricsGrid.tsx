@@ -28,7 +28,7 @@ export default function MetricsGrid({
   const isVisibilityReduced = metrics.visibilityMeters < 20000;
 
   return (
-    <section aria-label="Atmospheric Diagnostics" className="space-y-3">
+    <section id="metrics" aria-label="Atmospheric Diagnostics" className="space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-1">
         <div>
           <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">

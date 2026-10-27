@@ -27,7 +27,7 @@ import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import FaqSection from '@/components/FaqSection';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import { getLocalizedGuideArticle } from '@/lib/i18n/guides';
-import logoImg from '../../public/logo.jpeg';
+import Footer from '@/components/Footer';
 
 const CATEGORY_STYLE: Record<
   GuideCategory,
@@ -179,19 +179,21 @@ export default async function GuidesIndexView({
                       </div>
 
                       {/* Key Data Highlight Pill */}
-                      <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                          <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                            {guide.heroStat.label}:
-                          </span>
-                          <span className="text-xs font-mono font-extrabold text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/80 px-2 py-0.5 rounded-md">
+                      <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 space-y-2">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+                            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                              {guide.heroStat.label}:
+                            </span>
+                          </div>
+                          <span className="text-xs font-mono font-extrabold text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/80 px-2 py-0.5 rounded-md whitespace-nowrap shrink-0">
                             {guide.heroStat.value}
                           </span>
                         </div>
-                        <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                        <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 leading-relaxed">
                           {guide.heroStat.detail}
-                        </span>
+                        </p>
                       </div>
 
                       {/* Card Footer */}
@@ -250,19 +252,21 @@ export default async function GuidesIndexView({
                       </div>
 
                       {/* Key Data Highlight Pill */}
-                      <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                          <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                            {guide.heroStat.label}:
-                          </span>
-                          <span className="text-xs font-mono font-extrabold text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/80 px-2 py-0.5 rounded-md">
+                      <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 space-y-2">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+                            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                              {guide.heroStat.label}:
+                            </span>
+                          </div>
+                          <span className="text-xs font-mono font-extrabold text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/80 px-2 py-0.5 rounded-md whitespace-nowrap shrink-0">
                             {guide.heroStat.value}
                           </span>
                         </div>
-                        <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                        <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 leading-relaxed">
                           {guide.heroStat.detail}
-                        </span>
+                        </p>
                       </div>
                     </div>
 
@@ -317,47 +321,7 @@ export default async function GuidesIndexView({
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-600 dark:text-slate-400">
-        <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
-            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
-              <Image
-                src={logoImg}
-                alt="Is The Matterhorn Visible? logo"
-                width={48}
-                height={48}
-                unoptimized
-                className="w-full h-full object-cover pointer-events-none"
-              />
-            </span>
-            <span>
-              isthematterhornvisible.com • Swiss Alpine Telemetry Utility
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-4 font-mono">
-            <Link
-              href={getLocalizedHref('/', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Live Dashboard
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/widget', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Widget & API
-            </Link>
-            <span>•</span>
-            <Link
-              href="/api/visibility"
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              JSON API (/api/visibility)
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer locale={locale} />
     </>
   );
 }

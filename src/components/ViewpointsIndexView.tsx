@@ -25,7 +25,7 @@ import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import VisibilityIcon from '@/components/VisibilityIcon';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import { getLocalizedViewpointPage } from '@/lib/i18n/viewpoints';
-import logoImg from '../../public/logo.jpeg';
+import Footer from '@/components/Footer';
 
 const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
   emerald: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
@@ -205,7 +205,7 @@ export default async function ViewpointsIndexView({
                         <span className="font-bold text-slate-700 dark:text-slate-300">
                           {vp.heroStat.label}:
                         </span>
-                        <span className="font-mono font-bold text-sky-800 dark:text-sky-300">
+                        <span className="font-mono font-bold text-sky-800 dark:text-sky-300 whitespace-nowrap shrink-0">
                           {vp.heroStat.value}
                         </span>
                       </div>
@@ -291,54 +291,7 @@ export default async function ViewpointsIndexView({
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-600 dark:text-slate-400">
-        <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
-            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
-              <Image
-                src={logoImg}
-                alt="Is The Matterhorn Visible? logo"
-                width={48}
-                height={48}
-                unoptimized
-                className="w-full h-full object-cover pointer-events-none"
-              />
-            </span>
-            <span>
-              isthematterhornvisible.com • Swiss Alpine Telemetry Utility
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-4 font-mono">
-            <Link
-              href={getLocalizedHref('/', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Live Dashboard
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/widget', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Widget & API
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/guides', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Field Guides
-            </Link>
-            <span>•</span>
-            <Link
-              href="/api/visibility"
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              JSON API (/api/visibility)
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer locale={locale} />
     </>
   );
 }

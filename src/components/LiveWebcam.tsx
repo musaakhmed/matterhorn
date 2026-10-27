@@ -110,6 +110,7 @@ export default function LiveWebcam({
 
   return (
     <section
+      id="webcams"
       aria-label={dict.webcams.title}
       className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-5 sm:p-6 shadow-xs flex flex-col justify-between"
     >

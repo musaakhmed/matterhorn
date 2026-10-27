@@ -44,7 +44,7 @@ import FaqSection from '@/components/FaqSection';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import { getLocalizedViewpointPage } from '@/lib/i18n/viewpoints';
 import { getLocalizedGuideArticle } from '@/lib/i18n/guides';
-import logoImg from '../../public/logo.jpeg';
+import Footer from '@/components/Footer';
 
 const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
   emerald: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
@@ -405,7 +405,7 @@ export default async function ViewpointDetailView({
               <span className="text-slate-600 dark:text-slate-400 font-semibold">
                 {page.heroStat.label}:
               </span>
-              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-300 font-extrabold">
+              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-300 font-extrabold whitespace-nowrap shrink-0">
                 {page.heroStat.value}
               </span>
             </div>
@@ -672,62 +672,7 @@ export default async function ViewpointDetailView({
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-600 dark:text-slate-400">
-        <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
-            <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
-              <Image
-                src={logoImg}
-                alt="Is The Matterhorn Visible? logo"
-                width={48}
-                height={48}
-                unoptimized
-                className="w-full h-full object-cover pointer-events-none"
-              />
-            </span>
-            <span>
-              isthematterhornvisible.com • Swiss Alpine Telemetry Utility
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-4 font-mono">
-            <span className="inline-flex items-center gap-1.5">
-              <Activity
-                className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
-                aria-hidden="true"
-              />
-              <span>ISR Cache: 15m</span>
-            </span>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Live Dashboard
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/widget', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Widget & API
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/viewpoints', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Viewpoints
-            </Link>
-            <span>•</span>
-            <Link
-              href={getLocalizedHref('/guides', locale)}
-              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
-            >
-              Field Guides
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer locale={locale} />
     </>
   );
 }
