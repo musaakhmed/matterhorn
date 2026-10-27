@@ -72,7 +72,7 @@ export default async function LocalizedTrainsPage({
   if (!isValidLocale(locale)) notFound();
 
   const telemetry = await fetchMatterhornVisibility();
-  const jsonLd = buildTrainsPageJsonLd(telemetry);
+  const jsonLd = buildTrainsPageJsonLd(telemetry, locale);
 
   return (
     <>

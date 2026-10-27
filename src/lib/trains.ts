@@ -303,15 +303,15 @@ export const TRAINS_FAQS: TrainFaq[] = [
  * Extracts live telemetry summary for the Gornergrat Bahn and Glacier Express
  */
 export function getTrainsLiveStatus(data?: VisibilityApiResponse) {
-  const gornergrat = data?.viewpoints.gornergrat;
+  const gornergrat = data?.viewpoints?.gornergrat;
 
   // Gornergrat live evaluation
   const gornergratScore = gornergrat?.currentScore ?? 9;
   const gornergratBadge = gornergrat?.currentBadgeColor ?? 'emerald';
   const gornergratStatus = gornergrat?.currentStatus ?? 'Visible';
   const gornergratTemp = gornergrat?.metrics ? `${Math.round(15 - (3089 / 1000) * 6.5)}°C` : '2°C';
-  const gornergratCloudMid = gornergrat?.metrics.cloudCoverMid ?? 10;
-  const gornergratWind = gornergrat?.metrics.windSpeedKmh ?? 12;
+  const gornergratCloudMid = gornergrat?.metrics?.cloudCoverMid ?? 10;
+  const gornergratWind = gornergrat?.metrics?.windSpeedKmh ?? 12;
 
   // Glacier Express live operating context
   // The train runs roughly Dec 15 - Oct 15
@@ -328,8 +328,8 @@ export function getTrainsLiveStatus(data?: VisibilityApiResponse) {
       tempEstimated: gornergratTemp,
       cloudMid: gornergratCloudMid,
       windKmh: gornergratWind,
-      todayAmScore: gornergrat?.today.morning.score ?? 9,
-      todayPmScore: gornergrat?.today.afternoon.score ?? 8,
+      todayAmScore: gornergrat?.today?.morning?.score ?? 9,
+      todayPmScore: gornergrat?.today?.afternoon?.score ?? 8,
       isOptimalNow: gornergratScore >= 7,
       verdictText:
         gornergratScore >= 8

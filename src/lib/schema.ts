@@ -782,12 +782,14 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
  * WebPage, TouristAttraction (Gornergrat Bahn), TouristTrip (Glacier Express),
  * WeatherForecast, FAQPage, and BreadcrumbList.
  */
-export function buildTrainsPageJsonLd(data?: VisibilityApiResponse) {
-  const pageUrl = `${SITE_URL}/trains`;
+export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: string = 'en') {
+  const pageUrl = locale === 'en' ? `${SITE_URL}/trains` : `${SITE_URL}/${locale}/trains`;
   const faqs = TRAINS_FAQS.map((f) => ({
     question: f.question,
     answer: f.answer,
   }));
+
+  const inLanguage = LOCALE_METAS[locale as Locale]?.htmlLang || 'en-CH';
 
   return {
     '@context': 'https://schema.org',
@@ -799,7 +801,7 @@ export function buildTrainsPageJsonLd(data?: VisibilityApiResponse) {
         description:
           'Complete 2026 travel guide to the Gornergrat Bahn and Glacier Express. Compare Swiss Travel Pass discounts, seat reservations, live summit visibility scores, timetables, and panoramic routes.',
         url: pageUrl,
-        inLanguage: 'en-CH',
+        inLanguage,
         isPartOf: {
           '@id': `${SITE_URL}/#website`,
         },

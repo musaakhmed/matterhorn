@@ -14,11 +14,12 @@ import {
   CheckCircle2,
   AlertCircle,
   ArrowUpRight,
+  ExternalLink,
 } from 'lucide-react';
 import { TRAINS, TRAINS_FAQS, getTrainsLiveStatus } from '@/lib/trains';
 import { VisibilityApiResponse, BadgeColor } from '@/lib/types';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
-import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
+import Header from '@/components/Header';
 import logoImg from '../../public/logo.jpeg';
 
 interface TrainsComparisonViewProps {
@@ -66,9 +67,27 @@ export default function TrainsComparisonView({
   const gBadge = BADGE_COLOR_MAP[liveStatus.gornergrat.badge];
   const gexBadge = BADGE_COLOR_MAP[liveStatus.glacierExpress.statusBadgeColor as BadgeColor] || BADGE_COLOR_MAP.emerald;
 
+  const gornergratView = initialData?.viewpoints?.gornergrat;
+  const glacierView = initialData?.viewpoints?.['glacier-paradise'];
+
   return (
     <>
-      <LiveVisibilityBanner />
+      <Header
+        initialSwissTime={initialData?.swissTimeFormatted}
+        activeBadgeColor={gornergratView?.currentBadgeColor}
+        telemetrySummary={
+          gornergratView && glacierView
+            ? {
+                gornergratScore: gornergratView.currentScore,
+                gornergratBadge: gornergratView.currentBadgeColor,
+                gornergratStatus: gornergratView.currentStatus,
+                glacierScore: glacierView.currentScore,
+                glacierBadge: glacierView.currentBadgeColor,
+                glacierStatus: glacierView.currentStatus,
+              }
+            : undefined
+        }
+      />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
         {/* Breadcrumb Navigation */}
@@ -444,6 +463,20 @@ export default function TrainsComparisonView({
                   <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">PETS</span>
                   <span className="font-bold text-slate-900 dark:text-white">Dogs welcome on all trains</span>
                 </div>
+                <div className="pt-3">
+                  <a
+                    href="https://www.gornergrat.ch/en/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-xs transition-colors"
+                  >
+                    <span>Gornergrat Official Tickets</span>
+                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 text-center mt-1.5">
+                    Select Half-Fare option for 50% Swiss Travel Pass rate
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -557,6 +590,20 @@ export default function TrainsComparisonView({
                 <div className="pt-2">
                   <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">ANNUAL MAINTENANCE PAUSE</span>
                   <span className="font-bold text-amber-600 dark:text-amber-400">Mid-October to Mid-December</span>
+                </div>
+                <div className="pt-3">
+                  <a
+                    href="https://www.glacierexpress.ch/en/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs transition-colors"
+                  >
+                    <span>Glacier Express Reservations</span>
+                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 text-center mt-1.5">
+                    Mandatory seat bookings open 93 days in advance
+                  </p>
                 </div>
               </div>
             </div>
