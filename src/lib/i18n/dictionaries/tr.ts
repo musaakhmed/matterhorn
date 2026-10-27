@@ -181,9 +181,9 @@ export const tr: Dictionary = {
     terms: 'Şartlar',
   },
   seo: {
-    title: 'Matterhorn Bugün Görünüyor mu? | Canlı Zermatt Görüş Durumu',
-    description: 'Zermatt’ta Matterhorn dağının şu an görünüp görünmediğini canlı öğrenin. 1-10 arası görüş puanı, HD web kameralar ve 10 günlük tahmin.',
-    ogTitle: 'Matterhorn Şu Anda Görünüyor mu? | Zermatt Canlı Takip',
-    ogDescription: 'Canlı görüş puanı, HD Alp kameraları ve Gornergrat ile Glacier Paradise için ayrıntılı zirve hava durumu.',
+    title: 'Matterhorn Bugün Görünüyor mu? | Zermatt Webcam ve Hava',
+    description: 'Zermatt’ta Matterhorn görünürlüğü (4.478 m). Gornergrat webcam, Klein Matterhorn webcam ve 10 günlük hava tahmini.',
+    ogTitle: 'Matterhorn Bugün Görünüyor mu? | Zermatt Webcam ve Hava',
+    ogDescription: 'Gornergrat webcam, Klein Matterhorn webcam ve Zermatt için 10 günlük hava.',
   },
 };

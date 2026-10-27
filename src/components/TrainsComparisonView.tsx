@@ -111,7 +111,7 @@ export default function TrainsComparisonView({
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-            Gornergrat Railway & Glacier Express
+            Gornergrat Timetable & Tickets | Glacier Express Price
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">

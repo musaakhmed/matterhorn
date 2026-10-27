@@ -113,7 +113,7 @@ export const deGuides: Record<string, GuideTranslation> = {
   },
 
   'best-time-to-see-matterhorn': {
-    title: 'Bester Monat & beste Tageszeit für das Matterhorn: 30-Jahre-Klimatologie-Guide',
+    title: 'Zermatt Wetter nach Monat | Beste Zeit für das Matterhorn',
     shortTitle: 'Bester Monat & Tageszeit',
     description: 'Datengestützte Analyse der besten Reisezeiten: Warum Dezember & Januar 88%+ Klarsicht bieten, während Sommernachmittage oft in Quellwolken versinken.',
     category: 'Klimatologie',
@@ -160,6 +160,30 @@ export const deGuides: Record<string, GuideTranslation> = {
             bold: 'Herbst (Sep–Okt • 72–79 % Klarsicht):',
             text: 'Kühle Nächte bremsen die Thermik, während goldene Lärchen das Tal säumen – die fotogenste Zeit des Jahres.',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: 'Zermatt Wetter im Dezember',
+        paragraphs: [
+          'Der Dezember ist im 30-Jahres-Schnitt der klarste Monat: An 89 % der Tage ist der Matterhorngipfel frei. Kalte, stabile Luft erzeugt kaum Nachmittagsquellwolken, deshalb bleiben Vormittag und Nachmittag offen.',
+          'Das Dorf liegt unter Schnee und die Seen sind gefroren. Es ist ein Monat zum Schauen und Skifahren, nicht für Spiegelungen. Für die Weihnachtswoche siehe den [Weihnachtsguide für Zermatt](/guides/christmas-in-zermatt-matterhorn).',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: 'Zermatt Wetter im September',
+        paragraphs: [
+          'Im September ist der Gipfel an etwa 72 % der Tage klar. Kühlere Nächte stoppen die Nachmittagsthermik, die Juni und Juli verdirbt, und die Lärchen um die Ostwand werden gold.',
+          'Die Wanderwege sind noch schneefrei und der Riffelsee ist eisfrei. Das ist der Monat für die Matterhorn-Spiegelung ab Sunnegga oder Rotenboden. Bei Sonnenaufgang starten. Am frühen Nachmittag kräuselt oft ein Wind den See, auch wenn der Gipfel klar bleibt.',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: 'Zermatt Wetter im Mai',
+        paragraphs: [
+          'Der Mai ist eine Übergangszeit. Die Klarheit liegt im Spätfrühlingsbereich von 48–58 %, und das verlässliche Fenster ist der Vormittag. Feuchtigkeit aus der Schneeschmelze speist schon am frühen Nachmittag Quellwolken.',
+          'Der Riffelsee ist im Mai noch gefroren. Die Spiegelung lohnt erst ab Ende Juni. Nutzen Sie einen klaren Morgen für Gornergrat oder die Kirchbrücke und planen Sie den Nachmittag im Tal.',
         ],
       },
       {
@@ -425,7 +449,7 @@ export const deGuides: Record<string, GuideTranslation> = {
   },
 
   'zurich-geneva-to-zermatt-day-trip': {
-    title: 'Tagesausflug von Zürich oder Genf nach Zermatt: Lohnt sich die Bahnfahrt heute?',
+    title: 'Zug Zürich–Zermatt | Fahrzeiten, Visp & Live Go/No-Go',
     shortTitle: 'Tagesausflug Zürich & Genf',
     description: 'SBB-Umsteigetipps in Visp, Fahrzeiten und unsere Go/No-Go-Entscheidungsregel für Tagesausflüge ab Zürich (3h 14m) und Genf (3h 45m).',
     category: 'Day Trips',
@@ -549,6 +573,66 @@ export const deGuides: Record<string, GuideTranslation> = {
       'Swiss Travel Pass: Auf die Gornergratbahn erhalten Sie 50 % Rabatt (keine Reservierung nötig); der Glacier Express ist zu 100 % im Pass inbegriffen, erfordert jedoch eine OBLIGATORISCHE Sitzplatzreservierung (CHF 39–49).',
       'Beide Züge halten direkt gegenüber am Bahnhof Zermatt und lassen sich perfekt zu einem zweitägigen Alpentrip kombinieren.',
       'Besuchen Sie unsere Live-Übersicht auf der [Zugvergleichsseite](/trains) für aktuelle Sichtweiten am Gornergrat, Ticketpreise und Sitzplatz-Tipps.',
+    ],
+  },
+  'what-is-the-matterhorn': {
+    title: 'Was ist das Matterhorn? | Höhe, Lage und Sicht heute',
+    shortTitle: 'Was ist das Matterhorn?',
+    description:
+      'Das Matterhorn ist eine 4.478 m hohe Pyramide auf der Grenze Schweiz–Italien über Zermatt. Höhe, Lage und ob es heute sichtbar ist.',
+    category: 'Aussichtspunkte',
+    heroStat: {
+      label: 'Gipfelhöhe',
+      value: '4.478 m',
+      detail: 'Zermatt, Wallis, auf der Grenze Schweiz–Italien',
+    },
+    keyTakeaways: [
+      'Das Matterhorn ist eine vierseitige Pyramide. Italienisch heisst es Cervino, französisch Cervin.',
+      'Die Matterhorn Höhe ist 4.478 Meter (14.692 Fuss).',
+      'Es steht über Zermatt im Wallis und über Breuil-Cervinia im Aostatal.',
+      'Prüfen Sie den Live-Score, bevor Sie ein Ticket kaufen. Gornergrat zeigt die Ostwand, Klein Matterhorn die Südseite.',
+    ],
+    sections: [
+      {
+        id: 'what-it-is',
+        heading: 'Was ist das Matterhorn?',
+        paragraphs: [
+          'Das Matterhorn ist eine vierseitige Felspyramide in den Walliser Alpen. Von Zermatt wirkt der Gipfel wie eine einzelne Spitze, deshalb heisst die Ostansicht oft Toblerone.',
+          'Der Berg hat drei Namen. Deutsch und Englisch sagen Matterhorn, Italienisch Cervino, Französisch Cervin. Gemeint ist dieser Gipfel, nicht die Achterbahn in Disneyland und nicht eine Pipeline.',
+        ],
+      },
+      {
+        id: 'where-and-height',
+        heading: 'Wo liegt das Matterhorn, und wie hoch ist es?',
+        paragraphs: [
+          'Die Matterhorn Höhe ist 4.478 Meter, also 14.692 Fuss. Der Gipfel steht auf der Grenze zwischen der Schweiz und Italien.',
+          'Auf der Schweizer Seite ragt er über Zermatt im Kanton Wallis auf. Auf der italienischen Seite über Breuil-Cervinia im Aostatal. Ost- und Nordwand sind die klassische Sicht aus dem Dorf, vom Gornergrat und vom Riffelsee. Süd- und Westwand schauen nach Italien und sind die Ansicht vom Matterhorn Glacier Paradise.',
+        ],
+      },
+      {
+        id: 'how-to-see-it',
+        heading: 'Ist das Matterhorn heute sichtbar?',
+        paragraphs: [
+          'Der [Live-Sichtwert](/) aktualisiert sich alle 15 Minuten. 8–10 bedeutet eine freie Pyramide. 1–2 bedeutet Wolken. Wetter-Apps für das Dorf lesen Zermatt auf 1.608 m und verpassen die Wolken am Gipfel.',
+          'Der Gornergrat (3.089 m) zeigt die Ostwand und ist mit der Zahnradbahn erreichbar. Das Klein Matterhorn (3.883 m) ist die Seilbahn auf die Südseite. Die Kirchbrücke im Dorf ist gratis. Nutzen Sie die Gornergrat-Webcam und die Klein-Matterhorn-Webcam auf der Startseite, bevor Sie ein Ticket kaufen.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Was ist das Matterhorn?',
+        answer:
+          'Eine vierseitige Pyramide in den Walliser Alpen, auf Italienisch Cervino und auf Französisch Cervin. Der Gipfel liegt 4.478 m über Zermatt.',
+      },
+      {
+        question: 'Wo liegt das Matterhorn?',
+        answer:
+          'Auf der Grenze Schweiz–Italien. Die Schweizer Seite liegt über Zermatt im Wallis, die italienische über Breuil-Cervinia im Aostatal.',
+      },
+      {
+        question: 'Wie hoch ist das Matterhorn?',
+        answer: 'Die Matterhorn Höhe ist 4.478 Meter (14.692 Fuss).',
+      },
     ],
   },
 };

@@ -181,9 +181,9 @@ export const pt: Dictionary = {
     terms: 'Termos',
   },
   seo: {
-    title: 'O Matterhorn está visível hoje? | Pontuação ao vivo em Zermatt',
-    description: 'Verifique em tempo real se o Matterhorn está visível a partir de Zermatt. Pontuação de visibilidade de 1 a 10, câmaras ao vivo e previsão para 10 dias.',
-    ogTitle: 'O Matterhorn está visível agora? | Previsão ao vivo de Zermatt',
-    ogDescription: 'Índice de visibilidade em direto, webcams HD e telemetria alpina completa para Gornergrat e Glacier Paradise.',
+    title: 'O Matterhorn está visível? | Webcam e tempo em Zermatt',
+    description: 'Visibilidade do Matterhorn em Zermatt (4.478 m). Webcam do Gornergrat, webcam do Klein Matterhorn e previsão de 10 dias.',
+    ogTitle: 'O Matterhorn está visível? | Webcam e tempo em Zermatt',
+    ogDescription: 'Webcam do Gornergrat, webcam do Klein Matterhorn e previsão do Matterhorn para 10 dias.',
   },
 };

@@ -198,12 +198,11 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'best-time-to-see-matterhorn',
-    title: 'Best Month & Time of Day to See the Matterhorn (30-Year Climatology)',
-    shortTitle: 'Best Month & Time of Day',
-    seoTitle:
-      'Best Time & Month to See the Matterhorn | 30-Year Clear-Sky Statistics',
+    title: 'Zermatt Weather by Month | Best Time to See the Matterhorn',
+    shortTitle: 'Zermatt Weather by Month',
+    seoTitle: 'Zermatt Weather by Month | Best Time to See the Matterhorn',
     description:
-      'Data-backed guide to the best months and time of day to see the Matterhorn clearly. Discover why December & January hit 88%+ clarity while June & July afternoons cloud over.',
+      'Zermatt weather in December, September, and May, and the best time of day to see the Matterhorn. December hits 89% clear skies.',
     category: 'Climatology',
     publishedAt: '2026-01-20',
     updatedAt: '2026-10-25',
@@ -257,6 +256,30 @@ export const GUIDES: GuideArticle[] = [
             bold: 'Autumn Shoulder (Sep–Oct • 72%–79% Clarity):',
             text: 'Cooler nights suppress afternoon thermals while golden larch trees frame the valley—arguably the best all-around photography season.',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: 'Zermatt Weather in December',
+        paragraphs: [
+          'December is the clearest month on the 30-year record, with an 89% chance of a clear Matterhorn summit on a given day. Cold, stable air produces almost no afternoon cumulus, so both the morning and the afternoon stay open.',
+          'Snow covers the village and the lakes are frozen, so this is a viewing and skiing month rather than a reflection month. For Christmas week, sleighs, and the village schedule, see the [Christmas in Zermatt guide](/guides/christmas-in-zermatt-matterhorn).',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: 'Zermatt Weather in September',
+        paragraphs: [
+          'September clears on about 72% of days. Cooler nights shut down the afternoon thermals that wreck June and July, and the larch forests turn gold around the east face.',
+          'Hiking trails are still snow-free and Riffelsee is liquid, so this is the month for a Matterhorn reflection from Sunnegga or Rotenboden. Start at sunrise. A breeze often ripples the lake by early afternoon even when the summit stays clear.',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: 'Zermatt Weather in May',
+        paragraphs: [
+          'May is a shoulder month. Clear-sky odds sit in the late-spring range of 48–58%, and the reliable window is the morning. Moisture from melting snow feeds cumulus by early afternoon.',
+          'Riffelsee is still frozen in May, so leave the reflection shot for late June. Use a clear morning for Gornergrat or the village bridge, and treat the afternoon as a valley day.',
         ],
       },
       {
@@ -567,12 +590,11 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'zurich-geneva-to-zermatt-day-trip',
-    title: 'Zurich or Geneva to Zermatt Day Trip: Is It Worth the Train Ride Today?',
-    shortTitle: 'Zurich & Geneva Day Trip Guide',
-    seoTitle:
-      'Zurich & Geneva to Zermatt Day Trip (2026) | Train Times, Costs & Live Go/No-Go',
+    title: 'Zurich to Zermatt Train | Times, Visp Change & Live Go/No-Go',
+    shortTitle: 'Zurich to Zermatt Train',
+    seoTitle: 'Zurich to Zermatt Train | Times, Visp Change & Live Go/No-Go',
     description:
-      'Planning a day trip from Zurich (3h 14m) or Geneva (3h 45m) to Zermatt? Use our live AM/PM Matterhorn visibility Go/No-Go rules, SBB train transfer tips at Visp, and 1-day itinerary.',
+      'Zurich to Zermatt train times (3h 14m), the Visp change, and a live Matterhorn go/no-go before you board. Geneva is 3h 45m.',
     category: 'Day Trips',
     publishedAt: '2026-03-01',
     updatedAt: '2026-10-25',
@@ -1051,7 +1073,7 @@ export const GUIDES: GuideArticle[] = [
       {
         id: 'pass-rules-pricing',
         heading:
-          'Swiss Travel Pass, Half Fare Card & Ticket Pricing Compared',
+          'Glacier Express Price, Seat Reservation & Swiss Travel Pass',
         paragraphs: [
           'Travelers often assume that holding a Swiss Travel Pass allows them to hop onto any train in Switzerland for free. While the Swiss rail network is famously integrated, the Gornergrat Bahn and Glacier Express fall under completely different tariff categories.',
           'Understanding these rules ahead of time will prevent unexpected counter surcharges or reservation penalties at the boarding gates.',
@@ -1135,6 +1157,77 @@ export const GUIDES: GuideArticle[] = [
           'What happens if I book a Gornergrat ticket and the Matterhorn is hidden by clouds?',
         answer:
           'Standard Gornergrat Bahn tickets are valid for any train on the selected calendar date, but are generally non-refundable once activated. To avoid disappointment, check our real-time 1–10 AM/PM Visibility Score and live summit webcams on the [Trains Dashboard](/trains) before purchasing tickets at the station.',
+      },
+    ],
+  },
+  {
+    slug: 'what-is-the-matterhorn',
+    title: 'What Is the Matterhorn? | Height, Location & How to See It',
+    shortTitle: 'What Is the Matterhorn?',
+    seoTitle: 'What Is the Matterhorn? | Height, Location & How to See It',
+    description:
+      'The Matterhorn is a 4,478 m pyramid on the Swiss–Italian border above Zermatt. Height, location, and how to check if it is visible today.',
+    category: 'Viewpoints',
+    publishedAt: '2026-10-27',
+    updatedAt: '2026-10-27',
+    readingTimeMinutes: 4,
+    coverImage: {
+      src: '/guides/best-time-to-see-matterhorn.jpg',
+      alt: 'The Matterhorn pyramid above Zermatt at sunrise',
+      caption: 'The Matterhorn, 4,478 m, above Zermatt on the Swiss–Italian border.',
+    },
+    heroStat: {
+      label: 'Summit height',
+      value: '4,478 m',
+      detail: 'Zermatt, Valais, on the Swiss–Italian border',
+    },
+    keyTakeaways: [
+      'The Matterhorn is a four-sided pyramid. Italian speakers call it Cervino, French speakers Cervin.',
+      'The summit is 4,478 m (14,692 ft). In German that figure is the Matterhorn Höhe.',
+      'It stands above Zermatt in Valais, Switzerland, and Breuil-Cervinia in Italy’s Aosta Valley.',
+      'Check the live score before buying a lift ticket. Gornergrat faces the east side. Klein Matterhorn faces the south side.',
+    ],
+    sections: [
+      {
+        id: 'what-it-is',
+        heading: 'What is the Matterhorn?',
+        paragraphs: [
+          'The Matterhorn is a four-sided rock pyramid in the Pennine Alps. Each face is steep enough that the peak looks like a single spike from Zermatt, which is why the east-face view is nicknamed the Toblerone.',
+          'The same mountain has three names. English and German use Matterhorn. Italian uses Cervino. French uses Cervin. All three refer to this summit, not the Disneyland ride and not a pipeline.',
+        ],
+      },
+      {
+        id: 'where-and-height',
+        heading: 'Where is the Matterhorn, and how high is it?',
+        paragraphs: [
+          'The summit is 4,478 meters, or 14,692 feet. That number is the Matterhorn Höhe. The peak sits on the border between Switzerland and Italy.',
+          'On the Swiss side it rises above Zermatt, in the canton of Valais. On the Italian side it rises above Breuil-Cervinia, in the Aosta Valley. The east and north faces are the classic view from Zermatt village, Gornergrat, and Riffelsee. The south and west faces look into Italy and are what you see from Matterhorn Glacier Paradise.',
+        ],
+      },
+      {
+        id: 'how-to-see-it',
+        heading: 'How to see the Matterhorn today',
+        paragraphs: [
+          'The [live visibility score](/) updates every 15 minutes. A score of 8–10 means the pyramid is clear. A score of 1–2 means it is in cloud. Village weather apps read Zermatt at 1,608 m and miss the cloud deck around the summit.',
+          'Gornergrat (3,089 m) is the east-face view, reached by the cogwheel train. Klein Matterhorn (3,883 m) is the cable car to the south side. Kirchbrücke in the village is free. Use the Gornergrat webcam and the Klein Matterhorn webcam on the homepage before you buy a ticket.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the Matterhorn?',
+        answer:
+          'A four-sided pyramid in the Pennine Alps, called Cervino in Italian and Cervin in French. The summit is 4,478 m above Zermatt.',
+      },
+      {
+        question: 'Where is the Matterhorn?',
+        answer:
+          'On the Swiss–Italian border. The Swiss side is above Zermatt in Valais. The Italian side is above Breuil-Cervinia in the Aosta Valley.',
+      },
+      {
+        question: 'How high is the Matterhorn?',
+        answer:
+          '4,478 meters (14,692 feet). In German the search is Matterhorn Höhe, and the answer is 4.478 Meter.',
       },
     ],
   },

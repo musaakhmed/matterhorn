@@ -113,7 +113,7 @@ export const esGuides: Record<string, GuideTranslation> = {
   },
 
   'best-time-to-see-matterhorn': {
-    title: 'Mejor mes y hora del día para ver el Cervino: Climatología de 30 años',
+    title: 'Tiempo en Zermatt por mes | Mejor momento para el Matterhorn',
     shortTitle: 'Mejor mes y hora',
     description: 'Estadísticas históricas de visibilidad: por qué diciembre y enero superan el 88% de cielo despejado mientras las tardes de verano se cubren de nubes.',
     category: 'Climatology',
@@ -160,6 +160,30 @@ export const esGuides: Record<string, GuideTranslation> = {
             bold: 'Otoño (sep–oct • 72%–79% de claridad):',
             text: 'Noches frescas que frenan las térmicas y alerces dorados en el valle: la mejor época fotográfica.',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: 'Tiempo en Zermatt en diciembre',
+        paragraphs: [
+          'Diciembre es el mes más despejado del registro de 30 años, con un 89% de probabilidad de ver la cumbre del Matterhorn un día cualquiera. El aire frío y estable casi no forma cúmulos por la tarde.',
+          'El pueblo está nevado y los lagos helados: es un mes para mirar y esquiar, no para reflejos. Para la semana de Navidad, consulta la [guía de Navidad en Zermatt](/guides/christmas-in-zermatt-matterhorn).',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: 'Tiempo en Zermatt en septiembre',
+        paragraphs: [
+          'En septiembre la cumbre está despejada cerca del 72% de los días. Las noches más frescas cortan las térmicas de la tarde que estropean junio y julio, y los alerces se vuelven dorados.',
+          'Los senderos siguen sin nieve y el Riffelsee está líquido. Es el mes del reflejo del Matterhorn desde Sunnegga o Rotenboden. Sal al amanecer.',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: 'Tiempo en Zermatt en mayo',
+        paragraphs: [
+          'Mayo es un mes de transición. La probabilidad de cielo despejado queda en el rango de finales de primavera, 48–58%, y la ventana fiable es la mañana. La humedad del deshielo alimenta cúmulos a primera hora de la tarde.',
+          'El Riffelsee sigue helado en mayo. Deja la foto del reflejo para finales de junio. Usa una mañana clara para Gornergrat o el puente del pueblo y deja la tarde en el valle.',
         ],
       },
       {
@@ -425,7 +449,7 @@ export const esGuides: Record<string, GuideTranslation> = {
   },
 
   'zurich-geneva-to-zermatt-day-trip': {
-    title: 'Excursión de un día a Zermatt desde Zúrich o Ginebra: ¿Vale la pena el tren hoy?',
+    title: 'Tren Zúrich–Zermatt | Horarios, cambio en Visp',
     shortTitle: 'Excursión desde Zúrich & Ginebra',
     description: 'Transbordos en Visp con SBB, tiempos y regla Go/No-Go para planificar su excursión de 1 día desde Zúrich (3h 14m) o Ginebra (3h 45m).',
     category: 'Day Trips',

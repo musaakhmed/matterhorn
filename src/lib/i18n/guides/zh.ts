@@ -89,7 +89,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
   },
 
   'best-time-to-see-matterhorn': {
-    title: '看马特洪峰的最佳月份与时间段：基于30年气象大数据分析',
+    title: '采尔马特逐月天气 | 看马特洪峰的最佳时间',
     shortTitle: '最佳观赏月份与时间',
     description: '历史气象数据统计：为什么12月与1月能见度高达88%+，而夏季午后却经常被对流积云完全遮蔽。',
     category: 'Climatology',
@@ -136,6 +136,30 @@ export const zhGuides: Record<string, GuideTranslation> = {
             bold: '秋季（9月–10月 • 72%–79% 晴空率）：',
             text: '夜晚降温抑制了热对流，金黄的落叶松装点整个山谷，是摄影爱好者的黄金季节。',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: '采尔马特十二月天气',
+        paragraphs: [
+          '十二月是30年记录里最晴朗的月份，某一天能看到马特洪峰山顶的概率是89%。冷而稳定的空气几乎不会在下午堆出积云。',
+          '村子被雪覆盖，湖面结冰。这是看山和滑雪的月份，不是拍倒影的月份。圣诞周请看[采尔马特圣诞指南](/guides/christmas-in-zermatt-matterhorn)。',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: '采尔马特九月天气',
+        paragraphs: [
+          '九月大约72%的日子山顶是晴的。较凉的夜晚压住毁了六月和七月的午后热气流，东壁周围的落叶松变成金色。',
+          '步道还没有雪，里费尔湖已经解冻。这是从 Sunnegga 或 Rotenboden 拍马特洪峰倒影的月份。日出时出发。',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: '采尔马特五月天气',
+        paragraphs: [
+          '五月是过渡月。晴空概率落在晚春的48%–58%，可靠的窗口只有上午。融雪的水汽在午后不久就会喂出积云。',
+          '五月的里费尔湖仍结着冰。倒影留到六月下旬。晴朗的早晨去戈尔内格拉特或村里的桥，下午留在谷底。',
         ],
       },
       {
@@ -376,7 +400,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
   },
 
   'zurich-geneva-to-zermatt-day-trip': {
-    title: '从苏黎世或日内瓦一日往返采尔马特：今天的火车行程值得吗？',
+    title: '苏黎世到采尔马特火车 | 时刻、菲斯普换乘',
     shortTitle: '苏黎世与日内瓦一日游指南',
     description: '菲斯普（Visp）SBB换乘攻略、火车耗时与实时Go/No-Go决策法则：从苏黎世（3小时14分）或日内瓦（3小时45分）出发的最佳一日路线。',
     category: 'Day Trips',

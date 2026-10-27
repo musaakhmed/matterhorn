@@ -13,24 +13,30 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://isthematterhornvisible.com'),
-  title: 'Is The Matterhorn Visible Today? | Live Zermatt Score',
+  title: 'Is the Matterhorn Visible? | Zermatt Webcam & Weather',
   description:
-    'Live Matterhorn visibility score in Zermatt (4,478m). Real-time summit telemetry, Gornergrat webcams, and 10-day high-altitude alpine forecasts.',
+    'Live Matterhorn visibility in Zermatt (4,478m). Gornergrat webcam, Klein Matterhorn webcam, and a 10-day summit forecast.',
   category: 'weather',
   keywords: [
     'is the matterhorn visible',
     'matterhorn visibility forecast',
     'zermatt weather webcam',
+    'zermatt webcam',
+    'zermatt webcam live',
     'zermatt live webcams',
     'zermatt weather forecast',
+    'zermatt weather',
     'zermatt live camera',
     'zermatt mountain weather',
     'gornergrat visibility',
+    'gornergrat webcam',
+    'klein matterhorn webcam',
     'matterhorn glacier paradise weather',
     'best time to see the matterhorn',
     'matterhorn cloud cover',
     'is the matterhorn visible from zermatt',
     'zermatt viewpoints',
+    'wetter zermatt',
   ],
   alternates: getAlternateUrls('/'),
   icons: {
@@ -41,9 +47,9 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'Is The Matterhorn Visible Today? | Live Zermatt Score',
+    title: 'Is the Matterhorn Visible? | Zermatt Webcam & Weather',
     description:
-      'Check live Matterhorn visibility in Zermatt (4,478m). Real-time summit telemetry, webcam views & 10-day alpine forecasts.',
+      'Gornergrat webcam, Klein Matterhorn webcam, and a 10-day Matterhorn forecast for Zermatt.',
     url: 'https://isthematterhornvisible.com',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
@@ -65,9 +71,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Is The Matterhorn Visible Today? | Live Zermatt Score',
+    title: 'Is the Matterhorn Visible? | Zermatt Webcam & Weather',
     description:
-      'Check live Matterhorn visibility in Zermatt (4,478m). Real-time summit telemetry, webcam views & 10-day alpine forecasts.',
+      'Gornergrat webcam, Klein Matterhorn webcam, and a 10-day Matterhorn forecast for Zermatt.',
     images: ['/opengraph-image', '/banner.jpeg'],
   },
   robots: {
@@ -138,6 +144,14 @@ const rootJsonLd = {
           acceptedAnswer: {
             '@type': 'Answer',
             text: 'Gornergrat (3,089m) offers the iconic East/Northeast "Toblerone" pyramid profile and Riffelsee mirror lake reflections via cogwheel train. Klein Matterhorn / Matterhorn Glacier Paradise (3,883m) sits nearly 800m higher overlooking the Southern face, making it ideal for rising above low valley fog inversions.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Where is the live Zermatt webcam of the Matterhorn?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'The homepage plays four Roundshot feeds: Gornergrat (3,089m), Rothorn, Trockener Steg toward Klein Matterhorn, and Zermatt village at Kirchbrücke. Each frame refreshes every 10–15 minutes beside the live visibility score.',
           },
         },
       ],

@@ -113,7 +113,7 @@ export const frGuides: Record<string, GuideTranslation> = {
   },
 
   'best-time-to-see-matterhorn': {
-    title: 'Meilleur mois et heure pour voir le Cervin : Climatologie sur 30 ans',
+    title: 'Météo de Zermatt par mois | Meilleur moment pour le Cervin',
     shortTitle: 'Meilleur mois et heure',
     description: 'Statistiques météorologiques complètes : pourquoi décembre et janvier affichent 88%+ de ciel pur tandis que les après-midis d’été se couvrent de cumulus.',
     category: 'Climatology',
@@ -160,6 +160,30 @@ export const frGuides: Record<string, GuideTranslation> = {
             bold: 'Automne (sept–oct • 72 %–79 % de clarté) :',
             text: 'Les nuits fraîches calment la convection tandis que les mélèzes dorent la vallée : la période royale pour la photographie.',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: 'Météo de Zermatt en décembre',
+        paragraphs: [
+          'Décembre est le mois le plus clair sur 30 ans, avec 89 % de chances de voir le sommet du Cervin un jour donné. L’air froid et stable ne forme presque pas de cumulus l’après-midi.',
+          'Le village est sous la neige et les lacs sont gelés : c’est un mois pour regarder et skier, pas pour les reflets. Pour la semaine de Noël, voir le [guide de Noël à Zermatt](/guides/christmas-in-zermatt-matterhorn).',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: 'Météo de Zermatt en septembre',
+        paragraphs: [
+          'Septembre est clair environ 72 % des jours. Les nuits plus fraîches coupent les thermiques de l’après-midi qui gâchent juin et juillet, et les mélèzes dorent autour de la face est.',
+          'Les sentiers sont encore sans neige et le Riffelsee est liquide. C’est le mois du reflet du Cervin depuis Sunnegga ou Rotenboden. Partez au lever du soleil.',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: 'Météo de Zermatt en mai',
+        paragraphs: [
+          'Mai est un mois de transition. La probabilité de ciel clair reste dans la fourchette de fin de printemps, 48–58 %, et la seule fenêtre fiable est le matin. L’humidité de la fonte nourrit les cumulus dès le début d’après-midi.',
+          'Le Riffelsee est encore gelé en mai. Gardez la photo miroir pour fin juin. Un matin clair sert au Gornergrat ou au pont du village ; l’après-midi se passe dans la vallée.',
         ],
       },
       {
@@ -425,7 +449,7 @@ export const frGuides: Record<string, GuideTranslation> = {
   },
 
   'zurich-geneva-to-zermatt-day-trip': {
-    title: 'Excursion d’un jour à Zermatt depuis Zurich ou Genève : Le voyage en train vaut-il la peine aujourd’hui ?',
+    title: 'Train Zurich–Zermatt | Horaires, changement à Viège',
     shortTitle: 'Excursion depuis Zurich & Genève',
     description: 'Correspondances CFF à Viège, durées et règle de décision Go/No-Go pour votre excursion d’une journée depuis Zurich (3h 14m) ou Genève (3h 45m).',
     category: 'Day Trips',
@@ -549,6 +573,66 @@ export const frGuides: Record<string, GuideTranslation> = {
       'Swiss Travel Pass : 50 % de réduction pour le Gornergrat (sans réservation préalable requise) ; 100 % couvert pour le Glacier Express mais RÉSERVATION DE SIÈGE OBLIGATOIRE (39 à 49 CHF).',
       'Les deux trains se croisent sur la place de la gare de Zermatt, permettant d’enchaîner l’arrivée en Glacier Express et l’ascension au sommet le lendemain matin.',
       'Consultez notre [comparateur de trains suisses](/trains) pour vérifier la météo en direct au Gornergrat et les conditions de réservation.',
+    ],
+  },
+  'what-is-the-matterhorn': {
+    title: 'Qu’est-ce que le Cervin ? | Hauteur, lieu et visibilité',
+    shortTitle: 'Qu’est-ce que le Cervin ?',
+    description:
+      'Le Cervin est une pyramide de 4 478 m sur la frontière suisse-italienne au-dessus de Zermatt. Hauteur, lieu, et s’il est visible aujourd’hui.',
+    category: 'Points de vue',
+    heroStat: {
+      label: 'Altitude du sommet',
+      value: '4 478 m',
+      detail: 'Zermatt, Valais, sur la frontière suisse-italienne',
+    },
+    keyTakeaways: [
+      'Le Cervin est une pyramide à quatre faces. En italien il s’appelle Cervino, en allemand Matterhorn.',
+      'Le sommet culmine à 4 478 m (14 692 pieds).',
+      'Il domine Zermatt dans le Valais et Breuil-Cervinia dans le Val d’Aoste.',
+      'Vérifiez le score en direct avant d’acheter un billet. Le Gornergrat voit la face est, le Klein Matterhorn la face sud.',
+    ],
+    sections: [
+      {
+        id: 'what-it-is',
+        heading: 'Qu’est-ce que le Cervin ?',
+        paragraphs: [
+          'Le Cervin est une pyramide rocheuse à quatre faces dans les Alpes pennines. Depuis Zermatt, le sommet ressemble à une seule pointe, d’où le surnom Toblerone pour la face est.',
+          'La montagne a trois noms. Allemand et anglais disent Matterhorn, italien Cervino, français Cervin. Il s’agit de ce sommet, pas de l’attraction de Disneyland ni d’un pipeline.',
+        ],
+      },
+      {
+        id: 'where-and-height',
+        heading: 'Où se trouve le Cervin, et quelle est sa hauteur ?',
+        paragraphs: [
+          'Le sommet mesure 4 478 mètres, soit 14 692 pieds. Il se dresse sur la frontière entre la Suisse et l’Italie.',
+          'Côté suisse, il domine Zermatt dans le canton du Valais. Côté italien, il domine Breuil-Cervinia dans le Val d’Aoste. Les faces est et nord sont la vue classique depuis le village, le Gornergrat et le Riffelsee. Les faces sud et ouest regardent l’Italie et se voient depuis Matterhorn Glacier Paradise.',
+        ],
+      },
+      {
+        id: 'how-to-see-it',
+        heading: 'Comment voir le Cervin aujourd’hui',
+        paragraphs: [
+          'Le [score de visibilité en direct](/) se met à jour toutes les 15 minutes. 8–10 signifie une pyramide dégagée. 1–2 signifie des nuages. Les applis météo du village lisent Zermatt à 1 608 m et ratent le plafond nuageux autour du sommet.',
+          'Le Gornergrat (3 089 m) montre la face est, par le train à crémaillère. Le Klein Matterhorn (3 883 m) est la télécabine vers la face sud. Le Kirchbrücke dans le village est gratuit. Regardez la webcam du Gornergrat et celle du Klein Matterhorn sur la page d’accueil avant d’acheter un billet.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Qu’est-ce que le Cervin ?',
+        answer:
+          'Une pyramide à quatre faces dans les Alpes pennines, appelée Matterhorn en allemand et Cervino en italien. Le sommet est à 4 478 m au-dessus de Zermatt.',
+      },
+      {
+        question: 'Où se trouve le Cervin ?',
+        answer:
+          'Sur la frontière suisse-italienne. Le versant suisse est au-dessus de Zermatt, dans le Valais. Le versant italien est au-dessus de Breuil-Cervinia, dans le Val d’Aoste.',
+      },
+      {
+        question: 'Quelle est la hauteur du Cervin ?',
+        answer: '4 478 mètres (14 692 pieds).',
+      },
     ],
   },
 };

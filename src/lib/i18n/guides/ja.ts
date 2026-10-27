@@ -89,7 +89,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
   },
 
   'best-time-to-see-matterhorn': {
-    title: 'マッターホルンが一番綺麗に見える月と時間帯：30年気象データ分析',
+    title: 'ツェルマットの月別天気 | マッターホルンを見る最良の時期',
     shortTitle: 'ベストな月と時間帯',
     description: 'なぜ12月と1月は快晴率88%+で、夏の午後は積雲に覆われやすいのか？30年の高山気象データから読み解く完全ガイド。',
     category: 'Climatology',
@@ -136,6 +136,30 @@ export const jaGuides: Record<string, GuideTranslation> = {
             bold: '秋（9月〜10月 • 晴天率72%〜79%）：',
             text: '夜間の冷え込みが対流を抑え、黄金色のカラマツが谷を彩る、写真撮影に最高の時期です。',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: '12月のツェルマットの天気',
+        paragraphs: [
+          '12月は30年統計で最も晴れやすい月で、ある1日にマッターホルンの山頂が見える確率は89%です。冷たく安定した空気は午後の積雲をほとんど作りません。',
+          '村は雪に覆われ、湖は凍っています。反射写真ではなく、眺望とスキーの月です。クリスマス週は[ツェルマットのクリスマスガイド](/guides/christmas-in-zermatt-matterhorn)を見てください。',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: '9月のツェルマットの天気',
+        paragraphs: [
+          '9月は約72%の日で山頂が晴れます。涼しい夜が6月と7月を台無しにする午後の上昇気流を抑え、東壁のまわりのカラマツが黄金色になります。',
+          '登山道はまだ雪がなく、リッフェルゼーは溶けています。スンネッガまたはローテンボーデンからマッターホルンの逆さ富士を撮る月です。日の出に出発してください。',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: '5月のツェルマットの天気',
+        paragraphs: [
+          '5月は端境期です。晴天率は晩春の48〜58%に留まり、頼れるのは午前だけです。雪解けの湿気が午後早くに積雲を育てます。',
+          '5月のリッフェルゼーはまだ凍っています。反射写真は6月下旬まで待ってください。晴れた朝はゴルナーグラートか村の橋へ、午後は谷で過ごします。',
         ],
       },
       {
@@ -376,7 +400,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
   },
 
   'zurich-geneva-to-zermatt-day-trip': {
-    title: 'チューリッヒ・ジュネーヴからツェルマット日帰り観光：今日行く価値はあるか？',
+    title: 'チューリッヒからツェルマットの電車 | 時刻とフィスプ乗換',
     shortTitle: 'チューリッヒ＆ジュネーヴ日帰り',
     description: 'フィスプ（Visp）駅でのSBB乗り換え、所要時間、リアルタイムGo/No-Go判定ルール：チューリッヒ（3時間14分）とジュネーヴ（3時間45分）発の日帰り計画。',
     category: 'Day Trips',

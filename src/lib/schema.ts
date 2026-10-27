@@ -77,6 +77,13 @@ export function getDashboardFaqs(data?: VisibilityApiResponse): RichFaqItem[] {
       guideLabel: 'How banner clouds & Föhn wind scoring work',
     },
     {
+      question: 'Where is the live Zermatt webcam of the Matterhorn?',
+      answer:
+        'The homepage plays four Roundshot feeds: Gornergrat (3,089m), Rothorn, Trockener Steg toward Klein Matterhorn, and Zermatt village at Kirchbrücke. Each frame refreshes every 10–15 minutes beside the live visibility score.',
+      guideHref: '/viewpoints/gornergrat',
+      guideLabel: 'Gornergrat webcam and weather',
+    },
+    {
       question:
         'Are Gornergrat or Glacier Paradise tickets refundable if the Matterhorn is hidden in clouds?',
       answer:

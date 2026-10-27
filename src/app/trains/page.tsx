@@ -8,9 +8,9 @@ import TrainsComparisonView from '@/components/TrainsComparisonView';
 export const revalidate = 900; // Revalidate every 15 minutes
 
 export const metadata: Metadata = {
-  title: 'Gornergrat Railway & Glacier Express (2026 Guide) | Tickets, Passes & Live Conditions',
+  title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
   description:
-    'Complete guide to Gornergrat Bahn & Glacier Express in Zermatt: 2026 ticket prices, Swiss Travel Pass discounts, seat reservations, live summit visibility scores, and scenic routes.',
+    'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
   alternates: getAlternateUrls('/trains'),
   keywords: [
     'Gornergrat Bahn',
@@ -23,12 +23,16 @@ export const metadata: Metadata = {
     'Zermatt to Gornergrat train',
     'Glacier Express Excellence Class',
     'Gornergrat timetable',
+    'gornergrat ticket',
+    'glacier express price',
+    'glacier express seat reservation',
+    'glacier express route',
     'Riffelsee train stop',
   ],
   openGraph: {
-    title: 'Gornergrat Railway & Glacier Express Guide | Tickets, Passes & Live Conditions',
+    title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
     description:
-      'Compare Gornergrat (3,089 m cogwheel) and Glacier Express (panoramic trans-alpine rail): Swiss Travel Pass discounts, seat reservations, and live summit clarity.',
+      'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
     url: 'https://isthematterhornvisible.com/trains',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
@@ -50,9 +54,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Gornergrat Railway & Glacier Express | 2026 Tickets & Live Conditions',
+    title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
     description:
-      'Complete guide to Gornergrat Bahn & Glacier Express: Swiss Travel Pass 50% discount vs free tickets, seat reservations, and live Matterhorn summit visibility.',
+      'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
     images: ['/guides/gornergrat-vs-glacier-paradise.jpg'],
   },
 };

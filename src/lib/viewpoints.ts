@@ -155,14 +155,13 @@ export const VIEWPOINT_PAGES: ViewpointPageConfig[] = [
     slug: 'gornergrat',
     telemetryKey: 'gornergrat',
     defaultWebcamId: 'gornergrat',
-    targetKeyword: 'Can you see Matterhorn from Gornergrat today',
+    targetKeyword: 'Gornergrat webcam and weather today',
     name: 'Gornergrat Ridge (3,089m)',
     shortName: 'Gornergrat (3,089m)',
-    title: 'Can You See the Matterhorn from Gornergrat Today? Live 3,089m Visibility & Forecast',
-    seoTitle:
-      'Can You See the Matterhorn from Gornergrat Today? | Live 3,089m Visibility & Webcam',
+    title: 'Gornergrat Webcam & Weather Today | See the Matterhorn',
+    seoTitle: 'Gornergrat Webcam & Weather Today | See the Matterhorn',
     description:
-      'Check if you can see the Matterhorn from Gornergrat (3,089m) today before buying your cogwheel train ticket. Live 1–10 AM/PM visibility score, 3,000m cloud ceiling data, and Gornergrat webcam.',
+      'Gornergrat webcam and weather today. See if the Matterhorn is clear before you buy the Zermatt to Gornergrat train ticket.',
     elevationLabel: '3,089 m (10,135 ft)',
     elevationMeters: 3089,
     coordinatesLabel: '45.9840° N, 7.7845° E',
@@ -333,14 +332,13 @@ export const VIEWPOINT_PAGES: ViewpointPageConfig[] = [
     slug: 'glacier-paradise',
     telemetryKey: 'glacier-paradise',
     defaultWebcamId: 'trockener-steg',
-    targetKeyword: 'Klein Matterhorn visibility and view',
+    targetKeyword: 'Klein Matterhorn cable car webcam weather',
     name: 'Matterhorn Glacier Paradise / Klein Matterhorn (3,883m)',
     shortName: 'Glacier Paradise (3,883m)',
-    title: 'Klein Matterhorn Visibility & View Today: Matterhorn Glacier Paradise (3,883m)',
-    seoTitle:
-      'Klein Matterhorn Visibility & View Today | Matterhorn Glacier Paradise (3,883m)',
+    title: 'Klein Matterhorn Cable Car, Webcam & Weather',
+    seoTitle: 'Klein Matterhorn Cable Car, Webcam & Weather',
     description:
-      'Live Klein Matterhorn (Matterhorn Glacier Paradise, 3,883m) visibility score, South Face view comparison, Föhn wind cableway status, and live Trockener Steg glacier webcam.',
+      'Klein Matterhorn cable car, webcam, and weather at Matterhorn Glacier Paradise (3,883m), plus the live Trockener Steg view.',
     elevationLabel: '3,883 m (12,740 ft)',
     elevationMeters: 3883,
     coordinatesLabel: '45.9383° N, 7.7297° E',
@@ -492,14 +490,13 @@ export const VIEWPOINT_PAGES: ViewpointPageConfig[] = [
     slug: 'sunnegga-riffelsee',
     telemetryKey: 'gornergrat',
     defaultWebcamId: 'rothorn',
-    targetKeyword: 'Riffelsee Matterhorn reflection conditions',
+    targetKeyword: 'Which mountain is reflected in Riffelsee',
     name: 'Sunnegga, Stellisee & Riffelsee Reflection Lakes',
     shortName: 'Sunnegga & Riffelsee',
-    title: 'Riffelsee & Stellisee Matterhorn Reflection Conditions Today (Live Wind & Clarity)',
-    seoTitle:
-      'Riffelsee & Stellisee Matterhorn Reflection Conditions Today | Wind, Ice & Visibility',
+    title: 'Which Mountain Is Reflected in Riffelsee? | Sunnegga',
+    seoTitle: 'Which Mountain Is Reflected in Riffelsee? | Sunnegga',
     description:
-      'Live Riffelsee (2,757m) and Stellisee (2,537m) Matterhorn reflection conditions today. Check real-time surface wind ripple speed (<12 km/h rule), East-face cloud clarity, and lake thaw status.',
+      'The Matterhorn east face is the mountain reflected in Riffelsee. Live wind and clarity for Sunnegga, Stellisee, and the Rotenboden walk.',
     elevationLabel: '2,288 m – 2,757 m',
     elevationMeters: 2757,
     coordinatesLabel: '45.9825° N, 7.7661° E',
@@ -629,6 +626,11 @@ export const VIEWPOINT_PAGES: ViewpointPageConfig[] = [
       },
     ],
     faqs: [
+      {
+        question: 'Which mountain is reflected in the Riffelsee?',
+        answer:
+          'The Matterhorn. From the Rotenboden stop on the Gornergrat railway, a five-minute walk reaches Riffelsee, where the east face fills the reflection. Sunnegga and Stellisee show the same peak from a lower angle.',
+      },
       {
         question: 'Are Riffelsee Matterhorn reflection conditions good today?',
         answer:

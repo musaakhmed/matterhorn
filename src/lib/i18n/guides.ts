@@ -45,7 +45,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Смотровые площадки',
     },
     'best-time-to-see-matterhorn': {
-      title: 'Лучшее время суток и месяц для наблюдения за Маттерхорном (Климатология за 30 лет)',
+      title: 'Погода в Церматте по месяцам | Когда видеть Маттерхорн',
       shortTitle: 'Лучшее время для визита',
       description: 'Анализ утренней и дневной видимости, сезонная вероятность ясного неба и золотые часы Церматта.',
       category: 'Климатология',
@@ -69,7 +69,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Метеорология',
     },
     'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Однодневная поездка в Церматт из Цюриха или Женевы: стоит ли ехать на поезде сегодня?',
+      title: 'Поезд Цюрих–Церматт | Время, пересадка в Фисп',
       shortTitle: 'Поездка из Цюриха и Женевы',
       description: 'Пересадки в Фисп, время в пути и золотое правило Go/No-Go перед посадкой на поезд SBB.',
       category: 'Однодневные туры',
@@ -83,7 +83,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Mirantes',
     },
     'best-time-to-see-matterhorn': {
-      title: 'Melhor mês e hora para ver o Matterhorn: Climatologia de 30 anos',
+      title: 'Tempo em Zermatt por mês | Melhor hora para ver o Matterhorn',
       shortTitle: 'Melhor época e hora',
       description: 'Por que dezembro e janeiro têm 88%+ de céu limpo, enquanto as tardes de verão acumulam nuvens convectivas.',
       category: 'Climatologia',
@@ -107,7 +107,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Meteorologia',
     },
     'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Bate e volta a Zermatt saindo de Zurique ou Genebra: Vale a pena o trem hoje?',
+      title: 'Trem Zurique–Zermatt | Horários, baldeação em Visp',
       shortTitle: 'Passeio de Zurique ou Genebra',
       description: 'Conexões em Visp, tempos de viagem e regra Go/No-Go para decidir antes de embarcar.',
       category: 'Passeios de 1 dia',
@@ -121,7 +121,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Gardu Pandang',
     },
     'best-time-to-see-matterhorn': {
-      title: 'Bulan & Waktu Terbaik Melihat Matterhorn: Data Klimatologi 30 Tahun',
+      title: 'Cuaca Zermatt per bulan | Waktu terbaik melihat Matterhorn',
       shortTitle: 'Waktu Terbaik Berkunjung',
       description: 'Analisis visibilitas pagi vs sore dan probabilitas langit cerah sepanjang musim di Zermatt.',
       category: 'Klimatologi',
@@ -145,7 +145,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Meteorologi',
     },
     'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Day Trip ke Zermatt dari Zurich atau Jenewa: Apakah Sebanding Hari Ini?',
+      title: 'Kereta Zurich ke Zermatt | Jadwal dan ganti di Visp',
       shortTitle: 'Day Trip dari Zurich/Jenewa',
       description: 'Panduan transfer kereta di Visp dan aturan Go/No-Go sebelum Anda naik kereta SBB.',
       category: 'Day Trip',
@@ -159,7 +159,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Manzara Noktaları',
     },
     'best-time-to-see-matterhorn': {
-      title: 'Matterhorn’u Görmek İçin En İyi Ay ve Saat: 30 Yıllık İklim Raporu',
+      title: 'Zermatt hava durumu aya göre | Matterhorn’u görme zamanı',
       shortTitle: 'En İyi Ziyaret Zamanı',
       description: 'Aralık ve Ocak aylarının %88+ netliği ve yaz öğleden sonraları oluşan bulutların klimatolojik analizi.',
       category: 'Klimatoloji',
@@ -183,7 +183,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       category: 'Meteoroloji',
     },
     'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Zürih veya Cenevre’den Zermatt’a Günübirlik Gezi: Bugün Tren Yolculuğuna Değer mi?',
+      title: 'Zürih–Zermatt treni | Saatler, Visp aktarma',
       shortTitle: 'Günübirlik Gezi Rehberi',
       description: 'Visp aktarma ipuçları, seyahat süreleri ve trene binmeden önceki canlı Go/No-Go kuralı.',
       category: 'Günübirlik Geziler',

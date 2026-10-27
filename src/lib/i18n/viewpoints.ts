@@ -13,6 +13,7 @@ export interface ViewpointTranslation {
   quickFacts?: { label: string; value?: string; detail: string }[];
   keyTakeaways?: string[];
   faqs?: { question: string; answer: string }[];
+  extraFaqs?: { question: string; answer: string }[];
 }
 
 const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPageSlug, ViewpointTranslation>>>> = {
@@ -20,7 +21,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     gornergrat: {
       name: 'Gornergrat Aussichtspunkt',
       shortName: 'Gornergrat',
-      title: 'Gornergrat Aussichtspunkt: Live-Sicht, Webcams & Matterhorn-Panorama',
+      title: 'Gornergrat Webcam & Wetter | Matterhorn sehen',
       description: 'Echtzeit-Sichtbarkeitstelemetrie auf 3.089 m, Details zur Zahnradbahn ab Zermatt, Riffelsee-Spiegelung und 360°-Alpenpanorama.',
       aspectLabel: 'Ost- / Nordostwand (Klassische Toblerone-Perspektive)',
       transportSummary: 'Gornergrat Bahn (GGB) Zahnradbahn ab Zermatt Bahnhof',
@@ -35,7 +36,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     'glacier-paradise': {
       name: 'Matterhorn Glacier Paradise (Klein Matterhorn)',
       shortName: 'Glacier Paradise',
-      title: 'Matterhorn Glacier Paradise: Live-Sicht & Webcams auf 3.883 m',
+      title: 'Klein Matterhorn Seilbahn, Webcam & Wetter',
       description: 'Europas höchste Seilbahnstation (3.883 m). Live-Wolkendiagnostik, 3S-Gondelbahn und spektakulärer Blick auf die Südwand des Matterhorns.',
       aspectLabel: 'Süd- / Südwestwand (Hochalpine Gletscherperspektive)',
       transportSummary: 'Matterhorn Express + 3S-Seilbahn ab Zermatt / Furi',
@@ -50,8 +51,15 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     'sunnegga-riffelsee': {
       name: 'Sunnegga & Riffelsee Bergsee-Spiegelungen',
       shortName: 'See-Spiegelungen',
-      title: 'Riffelsee & Sunnegga: Live-Bedingungen für die Matterhorn-Spiegelung',
+      title: 'Welcher Berg spiegelt sich im Riffelsee?',
       description: 'Echtzeit-Windmessung und Wasseroberflächen-Diagnose für das perfekte Matterhorn-Spiegelfoto am Riffelsee (2.757 m) und Stellisee (2.537 m).',
+      extraFaqs: [
+        {
+          question: 'Welcher Berg spiegelt sich im Riffelsee?',
+          answer:
+            'Das Matterhorn. Von der Station Rotenboden der Gornergratbahn sind es fünf Gehminuten zum Riffelsee, wo sich die Ostwand im See spiegelt. Sunnegga und der Stellisee zeigen denselben Gipfel aus einem tieferen Winkel.',
+        },
+      ],
       aspectLabel: 'Ostwand-Spiegelung im Bergsee (Goldene Morgenstunde)',
       transportSummary: 'Gornergrat Bahn bis Rotenboden (Riffelsee) oder Standseilbahn nach Sunnegga (Stellisee)',
       journeyTime: '25–35 Minuten pro Strecke',
@@ -82,7 +90,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     gornergrat: {
       name: 'Belvédère du Gornergrat',
       shortName: 'Gornergrat',
-      title: 'Belvédère du Gornergrat : Visibilité en direct, webcams et panorama du Cervin',
+      title: 'Webcam et météo du Gornergrat | Voir le Cervin',
       description: 'Télémétrie de visibilité en direct à 3 089 m, accès en train à crémaillère, reflets du Riffelsee et panorama alpin à 360°.',
       aspectLabel: 'Face Est / Nord-Est (Profil classique Toblerone)',
       transportSummary: 'Chemin de fer à crémaillère Gornergrat Bahn (GGB) depuis la gare de Zermatt',
@@ -97,7 +105,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     'glacier-paradise': {
       name: 'Matterhorn Glacier Paradise (Petit Cervin)',
       shortName: 'Glacier Paradise',
-      title: 'Matterhorn Glacier Paradise : Visibilité alpine en direct et webcams à 3 883 m',
+      title: 'Télécabine Klein Matterhorn, webcam et météo',
       description: 'La plus haute station de téléphérique d’Europe (3 883 m). Télémétrie en temps réel, télécabine 3S et vue imprenable sur la face Sud.',
       aspectLabel: 'Face Sud / Sud-Ouest (Perspective glaciaire de haute altitude)',
       transportSummary: 'Matterhorn Express + téléphérique 3S depuis Zermatt / Furi',
@@ -112,7 +120,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     'sunnegga-riffelsee': {
       name: 'Reflets lacustres de Sunnegga et Riffelsee',
       shortName: 'Reflets dans les lacs',
-      title: 'Riffelsee et Sunnegga : Conditions en direct du reflet miroir du Cervin',
+      title: 'Quelle montagne se reflète dans le Riffelsee ? | Sunnegga',
       description: 'Mesure du vent en direct et clarté de l’eau pour réussir la légendaire photo du Cervin se reflétant dans le Riffelsee et le Stellisee.',
       aspectLabel: 'Reflet de la face Est (Lumière dorée du lever de soleil)',
       transportSummary: 'Train du Gornergrat jusqu’à Rotenboden ou funiculaire souterrain vers Sunnegga',
@@ -144,7 +152,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     gornergrat: {
       name: 'Belvedere del Gornergrat',
       shortName: 'Gornergrat',
-      title: 'Belvedere del Gornergrat: Visibilità in diretta, webcam e panorama del Cervino',
+      title: 'Webcam e meteo del Gornergrat | Vedere il Cervino',
       description: 'Telemetria meteo in tempo reale a 3.089 m, orari del treno a cremagliera, riflessi del Riffelsee e panorama alpino a 360° su Zermatt.',
       aspectLabel: 'Parete Est / Nord-Est (Classica silhouette del Toblerone)',
       transportSummary: 'Ferrovia a cremagliera Gornergrat Bahn (GGB) dalla stazione di Zermatt',
@@ -159,7 +167,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     'glacier-paradise': {
       name: 'Matterhorn Glacier Paradise (Piccolo Cervino)',
       shortName: 'Glacier Paradise',
-      title: 'Matterhorn Glacier Paradise: Visibilità alpina in tempo reale a 3.883 m',
+      title: 'Funivia Klein Matterhorn, webcam e meteo',
       description: 'La stazione di funivia più alta d’Europa (3.883 m). Diagnosi delle nubi in quota, cabine 3S e vista vertiginosa sulla parete Sud del Cervino.',
       aspectLabel: 'Parete Sud / Sud-Ovest (Prospettiva glaciale d’alta quota)',
       transportSummary: 'Matterhorn Express + cabinovia trifune 3S da Zermatt / Furi',
@@ -174,7 +182,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
     'sunnegga-riffelsee': {
       name: 'Riflessi lacustri di Sunnegga e Riffelsee',
       shortName: 'Riflessi nei laghi',
-      title: 'Riffelsee e Sunnegga: Condizioni in diretta per il riflesso a specchio del Cervino',
+      title: 'Quale montagna si riflette nel Riffelsee? | Sunnegga',
       description: 'Misurazione istantanea del vento e quiete delle acque per catturare il celebre riflesso del Cervino nel lago Riffelsee e Stellisee.',
       aspectLabel: 'Riflesso parete Est (Suggestiva luce dorata all’alba)',
       transportSummary: 'Treno Gornergrat fino a Rotenboden oppure funicolare sotterranea verso Sunnegga',
@@ -486,6 +494,9 @@ export function getLocalizedViewpointPage(
           detail: translation.quickFacts![i]?.detail || qf.detail,
         }))
       : base.quickFacts,
-    faqs: translation.faqs || base.faqs,
+    faqs: translation.faqs || [
+      ...base.faqs,
+      ...(translation.extraFaqs ?? []),
+    ],
   };
 }

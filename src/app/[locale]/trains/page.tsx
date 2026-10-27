@@ -27,9 +27,9 @@ export async function generateMetadata({
   if (!isValidLocale(locale)) return {};
 
   return {
-    title: 'Gornergrat Railway & Glacier Express (2026 Guide) | Tickets, Passes & Live Conditions',
+    title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
     description:
-      'Complete guide to Gornergrat Bahn & Glacier Express in Zermatt: 2026 ticket prices, Swiss Travel Pass discounts, seat reservations, live summit visibility scores, and scenic routes.',
+      'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
     alternates: getAlternateUrls('/trains', locale as Locale),
     keywords: [
       'Gornergrat Bahn',
@@ -42,12 +42,16 @@ export async function generateMetadata({
       'Zermatt to Gornergrat train',
       'Glacier Express Excellence Class',
       'Gornergrat timetable',
+      'gornergrat ticket',
+      'glacier express price',
+      'glacier express seat reservation',
+      'glacier express route',
       'Riffelsee train stop',
     ],
     openGraph: {
-      title: 'Gornergrat Railway & Glacier Express Guide | Tickets, Passes & Live Conditions',
+      title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
       description:
-        'Compare Gornergrat (3,089 m cogwheel) and Glacier Express (panoramic trans-alpine rail): Swiss Travel Pass discounts, seat reservations, and live summit clarity.',
+        'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
       url: `https://isthematterhornvisible.com/${locale}/trains`,
       siteName: 'Is The Matterhorn Visible?',
       type: 'article',

@@ -184,9 +184,9 @@ export const fr: Dictionary = {
     terms: 'Conditions d’utilisation',
   },
   seo: {
-    title: 'Le Cervin est-il visible aujourd’hui ? | Score en direct Zermatt',
-    description: 'Score de visibilité du Cervin en direct à Zermatt (4 478 m). Télémesure en temps réel au sommet, webcams du Gornergrat et prévisions alpines sur 10 jours.',
-    ogTitle: 'Le Cervin est-il visible aujourd’hui ? | Score en direct Zermatt',
-    ogDescription: 'Vérifiez la visibilité du Cervin à Zermatt (4 478 m). Télémesure du sommet en direct, vues webcam et prévisions à 10 jours.',
+    title: 'Le Cervin est-il visible ? | Webcam et météo Zermatt',
+    description: 'Visibilité du Cervin en direct à Zermatt (4 478 m). Webcam du Gornergrat, webcam du Klein Matterhorn et prévisions à 10 jours.',
+    ogTitle: 'Le Cervin est-il visible ? | Webcam et météo Zermatt',
+    ogDescription: 'Webcam du Gornergrat, webcam du Klein Matterhorn et météo du Cervin à 10 jours pour Zermatt.',
   },
 };

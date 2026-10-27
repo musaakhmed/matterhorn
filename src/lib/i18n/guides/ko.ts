@@ -89,7 +89,7 @@ export const koGuides: Record<string, GuideTranslation> = {
   },
 
   'best-time-to-see-matterhorn': {
-    title: '마터호른 보기 가장 좋은 달과 시간대: 30년 기상 데이터 총정리',
+    title: '체르마트 월별 날씨 | 마터호른을 보기 가장 좋은 때',
     shortTitle: '최적의 관람 월 & 시간대',
     description: '역사적 기상 통계: 12월과 1월의 쾌청률이 88%+에 달하는 이유와 여름철 오후에 뭉게구름이 몰려오는 과학적 원리 분석.',
     category: 'Climatology',
@@ -136,6 +136,30 @@ export const koGuides: Record<string, GuideTranslation> = {
             bold: '가을 (9월–10월 • 72%–79% 쾌청률):',
             text: '밤 사이 차가워진 기온이 대류를 억제하고 황금빛 낙엽송이 온 계곡을 물들이는 최고의 사진 촬영 시즌입니다.',
           },
+        ],
+      },
+      {
+        id: 'zermatt-weather-december',
+        heading: '12월 체르마트 날씨',
+        paragraphs: [
+          '12월은 30년 기록에서 가장 맑은 달입니다. 하루 기준으로 마터호른 정상이 보일 확률은 89%입니다. 차갑고 안정된 공기는 오후 적운을 거의 만들지 않습니다.',
+          '마을은 눈에 덮이고 호수는 얼어 있습니다. 반영 사진이 아니라 전망과 스키의 달입니다. 크리스마스 주는 [체르마트 크리스마스 가이드](/guides/christmas-in-zermatt-matterhorn)를 보세요.',
+        ],
+      },
+      {
+        id: 'zermatt-weather-september',
+        heading: '9월 체르마트 날씨',
+        paragraphs: [
+          '9월에는 약 72%의 날에 정상이 맑습니다. 서늘한 밤이 6월과 7월을 망치는 오후 상승기류를 누르고, 동벽 주변 낙엽송이 금색으로 변합니다.',
+          '등산로는 아직 눈이 없고 리펠제는 녹아 있습니다. 준네가 또는 로텐보덴에서 마터호른 반영을 찍는 달입니다. 일출에 출발하세요.',
+        ],
+      },
+      {
+        id: 'zermatt-weather-may',
+        heading: '5월 체르마트 날씨',
+        paragraphs: [
+          '5월은 중간 계절입니다. 맑을 확률은 늦봄 범위인 48–58%이고, 믿을 수 있는 시간은 오전뿐입니다. 녹는 눈의 습기가 이른 오후 적운을 키웁니다.',
+          '5월의 리펠제는 아직 얼어 있습니다. 반영 사진은 6월 말로 미루세요. 맑은 아침은 고르너그라트나 마을 다리, 오후는 계곡에서 보내세요.',
         ],
       },
       {
@@ -376,7 +400,7 @@ export const koGuides: Record<string, GuideTranslation> = {
   },
 
   'zurich-geneva-to-zermatt-day-trip': {
-    title: '취리히나 제네바에서 체르마트 당일치기: 오늘 기차 타고 갈 가치가 있을까?',
+    title: '취리히–체르마트 기차 | 시간, 비스프 환승, Go/No-Go',
     shortTitle: '취리히 & 제네바 당일치기 가이드',
     description: '비스프(Visp)역 SBB 환승 팁, 소요 시간과 실시간 Go/No-Go 결정 규칙: 취리히(3시간 14분)와 제네바(3시간 45분) 출발 당일치기 완벽 동선.',
     category: 'Day Trips',

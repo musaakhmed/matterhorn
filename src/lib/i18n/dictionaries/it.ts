@@ -184,9 +184,9 @@ export const it: Dictionary = {
     terms: 'Termini di servizio',
   },
   seo: {
-    title: 'Il Cervino è visibile oggi? | Punteggio live Zermatt',
-    description: 'Punteggio live di visibilità del Cervino a Zermatt (4.478 m). Telemetria del picco in tempo reale, webcam Gornergrat e previsioni alpine a 10 giorni.',
-    ogTitle: 'Il Cervino è visibile oggi? | Punteggio live Zermatt',
-    ogDescription: 'Verifica la visibilità del Cervino a Zermatt (4.478 m). Telemetria in tempo reale, immagini webcam e meteo a 10 giorni.',
+    title: 'Il Cervino è visibile oggi? | Webcam e meteo Zermatt',
+    description: 'Visibilità live del Cervino a Zermatt (4.478 m). Webcam Gornergrat, webcam Klein Matterhorn e meteo a 10 giorni.',
+    ogTitle: 'Il Cervino è visibile oggi? | Webcam e meteo Zermatt',
+    ogDescription: 'Webcam Gornergrat, webcam Klein Matterhorn e meteo del Cervino a 10 giorni per Zermatt.',
   },
 };

@@ -184,9 +184,9 @@ export const de: Dictionary = {
     terms: 'Nutzungsbedingungen',
   },
   seo: {
-    title: 'Ist das Matterhorn heute sichtbar? | Live-Zermatt-Score',
-    description: 'Live-Matterhorn-Sichtbarkeitswert in Zermatt (4.478 m). Echtzeit-Gipfeltelemetrie, Gornergrat-Webcams und 10-Tage-Alpenvorhersage.',
-    ogTitle: 'Ist das Matterhorn heute sichtbar? | Live-Zermatt-Score',
-    ogDescription: 'Prüfen Sie die aktuelle Sichtbarkeit des Matterhorns in Zermatt (4.478 m). Live-Telemetrie, Webcams & 10-Tage-Alpenwetter.',
+    title: 'Ist das Matterhorn sichtbar? | Zermatt Webcam & Wetter',
+    description: 'Live-Sicht des Matterhorns in Zermatt (4.478 m). Gornergrat-Webcam, Klein-Matterhorn-Webcam und 10-Tage-Vorhersage.',
+    ogTitle: 'Ist das Matterhorn sichtbar? | Zermatt Webcam & Wetter',
+    ogDescription: 'Gornergrat-Webcam, Klein-Matterhorn-Webcam und 10-Tage-Wetter für das Matterhorn in Zermatt.',
   },
 };

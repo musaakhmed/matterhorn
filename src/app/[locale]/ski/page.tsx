@@ -26,10 +26,27 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
 
+  const skiTitle =
+    locale === 'de'
+      ? 'Zermatt Ski-Report & Wetter | Lifte, Webcam & Cervinia'
+      : locale === 'fr'
+        ? 'Conditions ski Zermatt | Remontées, saison & météo'
+        : locale === 'it'
+          ? 'Report sci Zermatt | Impianti, stagione e meteo'
+          : 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia';
+
+  const skiDescription =
+    locale === 'de'
+      ? 'Zermatt Ski-Report und Wetter: Schnee nach Höhe, Lifte, Saison und ob die Piste nach Cervinia heute offen ist.'
+      : locale === 'fr'
+        ? 'Bulletin ski de Zermatt : neige, remontées, saison et météo pour skier jusqu’à Cervinia.'
+        : locale === 'it'
+          ? 'Report sci di Zermatt: neve, impianti, stagione e meteo per sciare fino a Cervinia.'
+          : 'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and whether you can ski to Cervinia today.';
+
   return {
-    title: 'Zermatt Ski Resort & Snow Report (2026) | Lifts, Cervinia Italy Link & Passes',
-    description:
-      'Live ski intelligence for Zermatt & Cervinia: snow depth at 3 elevations, real-time "Can I Ski to Italy?" border link status, 2026 dynamic ski pass pricing, Ikon Pass guide, and Findeln mountain restaurant directory.',
+    title: skiTitle,
+    description: skiDescription,
     alternates: getAlternateUrls('/ski', locale as Locale),
     keywords: [
       'Zermatt ski',
@@ -37,9 +54,17 @@ export async function generateMetadata({
       'Matterhorn ski paradise',
       'Zermatt to Cervinia ski',
       'Zermatt snow report',
+      'Zermatt ski report',
       'Zermatt snow conditions',
+      'Zermatt ski conditions',
+      'Zermatt ski season',
+      'Zermatt ski lifts',
       'Zermatt ski pass price',
       'Zermatt lift status',
+      'ski cervinia',
+      'cervinia webcam',
+      'meteo cervinia',
+      'skipass cervinia zermatt',
       'Zermatt Ikon Pass',
       'Zermatt piste map',
       'Chez Vrony',
@@ -47,9 +72,8 @@ export async function generateMetadata({
       'Zermatt glacier skiing',
     ],
     openGraph: {
-      title: 'Zermatt Ski Resort & Snow Report (2026) | Lifts, Cervinia Link & Passes',
-      description:
-        'Live ski conditions across 360 km of slopes in Switzerland and Italy: snow depth at 3 elevations, Italy border link status, 2026 ski pass calculator, and mountain dining radar.',
+      title: skiTitle,
+      description: skiDescription,
       url: `https://isthematterhornvisible.com/${locale}/ski`,
       siteName: 'Is The Matterhorn Visible?',
       type: 'article',

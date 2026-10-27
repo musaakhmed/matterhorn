@@ -181,9 +181,9 @@ export const id: Dictionary = {
     terms: 'Ketentuan',
   },
   seo: {
-    title: 'Apakah Matterhorn Terlihat Hari Ini? | Skor Visibilitas Langsung Zermatt',
-    description: 'Cek langsung apakah puncak Matterhorn terlihat dari Zermatt hari ini. Skor 1-10 akurat, live webcam HD, dan ramalan cuaca 10 hari.',
-    ogTitle: 'Apakah Matterhorn Terlihat Sekarang? | Live Zermatt',
-    ogDescription: 'Skor visibilitas real-time, live camera pegunungan Alpen, dan telemetri lengkap untuk Gornergrat & Glacier Paradise.',
+    title: 'Apakah Matterhorn Terlihat? | Webcam & Cuaca Zermatt',
+    description: 'Visibilitas Matterhorn di Zermatt (4.478 m). Webcam Gornergrat, webcam Klein Matterhorn, dan prakiraan 10 hari.',
+    ogTitle: 'Apakah Matterhorn Terlihat? | Webcam & Cuaca Zermatt',
+    ogDescription: 'Webcam Gornergrat, webcam Klein Matterhorn, dan cuaca Zermatt 10 hari.',
   },
 };

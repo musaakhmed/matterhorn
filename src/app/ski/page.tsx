@@ -8,9 +8,9 @@ import SkiDashboardView from '@/components/SkiDashboardView';
 export const revalidate = 900; // Revalidate every 15 minutes
 
 export const metadata: Metadata = {
-  title: 'Zermatt Ski Resort & Snow Report (2026) | Lifts, Cervinia Italy Link & Passes',
+  title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
   description:
-    'Live ski intelligence for Zermatt & Cervinia: snow depth at 3 elevations, real-time "Can I Ski to Italy?" border link status, 2026 dynamic ski pass pricing, Ikon Pass guide, and Findeln mountain restaurant directory.',
+    'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and whether you can ski to Cervinia today.',
   alternates: getAlternateUrls('/ski'),
   keywords: [
     'Zermatt ski',
@@ -18,9 +18,17 @@ export const metadata: Metadata = {
     'Matterhorn ski paradise',
     'Zermatt to Cervinia ski',
     'Zermatt snow report',
+    'Zermatt ski report',
     'Zermatt snow conditions',
+    'Zermatt ski conditions',
+    'Zermatt ski season',
+    'Zermatt ski lifts',
     'Zermatt ski pass price',
     'Zermatt lift status',
+    'ski cervinia',
+    'cervinia webcam',
+    'meteo cervinia',
+    'skipass cervinia zermatt',
     'Zermatt Ikon Pass',
     'Zermatt piste map',
     'Chez Vrony',
@@ -28,9 +36,9 @@ export const metadata: Metadata = {
     'Zermatt glacier skiing',
   ],
   openGraph: {
-    title: 'Zermatt Ski Resort & Snow Report (2026) | Lifts, Cervinia Link & Passes',
+    title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
     description:
-      'Live ski conditions across 360 km of slopes in Switzerland and Italy: snow depth at 3 elevations, Italy border link status, 2026 ski pass calculator, and mountain dining radar.',
+      'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and the Cervinia border link.',
     url: 'https://isthematterhornvisible.com/ski',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
@@ -52,9 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Zermatt Ski Report & Mountain Intelligence (2026)',
+    title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
     description:
-      'Real-time snow conditions, cross-border Italy link status, 2026 ski pass calculator, and Findeln gourmet huts guide.',
+      'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and the Cervinia border link.',
     images: ['/guides/gornergrat-vs-glacier-paradise.jpg'],
   },
 };

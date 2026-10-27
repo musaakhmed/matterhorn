@@ -138,7 +138,7 @@ export default function SkiDashboardView({
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
-            Zermatt & Cervinia Ski Report: Live Snow, Lifts & Italy Link
+            Zermatt Ski Report & Conditions | Lifts, Season & Cervinia
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
@@ -237,6 +237,44 @@ export default function SkiDashboardView({
           </div>
         </section>
 
+        <section aria-labelledby="cervinia-ski-heading" className="space-y-4">
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
+              Italy side of the ski area
+            </span>
+            <h2 id="cervinia-ski-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
+              Ski Cervinia, Webcam & Meteo
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Meteo Cervinia</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                The Italy side closes with the same crest wind as the Swiss border. Plateau Rosa is at {borderStatus.plateauRosaWindKmh} km/h right now, against a 55 km/h safety limit. The link above is {borderStatus.status}.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Skipass Cervinia Zermatt</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                Board Italian lifts with an international ski pass, or add the 55 CHF Cervinia day supplement to a Swiss pass. The calculator below prices the cross-border option.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Cervinia webcam</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                This page does not embed an Italian camera. The Trockener Steg webcam at 2,939 m is the Swiss view toward the glacier and the Italy link.
+              </p>
+              <a
+                href="#ski-webcams"
+                className="inline-flex items-center gap-1 mt-3 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
+              >
+                Open the Trockener Steg webcam
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* MULTI-ALTITUDE SNOW INTELLIGENCE (Consistent with Site's Metrics Grid) */}
         <section aria-labelledby="snow-elevation-heading" className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
@@ -310,7 +348,7 @@ export default function SkiDashboardView({
         </section>
 
         {/* LIVE SKI WEBCAMS EMBED (Connecting Live Telemetry directly to Visual Inspection) */}
-        <section aria-labelledby="ski-webcams-heading" className="space-y-4">
+        <section id="ski-webcams" aria-labelledby="ski-webcams-heading" className="space-y-4">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
               Live Visual Telemetry
@@ -324,7 +362,7 @@ export default function SkiDashboardView({
           </div>
 
           {/* Integrated LiveWebcam component */}
-          <LiveWebcam defaultCamId="rothorn" />
+          <LiveWebcam defaultCamId="trockener-steg" />
         </section>
 
         {/* 4 MOUNTAIN SECTORS (Structured 360 km Explorer) */}
