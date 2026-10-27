@@ -68,7 +68,7 @@ export default function FaqSection({
             <summary className="cursor-pointer list-none px-4 sm:px-5 py-4 font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center justify-between gap-3 hover:text-sky-700 dark:hover:text-sky-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-600">
               <span>{faq.question}</span>
               <ChevronRight
-                className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 transition-transform duration-200 group-open:rotate-90"
+                className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 transition-transform duration-200 ease-out group-open:rotate-90"
                 aria-hidden="true"
               />
             </summary>
@@ -80,10 +80,10 @@ export default function FaqSection({
                 <div className="pt-1">
                   <Link
                     href={faq.guideHref}
-                    className="inline-flex items-center gap-1 font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 underline underline-offset-4 transition-colors"
+                    className="group/link inline-flex items-center gap-1 font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 underline underline-offset-4 transition-colors"
                   >
                     <span>{faq.guideLabel}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" aria-hidden="true" />
                   </Link>
                 </div>
               )}

@@ -1,21 +1,11 @@
-import React from 'react';
-import VisibilityClientShell from '@/components/VisibilityClientShell';
-import { fetchMatterhornVisibility } from '@/lib/weather';
-import { buildHomePageJsonLd, serializeJsonLd } from '@/lib/schema';
+import Page, { generateMetadata as localizedMetadata } from './[locale]/page';
 
-export const revalidate = 900; // Revalidate every 15 minutes
+export const revalidate = 900;
 
-export default async function HomePage() {
-  const data = await fetchMatterhornVisibility();
-  const jsonLd = buildHomePageJsonLd(data);
+export async function generateMetadata() {
+  return localizedMetadata({ params: Promise.resolve({ locale: 'en' }) });
+}
 
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
-      />
-      <VisibilityClientShell initialData={data} />
-    </>
-  );
+export default async function RootHomePage() {
+  return <Page params={Promise.resolve({ locale: 'en' })} />;
 }

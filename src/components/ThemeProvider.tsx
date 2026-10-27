@@ -63,6 +63,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const initialResolved =
       savedTheme === 'system' ? getSystemTheme() : savedTheme;
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setThemeState(savedTheme);
     setResolvedTheme(initialResolved);
     applyThemeToDocument(initialResolved);

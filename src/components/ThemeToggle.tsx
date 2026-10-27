@@ -19,6 +19,7 @@ export default function ThemeToggle({
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -139,14 +140,14 @@ export default function ThemeToggle({
         aria-haspopup="true"
         aria-expanded={dropdownOpen}
         aria-label="Toggle Theme Menu"
-        className="inline-flex items-center justify-center gap-1.5 h-9 sm:h-10 px-2.5 sm:px-3 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 dark:bg-slate-800/90 dark:hover:bg-slate-700/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 shadow-2xs"
+        className="inline-flex items-center justify-center gap-1.5 h-9 sm:h-10 px-2.5 sm:px-3 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 dark:bg-slate-800/90 dark:hover:bg-slate-700/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all active:scale-[0.97] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 shadow-2xs"
       >
         {!mounted ? (
           <span className="w-4 h-4" />
         ) : resolvedTheme === 'dark' ? (
-          <Moon className="w-4 h-4 text-sky-400 shrink-0" aria-hidden="true" />
+          <Moon className="w-4 h-4 text-sky-400 shrink-0 transition-transform duration-300" aria-hidden="true" />
         ) : (
-          <Sun className="w-4 h-4 text-amber-500 shrink-0" aria-hidden="true" />
+          <Sun className="w-4 h-4 text-amber-500 shrink-0 transition-transform duration-300" aria-hidden="true" />
         )}
 
         <ChevronDown
@@ -161,7 +162,7 @@ export default function ThemeToggle({
         <div
           role="menu"
           aria-label="Select website appearance"
-          className="absolute right-0 mt-2 w-36 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-xl p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150"
+          className="absolute right-0 mt-2 w-36 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-xl p-1.5 z-50 animate-dropdown"
         >
           {THEME_OPTIONS.map((opt) => {
             const IconComp = opt.icon;

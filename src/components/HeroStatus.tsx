@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   Sparkles,
@@ -12,6 +14,12 @@ import {
 } from 'lucide-react';
 import { BadgeColor, ScoreBlock, ViewpointForecastData } from '@/lib/types';
 import VisibilityIcon from './VisibilityIcon';
+import { useTranslation } from '@/lib/i18n/context';
+import {
+  getLocalizedVerdictSummary,
+  getLocalizedGuideAdvice,
+  getLocalizedViewpointLabel,
+} from '@/lib/i18n/dispatch';
 
 interface HeroStatusProps {
   data: ViewpointForecastData;
@@ -102,83 +110,127 @@ function DualPeriodCard({
   block: ScoreBlock;
   isActive: boolean;
 }) {
+  const { dict } = useTranslation();
   const blockStyle = THEME_STYLES[block.badgeColor];
+  const statusLabel =
+    dict.hero.statuses[
+      block.badgeColor === 'emerald'
+        ? 'visible'
+        : block.badgeColor === 'amber'
+        ? 'partiallyVisible'
+        : block.badgeColor === 'orange'
+        ? 'barelyVisible'
+        : 'notVisible'
+    ] || block.status;
 
   return (
     <div
-      className={`rounded-2xl border p-4 transition-all ${
+      className={`rounded-2xl border p-3.5 sm:p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xs flex flex-col justify-between ${
         isActive
           ? `${blockStyle.blockBorder} ${blockStyle.blockBg} ring-2 ring-sky-500/25 dark:ring-sky-400/30 shadow-xs`
-          : 'border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/60'
+          : 'border-slate-200/90 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60'
       }`}
     >
-      <div className="flex items-center justify-between gap-2 mb-2.5">
-        <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-          {block.period === 'AM' ? (
-            <Sunrise className="w-4 h-4 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+            {block.period === 'AM' ? (
+              <Sunrise className="w-4 h-4 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+            ) : (
+              <Sunset className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+            )}
+            <span>
+              {block.period === 'AM' ? dict.hero.morningLabel : dict.hero.afternoonLabel}
+            </span>
+          </div>
+
+          {isActive ? (
+            <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider">
+              {dict.hero.activeNow}
+            </span>
           ) : (
-            <Sunset className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+              {block.timeRangeLabel}
+            </span>
           )}
-          <span>
-            {block.period === 'AM' ? 'Morning (AM)' : 'Afternoon (PM)'}
-          </span>
         </div>
 
-        {isActive ? (
-          <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider">
-            Active Now
-          </span>
-        ) : (
-          <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
-            {block.timeRangeLabel}
-          </span>
-        )}
-      </div>
-
-      <div className="flex items-center justify-between gap-3 mt-1">
-        <div className="flex items-center gap-3">
-          <VisibilityIcon
-            badgeColor={block.badgeColor}
-            size="lg"
-            className="shadow-sm"
-          />
+        <div className="flex items-center justify-between gap-2 my-1">
           <div className="flex items-baseline gap-1">
             <span
-              className={`text-3xl font-extrabold font-mono ${blockStyle.scoreText}`}
+              className={`text-2xl sm:text-3xl font-extrabold font-mono ${blockStyle.scoreText}`}
             >
               {block.score}
             </span>
-            <span className="text-sm font-bold text-slate-500 dark:text-slate-400">/10</span>
+            <span className="text-xs sm:text-sm font-bold text-slate-400 dark:text-slate-500">/10</span>
           </div>
-        </div>
 
-        <span
-          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-bold ${blockStyle.pillBg} ${blockStyle.pillBorder} ${blockStyle.pillText}`}
-        >
-          <StatusGlyph badgeColor={block.badgeColor} />
-          <span>{block.status}</span>
-        </span>
+          <span
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-bold ${blockStyle.pillBg} ${blockStyle.pillBorder} ${blockStyle.pillText}`}
+          >
+            <StatusGlyph badgeColor={block.badgeColor} />
+            <span>{statusLabel}</span>
+          </span>
+        </div>
       </div>
 
-      <div className="mt-3 pt-2 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-slate-400">
+      <div className="mt-2.5 pt-2 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
         <span>{block.timeRangeLabel}</span>
-        <span>Mid-Cloud: {block.metrics.cloudCoverMid}%</span>
+        <span>{dict.hero.midCloudLabel}: {block.metrics.cloudCoverMid}%</span>
       </div>
     </div>
   );
 }
 
 export default function HeroStatus({ data }: HeroStatusProps) {
+  const { dict, locale } = useTranslation();
   const style = THEME_STYLES[data.currentBadgeColor];
-  const radius = 72;
+  const radius = 68;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset =
     circumference - (data.currentScore / 10) * circumference;
 
+  const verdictSummary = getLocalizedVerdictSummary(data.currentBadgeColor, locale);
+  const guideAdvice = getLocalizedGuideAdvice(data, locale, dict);
+  const vpLabel = getLocalizedViewpointLabel(data.viewpoint.id, locale);
+
+  const answerWord = dict.hero.answerWords[data.currentBadgeColor] || style.answerWord;
+  const currentStatusLabel =
+    dict.hero.statuses[
+      data.currentBadgeColor === 'emerald'
+        ? 'visible'
+        : data.currentBadgeColor === 'amber'
+        ? 'partiallyVisible'
+        : data.currentBadgeColor === 'orange'
+        ? 'barelyVisible'
+        : 'notVisible'
+    ] || data.currentStatus;
+
+  const bestDayLabel = data.bestBlockNext48h.dayLabel.toLowerCase().includes('today')
+    ? dict.timeline.today
+    : data.bestBlockNext48h.dayLabel.toLowerCase().includes('tomorrow')
+    ? dict.timeline.tomorrow
+    : data.bestBlockNext48h.dayLabel;
+
+  const bestPeriodLabel =
+    data.bestBlockNext48h.period === 'AM'
+      ? dict.hero.morningLabel
+      : dict.hero.afternoonLabel;
+
+  const bestStatusKey =
+    data.bestBlockNext48h.badgeColor === 'emerald'
+      ? 'visible'
+      : data.bestBlockNext48h.badgeColor === 'amber'
+      ? 'partiallyVisible'
+      : data.bestBlockNext48h.badgeColor === 'orange'
+      ? 'barelyVisible'
+      : 'notVisible';
+  const bestStatusLabel = dict.hero.statuses[bestStatusKey] || data.bestBlockNext48h.status;
+
   return (
     <section
-      aria-label="Current Matterhorn Visibility Verdict"
-      className={`relative overflow-hidden rounded-3xl border ${style.cardBorder} bg-gradient-to-br ${style.cardGradient} shadow-[0_10px_30px_-10px_rgba(15,23,42,0.08)] dark:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] p-6 sm:p-8 lg:p-10 transition-all`}
+      aria-label={dict.hero.verdictAria}
+      className={`relative overflow-hidden rounded-3xl border ${style.cardBorder} bg-gradient-to-br ${style.cardGradient} shadow-sm p-5 sm:p-7 lg:p-8 transition-all duration-300`}
     >
       {/* Subtle Swiss Grid Pattern Overlay */}
       <div
@@ -190,43 +242,32 @@ export default function HeroStatus({ data }: HeroStatusProps) {
         }}
       />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-        {/* Left: Hero Visibility Illustration + 1–10 Circular Index Ring */}
-        <div className="lg:col-span-4 min-w-0 flex flex-col items-center justify-center">
-          {/* Primary Hero Illustration Badge */}
-          <div className="mb-4 flex flex-col items-center">
-            <VisibilityIcon
-              badgeColor={data.currentBadgeColor}
-              size="xl"
-              decorative={false}
-              preload={true}
-              className="shadow-md ring-4 ring-white dark:ring-slate-800"
-            />
-          </div>
-
-          <div className="relative w-48 h-48 sm:w-52 sm:h-52 flex items-center justify-center bg-white/80 dark:bg-slate-900/90 rounded-full shadow-inner border border-slate-200/70 dark:border-slate-800">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        {/* Left: Unified Hero Visibility Gauge */}
+        <div className="lg:col-span-5 xl:col-span-4 min-w-0 flex flex-col items-center justify-center">
+          <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center bg-white/90 dark:bg-slate-900/90 rounded-full shadow-inner border border-slate-200/80 dark:border-slate-800">
             <svg
               className="w-full h-full -rotate-90 transform"
-              viewBox="0 0 168 168"
+              viewBox="0 0 160 160"
               role="img"
               aria-label={`Visibility Index ${data.currentScore} out of 10`}
             >
               <circle
-                cx="84"
-                cy="84"
+                cx="80"
+                cy="80"
                 r={radius}
                 fill="transparent"
                 stroke="currentColor"
-                className="text-slate-200 dark:text-slate-800"
-                strokeWidth="10"
+                className="text-slate-200/80 dark:text-slate-800"
+                strokeWidth="9"
               />
               <circle
-                cx="84"
-                cy="84"
+                cx="80"
+                cy="80"
                 r={radius}
                 fill="transparent"
                 stroke={style.ringStroke}
-                strokeWidth="10"
+                strokeWidth="9"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
@@ -234,54 +275,58 @@ export default function HeroStatus({ data }: HeroStatusProps) {
               />
             </svg>
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
-              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 leading-none">
-                {data.activePeriod} Index
-              </span>
-              <div className="flex items-baseline justify-center gap-0.5 my-1 leading-none">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+              <div className="mb-1">
+                <VisibilityIcon
+                  badgeColor={data.currentBadgeColor}
+                  size="md"
+                  decorative={true}
+                  preload={true}
+                  className="shadow-2xs ring-2 ring-white dark:ring-slate-800"
+                />
+              </div>
+              <div className="flex items-baseline justify-center gap-0.5 leading-none">
                 <span
-                  className={`text-5xl sm:text-[54px] font-extrabold tracking-tight font-mono leading-none ${style.scoreText}`}
+                  className={`text-4xl sm:text-[46px] font-extrabold tracking-tight font-mono leading-none ${style.scoreText}`}
                 >
                   {data.currentScore}
                 </span>
-                <span className="text-base sm:text-lg font-bold text-slate-400 dark:text-slate-500 leading-none">
+                <span className="text-sm sm:text-base font-bold text-slate-400 dark:text-slate-500 leading-none">
                   /10
                 </span>
               </div>
-              <span className="text-[10px] sm:text-[10.5px] font-semibold tracking-tight text-slate-600 dark:text-slate-300 leading-tight whitespace-nowrap">
-                {data.viewpoint.shortLabel}
+              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold">
+                {data.activePeriod} {dict.hero.visibilityIndex}
               </span>
             </div>
           </div>
 
           {/* High-Contrast Status Pill */}
           <div
-            className={`mt-3.5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs sm:text-sm font-bold tracking-wide uppercase shadow-2xs`}
+            className={`mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs font-bold tracking-wide uppercase shadow-2xs`}
           >
             <StatusGlyph badgeColor={data.currentBadgeColor} />
-            <span>{data.currentStatus}</span>
+            <span>{currentStatusLabel}</span>
           </div>
+
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1">
+            {vpLabel.name} ({data.viewpoint.elevation.toLocaleString()}m)
+          </span>
         </div>
 
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}
-        <div className="lg:col-span-8 min-w-0 flex flex-col justify-between space-y-5 text-center lg:text-left">
-          <div className="space-y-1.5">
-            <p className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wide text-sky-700 dark:text-sky-400 leading-relaxed">
+        <div className="lg:col-span-7 xl:col-span-8 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
+          <div className="space-y-1">
+            <p className="text-xs font-mono font-bold uppercase tracking-wide text-sky-700 dark:text-sky-400 leading-none">
               <Eye
-                className="inline-block w-3.5 h-3.5 mr-1.5 -mt-0.5 align-middle shrink-0"
+                className="inline-block w-3.5 h-3.5 mr-1 -mt-0.5 align-middle shrink-0"
                 aria-hidden="true"
               />
-              <span>
-                {data.viewpoint.name} ({data.viewpoint.elevation.toLocaleString()}m)
-              </span>
-              <span className="mx-1.5" aria-hidden="true">
-                •
-              </span>
-              <span className="whitespace-nowrap">{style.answerWord}</span>
+              <span>{answerWord}</span>
             </p>
 
-            <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight break-words">
-              {data.verdictSummary}
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight break-words text-balance">
+              {verdictSummary}
             </h2>
           </div>
 
@@ -298,43 +343,34 @@ export default function HeroStatus({ data }: HeroStatusProps) {
           </div>
 
           {/* Zermatt Mountain Guide Box */}
-          <div className="rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-4 sm:p-5 text-left shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">
+          <div className="rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-3.5 sm:p-4 text-left shadow-xs">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
               <Navigation
                 className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
                 aria-hidden="true"
               />
-              <span>Zermatt Mountain Guide Dispatch</span>
+              <span>{dict.hero.guideDispatchTitle}</span>
             </div>
-            <p className="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
-              &ldquo;{data.guideAdvice}&rdquo;
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
+              &ldquo;{guideAdvice}&rdquo;
             </p>
           </div>
 
           {/* Bottom Summary Strip */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-0.5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 shadow-2xs">
               <CalendarClock
                 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0"
                 aria-hidden="true"
               />
               <span>
-                Best Upcoming Block:{' '}
+                {dict.hero.bestUpcomingBlock}:{' '}
                 <strong className="font-mono text-slate-900 dark:text-white">
-                  {data.bestBlockNext48h.dayLabel} {data.bestBlockNext48h.period}
+                  {bestDayLabel} {bestPeriodLabel}
                 </strong>{' '}
                 <span className="text-emerald-700 dark:text-emerald-400 font-bold">
-                  ({data.bestBlockNext48h.score}/10 — {data.bestBlockNext48h.status})
+                  ({data.bestBlockNext48h.score}/10 — {bestStatusLabel})
                 </span>
-              </span>
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 shadow-2xs">
-              <span>
-                3,000–5,000m Mid-Cloud:{' '}
-                <strong className="font-mono text-slate-900 dark:text-white">
-                  {data.metrics.cloudCoverMid}%
-                </strong>
               </span>
             </div>
           </div>

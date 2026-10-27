@@ -74,6 +74,90 @@ body {
   scrollbar-width: none;
 }
 
+/* Tasteful Swiss Micro-Interactions & Animations */
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-dropdown {
+  animation: dropdown-enter 160ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top right;
+}
+
+.animate-dropdown-left {
+  animation: dropdown-enter 160ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top left;
+}
+
+@keyframes drawer-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-drawer {
+  animation: drawer-slide-down 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes soft-beacon {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.animate-beacon {
+  animation: soft-beacon 2.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@keyframes accordion-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+details[open] summary ~ * {
+  animation: accordion-reveal 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes subtle-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-subtle-fade {
+  animation: subtle-fade-in 180ms ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

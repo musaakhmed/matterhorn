@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { BadgeColor, DayForecast, ScoreBlock } from '@/lib/types';
 import VisibilityIcon from './VisibilityIcon';
+import { useTranslation } from '@/lib/i18n/context';
 
 interface HourlyTimelineProps {
   days: DayForecast[];
@@ -58,44 +59,55 @@ const PILL_STYLES: Record<
 };
 
 function PeriodPill({ block }: { block: ScoreBlock }) {
+  const { dict } = useTranslation();
   const style = PILL_STYLES[block.badgeColor];
+  const statusLabel =
+    dict.hero.statuses[
+      block.badgeColor === 'emerald'
+        ? 'visible'
+        : block.badgeColor === 'amber'
+        ? 'partiallyVisible'
+        : block.badgeColor === 'orange'
+        ? 'barelyVisible'
+        : 'notVisible'
+    ] || block.shortLabel;
 
   return (
     <div
-      className={`rounded-xl border ${style.border} ${style.bg} p-2.5 flex flex-col gap-2 transition-colors`}
+      className={`rounded-xl border ${style.border} ${style.bg} p-2 flex flex-col gap-1.5 transition-colors`}
     >
       <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
         <span className="inline-flex items-center gap-1">
           {block.period === 'AM' ? (
-            <Sunrise className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+            <Sunrise className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" aria-hidden="true" />
           ) : (
-            <Sunset className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+            <Sunset className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
           )}
-          <span>{block.period === 'AM' ? 'Morning' : 'Afternoon'}</span>
+          <span>{block.period === 'AM' ? dict.hero.morningLabel : dict.hero.afternoonLabel}</span>
         </span>
-        <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">
+        <span className="font-mono text-[10px] text-slate-400 dark:text-slate-500">
           {block.period === 'AM' ? '06–12' : '12–18'}
         </span>
       </div>
 
-      <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <VisibilityIcon badgeColor={block.badgeColor} size="md" />
+      <div className="flex items-center justify-between gap-1.5">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className={`w-2 h-2 rounded-full shrink-0 ${style.dot}`} aria-hidden="true" />
           <span className={`text-xs font-bold truncate ${style.text}`}>
-            {block.shortLabel}
+            {statusLabel}
           </span>
         </div>
 
         <span
-          className={`inline-flex items-center justify-center px-2 py-0.5 rounded-md font-mono text-xs font-extrabold shrink-0 ${style.scoreBadge}`}
+          className={`inline-flex items-center justify-center px-1.5 py-0.5 rounded font-mono text-[11px] font-extrabold shrink-0 ${style.scoreBadge}`}
         >
           {block.score}/10
         </span>
       </div>
 
-      <div className="flex items-center justify-between text-[10px] font-mono text-slate-600 dark:text-slate-400 pt-1 border-t border-slate-200/60 dark:border-slate-800">
+      <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200/50 dark:border-slate-800/80">
         <span className="inline-flex items-center gap-1">
-          <Cloud className="w-3 h-3 text-slate-400 dark:text-slate-500" aria-hidden="true" />
+          <Cloud className="w-2.5 h-2.5 text-slate-400" aria-hidden="true" />
           <span>Mid {block.metrics.cloudCoverMid}%</span>
         </span>
         <span>Vis {block.metrics.visibilityKm}km</span>
@@ -108,6 +120,7 @@ export default function HourlyTimeline({
   days,
   viewpointLabel,
 }: HourlyTimelineProps) {
+  const { dict } = useTranslation();
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -127,11 +140,11 @@ export default function HourlyTimeline({
           <div className="flex items-center gap-2">
             <CalendarDays className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
             <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
-              10-Day Horizon Forecast — {viewpointLabel}
+              {dict.timeline.title} — {viewpointLabel}
             </h3>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
-            Dual 1–10 visibility index split into Morning (06:00–12:00 CET) and Afternoon (12:00–18:00 CET)
+            {dict.timeline.subtitle}
           </p>
         </div>
 
@@ -140,7 +153,7 @@ export default function HourlyTimeline({
             type="button"
             onClick={() => handleScroll('left')}
             aria-label="Scroll 10-day forecast left"
-            className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
           >
             <ChevronLeft className="w-4 h-4" aria-hidden="true" />
           </button>
@@ -148,7 +161,7 @@ export default function HourlyTimeline({
             type="button"
             onClick={() => handleScroll('right')}
             aria-label="Scroll 10-day forecast right"
-            className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
           >
             <ChevronRight className="w-4 h-4" aria-hidden="true" />
           </button>
@@ -161,10 +174,13 @@ export default function HourlyTimeline({
         className="flex items-stretch gap-3.5 overflow-x-auto no-scrollbar pb-2 pt-0.5 snap-x snap-mandatory"
       >
         {days.map((day) => {
+          const dayIndex = new Date(day.dateIso + 'T12:00:00Z').getUTCDay();
+          const localizedDayName = dict.timeline.daysOfWeek?.[dayIndex] || day.dayOfWeek;
+
           return (
             <div
               key={day.dateIso}
-              className={`snap-start shrink-0 w-[210px] sm:w-[220px] rounded-2xl border p-3.5 flex flex-col justify-between transition-all ${
+              className={`snap-start shrink-0 w-[190px] sm:w-[200px] rounded-2xl border p-3 flex flex-col justify-between transition-all duration-200 hover:-translate-y-0.5 ${
                 day.isToday
                   ? 'border-sky-500 dark:border-sky-500 bg-sky-50/40 dark:bg-sky-950/40 ring-2 ring-sky-500/20 shadow-sm'
                   : 'border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xs'
@@ -175,11 +191,11 @@ export default function HourlyTimeline({
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">
-                      {day.dayOfWeek}
+                      {localizedDayName}
                     </span>
                     {day.isToday && (
                       <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-extrabold uppercase tracking-wider">
-                        TODAY
+                        {dict.timeline.today.toUpperCase()}
                       </span>
                     )}
                   </div>
@@ -190,7 +206,7 @@ export default function HourlyTimeline({
 
                 <div className="text-right">
                   <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 block">
-                    Peak
+                    {dict.timeline.peakCol}
                   </span>
                   <span className="text-sm font-mono font-extrabold text-slate-900 dark:text-white">
                     {day.dailyPeakScore}/10
@@ -213,19 +229,19 @@ export default function HourlyTimeline({
         <div className="flex flex-wrap items-center gap-4">
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-            <span>8–10 Visible</span>
+            <span>8–10 {dict.hero.statuses.visible}</span>
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-            <span>6–7 Partially Visible</span>
+            <span>6–7 {dict.hero.statuses.partiallyVisible}</span>
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-500" />
-            <span>3–5 Barely Visible</span>
+            <span>3–5 {dict.hero.statuses.barelyVisible}</span>
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-            <span>1–2 Not Visible</span>
+            <span>1–2 {dict.hero.statuses.notVisible}</span>
           </span>
         </div>
         <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  Clock,
   Compass,
   BookOpen,
   Code2,
@@ -18,9 +17,14 @@ import {
   ArrowUpRight,
   Layers,
   Sparkles,
+  TrainFront,
+  Snowflake,
 } from 'lucide-react';
 import { BadgeColor, Viewpoint } from '@/lib/types';
 import ThemeToggle from './ThemeToggle';
+import LanguageSelector from './LanguageSelector';
+import { useTranslation } from '@/lib/i18n/context';
+import { getLocalizedHref, stripLocaleFromPath } from '@/lib/i18n/config';
 import logoImg from '../../public/logo.jpeg';
 
 export interface HeaderTelemetrySummary {
@@ -62,73 +66,55 @@ const BADGE_COLOR_MAP: Record<BadgeColor, { pill: string; dot: string; text: str
   },
 };
 
-const VIEWPOINT_NAV_ITEMS = [
-  {
-    slug: 'gornergrat',
-    title: 'Gornergrat Vantage',
-    elevation: '3,089 m',
-    aspect: 'East Face (Toblerone View)',
-    badgeKey: 'gornergrat' as const,
-  },
-  {
-    slug: 'glacier-paradise',
-    title: 'Matterhorn Glacier Paradise',
-    elevation: '3,883 m',
-    aspect: 'South Face & High Alpine Plateau',
-    badgeKey: 'glacier' as const,
-  },
-  {
-    slug: 'sunnegga-riffelsee',
-    title: 'Sunnegga & Riffelsee',
-    elevation: '2,288 m',
-    aspect: 'Lake Mirror Reflections',
-    badgeKey: null,
-  },
-];
-
 export default function Header({
-  initialSwissTime = '',
   activeViewpoint,
   activeBadgeColor,
   telemetrySummary,
 }: HeaderProps) {
   const pathname = usePathname() || '/';
-  const [swissTime, setSwissTime] = useState<string>(initialSwissTime);
+  const { locale, dict } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [viewpointsDropdownOpen, setViewpointsDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Live ticking Swiss CET / CEST clock
-  useEffect(() => {
-    const updateClock = () => {
-      try {
-        const now = new Date();
-        const formatter = new Intl.DateTimeFormat('en-GB', {
-          timeZone: 'Europe/Zurich',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        });
-        const tzFormatter = new Intl.DateTimeFormat('en-GB', {
-          timeZone: 'Europe/Zurich',
-          timeZoneName: 'short',
-        });
-        const tzParts = tzFormatter.formatToParts(now);
-        const tzRaw = tzParts.find((p) => p.type === 'timeZoneName')?.value || 'CET';
-        const tzLabel = tzRaw === 'GMT+1' ? 'CET' : tzRaw === 'GMT+2' ? 'CEST' : tzRaw;
-        setSwissTime(`${formatter.format(now)} ${tzLabel}`);
-      } catch {
-        // Fallback or maintain initial time
-      }
-    };
+  const { pathWithoutLocale } = stripLocaleFromPath(pathname);
+  const isHome = pathWithoutLocale === '/';
+  const isViewpoints = pathWithoutLocale.startsWith('/viewpoints');
+  const isTrains = pathWithoutLocale.startsWith('/trains');
+  const isSki = pathWithoutLocale.startsWith('/ski');
+  const isGuides = pathWithoutLocale.startsWith('/guides');
+  const isWidget = pathWithoutLocale.startsWith('/widget');
 
-    if (!initialSwissTime) {
-      updateClock();
-    }
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, [initialSwissTime]);
+  const viewpointNavItems = [
+    {
+      slug: 'gornergrat',
+      title: dict.navigation.gornergratTitle,
+      elevation: dict.navigation.gornergratElevation,
+      aspect: dict.navigation.gornergratAspect,
+      badgeKey: 'gornergrat' as const,
+    },
+    {
+      slug: 'glacier-paradise',
+      title: dict.navigation.glacierTitle,
+      elevation: dict.navigation.glacierElevation,
+      aspect: dict.navigation.glacierAspect,
+      badgeKey: 'glacier' as const,
+    },
+    {
+      slug: 'sunnegga-riffelsee',
+      title: dict.navigation.sunneggaTitle,
+      elevation: dict.navigation.sunneggaElevation,
+      aspect: dict.navigation.sunneggaAspect,
+      badgeKey: null,
+    },
+    {
+      slug: 'zermatt-village',
+      title: dict.navigation.zermattVillageTitle || 'Zermatt Village (Kirchbrücke)',
+      elevation: dict.navigation.zermattVillageElevation || '1,608 m',
+      aspect: dict.navigation.zermattVillageAspect || 'Village & River Perspective',
+      badgeKey: null,
+    },
+  ];
 
   // Close dropdown on outside click or escape key
   useEffect(() => {
@@ -168,14 +154,10 @@ export default function Header({
 
   // Close mobile drawer on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileMenuOpen(false);
     setViewpointsDropdownOpen(false);
   }, [pathname]);
-
-  const isHome = pathname === '/';
-  const isViewpoints = pathname.startsWith('/viewpoints');
-  const isGuides = pathname.startsWith('/guides');
-  const isWidget = pathname.startsWith('/widget');
 
   // Summary badge logic
   const gornergratBadge = telemetrySummary?.gornergratBadge || activeBadgeColor || 'emerald';
@@ -183,12 +165,12 @@ export default function Header({
 
   return (
     <header className="w-full border-b border-slate-200/90 dark:border-slate-800/90 bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl sticky top-0 z-50 shadow-[0_1px_3px_rgba(15,23,42,0.04)] dark:shadow-none transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-4">
         {/* Brand Identity */}
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center gap-3 shrink-0">
           <Link
-            href="/"
-            className="flex items-center gap-2.5 sm:gap-3 group focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none rounded-xl"
+            href={getLocalizedHref('/', locale)}
+            className="flex items-center gap-2.5 sm:gap-3 group focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none rounded-xl shrink-0"
             aria-label="Is The Matterhorn Visible? Home"
           >
             <div className="relative shrink-0">
@@ -207,28 +189,26 @@ export default function Header({
                 className="absolute -top-1 -right-1 flex h-3 w-3"
                 title="Live Atmospheric Telemetry Active"
               >
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="animate-beacon absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-white dark:ring-slate-900" />
               </span>
             </div>
 
-            <div className="min-w-0">
+            <div className="shrink-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs sm:text-sm font-extrabold tracking-tight text-slate-900 dark:text-white uppercase truncate group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
-                  IS THE MATTERHORN VISIBLE?
+                <span className="text-xs sm:text-sm font-extrabold tracking-tight text-slate-900 dark:text-white uppercase whitespace-nowrap group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+                  {dict.common.siteName.toUpperCase()}
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-mono truncate">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-mono whitespace-nowrap">
                 <span className="text-sky-700 dark:text-sky-400 font-semibold">Zermatt 4,478m</span>
-                <span className="text-slate-300 dark:text-slate-600">•</span>
-                {activeViewpoint ? (
-                  <span className="truncate hidden sm:inline text-slate-600 dark:text-slate-300">
-                    {activeViewpoint.shortLabel}
-                  </span>
-                ) : (
-                  <span className="truncate hidden sm:inline text-slate-600 dark:text-slate-300">
-                    Live Alpine Telemetry
-                  </span>
+                {activeViewpoint && (
+                  <>
+                    <span className="text-slate-300 dark:text-slate-600 hidden xl:inline">•</span>
+                    <span className="hidden xl:inline text-slate-600 dark:text-slate-300">
+                      {activeViewpoint.shortLabel}
+                    </span>
+                  </>
                 )}
               </p>
             </div>
@@ -238,12 +218,12 @@ export default function Header({
         {/* Desktop Navigation Links */}
         <nav
           aria-label="Main Navigation"
-          className="hidden md:flex items-center gap-1 lg:gap-1.5 font-medium text-xs sm:text-sm"
+          className="hidden lg:flex items-center gap-1 xl:gap-2 font-medium text-xs sm:text-sm"
         >
           {/* Live Forecast / Home Link */}
           <Link
-            href="/"
-            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all min-h-[40px] ${
+            href={getLocalizedHref('/', locale)}
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
               isHome
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -254,18 +234,18 @@ export default function Header({
               className={`w-4 h-4 shrink-0 ${isHome ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
               aria-hidden="true"
             />
-            <span>Forecast</span>
+            <span>{dict.common.liveScore}</span>
           </Link>
 
           {/* Viewpoints Dropdown */}
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative shrink-0" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setViewpointsDropdownOpen(!viewpointsDropdownOpen)}
               onMouseEnter={() => setViewpointsDropdownOpen(true)}
               aria-expanded={viewpointsDropdownOpen}
               aria-haspopup="true"
-              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all min-h-[40px] cursor-pointer ${
+              className={`whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 cursor-pointer ${
                 isViewpoints
                   ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -275,7 +255,7 @@ export default function Header({
                 className={`w-4 h-4 shrink-0 ${isViewpoints ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
                 aria-hidden="true"
               />
-              <span>Viewpoints</span>
+              <span>{dict.common.allViewpoints}</span>
               <ChevronDown
                 className={`w-3.5 h-3.5 transition-transform duration-200 ${
                   viewpointsDropdownOpen ? 'rotate-180 text-sky-600 dark:text-sky-400' : 'text-slate-400'
@@ -288,19 +268,19 @@ export default function Header({
             {viewpointsDropdownOpen && (
               <div
                 onMouseLeave={() => setViewpointsDropdownOpen(false)}
-                className="absolute left-0 mt-1.5 w-80 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150"
+                className="absolute left-0 mt-2 w-[360px] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-50 animate-dropdown-left"
                 role="menu"
                 aria-label="Viewpoints menu"
               >
                 <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 mb-1">
                   <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
-                    Matterhorn Vantage Points
+                    {dict.viewpointSwitcher.selectVantagePoint}
                   </span>
                 </div>
 
                 <div className="space-y-1">
-                  {VIEWPOINT_NAV_ITEMS.map((item) => {
-                    const isItemActive = pathname === `/viewpoints/${item.slug}`;
+                  {viewpointNavItems.map((item) => {
+                    const isItemActive = pathWithoutLocale === `/viewpoints/${item.slug}`;
                     let scoreBadge: { score: number; color: BadgeColor } | null = null;
                     if (item.badgeKey === 'gornergrat' && telemetrySummary?.gornergratScore) {
                       scoreBadge = {
@@ -317,18 +297,18 @@ export default function Header({
                     return (
                       <Link
                         key={item.slug}
-                        href={`/viewpoints/${item.slug}`}
+                        href={getLocalizedHref(`/viewpoints/${item.slug}`, locale)}
                         role="menuitem"
-                        className={`group flex items-start justify-between p-2.5 rounded-xl transition-all ${
+                        className={`group flex items-center justify-between p-2.5 rounded-xl transition-all ${
                           isItemActive
-                            ? 'bg-sky-50/80 dark:bg-sky-950/60 text-sky-950 dark:text-sky-200 font-semibold ring-1 ring-sky-200 dark:ring-sky-800'
+                            ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-950 dark:text-sky-200 font-semibold ring-1 ring-sky-200 dark:ring-sky-800'
                             : 'hover:bg-slate-50 dark:hover:bg-slate-800/70 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                         }`}
                       >
                         <div className="min-w-0 pr-2">
-                          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400">
-                            <span>{item.title}</span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400">
+                            <span className="truncate">{item.title}</span>
+                            <span className="whitespace-nowrap shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                               {item.elevation}
                             </span>
                           </div>
@@ -339,7 +319,7 @@ export default function Header({
 
                         {scoreBadge && (
                           <span
-                            className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
+                            className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-mono font-bold border whitespace-nowrap ${
                               BADGE_COLOR_MAP[scoreBadge.color].pill
                             }`}
                           >
@@ -358,25 +338,59 @@ export default function Header({
 
                 <div className="pt-2 mt-1 border-t border-slate-100 dark:border-slate-800">
                   <Link
-                    href="/viewpoints"
+                    href={getLocalizedHref('/viewpoints', locale)}
                     role="menuitem"
-                    className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-950/50 transition-colors"
+                    className="group flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-950/50 transition-colors"
                   >
                     <span className="flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5" aria-hidden="true" />
-                      <span>Compare All Viewpoints</span>
+                      <span>{dict.common.allViewpoints}</span>
                     </span>
-                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
             )}
           </div>
 
+          {/* Scenic Trains Link */}
+          <Link
+            href={getLocalizedHref('/trains', locale)}
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
+              isTrains
+                ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
+            }`}
+            aria-current={isTrains ? 'page' : undefined}
+          >
+            <TrainFront
+              className={`w-4 h-4 shrink-0 ${isTrains ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
+              aria-hidden="true"
+            />
+            <span>Trains</span>
+          </Link>
+
+          {/* Ski & Snow Intelligence Link */}
+          <Link
+            href={getLocalizedHref('/ski', locale)}
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
+              isSki
+                ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
+            }`}
+            aria-current={isSki ? 'page' : undefined}
+          >
+            <Snowflake
+              className={`w-4 h-4 shrink-0 ${isSki ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
+              aria-hidden="true"
+            />
+            <span>Ski & Snow</span>
+          </Link>
+
           {/* Field Guides Link */}
           <Link
-            href="/guides"
-            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all min-h-[40px] ${
+            href={getLocalizedHref('/guides', locale)}
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
               isGuides
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -387,13 +401,13 @@ export default function Header({
               className={`w-4 h-4 shrink-0 ${isGuides ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
               aria-hidden="true"
             />
-            <span>Field Guides</span>
+            <span>{dict.common.guides}</span>
           </Link>
 
           {/* Embed Widget Link */}
           <Link
-            href="/widget"
-            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all min-h-[40px] ${
+            href={getLocalizedHref('/widget', locale)}
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
               isWidget
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -404,28 +418,16 @@ export default function Header({
               className={`w-4 h-4 shrink-0 ${isWidget ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
               aria-hidden="true"
             />
-            <span>Widget</span>
+            <span>{dict.common.widgetApi}</span>
           </Link>
         </nav>
 
-        {/* Right Status Cluster: Live Swiss CET Clock & Telemetry Pill & Theme Toggle */}
-        <div className="flex items-center gap-2">
-          {/* Live Swiss CET Clock (Desktop & Tablet) */}
-          {swissTime && (
-            <div
-              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-sky-50/80 dark:bg-sky-950/60 border border-sky-200/90 dark:border-sky-800/80 text-xs font-mono font-bold text-sky-900 dark:text-sky-300 shadow-2xs select-none"
-              title="Official Zermatt Local Time (Europe/Zurich)"
-              aria-label={`Official Swiss Local Time: ${swissTime}`}
-            >
-              <Clock className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>{swissTime}</span>
-            </div>
-          )}
-
+        {/* Right Status Cluster: Telemetry Pill & Language & Theme Toggle */}
+        <div className="flex items-center gap-2 shrink-0">
           {/* Live Telemetry Score Pill */}
           <Link
-            href={isHome ? '/viewpoints/gornergrat' : '/'}
-            className={`hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all hover:scale-102 shadow-2xs ${
+            href={getLocalizedHref(isHome ? '/viewpoints/gornergrat' : '/', locale)}
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all hover:scale-102 shadow-2xs shrink-0 ${
               BADGE_COLOR_MAP[gornergratBadge].pill
             }`}
             title={`Live Gornergrat Summit Visibility: ${gornergratScore}/10`}
@@ -434,17 +436,20 @@ export default function Header({
             <span>Live: {gornergratScore}/10</span>
           </Link>
 
-          {/* Theme Toggle Button (Desktop & Tablet) */}
-          <ThemeToggle variant="dropdown" className="hidden sm:inline-block" />
+          {/* Multilingual Selector */}
+          <LanguageSelector />
 
-          {/* Mobile Hamburger Button */}
+          {/* Theme Toggle Button */}
+          <ThemeToggle variant="dropdown" className="inline-block" />
+
+          {/* Mobile/Tablet Hamburger Button */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation-drawer"
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none"
+            className="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 transition-colors active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none shrink-0"
           >
             {mobileMenuOpen ? (
               <X className="w-5 h-5 text-slate-900 dark:text-white" aria-hidden="true" />
@@ -460,7 +465,7 @@ export default function Header({
         <>
           {/* Backdrop Blur */}
           <div
-            className="fixed inset-0 top-[61px] sm:top-[69px] bg-slate-900/40 dark:bg-black/60 backdrop-blur-xs z-40 md:hidden"
+            className="fixed inset-0 top-[61px] sm:top-[69px] bg-slate-900/40 dark:bg-black/60 backdrop-blur-xs z-40 lg:hidden animate-subtle-fade"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
@@ -468,13 +473,13 @@ export default function Header({
           {/* Slide-Down Drawer Container */}
           <div
             id="mobile-navigation-drawer"
-            className="fixed inset-x-0 top-[61px] sm:top-[69px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-b border-slate-200/90 dark:border-slate-800 shadow-2xl z-50 md:hidden max-h-[calc(100vh-70px)] overflow-y-auto animate-in slide-in-from-top-2 duration-200"
+            className="fixed inset-x-0 top-[61px] sm:top-[69px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-b border-slate-200/90 dark:border-slate-800 shadow-2xl z-50 lg:hidden max-h-[calc(100vh-70px)] overflow-y-auto animate-drawer"
           >
             <div className="p-4 space-y-4 max-w-lg mx-auto">
               {/* Primary Mobile Links */}
               <div className="grid grid-cols-2 gap-2">
                 <Link
-                  href="/"
+                  href={getLocalizedHref('/', locale)}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
                     isHome
@@ -483,11 +488,11 @@ export default function Header({
                   }`}
                 >
                   <Mountain className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">Live Forecast</span>
+                  <span className="text-xs font-bold">{dict.common.liveScore}</span>
                 </Link>
 
                 <Link
-                  href="/viewpoints"
+                  href={getLocalizedHref('/viewpoints', locale)}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
                     isViewpoints
@@ -496,11 +501,37 @@ export default function Header({
                   }`}
                 >
                   <Compass className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">All Viewpoints</span>
+                  <span className="text-xs font-bold">{dict.common.allViewpoints}</span>
                 </Link>
 
                 <Link
-                  href="/guides"
+                  href={getLocalizedHref('/trains', locale)}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
+                    isTrains
+                      ? 'bg-sky-50 dark:bg-sky-950/60 border-sky-300 dark:border-sky-700 text-sky-900 dark:text-sky-200 font-bold shadow-2xs'
+                      : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/60'
+                  }`}
+                >
+                  <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+                  <span className="text-xs font-bold">Scenic Trains</span>
+                </Link>
+
+                <Link
+                  href={getLocalizedHref('/ski', locale)}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
+                    isSki
+                      ? 'bg-sky-50 dark:bg-sky-950/60 border-sky-300 dark:border-sky-700 text-sky-900 dark:text-sky-200 font-bold shadow-2xs'
+                      : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/60'
+                  }`}
+                >
+                  <Snowflake className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+                  <span className="text-xs font-bold">Ski & Snow</span>
+                </Link>
+
+                <Link
+                  href={getLocalizedHref('/guides', locale)}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
                     isGuides
@@ -509,11 +540,11 @@ export default function Header({
                   }`}
                 >
                   <BookOpen className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">Field Guides</span>
+                  <span className="text-xs font-bold">{dict.common.guides}</span>
                 </Link>
 
                 <Link
-                  href="/widget"
+                  href={getLocalizedHref('/widget', locale)}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
                     isWidget
@@ -522,7 +553,7 @@ export default function Header({
                   }`}
                 >
                   <Code2 className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">Embed Widget</span>
+                  <span className="text-xs font-bold">{dict.common.widgetApi}</span>
                 </Link>
               </div>
 
@@ -530,7 +561,7 @@ export default function Header({
               <div className="bg-slate-50/80 dark:bg-slate-800/50 rounded-2xl p-3 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
                 <div className="flex items-center justify-between px-1">
                   <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
-                    Direct Viewpoint Telemetry
+                    {dict.viewpointSwitcher.selectVantagePoint}
                   </span>
                   <span className="text-[10px] font-mono text-sky-700 dark:text-sky-400 font-semibold">
                     Live Score
@@ -538,8 +569,8 @@ export default function Header({
                 </div>
 
                 <div className="space-y-1.5">
-                  {VIEWPOINT_NAV_ITEMS.map((item) => {
-                    const isItemActive = pathname === `/viewpoints/${item.slug}`;
+                  {viewpointNavItems.map((item) => {
+                    const isItemActive = pathWithoutLocale === `/viewpoints/${item.slug}`;
                     let scoreBadge: { score: number; color: BadgeColor } | null = null;
                     if (item.badgeKey === 'gornergrat' && telemetrySummary?.gornergratScore) {
                       scoreBadge = {
@@ -556,7 +587,7 @@ export default function Header({
                     return (
                       <Link
                         key={item.slug}
-                        href={`/viewpoints/${item.slug}`}
+                        href={getLocalizedHref(`/viewpoints/${item.slug}`, locale)}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`flex items-center justify-between p-2.5 rounded-xl border transition-colors ${
                           isItemActive
@@ -595,6 +626,9 @@ export default function Header({
                 </div>
               </div>
 
+              {/* Mobile Language Selector */}
+              <LanguageSelector variant="mobile" />
+
               {/* Theme Selector Strip */}
               <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80">
                 <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
@@ -603,22 +637,19 @@ export default function Header({
                 <ThemeToggle variant="segmented" />
               </div>
 
-              {/* Swiss Clock & Altitude Footer */}
-              <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
-                {swissTime && (
-                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <Clock className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                    <span>Zermatt Time: {swissTime}</span>
-                  </div>
-                )}
+              {/* Mobile CTA Footer */}
+              <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2.5">
+                <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                  Zermatt 4,478m
+                </span>
 
                 <Link
-                  href="/"
+                  href={getLocalizedHref('/', locale)}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors"
+                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors ml-auto"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-sky-200" aria-hidden="true" />
-                  <span>View 10-Day Horizon Score</span>
+                  <span>{dict.common.liveScore}</span>
                 </Link>
               </div>
             </div>

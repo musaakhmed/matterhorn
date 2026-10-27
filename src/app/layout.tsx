@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { buildRootLayoutJsonLd, serializeJsonLd } from '@/lib/schema';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { I18nProvider } from '@/lib/i18n/context';
+import { getAlternateUrls } from '@/lib/i18n/config';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -19,15 +21,18 @@ export const metadata: Metadata = {
     'is the matterhorn visible',
     'matterhorn visibility forecast',
     'zermatt weather webcam',
+    'zermatt live webcams',
+    'zermatt weather forecast',
+    'zermatt live camera',
+    'zermatt mountain weather',
     'gornergrat visibility',
     'matterhorn glacier paradise weather',
     'best time to see the matterhorn',
     'matterhorn cloud cover',
-    'zermatt live webcams',
+    'is the matterhorn visible from zermatt',
+    'zermatt viewpoints',
   ],
-  alternates: {
-    canonical: '/',
-  },
+  alternates: getAlternateUrls('/'),
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -48,13 +53,13 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Is The Matterhorn Visible Today? Live Alpine Visibility Score',
+        alt: 'Is The Matterhorn Visible Today? Live Zermatt Alpine Visibility Score',
       },
       {
         url: '/banner.jpeg',
         width: 1424,
         height: 752,
-        alt: 'Is The Matterhorn Visible Today? Alpine Banner',
+        alt: 'Is The Matterhorn Visible Today? Zermatt Alpine Banner',
       },
     ],
   },
@@ -159,7 +164,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 alpine-backdrop selection:bg-sky-500/20 selection:text-sky-900 dark:selection:text-sky-100 transition-colors duration-200">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <I18nProvider locale="en">{children}</I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

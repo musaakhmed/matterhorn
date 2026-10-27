@@ -12,11 +12,14 @@ import MetricsGrid from './MetricsGrid';
 import LiveWebcam from './LiveWebcam';
 import HistoricalTable from './HistoricalTable';
 import ViewpointAdvice from './ViewpointAdvice';
+import ScenicTrainsCard from './ScenicTrainsCard';
 import FaqSection from './FaqSection';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
 import { Activity, Info, BookOpen, ArrowUpRight, Code2 } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/context';
+import { getLocalizedHref } from '@/lib/i18n/config';
 import logoImg from '../../public/logo.jpeg';
 
 interface VisibilityClientShellProps {
@@ -26,6 +29,7 @@ interface VisibilityClientShellProps {
 export default function VisibilityClientShell({
   initialData,
 }: VisibilityClientShellProps) {
+  const { dict, locale } = useTranslation();
   const [activeViewpointId, setActiveViewpointId] = useState<ViewpointId>(
     initialData.defaultViewpoint
   );
@@ -67,7 +71,9 @@ export default function VisibilityClientShell({
         }}
       />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
+        <h1 className="sr-only">{dict.common.siteTagline}</h1>
+
         {/* 1. Prominent Multi-Aspect Viewpoint Switcher */}
         <ViewpointSwitcher
           viewpoints={viewpointsMap}
@@ -93,20 +99,23 @@ export default function VisibilityClientShell({
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
 
-        {/* 5. Atmospheric Layer Diagnostics (4-Card Grid) */}
+        {/* 5. Expanded Multi-Cam Grid + User Validation Micro-Poll */}
+        <LiveWebcam />
+
+        {/* 6. Tactical Zermatt Sector Guide (Gornergrat vs Glacier Paradise vs Sunnegga) */}
+        <ViewpointAdvice viewpoints={activeData.sectorRecommendations} />
+
+        {/* 7. Iconic Mountain Trains: Gornergrat & Glacier Express (Live Conditions & Passes) */}
+        <ScenicTrainsCard initialData={initialData} />
+
+        {/* 8. Atmospheric Layer Diagnostics (4-Card Telemetry Grid) */}
         <MetricsGrid
           metrics={activeData.metrics}
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
 
-        {/* 6. Expanded Multi-Cam Grid + User Validation Micro-Poll */}
-        <LiveWebcam />
-
-        {/* 7. Historical "Visibility by Month" Statistical Table */}
+        {/* 9. Historical "Visibility by Month" Statistical Table */}
         <HistoricalTable />
-
-        {/* 8. Tactical Zermatt Sector Guide */}
-        <ViewpointAdvice viewpoints={activeData.sectorRecommendations} />
 
         {/* 9. Meteorological Scoring Formula & Visual Scale Reference Card */}
         <section
@@ -117,23 +126,15 @@ export default function VisibilityClientShell({
             <div className="space-y-1.5 max-w-3xl">
               <div className="flex items-center gap-2 text-slate-900 dark:text-white font-extrabold">
                 <Info className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                <span>High-Altitude 1–10 AM/PM Dual Scoring Engine</span>
+                <span>{dict.scoring.title}</span>
               </div>
               <p className="leading-relaxed">
-                Standard valley weather apps fail in Zermatt because they read conditions at 1,608m. Our engine queries atmospheric layers across both{' '}
-                <strong className="text-slate-900 dark:text-white">
-                  Gornergrat (3,089m East)
-                </strong>{' '}
-                and{' '}
-                <strong className="text-slate-900 dark:text-white">
-                  Glacier Paradise (3,883m South)
-                </strong>
-                , averaging 6-hour Morning (06:00–12:00) and Afternoon (12:00–18:00) blocks mapped to a 1–10 index.{' '}
+                {dict.scoring.description}{' '}
                 <Link
-                  href="/guides/matterhorn-banner-cloud-fohn-wind"
+                  href={getLocalizedHref('/guides/matterhorn-banner-cloud-fohn-wind', locale)}
                   className="inline-flex items-center gap-1 font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 underline underline-offset-4"
                 >
-                  <span>Why the Matterhorn gets a banner cloud</span>
+                  <span>{dict.scoring.bannerCloudLink}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
               </p>
@@ -144,34 +145,46 @@ export default function VisibilityClientShell({
                 Raw = 100 - (0.60·C_mid + 0.25·C_low + 0.15·C_high) - Penalties
               </div>
               <div className="text-slate-600 dark:text-slate-400">
-                1–10 Index: 8–10 Visible • 6–7 Partially • 3–5 Barely • 1–2 Not Visible
+                1–10 Index: 8–10 {dict.hero.statuses.visible} • 6–7 {dict.hero.statuses.partiallyVisible} • 3–5 {dict.hero.statuses.barelyVisible} • 1–2 {dict.hero.statuses.notVisible}
               </div>
             </div>
           </div>
 
           {/* 4-Tier Visual Icon Scale Reference */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-4 border-t border-slate-200/80 dark:border-slate-800">
-            {VISIBILITY_SCALE_TIERS.map((tier) => (
-              <div
-                key={tier.status}
-                className="flex items-center gap-3 rounded-xl bg-slate-50/90 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 p-3"
-              >
-                <VisibilityIcon badgeColor={tier.badgeColor} size="lg" />
-                <div className="min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-xs font-extrabold text-slate-900 dark:text-white">
-                      {tier.scoreRange}/10
-                    </span>
-                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
-                      • {tier.status}
-                    </span>
+            {VISIBILITY_SCALE_TIERS.map((tier) => {
+              const tierKey =
+                tier.badgeColor === 'emerald'
+                  ? 'crisp'
+                  : tier.badgeColor === 'amber'
+                  ? 'partial'
+                  : tier.badgeColor === 'orange'
+                  ? 'barely'
+                  : 'sockedIn';
+              const localizedTier = dict.scoring.tiers[tierKey];
+
+              return (
+                <div
+                  key={tier.status}
+                  className="flex items-center gap-3 rounded-xl bg-slate-50/90 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 p-3"
+                >
+                  <VisibilityIcon badgeColor={tier.badgeColor} size="lg" />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono text-xs font-extrabold text-slate-900 dark:text-white">
+                        {localizedTier.range}/10
+                      </span>
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
+                        • {localizedTier.label}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 truncate mt-0.5">
+                      {localizedTier.caption}
+                    </p>
                   </div>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-400 truncate mt-0.5">
-                    {tier.shortCaption}
-                  </p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -179,7 +192,7 @@ export default function VisibilityClientShell({
         <FaqSection
           faqs={dashboardFaqs}
           groupName="dashboard-faq"
-          badgeLabel="FAQPage Schema • Live Telemetry Indexed"
+          badgeLabel={dict.faq.badge}
         />
 
         {/* 11. Alpine Field Guides & Live Status Widget Quick-Access Strip */}
@@ -191,19 +204,19 @@ export default function VisibilityClientShell({
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-slate-900 dark:text-white font-extrabold text-sm sm:text-base">
                 <BookOpen className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                <span>Planning a Zermatt Excursion? Read Our Field Guides</span>
+                <span>{dict.guidesPromo.title}</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                Deep-dive guides on Gornergrat vs. Glacier Paradise tickets, sunrise reflection lakes, 30-year monthly clarity, and rainy-day backup plans.
+                {dict.guidesPromo.desc}
               </p>
             </div>
 
             <div>
               <Link
-                href="/guides"
+                href={getLocalizedHref('/guides', locale)}
                 className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-500 text-white text-xs font-bold shadow-xs transition-colors"
               >
-                <span>Browse All 6 Field Guides</span>
+                <span>{dict.guidesPromo.cta}</span>
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
@@ -213,19 +226,19 @@ export default function VisibilityClientShell({
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 font-extrabold text-sm sm:text-base text-white">
                 <Code2 className="w-4 h-4 text-sky-400 shrink-0" aria-hidden="true" />
-                <span>Publish Live Matterhorn Status on Your Website</span>
+                <span>{dict.widgetPromo.title}</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-300">
-                Embed our free, auto-updating 1–10 Matterhorn Visibility Widget on any blog, travel guide, community portal, or website in EN, DE, or FR.
+                {dict.widgetPromo.desc}
               </p>
             </div>
 
             <div>
               <Link
-                href="/widget"
+                href={getLocalizedHref('/widget', locale)}
                 className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-extrabold shadow-xs transition-colors"
               >
-                <span>Customize &amp; Embed Live Widget</span>
+                <span>{dict.widgetPromo.cta}</span>
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
@@ -233,8 +246,8 @@ export default function VisibilityClientShell({
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-600 dark:text-slate-400">
+        <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image
@@ -247,7 +260,7 @@ export default function VisibilityClientShell({
               />
             </span>
             <span>
-              isthematterhornvisible.com • Swiss Alpine Telemetry Utility
+              isthematterhornvisible.com • {dict.footer.tagline}
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-4 font-mono">
@@ -257,25 +270,32 @@ export default function VisibilityClientShell({
             </span>
             <span>•</span>
             <Link
-              href="/widget"
+              href={getLocalizedHref('/widget', locale)}
               className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
-              Embed Widget (/widget)
+              {dict.common.widgetApi}
             </Link>
             <span>•</span>
             <Link
-              href="/guides"
+              href={getLocalizedHref('/trains', locale)}
               className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
-              Field Guides (/guides)
+              Scenic Trains
             </Link>
             <span>•</span>
-            <a
+            <Link
+              href={getLocalizedHref('/guides', locale)}
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
+            >
+              {dict.common.guides}
+            </Link>
+            <span>•</span>
+            <Link
               href="/api/visibility"
               className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4 cursor-pointer"
             >
               JSON API (/api/visibility)
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
