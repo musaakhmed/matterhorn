@@ -51,7 +51,7 @@ function ViewpointIcon({ id }: { id: ViewpointRecommendation['id'] }) {
 
 const VIEWPOINT_ROUTE_MAP: Record<ViewpointRecommendation['id'], string> = {
   gornergrat: '/viewpoints/gornergrat',
-  sunnegga: '/viewpoints/sunnegga-riffelsee',
+  sunnegga: '/viewpoints/sunnegga',
   'glacier-paradise': '/viewpoints/glacier-paradise',
   'zermatt-village': '/viewpoints/zermatt-village',
 };

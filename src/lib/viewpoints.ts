@@ -10,7 +10,8 @@ import { GuideComparisonTable, GuideFaq, GuideSection } from './guides';
 export type ViewpointPageSlug =
   | 'gornergrat'
   | 'glacier-paradise'
-  | 'sunnegga-riffelsee'
+  | 'sunnegga'
+  | 'riffelsee'
   | 'zermatt-village';
 
 export interface ViewpointQuickFact {
@@ -487,14 +488,138 @@ export const VIEWPOINT_PAGES: ViewpointPageConfig[] = [
     ],
   },
   {
-    slug: 'sunnegga-riffelsee',
+    slug: 'sunnegga',
+    telemetryKey: 'gornergrat',
+    defaultWebcamId: 'rothorn',
+    targetKeyword: 'Sunnegga Zermatt',
+    name: 'Sunnegga',
+    shortName: 'Sunnegga',
+    title: 'Sunnegga Funicular & Matterhorn East Face',
+    seoTitle: 'Sunnegga Funicular & Matterhorn East Face',
+    description:
+      'The Sunnegga funicular is the lower terrace for the Matterhorn east face, Stellisee, and the 5-lakes walk. Use it when you want the easy start, not the closest reflection.',
+    elevationLabel: '2,288 m',
+    elevationMeters: 2288,
+    coordinatesLabel: '46.0169° N, 7.7625° E',
+    latitude: 46.0169,
+    longitude: 7.7625,
+    aspectLabel: 'East face from the lower terrace',
+    transportSummary: 'Sunnegga funicular from Zermatt',
+    journeyTime: '4.5 minutes',
+    firstDepartureLabel: 'About 08:00 CET',
+    bestTimeWindow: 'First cabin, before the breeze reaches Stellisee',
+    updatedAt: '2026-10-27',
+    heroStat: {
+      label: 'Funicular',
+      value: '4.5 min',
+      detail: 'Zermatt to the 2,288 m terrace',
+    },
+    quickFacts: [
+      {
+        label: 'Terrace',
+        value: '2,288 m',
+        detail: 'East face from a wider, lower angle than Riffelsee',
+      },
+      {
+        label: 'Stellisee',
+        value: '20-min walk',
+        detail: 'Continue to Blauherd (2,571 m), then walk to the lake at 2,537 m',
+      },
+      {
+        label: 'Leisee',
+        value: 'Below the terrace',
+        detail: 'The easiest lake, a few minutes from the funicular',
+      },
+      {
+        label: 'Compared with Riffelsee',
+        value: 'Later start',
+        detail: 'The Gornergrat train reaches Riffelsee about 07:30. Sunnegga opens later.',
+      },
+    ],
+    keyTakeaways: [
+      'Sunnegga is the funicular terrace at 2,288 m. The east face is the view, from lower and farther away than Riffelsee.',
+      'Stellisee is the reflection lake on this side. It is a gondola ride to Blauherd plus a 20-minute walk.',
+      'Choose Sunnegga for Leisee, children, and the 5-lakes walk. Choose Riffelsee when you want the largest reflection at first light.',
+    ],
+    comparisonTable: {
+      caption: 'When Sunnegga is the better walk than Riffelsee',
+      headers: ['Trip', 'Choose Sunnegga', 'Choose Riffelsee'],
+      rows: [
+        [
+          'Closest reflection',
+          'Stellisee, after the gondola and a 20-minute walk',
+          'Five minutes down from Rotenboden. The largest east-face mirror.',
+        ],
+        [
+          'First light',
+          'Funicular opens around 08:00',
+          'First Gornergrat train can put you at the lake by about 07:30',
+        ],
+        [
+          'Easy day',
+          'Leisee is beside the terrace. No Gornergrat ticket.',
+          'A railway ticket to Rotenboden, then a short downhill walk',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'sunnegga-funicular',
+        heading: 'The Sunnegga funicular',
+        paragraphs: [
+          'The funicular leaves Zermatt and climbs to the Sunnegga terrace at 2,288 m in about four and a half minutes. The east face is in front of you, wider and lower than the view from Riffelsee.',
+          'Leisee sits just below the terrace. It is the lake to use with children, and it does not require the Gornergrat railway.',
+        ],
+      },
+      {
+        id: 'stellisee',
+        heading: 'Stellisee and the east face',
+        paragraphs: [
+          'The reflection on this side is Stellisee, at 2,537 m. Ride the gondola from Sunnegga to Blauherd (2,571 m), then walk about 20 minutes. The foreground is boulders and cotton grass, and the peak is the same east face you see from Riffelsee.',
+          'The water only mirrors the mountain from late June through October, and only while the wind stays under about 12 km/h. A clear afternoon still fails if the breeze has started.',
+        ],
+      },
+      {
+        id: 'when-sunnegga-wins',
+        heading: 'When Sunnegga beats the walk to Riffelsee',
+        paragraphs: [
+          'Riffelsee is the closer, larger reflection, and the first train reaches it earlier. Sunnegga is the better walk when you want the 5-lakes trail (Stellisee, Grindjisee, Grünsee, Moosjisee, Leisee), when you are with children, or when you do not want a Gornergrat ticket.',
+          'Start at Blauherd as soon as the gondola opens so Stellisee is still calm. If the wind is already up, Grindjisee is lower and sheltered by larches, and it keeps a reflection later in the day.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is Sunnegga?',
+        answer:
+          'A funicular terrace at 2,288 m above Zermatt. The ride takes about 4.5 minutes. The view is the Matterhorn east face, from lower than Riffelsee.',
+      },
+      {
+        question: 'Is Sunnegga or Riffelsee better for the reflection?',
+        answer:
+          'Riffelsee, if you want the largest mirror and the earliest start. Sunnegga is the easier terrace and the start of the walk to Stellisee.',
+      },
+      {
+        question: 'How do you reach Stellisee from Sunnegga?',
+        answer:
+          'Take the gondola to Blauherd at 2,571 m, then walk about 20 minutes to Stellisee at 2,537 m.',
+      },
+    ],
+    relatedGuideSlugs: [
+      'best-matterhorn-photo-viewpoints',
+      'zermatt-weather-september',
+      'hotels-with-matterhorn-view',
+    ],
+  },
+  {
+    slug: 'riffelsee',
     telemetryKey: 'gornergrat',
     defaultWebcamId: 'rothorn',
     targetKeyword: 'Which mountain is reflected in Riffelsee',
-    name: 'Sunnegga, Stellisee & Riffelsee Reflection Lakes',
-    shortName: 'Sunnegga & Riffelsee',
-    title: 'Which Mountain Is Reflected in Riffelsee? | Sunnegga',
-    seoTitle: 'Which Mountain Is Reflected in Riffelsee? | Sunnegga',
+    name: 'Riffelsee',
+    shortName: 'Riffelsee',
+    title: 'Which Mountain Is Reflected in Riffelsee?',
+    seoTitle: 'Which Mountain Is Reflected in Riffelsee?',
     description:
       'The Matterhorn east face is the mountain reflected in Riffelsee. Live wind and clarity for Sunnegga, Stellisee, and the Rotenboden walk.',
     elevationLabel: '2,288 m – 2,757 m',

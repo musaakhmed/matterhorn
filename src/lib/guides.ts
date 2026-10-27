@@ -263,7 +263,7 @@ export const GUIDES: GuideArticle[] = [
         heading: 'Zermatt Weather in December',
         paragraphs: [
           'December is the clearest month on the 30-year record, with an 89% chance of a clear Matterhorn summit on a given day. Cold, stable air produces almost no afternoon cumulus, so both the morning and the afternoon stay open.',
-          'Snow covers the village and the lakes are frozen, so this is a viewing and skiing month rather than a reflection month. For Christmas week, sleighs, and the village schedule, see the [Christmas in Zermatt guide](/guides/christmas-in-zermatt-matterhorn).',
+          'Snow covers the village and the lakes are frozen, so this is a viewing and skiing month rather than a reflection month. For Christmas week, sleighs, and the village schedule, see the [Christmas in Zermatt guide](/guides/christmas-in-zermatt-matterhorn). The month on its own page is [Zermatt Weather in December](/guides/zermatt-weather-december).',
         ],
       },
       {
@@ -271,7 +271,7 @@ export const GUIDES: GuideArticle[] = [
         heading: 'Zermatt Weather in September',
         paragraphs: [
           'September clears on about 72% of days. Cooler nights shut down the afternoon thermals that wreck June and July, and the larch forests turn gold around the east face.',
-          'Hiking trails are still snow-free and Riffelsee is liquid, so this is the month for a Matterhorn reflection from Sunnegga or Rotenboden. Start at sunrise. A breeze often ripples the lake by early afternoon even when the summit stays clear.',
+          'Hiking trails are still snow-free and Riffelsee is liquid, so this is the month for a Matterhorn reflection from Sunnegga or Rotenboden. Start at sunrise. A breeze often ripples the lake by early afternoon even when the summit stays clear. The month on its own page is [Zermatt Weather in September](/guides/zermatt-weather-september).',
         ],
       },
       {
@@ -279,7 +279,7 @@ export const GUIDES: GuideArticle[] = [
         heading: 'Zermatt Weather in May',
         paragraphs: [
           'May is a shoulder month. Clear-sky odds sit in the late-spring range of 48–58%, and the reliable window is the morning. Moisture from melting snow feeds cumulus by early afternoon.',
-          'Riffelsee is still frozen in May, so leave the reflection shot for late June. Use a clear morning for Gornergrat or the village bridge, and treat the afternoon as a valley day.',
+          'Riffelsee is still frozen in May, so leave the reflection shot for late June. Use a clear morning for Gornergrat or the village bridge, and treat the afternoon as a valley day. The month on its own page is [Zermatt Weather in May](/guides/zermatt-weather-may).',
         ],
       },
       {
@@ -1228,6 +1228,307 @@ export const GUIDES: GuideArticle[] = [
         question: 'How high is the Matterhorn?',
         answer:
           '4,478 meters (14,692 feet). In German the search is Matterhorn Höhe, and the answer is 4.478 Meter.',
+      },
+    ],
+  },
+  {
+    slug: 'zermatt-weather-december',
+    title: 'Zermatt Weather in December',
+    shortTitle: 'December Weather',
+    seoTitle: 'Zermatt Weather in December | Clear Skies & Skiing',
+    description:
+      'December is Zermatt’s clearest month, with an 89% chance of a clear Matterhorn. Snow, frozen lakes, and how to check the peak today.',
+    category: 'Climatology',
+    publishedAt: '2026-10-27',
+    updatedAt: '2026-10-27',
+    readingTimeMinutes: 3,
+    coverImage: {
+      src: '/guides/christmas-in-zermatt-matterhorn.jpg',
+      alt: 'Snowy Zermatt village with the Matterhorn in December',
+      caption: 'December is a viewing and skiing month. The lakes are frozen.',
+    },
+    heroStat: {
+      label: 'Clear-sky chance',
+      value: '89%',
+      detail: 'Highest month on the 30-year record',
+    },
+    keyTakeaways: [
+      'December clears on 89% of days. Morning and afternoon both stay open.',
+      'The village is under snow and Riffelsee is frozen, so skip the reflection shot.',
+      'Check the live score before buying a Gornergrat or ski ticket.',
+    ],
+    sections: [
+      {
+        id: 'december-clarity',
+        heading: 'Zermatt weather in December',
+        paragraphs: [
+          'December is the clearest month on the 30-year record, with an 89% chance of a clear Matterhorn summit on a given day. Cold, stable air produces almost no afternoon cumulus, so both the morning and the afternoon stay open.',
+          'Snow covers the village and the lakes are frozen, so this is a viewing and skiing month rather than a reflection month. For Christmas week, sleighs, and the village schedule, see the [Christmas in Zermatt guide](/guides/christmas-in-zermatt-matterhorn).',
+          'The [live visibility score](/) is the check for today. The rest of the year is in [Zermatt weather by month](/guides/best-time-to-see-matterhorn).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is Zermatt weather like in December?',
+        answer:
+          'Cold and unusually clear. About 89% of December days show the Matterhorn, and the afternoon stays open because there is almost no thermal cloud.',
+      },
+      {
+        question: 'Can you see a Riffelsee reflection in December?',
+        answer: 'No. Riffelsee is frozen and snow-covered from November through early June.',
+      },
+    ],
+  },
+  {
+    slug: 'zermatt-weather-september',
+    title: 'Zermatt Weather in September',
+    shortTitle: 'September Weather',
+    seoTitle: 'Zermatt Weather in September | Hiking & Lake Reflections',
+    description:
+      'September clears on about 72% of days in Zermatt. Hiking trails are open and Riffelsee is liquid for a Matterhorn reflection.',
+    category: 'Climatology',
+    publishedAt: '2026-10-27',
+    updatedAt: '2026-10-27',
+    readingTimeMinutes: 3,
+    coverImage: {
+      src: '/guides/best-time-to-see-matterhorn.jpg',
+      alt: 'The Matterhorn above golden larches in September',
+      caption: 'September is the month for hiking and a liquid Riffelsee reflection.',
+    },
+    heroStat: {
+      label: 'Clear-sky chance',
+      value: '72%',
+      detail: 'Cooler nights, gold larches, liquid lakes',
+    },
+    keyTakeaways: [
+      'September clears on about 72% of days, after the summer afternoon clouds fade.',
+      'Trails are still snow-free and Riffelsee can mirror the east face.',
+      'Start at sunrise. A breeze often ripples the lake by early afternoon.',
+    ],
+    sections: [
+      {
+        id: 'september-clarity',
+        heading: 'Zermatt weather in September',
+        paragraphs: [
+          'September clears on about 72% of days. Cooler nights shut down the afternoon thermals that wreck June and July, and the larch forests turn gold around the east face.',
+          'Hiking trails are still snow-free and Riffelsee is liquid, so this is the month for a Matterhorn reflection from Sunnegga or Rotenboden. Start at sunrise. A breeze often ripples the lake by early afternoon even when the summit stays clear.',
+          'Check the [live visibility score](/) the morning you go. The full year is in [Zermatt weather by month](/guides/best-time-to-see-matterhorn).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is Zermatt weather like in September?',
+        answer:
+          'Clear on about 72% of days. Nights are cool enough to stop the afternoon cumulus that covers the peak in midsummer, and the larches turn gold.',
+      },
+      {
+        question: 'Is Riffelsee liquid in September?',
+        answer:
+          'Yes. The reflection window runs from late June through late October. September is inside that window. Go at sunrise, before the breeze.',
+      },
+    ],
+  },
+  {
+    slug: 'zermatt-weather-may',
+    title: 'Zermatt Weather in May',
+    shortTitle: 'May Weather',
+    seoTitle: 'Zermatt Weather in May | Morning Views, Frozen Lakes',
+    description:
+      'May in Zermatt clears on 48–58% of mornings. Afternoon clouds build fast, and Riffelsee is still frozen.',
+    category: 'Climatology',
+    publishedAt: '2026-10-27',
+    updatedAt: '2026-10-27',
+    readingTimeMinutes: 3,
+    coverImage: {
+      src: '/guides/best-time-to-see-matterhorn.jpg',
+      alt: 'The Matterhorn above Zermatt in late spring',
+      caption: 'May is a morning-only month. The high lakes are still frozen.',
+    },
+    heroStat: {
+      label: 'Clear-sky chance',
+      value: '48–58%',
+      detail: 'Reliable only before midday',
+    },
+    keyTakeaways: [
+      'May sits in the late-spring range of 48–58% clear days.',
+      'The usable window is the morning. Melting snow feeds afternoon cumulus.',
+      'Riffelsee is still frozen. Leave the reflection for late June.',
+    ],
+    sections: [
+      {
+        id: 'may-clarity',
+        heading: 'Zermatt weather in May',
+        paragraphs: [
+          'May is a shoulder month. Clear-sky odds sit in the late-spring range of 48–58%, and the reliable window is the morning. Moisture from melting snow feeds cumulus by early afternoon.',
+          'Riffelsee is still frozen in May, so leave the reflection shot for late June. Use a clear morning for Gornergrat or the village bridge, and treat the afternoon as a valley day.',
+          'Check the [live visibility score](/) before you leave the hotel. The other months are in [Zermatt weather by month](/guides/best-time-to-see-matterhorn).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is Zermatt weather like in May?',
+        answer:
+          'A shoulder month. About half of days clear in the morning, then cumulus builds by early afternoon as snowmelt adds moisture.',
+      },
+      {
+        question: 'Can you photograph Riffelsee in May?',
+        answer:
+          'The lake is still frozen in May. Full liquid reflections start in late June. Use a clear May morning at Gornergrat or Kirchbrücke instead.',
+      },
+    ],
+  },
+  {
+    slug: 'glacier-express',
+    title: 'Glacier Express Price, Route & Seat Reservation',
+    shortTitle: 'Glacier Express',
+    seoTitle: 'Glacier Express Price, Route & Seat Reservation',
+    description:
+      'Glacier Express ticket prices, the mandatory seat reservation, the Zermatt to St. Moritz route, and how it differs from the Bernina Express.',
+    category: 'Day Trips',
+    publishedAt: '2026-10-27',
+    updatedAt: '2026-10-27',
+    readingTimeMinutes: 5,
+    coverImage: {
+      src: '/guides/glacier-express-panoramic-train.jpg',
+      alt: 'The Glacier Express panoramic train in the Alps',
+      caption: 'The Glacier Express runs Zermatt to St. Moritz. The seat reservation is separate from the ticket.',
+    },
+    heroStat: {
+      label: 'Seat reservation',
+      value: 'CHF 39–49',
+      detail: 'Mandatory, on top of the train ticket',
+    },
+    keyTakeaways: [
+      'A 2nd class one-way ticket is about CHF 159. 1st class is about CHF 272. Both still need a seat reservation.',
+      'The reservation is CHF 39 in the low season and CHF 49 in peak summer. It opens 93 days ahead.',
+      'Excellence Class adds CHF 470 to a 1st class ticket. There are 20 seats.',
+      'The Bernina Express is the same railway company in a different valley. It does not go to Zermatt.',
+    ],
+    sections: [
+      {
+        id: 'glacier-express-price',
+        heading: 'Glacier Express price',
+        paragraphs: [
+          'A standard adult one-way fare is CHF 159 in 2nd class or CHF 272 in 1st class, and that fare does not include the seat. The Swiss Travel Pass and Eurail cover the train ticket. They do not cover the reservation.',
+          'Excellence Class is a 1+1 panoramic car with 20 seats. The surcharge is CHF 470 on top of a 1st class ticket or pass, and the fare includes a champagne welcome and a five-course lunch. Seats often go on the morning reservations open.',
+        ],
+      },
+      {
+        id: 'seat-reservation',
+        heading: 'Seat reservation',
+        paragraphs: [
+          'Every Glacier Express passenger needs a seat reservation: CHF 39 in the low season and CHF 49 in peak summer. Children who travel free on a pass still pay it. Reservations open 93 days before departure.',
+          'The panoramic train pauses from roughly mid-October to mid-December. Regional Matterhorn Gotthard Bahn and RhB trains keep running the same tracks between Zermatt, Brig, Andermatt, and St. Moritz, without the Glacier Express reservation or the dining car.',
+        ],
+      },
+      {
+        id: 'route',
+        heading: 'Route from Zermatt to St. Moritz',
+        paragraphs: [
+          'The full run is about eight hours from Zermatt (1,604 m) to St. Moritz (1,775 m), over the Oberalp Pass at 2,033 m. Some services continue toward Davos. The famous stretches are the Rhine Gorge and the Landwasser Viaduct near Filisur.',
+          'From Zurich or Geneva you change at Visp onto the Matterhorn Gotthard Bahn for Zermatt, then board the Glacier Express there. Shorter hops that still need a reservation include Zermatt to Brig (about 1 hour 20 minutes) and Zermatt to Andermatt (about 3 hours 15 minutes).',
+        ],
+      },
+      {
+        id: 'bernina-express',
+        heading: 'Glacier Express or Bernina Express',
+        paragraphs: [
+          'Both trains are Rhaetian Railway / Matterhorn Gotthard Bahn panoramic services, and they are not substitutes. The Glacier Express crosses the Alps from Zermatt to St. Moritz. The Bernina Express runs from Chur or St. Moritz over the Bernina Pass to Tirano in Italy.',
+          'Ride the Glacier Express for the Matterhorn, the Oberalp Pass, and Zermatt. Ride the Bernina Express for the Bernina glaciers and the Italian descent. St. Moritz is the only place the two routes meet.',
+        ],
+      },
+      {
+        id: 'today',
+        heading: 'Is it worth boarding today?',
+        paragraphs: [
+          'The [trains page](/trains) shows whether the Glacier Express is on its seasonal schedule or in the autumn pause, plus the live Gornergrat score. A high score means the Matterhorn is clear at the Zermatt end. It does not change the Oberalp weather in the middle of the route.',
+          'The Gornergrat railway is a different train: a 33-minute cogwheel from Zermatt to 3,089 m, with no mandatory reservation. Compare the two on the [Gornergrat vs Glacier Express guide](/guides/gornergrat-railway-vs-glacier-express).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How much is the Glacier Express?',
+        answer:
+          'About CHF 159 one way in 2nd class or CHF 272 in 1st class, plus a mandatory seat reservation of CHF 39 or CHF 49. A Swiss Travel Pass covers the ticket and not the reservation.',
+      },
+      {
+        question: 'Do I need a Glacier Express seat reservation?',
+        answer:
+          'Yes. Boarding is refused without it. Book when reservations open, 93 days before travel. Excellence Class is CHF 470 extra and has 20 seats.',
+      },
+      {
+        question: 'What is the Glacier Express route?',
+        answer:
+          'Zermatt to St. Moritz in about eight hours, via Visp, Brig, Andermatt, and the Oberalp Pass, with some trains toward Davos. The Bernina Express is a separate line from St. Moritz to Tirano.',
+      },
+    ],
+  },
+  {
+    slug: 'hotels-with-matterhorn-view',
+    title: 'Hotels with a Matterhorn View',
+    shortTitle: 'Hotels with a View',
+    seoTitle: 'Hotels with a Matterhorn View | Which Rooms See the Peak',
+    description:
+      'Which Zermatt hotels actually see the Matterhorn east face, which sit by the reflection lakes, and which stay clear when valley cloud hides the village.',
+    category: 'Viewpoints',
+    publishedAt: '2026-10-27',
+    updatedAt: '2026-10-27',
+    readingTimeMinutes: 4,
+    coverImage: {
+      src: '/guides/best-matterhorn-photo-viewpoints.jpg',
+      alt: 'The Matterhorn east face above Zermatt',
+      caption: 'A Matterhorn view depends on which way the room faces, and how high the cloud base sits.',
+    },
+    heroStat: {
+      label: 'View that fails first',
+      value: 'Village',
+      detail: 'East-face rooms at 1,620 m drop out in valley cloud',
+    },
+    keyTakeaways: [
+      'Village rooms face the east face and lose the peak first when the cloud base drops.',
+      'Riffelalp is the hotel on the walk toward Riffelsee. Sunnegga is a day terrace, not a hotel night.',
+      'Riffelhaus and the Kulmhotel Gornergrat sit above the valley fog that hides the village.',
+    ],
+    sections: [
+      {
+        id: 'village-east-face',
+        heading: 'Village east face',
+        paragraphs: [
+          'Rooms in the village look up the valley at the east face. The Omnia sits on the hillside above the church, and Mont Cervin Palace faces the peak from the village floor. Both are a walk from Kirchbrücke, the free viewpoint.',
+          'This is the view that dies first. A cloud deck around 2,000–2,500 m can hide the summit from the village while Gornergrat, at 3,089 m, is still clear. Check the [live score](/) and the [village viewpoint](/viewpoints/zermatt-village) before you treat a “Matterhorn view” room as guaranteed.',
+        ],
+      },
+      {
+        id: 'riffelsee-and-sunnegga',
+        heading: 'Sunnegga and Riffelsee',
+        paragraphs: [
+          'The reflection is the east face in Riffelsee, a five-minute walk down from Rotenboden, and in Stellisee above Sunnegga. Sunnegga itself is a funicular terrace for the day. There is no hotel on the lake shore.',
+          'Riffelalp Resort 2222 is the lodging on that walk. It sits on the Gornergrat railway, below Rotenboden, with the east face in front of the hotel. The water only mirrors the peak from late June through October, and only while the wind stays under about 12 km/h. The [Riffelsee page](/viewpoints/riffelsee) is the daily check. [Sunnegga](/viewpoints/sunnegga) is the lower terrace and the start of the lakes walk.',
+        ],
+      },
+      {
+        id: 'gornergrat-side',
+        heading: 'Gornergrat side',
+        paragraphs: [
+          'Two hotels sit on the ridge above the fog that fills Zermatt. Riffelhaus 1853 is at Riffelberg, 2,582 m, one stop below Rotenboden. Kulmhotel Gornergrat is at the summit station, 3,089 m, beside the viewpoint.',
+          'These rooms keep the east face when the village is in cloud, and they lose it when the summit itself is capped. The [Gornergrat page](/viewpoints/gornergrat) is the score for that elevation. Neither hotel is a reason to skip the webcam check.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Which hotels have a Matterhorn view?',
+        answer:
+          'In the village, The Omnia and Mont Cervin Palace face the east face. On the railway, Riffelalp Resort 2222 faces the same peak closer to Riffelsee. Riffelhaus 1853 and Kulmhotel Gornergrat are above the valley fog.',
+      },
+      {
+        question: 'Which Matterhorn view disappears first in cloud?',
+        answer:
+          'The village. A cloud base near 2,000 m hides the peak from Kirchbrücke while the Gornergrat hotels are still above it. When the score at 3,089 m drops, every view fails together.',
       },
     ],
   },

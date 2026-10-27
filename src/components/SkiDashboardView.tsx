@@ -148,131 +148,17 @@ export default function SkiDashboardView({
           </p>
         </header>
 
-        {/* HERO ALERT: Can I Ski to Italy Today? (Solid High-Contrast Swiss Panel) */}
-        <section
-          aria-labelledby="border-link-heading"
-          className={`rounded-2xl border p-6 sm:p-8 transition-colors shadow-2xs ${
-            borderStatus.status === 'OPEN'
-              ? 'bg-white dark:bg-slate-900 border-emerald-500 dark:border-emerald-500/80'
-              : borderStatus.status === 'STANDBY'
-              ? 'bg-white dark:bg-slate-900 border-amber-500 dark:border-amber-500/80'
-              : 'bg-white dark:bg-slate-900 border-rose-500 dark:border-rose-500/80'
-          }`}
-        >
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
-            <div className="space-y-3.5 max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold tracking-wide uppercase ${
-                    borderStatus.status === 'OPEN'
-                      ? 'bg-emerald-600 text-white'
-                      : borderStatus.status === 'STANDBY'
-                      ? 'bg-amber-500 text-slate-950'
-                      : 'bg-rose-600 text-white'
-                  }`}
-                >
-                  {borderStatus.status === 'OPEN' && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
-                  {borderStatus.status === 'STANDBY' && <AlertTriangle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
-                  {borderStatus.status === 'CLOSED' && <XCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
-                  <span>{borderStatus.status}: Switzerland ↔ Italy Border Link</span>
-                </span>
 
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                  Plateau Rosa & Testa Grigia (3,480 m)
-                </span>
-              </div>
-
-              <h2 id="border-link-heading" className="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">
-                {borderStatus.title}
-              </h2>
-
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                {borderStatus.reason}
-              </p>
-            </div>
-
-            {/* Solid Telemetry Indicator Blocks */}
-            <div className="grid grid-cols-2 gap-3 sm:w-80 shrink-0">
-              <div className="bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
-                <span className="flex items-center justify-center gap-1.5 text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
-                  <Wind className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                  <span>Crest Wind</span>
-                </span>
-                <p className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1.5">
-                  {borderStatus.plateauRosaWindKmh} <span className="text-xs font-sans font-normal text-slate-500">km/h</span>
-                </p>
-                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block mt-0.5">
-                  Safety limit: 55 km/h
-                </span>
-              </div>
-
-              <div className="bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
-                <span className="flex items-center justify-center gap-1.5 text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
-                  <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" aria-hidden="true" />
-                  <span>Last Return</span>
-                </span>
-                <p className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1.5">
-                  {borderStatus.lastLiftReturnTime.split(' ')[0]}
-                </p>
-                <span className="text-[10px] font-mono text-rose-600 dark:text-rose-400 font-medium block mt-0.5">
-                  Do not miss lift
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-600 dark:text-slate-400 gap-3">
-            <div className="flex items-center gap-2">
-              <Info className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>International ski pass or 55 CHF Cervinia daily supplement required before boarding Italian lifts.</span>
-            </div>
-
-            <Link
-              href="#pass-calculator"
-              className="font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded"
-            >
-              <span>Calculate international pass price</span>
-              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-            </Link>
-          </div>
-        </section>
-
-        <section aria-labelledby="cervinia-ski-heading" className="space-y-4">
-          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-            <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-              Italy side of the ski area
-            </span>
-            <h2 id="cervinia-ski-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              Ski Cervinia, Webcam & Meteo
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Meteo Cervinia</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                The Italy side closes with the same crest wind as the Swiss border. Plateau Rosa is at {borderStatus.plateauRosaWindKmh} km/h right now, against a 55 km/h safety limit. The link above is {borderStatus.status}.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Skipass Cervinia Zermatt</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                Board Italian lifts with an international ski pass, or add the 55 CHF Cervinia day supplement to a Swiss pass. The calculator below prices the cross-border option.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Cervinia webcam</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                This page does not embed an Italian camera. The Trockener Steg webcam at 2,939 m is the Swiss view toward the glacier and the Italy link.
-              </p>
-              <a
-                href="#ski-webcams"
-                className="inline-flex items-center gap-1 mt-3 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
-              >
-                Open the Trockener Steg webcam
-                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
+        <section aria-labelledby="ski-season-heading" className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 sm:p-6 shadow-2xs space-y-3">
+          <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold">
+            Zermatt Bergbahnen
+          </span>
+          <h2 id="ski-season-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
+            Zermatt ski season
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+            Zermatt Bergbahnen run the lifts. Glacier skiing on the Theodul, up to 3,883 m at Matterhorn Glacier Paradise, runs year-round. The village slopes are the winter season. Early December and late May still ski on the glacier when the lower mountain is thin.
+          </p>
         </section>
 
         {/* MULTI-ALTITUDE SNOW INTELLIGENCE (Consistent with Site's Metrics Grid) */}
@@ -345,24 +231,6 @@ export default function SkiDashboardView({
               </div>
             ))}
           </div>
-        </section>
-
-        {/* LIVE SKI WEBCAMS EMBED (Connecting Live Telemetry directly to Visual Inspection) */}
-        <section id="ski-webcams" aria-labelledby="ski-webcams-heading" className="space-y-4">
-          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-            <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-              Live Visual Telemetry
-            </span>
-            <h2 id="ski-webcams-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              Slope & Summit Webcams
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Real-time 360° Roundshot panoramic feeds from Rothorn, Gornergrat, and Trockener Steg glacier approach.
-            </p>
-          </div>
-
-          {/* Integrated LiveWebcam component */}
-          <LiveWebcam defaultCamId="trockener-steg" />
         </section>
 
         {/* 4 MOUNTAIN SECTORS (Structured 360 km Explorer) */}
@@ -492,6 +360,151 @@ export default function SkiDashboardView({
               </div>
             </div>
           </div>
+        </section>
+
+        {/* HERO ALERT: Can I Ski to Italy Today? (Solid High-Contrast Swiss Panel) */}
+        <section
+          aria-labelledby="border-link-heading"
+          className={`rounded-2xl border p-6 sm:p-8 transition-colors shadow-2xs ${
+            borderStatus.status === 'OPEN'
+              ? 'bg-white dark:bg-slate-900 border-emerald-500 dark:border-emerald-500/80'
+              : borderStatus.status === 'STANDBY'
+              ? 'bg-white dark:bg-slate-900 border-amber-500 dark:border-amber-500/80'
+              : 'bg-white dark:bg-slate-900 border-rose-500 dark:border-rose-500/80'
+          }`}
+        >
+          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+            <div className="space-y-3.5 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold tracking-wide uppercase ${
+                    borderStatus.status === 'OPEN'
+                      ? 'bg-emerald-600 text-white'
+                      : borderStatus.status === 'STANDBY'
+                      ? 'bg-amber-500 text-slate-950'
+                      : 'bg-rose-600 text-white'
+                  }`}
+                >
+                  {borderStatus.status === 'OPEN' && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
+                  {borderStatus.status === 'STANDBY' && <AlertTriangle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
+                  {borderStatus.status === 'CLOSED' && <XCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
+                  <span>{borderStatus.status}: Switzerland ↔ Italy Border Link</span>
+                </span>
+
+                <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                  Plateau Rosa & Testa Grigia (3,480 m)
+                </span>
+              </div>
+
+              <h2 id="border-link-heading" className="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">
+                {borderStatus.title}
+              </h2>
+
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {borderStatus.reason}
+              </p>
+            </div>
+
+            {/* Solid Telemetry Indicator Blocks */}
+            <div className="grid grid-cols-2 gap-3 sm:w-80 shrink-0">
+              <div className="bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                <span className="flex items-center justify-center gap-1.5 text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
+                  <Wind className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+                  <span>Crest Wind</span>
+                </span>
+                <p className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1.5">
+                  {borderStatus.plateauRosaWindKmh} <span className="text-xs font-sans font-normal text-slate-500">km/h</span>
+                </p>
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block mt-0.5">
+                  Safety limit: 55 km/h
+                </span>
+              </div>
+
+              <div className="bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                <span className="flex items-center justify-center gap-1.5 text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
+                  <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+                  <span>Last Return</span>
+                </span>
+                <p className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1.5">
+                  {borderStatus.lastLiftReturnTime.split(' ')[0]}
+                </p>
+                <span className="text-[10px] font-mono text-rose-600 dark:text-rose-400 font-medium block mt-0.5">
+                  Do not miss lift
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-600 dark:text-slate-400 gap-3">
+            <div className="flex items-center gap-2">
+              <Info className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+              <span>International ski pass or 55 CHF Cervinia daily supplement required before boarding Italian lifts.</span>
+            </div>
+
+            <Link
+              href="#pass-calculator"
+              className="font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded"
+            >
+              <span>Calculate international pass price</span>
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+
+        <section aria-labelledby="cervinia-ski-heading" className="space-y-4">
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
+              Italy side of the ski area
+            </span>
+            <h2 id="cervinia-ski-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
+              Ski Cervinia, Webcam & Meteo
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Meteo Cervinia</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                The Italy side closes with the same crest wind as the Swiss border. Plateau Rosa is at {borderStatus.plateauRosaWindKmh} km/h right now, against a 55 km/h safety limit. The link above is {borderStatus.status}.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Skipass Cervinia Zermatt</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                Board Italian lifts with an international ski pass, or add the 55 CHF Cervinia day supplement to a Swiss pass. The calculator below prices the cross-border option.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Cervinia webcam</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                This page does not embed an Italian camera. The Trockener Steg webcam at 2,939 m is the Swiss view toward the glacier and the Italy link.
+              </p>
+              <a
+                href="#ski-webcams"
+                className="inline-flex items-center gap-1 mt-3 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
+              >
+                Open the Trockener Steg webcam
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* LIVE SKI WEBCAMS EMBED (Connecting Live Telemetry directly to Visual Inspection) */}
+        <section id="ski-webcams" aria-labelledby="ski-webcams-heading" className="space-y-4">
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
+              Live Visual Telemetry
+            </span>
+            <h2 id="ski-webcams-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
+              Slope & Summit Webcams
+            </h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+              Real-time 360° Roundshot panoramic feeds from Rothorn, Gornergrat, and Trockener Steg glacier approach.
+            </p>
+          </div>
+
+          {/* Integrated LiveWebcam component */}
+          <LiveWebcam defaultCamId="trockener-steg" />
         </section>
 
         {/* 2026 SKI PASS & IKON PASS CALCULATOR (Matches ScenicTrainsCard & Ticket Styles) */}
@@ -668,6 +681,32 @@ export default function SkiDashboardView({
                   <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section aria-labelledby="chamonix-heading" className="space-y-4">
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
+              Two resorts
+            </span>
+            <h2 id="chamonix-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
+              Zermatt or Chamonix
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Zermatt and Cervinia</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                This is one ski area. The link to Italy is the Plateau Rosa border above Trockener Steg. An international pass, or the 55 CHF Cervinia day supplement on a Swiss pass, is what lets you ski across.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">Chamonix is a different resort</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                Chamonix sits under Mont Blanc, in France. Zermatt and Chamonix do not share a piste. Getting from one to the other is a travel day, not a lift ride. Cervinia remains the only ski link out of Zermatt.
+              </p>
             </div>
           </div>
         </section>

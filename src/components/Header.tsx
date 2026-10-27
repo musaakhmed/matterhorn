@@ -102,9 +102,16 @@ export default function Header({
       badgeKey: 'glacier' as const,
     },
     {
-      slug: 'sunnegga-riffelsee',
-      title: dict.navigation.sunneggaTitle,
+      slug: 'sunnegga',
+      title: 'Sunnegga',
       elevation: dict.navigation.sunneggaElevation,
+      aspect: 'Funicular & east face',
+      badgeKey: null,
+    },
+    {
+      slug: 'riffelsee',
+      title: 'Riffelsee',
+      elevation: '2,757 m',
       aspect: dict.navigation.sunneggaAspect,
       badgeKey: null,
     },

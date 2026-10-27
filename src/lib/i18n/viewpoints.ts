@@ -48,7 +48,13 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         'Ganzjähriges Skigebiet und Gletscherpalast tief im Inneren des Eises.',
       ],
     },
-    'sunnegga-riffelsee': {
+    sunnegga: {
+      name: 'Sunnegga',
+      shortName: 'Sunnegga',
+      title: 'Sunnegga Standseilbahn & Matterhorn-Ostwand',
+      description: 'Die Standseilbahn nach Sunnegga (2.288 m), die Ostwand, der Stellisee und wann der Weg besser ist als der Riffelsee.',
+    },
+    'riffelsee': {
       name: 'Sunnegga & Riffelsee Bergsee-Spiegelungen',
       shortName: 'See-Spiegelungen',
       title: 'Welcher Berg spiegelt sich im Riffelsee?',
@@ -117,10 +123,16 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         'Domaine skiable ouvert 365 jours par an et palais de glace féerique sous le glacier.',
       ],
     },
-    'sunnegga-riffelsee': {
+    sunnegga: {
+      name: 'Sunnegga',
+      shortName: 'Sunnegga',
+      title: 'Funiculaire de Sunnegga et face est du Cervin',
+      description: 'Le funiculaire de Sunnegga (2 288 m), la face est, le Stellisee, et quand cette terrasse vaut mieux que le Riffelsee.',
+    },
+    'riffelsee': {
       name: 'Reflets lacustres de Sunnegga et Riffelsee',
       shortName: 'Reflets dans les lacs',
-      title: 'Quelle montagne se reflète dans le Riffelsee ? | Sunnegga',
+      title: 'Quelle montagne se reflète dans le Riffelsee ?',
       description: 'Mesure du vent en direct et clarté de l’eau pour réussir la légendaire photo du Cervin se reflétant dans le Riffelsee et le Stellisee.',
       aspectLabel: 'Reflet de la face Est (Lumière dorée du lever de soleil)',
       transportSummary: 'Train du Gornergrat jusqu’à Rotenboden ou funiculaire souterrain vers Sunnegga',
@@ -179,10 +191,16 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         'Accesso al palazzo di ghiaccio scavato nelle profondità del ghiacciaio perenne.',
       ],
     },
-    'sunnegga-riffelsee': {
+    sunnegga: {
+      name: 'Sunnegga',
+      shortName: 'Sunnegga',
+      title: 'Funicolare Sunnegga e parete est del Cervino',
+      description: 'La funicolare di Sunnegga (2.288 m), la parete est, lo Stellisee, e quando conviene rispetto al Riffelsee.',
+    },
+    'riffelsee': {
       name: 'Riflessi lacustri di Sunnegga e Riffelsee',
       shortName: 'Riflessi nei laghi',
-      title: 'Quale montagna si riflette nel Riffelsee? | Sunnegga',
+      title: 'Quale montagna si riflette nel Riffelsee?',
       description: 'Misurazione istantanea del vento e quiete delle acque per catturare il celebre riflesso del Cervino nel lago Riffelsee e Stellisee.',
       aspectLabel: 'Riflesso parete Est (Suggestiva luce dorata all’alba)',
       transportSummary: 'Treno Gornergrat fino a Rotenboden oppure funicolare sotterranea verso Sunnegga',
@@ -241,7 +259,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         'Palacio de hielo tallado en el interior del glaciar y esquí abierto los 365 días del año.',
       ],
     },
-    'sunnegga-riffelsee': {
+    'riffelsee': {
       name: 'Reflejos en los lagos de Sunnegga y Riffelsee',
       shortName: 'Reflejos en lagos',
       title: 'Riffelsee y Sunnegga: Condiciones en vivo del reflejo del Matterhorn en el agua',
@@ -303,7 +321,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         '拥有全年开放的冰雪乐园以及深入冰川地下的冰宫殿。',
       ],
     },
-    'sunnegga-riffelsee': {
+    'riffelsee': {
       name: '苏内加与利菲尔湖高山倒影',
       shortName: '湖面倒影',
       title: '利菲尔湖与苏内加：拍摄马特洪峰湖面倒影实时风力与水况诊断',
@@ -350,7 +368,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         '全年皆可滑雪，並可參觀深入冰川內部深處的冰宮殿。',
       ],
     },
-    'sunnegga-riffelsee': {
+    'riffelsee': {
       name: '蘇內加與利菲爾湖高山倒影',
       shortName: '湖面倒影',
       title: '利菲尔湖與蘇內加：拍攝馬特洪峰湖水鏡面倒影即時風速與水況監測',
@@ -397,7 +415,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         '年間を通してスキーが可能で、氷河の地下深くを歩ける氷の宮殿があります。',
       ],
     },
-    'sunnegga-riffelsee': {
+    'riffelsee': {
       name: 'スネガ＆リッフェル湖の逆さマッターホルン',
       shortName: '湖の逆さ富士',
       title: 'リッフェル湖＆スネガ：逆さマッターホルン湖面反射のリアルタイム風速診断',
@@ -444,7 +462,7 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
         '365일 연중 스키가 가능하며 빙하 깊숙이 들어가는 얼음 궁전이 있습니다.',
       ],
     },
-    'sunnegga-riffelsee': {
+    'riffelsee': {
       name: '수네가 & 리펠제 호수 반영',
       shortName: '호수 반영 뷰',
       title: '리펠제 & 수네가: 마터호른 거울 반영 촬영을 위한 실시간 바람 및 수면 진단',

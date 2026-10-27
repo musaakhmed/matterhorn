@@ -40,7 +40,9 @@ function ViewpointIcon({ slug }: { slug: ViewpointPageSlug }) {
       return <TrainFront className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
     case 'glacier-paradise':
       return <CableCar className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
-    case 'sunnegga-riffelsee':
+    case 'sunnegga':
+      return <Compass className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
+    case 'riffelsee':
       return <Waves className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
     case 'zermatt-village':
       return <MapPin className="w-5 h-5 text-sky-600 dark:text-sky-400" aria-hidden="true" />;
@@ -119,7 +121,7 @@ export default async function ViewpointsIndexView({
           {VIEWPOINT_PAGES.map((rawVp) => {
             const vp = getLocalizedViewpointPage(rawVp.slug, locale);
             const forecast = getLiveForecastForViewpointPage(rawVp, telemetry);
-            const isLakePage = vp.slug === 'sunnegga-riffelsee';
+            const isLakePage = vp.slug === 'riffelsee';
 
             return (
               <article

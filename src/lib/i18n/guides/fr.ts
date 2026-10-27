@@ -167,7 +167,7 @@ export const frGuides: Record<string, GuideTranslation> = {
         heading: 'Météo de Zermatt en décembre',
         paragraphs: [
           'Décembre est le mois le plus clair sur 30 ans, avec 89 % de chances de voir le sommet du Cervin un jour donné. L’air froid et stable ne forme presque pas de cumulus l’après-midi.',
-          'Le village est sous la neige et les lacs sont gelés : c’est un mois pour regarder et skier, pas pour les reflets. Pour la semaine de Noël, voir le [guide de Noël à Zermatt](/guides/christmas-in-zermatt-matterhorn).',
+          'Le village est sous la neige et les lacs sont gelés : c’est un mois pour regarder et skier, pas pour les reflets. Pour la semaine de Noël, voir le [guide de Noël à Zermatt](/guides/christmas-in-zermatt-matterhorn). La page du mois est [Météo de Zermatt en décembre](/guides/zermatt-weather-december).',
         ],
       },
       {
@@ -175,7 +175,7 @@ export const frGuides: Record<string, GuideTranslation> = {
         heading: 'Météo de Zermatt en septembre',
         paragraphs: [
           'Septembre est clair environ 72 % des jours. Les nuits plus fraîches coupent les thermiques de l’après-midi qui gâchent juin et juillet, et les mélèzes dorent autour de la face est.',
-          'Les sentiers sont encore sans neige et le Riffelsee est liquide. C’est le mois du reflet du Cervin depuis Sunnegga ou Rotenboden. Partez au lever du soleil.',
+          'Les sentiers sont encore sans neige et le Riffelsee est liquide. C’est le mois du reflet du Cervin depuis Sunnegga ou Rotenboden. Partez au lever du soleil. La page du mois est [Météo de Zermatt en septembre](/guides/zermatt-weather-september).',
         ],
       },
       {
@@ -183,7 +183,7 @@ export const frGuides: Record<string, GuideTranslation> = {
         heading: 'Météo de Zermatt en mai',
         paragraphs: [
           'Mai est un mois de transition. La probabilité de ciel clair reste dans la fourchette de fin de printemps, 48–58 %, et la seule fenêtre fiable est le matin. L’humidité de la fonte nourrit les cumulus dès le début d’après-midi.',
-          'Le Riffelsee est encore gelé en mai. Gardez la photo miroir pour fin juin. Un matin clair sert au Gornergrat ou au pont du village ; l’après-midi se passe dans la vallée.',
+          'Le Riffelsee est encore gelé en mai. Gardez la photo miroir pour fin juin. Un matin clair sert au Gornergrat ou au pont du village ; l’après-midi se passe dans la vallée. La page du mois est [Météo de Zermatt en mai](/guides/zermatt-weather-may).',
         ],
       },
       {
@@ -632,6 +632,222 @@ export const frGuides: Record<string, GuideTranslation> = {
       {
         question: 'Quelle est la hauteur du Cervin ?',
         answer: '4 478 mètres (14 692 pieds).',
+      },
+    ],
+  },
+  'zermatt-weather-december': {
+    title: 'Météo de Zermatt en décembre',
+    shortTitle: 'Météo de décembre',
+    description: 'Décembre est le mois le plus clair à Zermatt, avec 89 % de chances de voir le Cervin. Neige, lacs gelés et contrôle du jour.',
+    category: 'Climatologie',
+    heroStat: { label: 'Jours clairs', value: '89 %', detail: 'Mois le plus clair sur 30 ans' },
+    keyTakeaways: [
+      'Le sommet est dégagé 89 % des jours de décembre. Matin et après-midi restent ouverts.',
+      'Le village est sous la neige et le Riffelsee est gelé.',
+      'Vérifiez le score en direct avant un billet Gornergrat ou ski.',
+    ],
+    sections: [
+      {
+        id: 'december-clarity',
+        heading: 'Météo de Zermatt en décembre',
+        paragraphs: [
+          'Décembre est le mois le plus clair sur 30 ans, avec 89 % de chances de voir le sommet un jour donné. L’air froid et stable ne forme presque pas de cumulus l’après-midi.',
+          'Le village est sous la neige et les lacs sont gelés : un mois pour regarder et skier, pas pour les reflets. Pour Noël, voir le [guide de Noël à Zermatt](/guides/christmas-in-zermatt-matterhorn).',
+          'Le [score en direct](/) vaut pour aujourd’hui. L’année est dans [la météo de Zermatt par mois](/guides/best-time-to-see-matterhorn).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Quel temps fait-il à Zermatt en décembre ?',
+        answer: 'Froid et exceptionnellement clair. Le Cervin est visible environ 89 % des jours, y compris l’après-midi.',
+      },
+      {
+        question: 'Le Riffelsee reflète-t-il le Cervin en décembre ?',
+        answer: 'Non. Le lac est gelé et sous la neige de novembre à début juin.',
+      },
+    ],
+  },
+  'zermatt-weather-september': {
+    title: 'Météo de Zermatt en septembre',
+    shortTitle: 'Météo de septembre',
+    description: 'En septembre le sommet est clair environ 72 % des jours. Les sentiers sont ouverts et le Riffelsee est liquide.',
+    category: 'Climatologie',
+    heroStat: { label: 'Jours clairs', value: '72 %', detail: 'Nuits fraîches, mélèzes dorés, lacs ouverts' },
+    keyTakeaways: [
+      'Environ 72 % des jours de septembre sont clairs.',
+      'Les sentiers sont sans neige et le Riffelsee peut refléter la face est.',
+      'Partez au lever du soleil. Le vent ride souvent le lac en début d’après-midi.',
+    ],
+    sections: [
+      {
+        id: 'september-clarity',
+        heading: 'Météo de Zermatt en septembre',
+        paragraphs: [
+          'Septembre est clair environ 72 % des jours. Les nuits plus fraîches coupent les thermiques de juin et juillet, et les mélèzes dorent autour de la face est.',
+          'Les sentiers sont encore sans neige et le Riffelsee est liquide. C’est le mois du reflet depuis Sunnegga ou Rotenboden. Partez au lever du soleil.',
+          'Contrôlez le [score en direct](/) le matin. L’année est dans [la météo de Zermatt par mois](/guides/best-time-to-see-matterhorn).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Quel temps fait-il à Zermatt en septembre ?',
+        answer: 'Clair environ 72 % des jours. Les nuits sont assez fraîches pour calmer les cumulus du plein été.',
+      },
+      {
+        question: 'Le Riffelsee est-il liquide en septembre ?',
+        answer: 'Oui. La fenêtre de reflet va de fin juin à fin octobre. Septembre est dedans. Partez à l’aube.',
+      },
+    ],
+  },
+  'zermatt-weather-may': {
+    title: 'Météo de Zermatt en mai',
+    shortTitle: 'Météo de mai',
+    description: 'En mai, Zermatt est clair 48 à 58 % des matins. Les nuages montent l’après-midi et le Riffelsee est encore gelé.',
+    category: 'Climatologie',
+    heroStat: { label: 'Jours clairs', value: '48–58 %', detail: 'Fiable seulement avant midi' },
+    keyTakeaways: [
+      'Mai reste dans la fourchette de 48–58 % de jours clairs.',
+      'La fenêtre utile est le matin. La fonte nourrit les cumulus.',
+      'Le Riffelsee est encore gelé. Le reflet attend fin juin.',
+    ],
+    sections: [
+      {
+        id: 'may-clarity',
+        heading: 'Météo de Zermatt en mai',
+        paragraphs: [
+          'Mai est un mois de transition. La probabilité de ciel clair est de 48–58 %, et la seule fenêtre fiable est le matin. L’humidité de la fonte nourrit les cumulus dès le début d’après-midi.',
+          'Le Riffelsee est encore gelé. Un matin clair sert au Gornergrat ou au pont du village ; l’après-midi se passe dans la vallée.',
+          'Vérifiez le [score en direct](/) avant de partir. Les autres mois sont dans [la météo de Zermatt par mois](/guides/best-time-to-see-matterhorn).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Quel temps fait-il à Zermatt en mai ?',
+        answer: 'Un mois charnière. Environ la moitié des jours sont clairs le matin, puis les cumulus montent en début d’après-midi.',
+      },
+      {
+        question: 'Peut-on photographier le Riffelsee en mai ?',
+        answer: 'Le lac est encore gelé en mai. Les reflets liquides commencent fin juin.',
+      },
+    ],
+  },
+  'glacier-express': {
+    title: 'Prix, trajet et réservation du Glacier Express',
+    shortTitle: 'Glacier Express',
+    description: 'Prix des billets, réservation obligatoire, trajet Zermatt–Saint-Moritz, et différence avec le Bernina Express.',
+    category: 'Excursions',
+    heroStat: { label: 'Réservation', value: 'CHF 39–49', detail: 'Obligatoire, en plus du billet' },
+    keyTakeaways: [
+      'Aller simple : environ CHF 159 en 2e classe, CHF 272 en 1re. La réservation s’ajoute.',
+      'La réservation coûte CHF 39 hors saison et CHF 49 en plein été. Elle ouvre 93 jours avant.',
+      'L’Excellence Class ajoute CHF 470 à un billet de 1re. Il y a 20 places.',
+      'Le Bernina Express est la même famille ferroviaire dans une autre vallée. Il ne va pas à Zermatt.',
+    ],
+    sections: [
+      {
+        id: 'glacier-express-price',
+        heading: 'Prix du Glacier Express',
+        paragraphs: [
+          'Un aller adulte coûte environ CHF 159 en 2e classe ou CHF 272 en 1re, sans le siège. Le Swiss Travel Pass et Eurail couvrent le billet, pas la réservation.',
+          'L’Excellence Class est une voiture panoramique de 20 places en 1+1. Le supplément est de CHF 470 sur un billet de 1re et comprend un accueil et un déjeuner en cinq services.',
+        ],
+      },
+      {
+        id: 'seat-reservation',
+        heading: 'Réservation de siège',
+        paragraphs: [
+          'Chaque passager a besoin d’une réservation : CHF 39 hors saison, CHF 49 en plein été. Les enfants qui voyagent gratuitement la paient aussi. Les places ouvrent 93 jours avant le départ.',
+          'Le train panoramique s’arrête environ de mi-octobre à mi-décembre. Les trains régionaux du Matterhorn Gotthard Bahn et des RhB continuent sur les mêmes voies, sans réservation Glacier Express ni wagon-restaurant.',
+        ],
+      },
+      {
+        id: 'route',
+        heading: 'Trajet de Zermatt à Saint-Moritz',
+        paragraphs: [
+          'Le parcours complet dure environ huit heures, de Zermatt (1 604 m) à Saint-Moritz (1 775 m), par le col de l’Oberalp à 2 033 m. Certains trains continuent vers Davos. Les gorges du Rhin et le viaduc de Landwasser à Filisur sont les passages connus.',
+          'Depuis Zurich ou Genève, on change à Viège pour le Matterhorn Gotthard Bahn jusqu’à Zermatt, puis on monte dans le Glacier Express. Les tronçons plus courts, Zermatt–Brigue ou Zermatt–Andermatt, exigent aussi une réservation.',
+        ],
+      },
+      {
+        id: 'bernina-express',
+        heading: 'Glacier Express ou Bernina Express',
+        paragraphs: [
+          'Les deux sont des trains panoramiques des RhB et du Matterhorn Gotthard Bahn, et ils ne se remplacent pas. Le Glacier Express traverse les Alpes de Zermatt à Saint-Moritz. Le Bernina Express va de Coire ou Saint-Moritz au col de la Bernina, puis à Tirano en Italie.',
+          'Prenez le Glacier Express pour le Cervin, l’Oberalp et Zermatt. Prenez le Bernina Express pour les glaciers de la Bernina et la descente vers l’Italie. Saint-Moritz est le seul point commun.',
+        ],
+      },
+      {
+        id: 'today',
+        heading: 'Faut-il monter aujourd’hui ?',
+        paragraphs: [
+          'La [page des trains](/trains) indique si le Glacier Express suit son horaire de saison ou s’il est en pause d’automne, plus le score du Gornergrat. Un score élevé veut dire un Cervin dégagé à Zermatt. Il ne décrit pas le temps à l’Oberalp.',
+          'Le Gornergrat est un autre train : 33 minutes de crémaillère jusqu’à 3 089 m, sans réservation obligatoire. La comparaison est dans le [guide Gornergrat contre Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Combien coûte le Glacier Express ?',
+        answer: 'Environ CHF 159 l’aller en 2e classe ou CHF 272 en 1re, plus une réservation obligatoire de CHF 39 ou CHF 49. Le Swiss Travel Pass couvre le billet, pas la réservation.',
+      },
+      {
+        question: 'Faut-il réserver un siège ?',
+        answer: 'Oui. L’accès est refusé sans réservation. Réservez à l’ouverture, 93 jours avant. L’Excellence Class coûte CHF 470 de plus et compte 20 places.',
+      },
+      {
+        question: 'Quel est le trajet du Glacier Express ?',
+        answer: 'Zermatt–Saint-Moritz en huit heures environ, via Viège, Brigue, Andermatt et l’Oberalp, certains trains vers Davos. Le Bernina Express est une autre ligne, de Saint-Moritz à Tirano.',
+      },
+    ],
+  },
+  'hotels-with-matterhorn-view': {
+    title: 'Hôtels avec vue sur le Cervin',
+    shortTitle: 'Hôtels avec vue',
+    description: 'Quelles chambres voient la face est, lesquelles sont sur le chemin du reflet, et lesquelles restent au-dessus du brouillard de vallée.',
+    category: 'Points de vue',
+    heroStat: { label: 'Vue qui lâche d’abord', value: 'Village', detail: 'Les chambres à 1 620 m perdent le sommet dans le brouillard' },
+    keyTakeaways: [
+      'Les chambres du village voient la face est et perdent le sommet en premier quand la base des nuages descend.',
+      'Le Riffelalp Resort est sur le chemin du Riffelsee. Sunnegga est une terrasse de jour, pas un hôtel.',
+      'Le Riffelhaus et le Kulmhotel Gornergrat restent au-dessus du brouillard qui cache le village.',
+    ],
+    sections: [
+      {
+        id: 'village-east-face',
+        heading: 'Face est depuis le village',
+        paragraphs: [
+          'Les chambres du village regardent la face est. The Omnia est sur la colline au-dessus de l’église, et le Mont Cervin Palace fait face au sommet depuis le village. Les deux sont à pied du Kirchbrücke.',
+          'C’est la vue qui disparaît en premier. Un plafond vers 2 000–2 500 m cache le sommet au village alors que le Gornergrat, à 3 089 m, est encore dégagé. Vérifiez le [score en direct](/) et le [point de vue du village](/viewpoints/zermatt-village).',
+        ],
+      },
+      {
+        id: 'riffelsee-and-sunnegga',
+        heading: 'Sunnegga et Riffelsee',
+        paragraphs: [
+          'Le reflet est la face est dans le Riffelsee, à cinq minutes sous Rotenboden, et dans le Stellisee au-dessus de Sunnegga. Sunnegga est une terrasse de funiculaire pour la journée. Il n’y a pas d’hôtel au bord du lac.',
+          'Le Riffelalp Resort 2222 est l’hôtel de ce chemin, sur le train du Gornergrat, sous Rotenboden, avec la face est devant l’établissement. L’eau ne reflète que de fin juin à octobre, et seulement si le vent reste sous environ 12 km/h. Le contrôle du jour est la [page Riffelsee](/viewpoints/riffelsee). [Sunnegga](/viewpoints/sunnegga) est la terrasse basse.',
+        ],
+      },
+      {
+        id: 'gornergrat-side',
+        heading: 'Côté Gornergrat',
+        paragraphs: [
+          'Deux hôtels sont au-dessus du brouillard qui remplit Zermatt. Le Riffelhaus 1853 est à Riffelberg, 2 582 m, un arrêt sous Rotenboden. Le Kulmhotel Gornergrat est à la gare sommitale, 3 089 m.',
+          'Ces chambres gardent la face est quand le village est dans les nuages, et la perdent quand le sommet lui-même est coiffé. Le score de cette altitude est sur la [page Gornergrat](/viewpoints/gornergrat).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Quels hôtels ont une vue sur le Cervin ?',
+        answer: 'Au village, The Omnia et le Mont Cervin Palace font face à la face est. Sur la ligne, le Riffelalp Resort 2222 voit le même sommet plus près du Riffelsee. Le Riffelhaus 1853 et le Kulmhotel Gornergrat sont au-dessus du brouillard.',
+      },
+      {
+        question: 'Quelle vue disparaît en premier ?',
+        answer: 'Celle du village. Une base nuageuse vers 2 000 m cache le sommet au Kirchbrücke alors que les hôtels du Gornergrat sont encore au-dessus.',
       },
     ],
   },

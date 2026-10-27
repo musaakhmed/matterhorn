@@ -555,14 +555,14 @@ export function getViewpointPageFaqs(
 
   const forecast = getLiveForecastForViewpointPage(page, data);
   const reflection =
-    page.slug === 'sunnegga-riffelsee'
+    page.slug === 'riffelsee'
       ? evaluateLakeReflectionConditions(forecast)
       : null;
 
   return page.faqs.map((faq, idx) => {
     if (idx !== 0) return faq;
 
-    if (page.slug === 'sunnegga-riffelsee' && reflection) {
+    if (page.slug === 'riffelsee' && reflection) {
       return {
         ...faq,
         answer: `Right now (${data.swissTimeFormatted}), Riffelsee & Stellisee reflection status is "${reflection.overallVerdict}" — East-Face Visibility is ${forecast.currentScore}/10 (${forecast.currentStatus}; AM: ${forecast.today.morning.score}/10, PM: ${forecast.today.afternoon.score}/10) with surface wind at ${forecast.metrics.windSpeedKmh} km/h ${forecast.metrics.windCardinal}. ${faq.answer}`,

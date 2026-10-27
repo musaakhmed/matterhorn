@@ -19,9 +19,11 @@ import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
 import { getViewpointScoreMap } from '@/lib/viewpoints';
-import { Activity, Info, BookOpen, ArrowUpRight, Code2 } from 'lucide-react';
+import { Activity, Info, BookOpen, ArrowUpRight, Code2, Camera, MountainSnow, TrainFront } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref } from '@/lib/i18n/config';
+import { evaluateCrossBorderLink } from '@/lib/ski';
+import { getTrainsLiveStatus } from '@/lib/trains';
 
 interface VisibilityClientShellProps {
   initialData: VisibilityApiResponse;
@@ -37,6 +39,8 @@ export default function VisibilityClientShell({
 
   const activeData = initialData.viewpoints[activeViewpointId];
   const dashboardFaqs = getDashboardFaqs(initialData);
+  const borderStatus = evaluateCrossBorderLink(initialData);
+  const trainsLive = getTrainsLiveStatus(initialData);
 
   const viewpointsMap = {
     gornergrat: initialData.viewpoints.gornergrat.viewpoint,
@@ -94,6 +98,52 @@ export default function VisibilityClientShell({
           afternoonScore={activeData.today.afternoon.score}
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
+
+        <section aria-label="Today in Zermatt" className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a
+            href="#webcams"
+            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:border-sky-400 dark:hover:border-sky-600 transition-colors"
+          >
+            <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
+              <Camera className="w-4 h-4" aria-hidden="true" />
+              <span className="text-xs font-mono uppercase tracking-wider font-bold">Webcam</span>
+            </div>
+            <h2 className="mt-2 text-lg font-extrabold text-slate-950 dark:text-white">Gornergrat is live</h2>
+            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              The Gornergrat webcam is on this page. Trockener Steg is the Klein Matterhorn view in the same block.
+            </p>
+          </a>
+          <Link
+            href={getLocalizedHref('/ski', locale)}
+            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:border-sky-400 dark:hover:border-sky-600 transition-colors"
+          >
+            <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
+              <MountainSnow className="w-4 h-4" aria-hidden="true" />
+              <span className="text-xs font-mono uppercase tracking-wider font-bold">Ski report</span>
+            </div>
+            <h2 className="mt-2 text-lg font-extrabold text-slate-950 dark:text-white">
+              Cervinia link {borderStatus.status.toLowerCase()}
+            </h2>
+            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Plateau Rosa wind is {borderStatus.plateauRosaWindKmh} km/h. Open the Zermatt ski report for snow, season, and lifts.
+            </p>
+          </Link>
+          <Link
+            href={getLocalizedHref('/trains', locale)}
+            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:border-sky-400 dark:hover:border-sky-600 transition-colors"
+          >
+            <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
+              <TrainFront className="w-4 h-4" aria-hidden="true" />
+              <span className="text-xs font-mono uppercase tracking-wider font-bold">Trains</span>
+            </div>
+            <h2 className="mt-2 text-lg font-extrabold text-slate-950 dark:text-white">
+              {trainsLive.glacierExpress.isOperating ? 'Glacier Express is running' : 'Glacier Express is paused'}
+            </h2>
+            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Gornergrat scores {trainsLive.gornergrat.score}/10 today. {trainsLive.glacierExpress.operatingStatusLabel}
+            </p>
+          </Link>
+        </section>
 
         {/* 4. 10-Day Horizon Card Slider */}
         <HourlyTimeline

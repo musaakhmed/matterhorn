@@ -59,7 +59,9 @@ function ViewpointRouteIcon({ slug }: { slug: ViewpointPageSlug }) {
       return <TrainFront className="w-4 h-4 text-sky-600" aria-hidden="true" />;
     case 'glacier-paradise':
       return <CableCar className="w-4 h-4 text-sky-600" aria-hidden="true" />;
-    case 'sunnegga-riffelsee':
+    case 'sunnegga':
+      return <Compass className="w-4 h-4 text-sky-600" aria-hidden="true" />;
+    case 'riffelsee':
       return <Waves className="w-4 h-4 text-sky-600" aria-hidden="true" />;
     case 'zermatt-village':
       return <MapPin className="w-4 h-4 text-sky-600" aria-hidden="true" />;
@@ -82,7 +84,7 @@ export default async function ViewpointDetailView({
   const telemetry = await fetchMatterhornVisibility();
   const activeForecast = getLiveForecastForViewpointPage(page, telemetry);
   const reflectionStatus =
-    page.slug === 'sunnegga-riffelsee'
+    page.slug === 'riffelsee'
       ? evaluateLakeReflectionConditions(activeForecast)
       : null;
 
@@ -622,7 +624,7 @@ export default async function ViewpointDetailView({
               href={getLocalizedHref('/guides', locale)}
               className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300"
             >
-              <span>All 6 Guides</span>
+              <span>All guides</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </Link>
           </div>

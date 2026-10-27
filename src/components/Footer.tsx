@@ -169,15 +169,29 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
               </li>
               <li>
                 <Link
-                  href={getLocalizedHref('/viewpoints/sunnegga-riffelsee', locale)}
+                  href={getLocalizedHref('/viewpoints/sunnegga', locale)}
                   className="group flex flex-col hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
                 >
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
-                    <span>Sunnegga & Riffelsee</span>
+                    <span>Sunnegga</span>
+                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">2,288m</span>
+                  </span>
+                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                    Funicular terrace and the east face
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={getLocalizedHref('/viewpoints/riffelsee', locale)}
+                  className="group flex flex-col hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+                >
+                  <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
+                    <span>Riffelsee</span>
                     <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">2,757m</span>
                   </span>
                   <span className="text-[11px] text-slate-600 dark:text-slate-400">
-                    Calm morning mirror lake reflections
+                    Which mountain is reflected in the lake
                   </span>
                 </Link>
               </li>
