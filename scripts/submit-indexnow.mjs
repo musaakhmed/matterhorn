@@ -7,18 +7,11 @@ const INDEXNOW_KEY = 'be719268580c7746e467071e23d9e2a6';
 
 const LOCALES = [
   'en',
-  'az',
-  'id',
   'de',
   'es',
   'fr',
   'it',
   'pt',
-  'tr',
-  'ru',
-  'ar',
-  'hi',
-  'th',
   'ko',
   'ja',
   'zh',
@@ -62,7 +55,7 @@ function generateAllPaths() {
     paths.add(`/guides/${slug}`);
   }
 
-  // Localized routes for all 16 other languages
+  // Localized routes for every non-English locale
   for (const locale of LOCALES) {
     if (locale === 'en') continue;
 

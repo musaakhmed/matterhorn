@@ -37,44 +37,6 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
   'zh-tw': zhTwGuides,
   ja: jaGuides,
   ko: koGuides,
-  ru: {
-    'gornergrat-vs-glacier-paradise': {
-      title: 'Горнерграт против Glacier Paradise: с какой смотровой площадки Маттерхорн выглядит лучше?',
-      shortTitle: 'Горнерграт или Glacier Paradise',
-      description: 'Сравнение высоты, зубчатой железной дороги и канатной дороги, ракурсов и облачности двух главных смотровых площадок Церматта.',
-      category: 'Смотровые площадки',
-    },
-    'best-time-to-see-matterhorn': {
-      title: 'Погода в Церматте по месяцам | Когда видеть Маттерхорн',
-      shortTitle: 'Лучшее время для визита',
-      description: 'Анализ утренней и дневной видимости, сезонная вероятность ясного неба и золотые часы Церматта.',
-      category: 'Климатология',
-    },
-    'zermatt-cloudy-rainy-day-guide': {
-      title: 'Что делать в Церматте в туман и дождь: умный план на случай плохой погоды',
-      shortTitle: 'План на случай непогоды',
-      description: 'Ущелье Горнер, музей Маттерхорна, альпийские спа и защищенные прогулки среди лиственниц, когда вершина скрыта облаками.',
-      category: 'Непогода',
-    },
-    'best-matterhorn-photo-viewpoints': {
-      title: 'Лучшие фотолокации Маттерхорна и точки для съемки рассвета в Церматте',
-      shortTitle: 'Фотолокации и рассвет',
-      description: 'Точные координаты, время в пути и углы освещения: Кирхбрюкке, Риффельзее, Штеллизее и Мюрини.',
-      category: 'Фотография',
-    },
-    'matterhorn-banner-cloud-fohn-wind': {
-      title: 'Почему над вершиной Маттерхорна часто висит облако-флаг? Физика фена',
-      shortTitle: 'Облако-флаг и фен',
-      description: 'Атмосферная физика знаменитого подветренного облака-шлейфа, возникающего даже в идеально ясные дни.',
-      category: 'Метеорология',
-    },
-    'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Поезд Цюрих–Церматт | Время, пересадка в Фисп',
-      shortTitle: 'Поездка из Цюриха и Женевы',
-      description: 'Пересадки в Фисп, время в пути и золотое правило Go/No-Go перед посадкой на поезд SBB.',
-      category: 'Однодневные туры',
-    },
-  },
   pt: {
     'gornergrat-vs-glacier-paradise': {
       title: 'Gornergrat vs. Glacier Paradise: Qual o melhor mirante para ver o Matterhorn?',
@@ -111,82 +73,6 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
       shortTitle: 'Passeio de Zurique ou Genebra',
       description: 'Conexões em Visp, tempos de viagem e regra Go/No-Go para decidir antes de embarcar.',
       category: 'Passeios de 1 dia',
-    },
-  },
-  id: {
-    'gornergrat-vs-glacier-paradise': {
-      title: 'Gornergrat vs. Glacier Paradise: Sudut Pandang Mana yang Terbaik untuk Matterhorn?',
-      shortTitle: 'Gornergrat vs Glacier Paradise',
-      description: 'Perbandingan ketinggian, kereta gerigi vs kereta gantung, sudut pandang, dan cuaca di dua gardu pandang utama Zermatt.',
-      category: 'Gardu Pandang',
-    },
-    'best-time-to-see-matterhorn': {
-      title: 'Cuaca Zermatt per bulan | Waktu terbaik melihat Matterhorn',
-      shortTitle: 'Waktu Terbaik Berkunjung',
-      description: 'Analisis visibilitas pagi vs sore dan probabilitas langit cerah sepanjang musim di Zermatt.',
-      category: 'Klimatologi',
-    },
-    'zermatt-cloudy-rainy-day-guide': {
-      title: 'Aktivitas di Zermatt Saat Matterhorn Tertutup Awan (Panduan Cuaca Buruk)',
-      shortTitle: 'Panduan Cuaca Buruk',
-      description: 'Hemat tiket kereta gantung 100+ CHF dan jelajahi ngarai Gornerschlucht, museum, serta spa alpine.',
-      category: 'Rencana Alternatif',
-    },
-    'best-matterhorn-photo-viewpoints': {
-      title: 'Spot Foto Matterhorn Terbaik & Lokasi Sunrise di Zermatt',
-      shortTitle: 'Spot Foto & Sunrise',
-      description: 'Lokasi persis, waktu jalan kaki, dan sudut cahaya terbaik: Kirchbrücke, Riffelsee, Stellisee, dan Mürini.',
-      category: 'Fotografi',
-    },
-    'matterhorn-banner-cloud-fohn-wind': {
-      title: 'Mengapa Puncak Matterhorn Selalu Dikelilingi Awan? Fisika Angin Föhn',
-      shortTitle: 'Awan Bendera & Föhn',
-      description: 'Fisika di balik awan bendera legendaris yang berkibar di puncak bahkan saat langit cerah tanpa awan.',
-      category: 'Meteorologi',
-    },
-    'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Kereta Zurich ke Zermatt | Jadwal dan ganti di Visp',
-      shortTitle: 'Day Trip dari Zurich/Jenewa',
-      description: 'Panduan transfer kereta di Visp dan aturan Go/No-Go sebelum Anda naik kereta SBB.',
-      category: 'Day Trip',
-    },
-  },
-  tr: {
-    'gornergrat-vs-glacier-paradise': {
-      title: 'Gornergrat ve Glacier Paradise Karşılaştırması: Matterhorn İçin Hangi Zirve Daha İyi?',
-      shortTitle: 'Gornergrat vs Glacier Paradise',
-      description: 'Rakım farkı, dişli tren ile teleferik karşılaştırması ve Zermatt’ın iki tepe noktasının hava dayanıklılığı.',
-      category: 'Manzara Noktaları',
-    },
-    'best-time-to-see-matterhorn': {
-      title: 'Zermatt hava durumu aya göre | Matterhorn’u görme zamanı',
-      shortTitle: 'En İyi Ziyaret Zamanı',
-      description: 'Aralık ve Ocak aylarının %88+ netliği ve yaz öğleden sonraları oluşan bulutların klimatolojik analizi.',
-      category: 'Klimatoloji',
-    },
-    'zermatt-cloudy-rainy-day-guide': {
-      title: 'Matterhorn Bulutluyken Zermatt’ta Ne Yapılır? (Kötü Hava Rehberi)',
-      shortTitle: 'Kötü Hava Rehberi',
-      description: 'Sis içinde 100+ CHF harcamak yerine Gorner Boğazı, Matterhorn Müzesi ve kaplıcaları keşfedin.',
-      category: 'Kötü Hava',
-    },
-    'best-matterhorn-photo-viewpoints': {
-      title: 'Zermatt’ta En İyi Matterhorn Fotoğraf Noktaları ve Gün Doğumu Konumları',
-      shortTitle: 'Fotoğraf Noktaları & Gündoğumu',
-      description: 'Kilise Köprüsü (Kirchbrücke), Riffelsee, Stellisee ve Mürini için en iyi çekim açıları.',
-      category: 'Fotoğrafçılık',
-    },
-    'matterhorn-banner-cloud-fohn-wind': {
-      title: 'Matterhorn Zirvesinde Neden Hep Bayrak Bulutu Var? Föhn Fiziği',
-      shortTitle: 'Bayrak Bulutu ve Föhn',
-      description: 'Güneşli günlerde bile zirvede oluşan aerodinamik bulut flamasının arkasındaki atmosfer fiziği.',
-      category: 'Meteoroloji',
-    },
-    'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Zürih–Zermatt treni | Saatler, Visp aktarma',
-      shortTitle: 'Günübirlik Gezi Rehberi',
-      description: 'Visp aktarma ipuçları, seyahat süreleri ve trene binmeden önceki canlı Go/No-Go kuralı.',
-      category: 'Günübirlik Geziler',
     },
   },
 };

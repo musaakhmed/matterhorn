@@ -4,6 +4,7 @@ export const LOCALES = [
   'es',
   'fr',
   'it',
+  'pt',
   'ko',
   'ja',
   'zh',
@@ -14,7 +15,6 @@ export const LOCALES = [
 export const RETIRED_LOCALES = [
   'az',
   'id',
-  'pt',
   'tr',
   'ru',
   'ar',
@@ -74,6 +74,14 @@ export const LOCALE_METAS: Record<Locale, LocaleMeta> = {
     englishName: 'Italian',
     flag: '🇮🇹',
     htmlLang: 'it',
+    dir: 'ltr',
+  },
+  pt: {
+    code: 'pt',
+    name: 'Português',
+    englishName: 'Portuguese',
+    flag: '🇵🇹',
+    htmlLang: 'pt',
     dir: 'ltr',
   },
   ko: {

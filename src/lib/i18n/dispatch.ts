@@ -14,13 +14,6 @@ const VERDICT_SUMMARIES: Record<BadgeColor, Record<Locale, string>> = {
     'zh-tw': '馬特洪峰金字塔峰頂清晰可見，絕美無遮擋。',
     ja: 'マッターホルンのピラミッドが遮るものなく鮮明に見渡せます。',
     ko: '마터호른 피라미드 정상이 가림 없이 선명하게 조망됩니다.',
-    ru: 'Кристально чистый, беспрепятственный вид на пирамиду Маттерхорна.',
-    ar: 'إطلالة واضحة ونقية دون عوائق على هرم ماترهورن.',
-    tr: 'Matterhorn piramidinin net ve engelsiz manzarası.',
-    id: 'Pemandangan piramida Matterhorn yang jernih dan tanpa halangan.',
-    th: 'ทัศนียภาพยอดเขาแมตเทอร์ฮอร์นคมชัด ไร้สิ่งบدบัง',
-    hi: 'मैटरहॉर्न पिरामिड का स्पष्ट, अबाधित और मनमोहक दृश्य।',
-    az: 'Matterhorn piramidasının aydın və maneəsiz mənzərəsi.',
   },
   amber: {
     en: 'Good visibility with passing clouds or light ridge banner.',
@@ -33,13 +26,6 @@ const VERDICT_SUMMARIES: Record<BadgeColor, Record<Locale, string>> = {
     'zh-tw': '能見度良好，有少許過境浮雲或山脊輕微旗雲。',
     ja: '視界は良好ですが、流れる雲や尾根に薄い旗雲がかかることがあります。',
     ko: '가시성 양호, 간헐적인 구름이나 얇은 능선 깃발 구름이 있을 수 있습니다.',
-    ru: 'Хорошая видимость с проходящими облаками или легким флагом на гребне.',
-    ar: 'رؤية جيدة مع سحب عابرة أو سحابة شريطية خفيفة على الحافة.',
-    tr: 'Geçici bulutlar veya hafif sırt bayrağı ile iyi görüş.',
-    id: 'Visibilitas baik dengan awan lewat atau awan bendera tipis di punggungan.',
-    th: 'ทัศนวิสัยดี อาจมีเมฆเคลื่อนผ่านหรือเมฆธงบางๆ ตามสันเขา',
-    hi: 'गुजरते बादलों या हल्की रिज बैनर के साथ अच्छी दृश्यता।',
-    az: 'Keçici buludlar və ya silsilədə yüngül bayraq buludu ilə yaxşı görünüş.',
   },
   orange: {
     en: 'Limited visibility; summit frequently obscured by mid-level cloud decks.',
@@ -52,13 +38,6 @@ const VERDICT_SUMMARIES: Record<BadgeColor, Record<Locale, string>> = {
     'zh-tw': '能見度有限，山頂常被中層雲層遮蔽。',
     ja: '視界不良：中層の雲によって山頂が頻繁に隠れます。',
     ko: '시야 제한적, 중층 구름대로 인해 정상이 자주 가려집니다.',
-    ru: 'Ограниченная видимость; вершина часто скрыта облаками среднего яруса.',
-    ar: 'رؤية محدودة؛ القمة محجوبة بشكل متكرر بطبقات سحب متوسطة الارتفاع.',
-    tr: 'Sınırlı görüş; zirve sık sık orta seviye bulutlarla kapanıyor.',
-    id: 'Visibilitas terbatas; puncak sering terhalang oleh lapisan awan tingkat menengah.',
-    th: 'ทัศนวิสัยจำกัด ยอดเขามักถูกบดบังด้วยกลุ่มเมฆระดับกลาง',
-    hi: 'सीमित दृश्यता; मध्य-स्तरीय बादलों से शिखर बार-बार ढका रहता है।',
-    az: 'Məhdud görünüş; zirvə tez-tez orta səviyyəli buludlarla örtülür.',
   },
   rose: {
     en: 'Socked in; zero summit visibility due to thick clouds or precipitation.',
@@ -71,13 +50,6 @@ const VERDICT_SUMMARIES: Record<BadgeColor, Record<Locale, string>> = {
     'zh-tw': '完全被濃雲籠罩；因厚重雲霧或降水導致山頂能見度為零。',
     ja: '完全な視界不良：厚い雲または降水のため山頂は全く見えません。',
     ko: '완전 폐쇄형 구름; 짙은 구름이나 강수로 인해 정상 시야가 전혀 없습니다.',
-    ru: 'Полная облачность; нулевая видимость вершины из-за плотных облаков или осадков.',
-    ar: 'محجوب بالكامل؛ انعدام الرؤية على القمة بسبب السحب الكثيفة أو الهطول.',
-    tr: 'Tamamen kapalı; yoğun bulutlar veya yağış nedeniyle zirvede sıfır görüş.',
-    id: 'Tertutup total; visibilitas nol di puncak karena awan tebal atau presipitasi.',
-    th: 'ถูกปกคลุมอย่างหนาแน่น ทัศนวิสัยบนยอดเขาเป็นศูนย์เนื่องจากเมฆหนาหรือฝนตก',
-    hi: 'पूरी तरह से ढका हुआ; घने बादलों या वर्षा के कारण शिखर पर शून्य दृश्यता।',
-    az: 'Tamamilə örtülü; sıx buludlar və ya yağıntı səbəbindən zirvədə sıfır görünüş.',
   },
 };
 
@@ -127,10 +99,6 @@ export function getLocalizedViewpointLabel(
       return isGlacier
         ? { name: '마터호른 글래시어 파라다이스 (3,883m)', shortLabel: '글래시어 (남벽)' }
         : { name: '고르너그라트 & 수네가 (3,089m)', shortLabel: '고르너그라트 (동벽)' };
-    case 'ru':
-      return isGlacier
-        ? { name: 'Matterhorn Glacier Paradise (3 883 м)', shortLabel: 'Glacier Paradise (Юг)' }
-        : { name: 'Gornergrat & Sunnegga (3 089 м)', shortLabel: 'Горнерграт (Восток)' };
     default:
       return isGlacier
         ? { name: 'Matterhorn Glacier Paradise (3,883m)', shortLabel: 'Glacier Paradise (South)' }
@@ -197,8 +165,6 @@ export function getLocalizedGuideAdvice(
         return `${vpLabel}（${score}/10）は雲ひとつない快晴！始発の列車やロープウェイに乗車をおすすめします。水平視程${metrics.visibilityKm}kmで稜線の遮りはほぼゼロです。`;
       case 'ko':
         return `${vpLabel}(${score}/10) 환상적인 쾌청 알프스 윈도우! 첫차나 케이블카에 탑승하세요 — 수평 가시거리 ${metrics.visibilityKm}km로 능선에 구름 걸림이 거의 없습니다.`;
-      case 'ru':
-        return `Идеальное альпийское окно на ${vpLabel} (${score}/10)! Садитесь на первый поезд или канатную дорогу — видимость ${metrics.visibilityKm} км без облачности на гребнях.`;
       case 'pt':
         return `Janela alpina perfeita em ${vpLabel} (${score}/10)! Pegue o primeiro trem ou teleférico — ${metrics.visibilityKm} km de visibilidade horizontal sem obstrução nas cristas.`;
       default:

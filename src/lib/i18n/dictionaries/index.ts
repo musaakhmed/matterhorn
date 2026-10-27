@@ -5,6 +5,7 @@ import { de } from './de';
 import { es } from './es';
 import { fr } from './fr';
 import { it } from './it';
+import { pt } from './pt';
 import { ko } from './ko';
 import { ja } from './ja';
 import { zh } from './zh';
@@ -16,6 +17,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
   es,
   fr,
   it,
+  pt,
   ko,
   ja,
   zh,
