@@ -14,7 +14,9 @@ import {
 } from 'lucide-react';
 import { BadgeColor, ScoreBlock, ViewpointForecastData } from '@/lib/types';
 import VisibilityIcon from './VisibilityIcon';
+import FramedPhoto from './FramedPhoto';
 import { useTranslation } from '@/lib/i18n/context';
+import type { PlacePhoto } from '@/lib/place-photos';
 import {
   getLocalizedVerdictSummary,
   getLocalizedGuideAdvice,
@@ -23,6 +25,7 @@ import {
 
 interface HeroStatusProps {
   data: ViewpointForecastData;
+  photo: PlacePhoto;
 }
 
 const THEME_STYLES: Record<
@@ -182,7 +185,7 @@ function DualPeriodCard({
   );
 }
 
-export default function HeroStatus({ data }: HeroStatusProps) {
+export default function HeroStatus({ data, photo }: HeroStatusProps) {
   const { dict, locale } = useTranslation();
   const style = THEME_STYLES[data.currentBadgeColor];
   const radius = 68;
@@ -230,7 +233,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
   return (
     <section
       aria-label={dict.hero.verdictAria}
-      className={`relative overflow-hidden rounded-3xl border ${style.cardBorder} bg-gradient-to-br ${style.cardGradient} shadow-sm p-5 sm:p-7 lg:p-8 transition-all duration-300`}
+      className={`relative overflow-hidden rounded-3xl border ${style.cardBorder} bg-gradient-to-br ${style.cardGradient} shadow-sm p-5 sm:p-7 lg:p-8 transition-colors duration-200 ease-out`}
     >
       {/* Subtle Swiss Grid Pattern Overlay */}
       <div
@@ -244,8 +247,16 @@ export default function HeroStatus({ data }: HeroStatusProps) {
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
         {/* Gauge is supporting. On small screens the sentence comes first. */}
-        <div className="order-2 lg:order-1 lg:col-span-5 xl:col-span-4 min-w-0 flex flex-col items-center justify-center">
-          <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center bg-white/90 dark:bg-slate-900/90 rounded-full shadow-inner border border-slate-200/80 dark:border-slate-800">
+        <div className="order-2 lg:order-1 lg:col-span-5 xl:col-span-4 min-w-0">
+          <FramedPhoto
+            photo={photo}
+            preload
+            sizes="(max-width: 1024px) 100vw, 380px"
+            aspectClass="aspect-[4/3] lg:aspect-[5/4]"
+          >
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 py-5">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,23,42,0.42),transparent_62%)]" />
+              <div className="relative w-40 h-40 sm:w-44 sm:h-44 flex items-center justify-center bg-white/95 dark:bg-slate-900/95 rounded-full shadow-inner border border-slate-200/80 dark:border-slate-800">
             <svg
               className="w-full h-full -rotate-90 transform"
               viewBox="0 0 160 160"
@@ -271,7 +282,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                 strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-700 ease-out"
+                className="transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
               />
             </svg>
 
@@ -301,17 +312,18 @@ export default function HeroStatus({ data }: HeroStatusProps) {
             </div>
           </div>
 
-          {/* High-Contrast Status Pill */}
-          <div
-            className={`mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs font-bold tracking-wide uppercase shadow-2xs`}
-          >
-            <StatusGlyph badgeColor={data.currentBadgeColor} />
-            <span>{currentStatusLabel}</span>
-          </div>
+              <div
+                className={`relative mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs font-bold tracking-wide uppercase shadow-2xs`}
+              >
+                <StatusGlyph badgeColor={data.currentBadgeColor} />
+                <span>{currentStatusLabel}</span>
+              </div>
 
-          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
-            {vpLabel.name} ({data.viewpoint.elevation.toLocaleString()}m)
-          </span>
+              <span className="relative mt-2 inline-flex max-w-[16rem] items-center rounded-full bg-white/95 px-2.5 py-1 text-center text-xs font-semibold text-slate-800 shadow-2xs dark:bg-slate-950/90 dark:text-slate-100">
+                {vpLabel.name}
+              </span>
+            </div>
+          </FramedPhoto>
         </div>
 
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}

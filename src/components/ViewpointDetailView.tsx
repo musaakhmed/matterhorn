@@ -47,6 +47,7 @@ import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import { getLocalizedViewpointPage } from '@/lib/i18n/viewpoints';
 import { getLocalizedGuideArticle } from '@/lib/i18n/guides';
 import Footer from '@/components/Footer';
+import { VIEWPOINT_PHOTOS } from '@/lib/place-photos';
 
 const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
   emerald: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
@@ -182,7 +183,7 @@ export default async function ViewpointDetailView({
           </nav>
         </div>
 
-        <HeroStatus data={activeForecast} />
+        <HeroStatus data={activeForecast} photo={VIEWPOINT_PHOTOS[page.slug]} />
 
         <div className="rounded-2xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200/90 dark:border-sky-800/80 p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-sm">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-slate-800 dark:text-slate-200">

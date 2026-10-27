@@ -342,7 +342,9 @@ export function getTrainsLiveStatus(data?: VisibilityApiResponse) {
       isOperating: !isMaintenancePeriod,
       operatingStatusLabel: isMaintenancePeriod ? 'Annual Maintenance Pause' : 'Normal Winter/Summer Schedule Active',
       statusBadgeColor: isMaintenancePeriod ? 'amber' : 'emerald',
-      oberalpPassStatus: 'Oberalp Pass (2,033 m): Open & Scenic Rail Corridor Active',
+      oberalpPassStatus: isMaintenancePeriod
+        ? 'Oberalp Pass (2,033 m): Glacier Express paused until mid-December'
+        : 'Oberalp Pass (2,033 m): Open and scenic rail corridor active',
       regionalAlternative: isMaintenancePeriod
         ? 'Regional Matterhorn Gotthard Bahn & RhB trains run the identical scenic route daily.'
         : 'Daily panoramic departures operating between Zermatt and St. Moritz.',

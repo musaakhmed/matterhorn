@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import {
   Activity,
@@ -28,6 +27,8 @@ import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import WidgetBuilderClient from '@/components/WidgetBuilderClient';
 import FaqSection from '@/components/FaqSection';
 import Footer from '@/components/Footer';
+import FramedPhoto from '@/components/FramedPhoto';
+import { PLACE_PHOTOS } from '@/lib/place-photos';
 
 export const revalidate = 900; // Refresh live telemetry every 15 minutes
 
@@ -138,8 +139,9 @@ export default async function PartnerWidgetPage() {
         </nav>
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
-          <div className="max-w-3xl space-y-4">
+        <section className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-xs dark:border-slate-800 dark:bg-slate-900/90">
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+          <div className="order-2 max-w-3xl space-y-4 p-6 sm:p-8 md:p-10 lg:order-1 lg:col-span-7">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
               <Code2 className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
               <span>
@@ -185,6 +187,16 @@ export default async function PartnerWidgetPage() {
                 );
               })}
             </div>
+          </div>
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <FramedPhoto
+              photo={PLACE_PHOTOS.zermattVillage}
+              preload
+              embedded
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              aspectClass="aspect-[4/5] sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[320px]"
+            />
+          </div>
           </div>
         </section>
 

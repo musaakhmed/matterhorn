@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import {
   Compass,
@@ -26,6 +25,8 @@ import VisibilityIcon from '@/components/VisibilityIcon';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import { getLocalizedViewpointPage } from '@/lib/i18n/viewpoints';
 import Footer from '@/components/Footer';
+import FramedPhoto from '@/components/FramedPhoto';
+import { VIEWPOINT_PHOTOS } from '@/lib/place-photos';
 
 const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
   emerald: 'bg-emerald-100 dark:bg-emerald-950/80 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200',
@@ -91,8 +92,9 @@ export default async function ViewpointsIndexView({
         </nav>
 
         {/* Hero Section */}
-        <section className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
-          <div className="max-w-3xl space-y-4">
+        <section className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-xs dark:border-slate-800 dark:bg-slate-900/95">
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+          <div className="order-2 max-w-3xl space-y-4 p-6 sm:p-8 md:p-10 lg:order-1 lg:col-span-7">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
               <Compass
                 className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
@@ -111,12 +113,22 @@ export default async function ViewpointsIndexView({
               Because the Matterhorn (4,478m) sits on the Swiss-Italian meteorological divide, visibility, wind holds, and lake mirror reflections vary dramatically by viewpoint altitude and aspect. Select your target sector below to inspect live 10-day AM/PM telemetry before purchasing mountain passes.
             </p>
           </div>
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <FramedPhoto
+              photo={VIEWPOINT_PHOTOS.gornergrat}
+              preload
+              embedded
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              aspectClass="aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[280px]"
+            />
+          </div>
+          </div>
         </section>
 
         {/* Viewpoint Cards Grid */}
         <section
           aria-label="Matterhorn Viewpoints"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"
         >
           {VIEWPOINT_PAGES.map((rawVp) => {
             const vp = getLocalizedViewpointPage(rawVp.slug, locale);
@@ -126,9 +138,16 @@ export default async function ViewpointsIndexView({
             return (
               <article
                 key={vp.slug}
-                className="group relative rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-xs transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-sky-300 hover:shadow-md motion-safe:hover:-translate-y-0.5 dark:border-slate-800 dark:bg-slate-900/95 dark:hover:border-sky-700"
               >
-                <div className="space-y-5">
+                <FramedPhoto
+                  photo={VIEWPOINT_PHOTOS[vp.slug]}
+                  embedded
+                  interactive
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  aspectClass="aspect-[16/10]"
+                />
+                <div className="space-y-5 p-6 sm:p-7">
                   {/* Top Badge Row */}
                   <div className="flex items-center justify-between gap-2">
                     <span className="p-2.5 rounded-2xl bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 transition-transform duration-200 group-hover:scale-105">
@@ -240,7 +259,7 @@ export default async function ViewpointsIndexView({
                 </div>
 
                 {/* Bottom CTA */}
-                <div className="pt-5 mt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400">
+                <div className="mx-6 mb-6 flex items-center justify-between border-t border-slate-100 pt-5 text-xs font-bold text-sky-700 dark:border-slate-800 dark:text-sky-400 sm:mx-7">
                   <span className="flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>View Telemetry &amp; Cams</span>

@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   TrainFront,
   Mountain,
@@ -22,6 +21,9 @@ import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import FramedPhoto from '@/components/FramedPhoto';
+import { PLACE_PHOTOS } from '@/lib/place-photos';
+import TrainScene from '@/components/scenes/TrainScene';
 
 interface TrainsComparisonViewProps {
   initialData?: VisibilityApiResponse;
@@ -50,6 +52,15 @@ const BADGE_COLOR_MAP: Record<BadgeColor, { pill: string; dot: string; text: str
     text: 'text-rose-700 dark:text-rose-400',
   },
 };
+
+function ConditionStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex h-full flex-col justify-center rounded-xl bg-slate-50 px-3 py-2.5 dark:bg-slate-900/70">
+      <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</dt>
+      <dd className="mt-0.5 text-sm font-semibold leading-5 text-slate-900 dark:text-white">{value}</dd>
+    </div>
+  );
+}
 
 export default function TrainsComparisonView({
   initialData,
@@ -103,8 +114,10 @@ export default function TrainsComparisonView({
           </span>
         </nav>
 
+        <div className="relative">
+        <TrainScene />
         {/* Hero Section */}
-        <header className="space-y-4 max-w-4xl">
+        <header className="relative z-10 space-y-4 max-w-4xl pb-24">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200/90 dark:border-sky-800 text-sky-800 dark:text-sky-300 text-xs font-bold shadow-2xs">
             <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
             <span>2026 Swiss Scenic Railway Field Guide & Live Telemetry</span>
@@ -142,6 +155,7 @@ export default function TrainsComparisonView({
             </div>
           </div>
         </header>
+        </div>
 
         {/* Live Conditions Dashboard Bar */}
         <section
@@ -163,56 +177,75 @@ export default function TrainsComparisonView({
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Gornergrat Live */}
-            <div className="rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                  <span className="font-bold text-sm text-slate-900 dark:text-white">Gornergrat Bahn (3,089 m)</span>
+          <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
+            <article className="flex flex-col gap-3 overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/80 dark:bg-slate-800/90 md:row-span-5 md:grid md:grid-rows-subgrid md:gap-3">
+              <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5">
+                <div className="flex min-w-0 items-center gap-2">
+                  <TrainFront className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">Gornergrat Bahn (3,089 m)</h3>
                 </div>
-                <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-bold ${gBadge.pill}`}>
-                  <span className={`w-2 h-2 rounded-full ${gBadge.dot}`} />
+                <div className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${gBadge.pill}`}>
+                  <span className={`h-2 w-2 rounded-full ${gBadge.dot}`} />
                   <span>{liveStatus.gornergrat.score}/10 {liveStatus.gornergrat.status}</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300">
+              <p className="px-4 text-sm leading-6 text-slate-700 sm:px-5 dark:text-slate-200">
                 {liveStatus.gornergrat.verdictText}
               </p>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono pt-2 border-t border-slate-100 dark:border-slate-700/80">
-                <span>AM Score: {liveStatus.gornergrat.todayAmScore}/10</span>
-                <span>•</span>
-                <span>PM Score: {liveStatus.gornergrat.todayPmScore}/10</span>
-                <span>•</span>
-                <span>Mid-Cloud: {liveStatus.gornergrat.cloudMid}%</span>
-                <span>•</span>
-                <span>Wind: {liveStatus.gornergrat.windKmh} km/h</span>
-              </div>
-            </div>
+              <dl className="grid h-full grid-cols-3 grid-rows-2 gap-2 px-4 sm:px-5">
+                <ConditionStat label="This morning" value={`${liveStatus.gornergrat.todayAmScore}/10`} />
+                <ConditionStat label="This afternoon" value={`${liveStatus.gornergrat.todayPmScore}/10`} />
+                <ConditionStat label="Summit" value={liveStatus.gornergrat.tempEstimated} />
+                <ConditionStat label="Mid-layer cloud" value={`${liveStatus.gornergrat.cloudMid}%`} />
+                <ConditionStat label="Wind" value={`${liveStatus.gornergrat.windKmh} km/h`} />
+                <ConditionStat label="Ride" value="33 min" />
+              </dl>
+              <p className="px-4 text-sm leading-6 text-slate-600 sm:px-5 dark:text-slate-300">
+                {gornergrat.seasonality.schedule}. {gornergrat.swissPassCoverage.shortBadge}. Sit on the right side going up.
+              </p>
+              <FramedPhoto
+                photo={PLACE_PHOTOS.gornergratBahn}
+                preload
+                embedded
+                stretch={false}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                aspectClass="aspect-[3/1]"
+              />
+            </article>
 
-            {/* Glacier Express Live */}
-            <div className="rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Mountain className="w-4 h-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
-                  <span className="font-bold text-sm text-slate-900 dark:text-white">Glacier Express Corridor</span>
+            <article className="flex flex-col gap-3 overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/80 dark:bg-slate-800/90 md:row-span-5 md:grid md:grid-rows-subgrid md:gap-3">
+              <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5">
+                <div className="flex min-w-0 items-center gap-2">
+                  <Mountain className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">Glacier Express Corridor</h3>
                 </div>
-                <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-bold ${gexBadge.pill}`}>
-                  <span className={`w-2 h-2 rounded-full ${gexBadge.dot}`} />
-                  <span>{liveStatus.glacierExpress.operatingStatusLabel}</span>
+                <div className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${gexBadge.pill}`}>
+                  <span className={`h-2 w-2 rounded-full ${gexBadge.dot}`} />
+                  <span>{liveStatus.glacierExpress.isOperating ? 'Running' : 'Paused'}</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300">
+              <p className="px-4 text-sm leading-6 text-slate-700 sm:px-5 dark:text-slate-200">
                 {liveStatus.glacierExpress.oberalpPassStatus}. {liveStatus.glacierExpress.regionalAlternative}
               </p>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono pt-2 border-t border-slate-100 dark:border-slate-700/80">
-                <span>Peak Elevation: 2,033 m</span>
-                <span>•</span>
-                <span>Terminus: Zermatt (1,604 m)</span>
-                <span>•</span>
-                <span>Booking Horizon: 93 Days</span>
-              </div>
-            </div>
+              <dl className="grid h-full grid-cols-3 grid-rows-2 gap-2 px-4 sm:px-5">
+                <ConditionStat label="Service" value={liveStatus.glacierExpress.isOperating ? 'In season' : 'Maintenance'} />
+                <ConditionStat label="Peak pass" value="2,033 m" />
+                <ConditionStat label="Ride" value="7h 45m" />
+                <ConditionStat label="Swiss Pass" value="Included" />
+                <ConditionStat label="Seat" value="Required" />
+                <ConditionStat label="Booking" value="93 days" />
+              </dl>
+              <p className="px-4 text-sm leading-6 text-slate-600 sm:px-5 dark:text-slate-300">
+                {liveStatus.glacierExpress.operatingStatusLabel}. {liveStatus.glacierExpress.seatAvailabilityNotice}
+              </p>
+              <FramedPhoto
+                photo={PLACE_PHOTOS.glacierExpress}
+                embedded
+                stretch={false}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                aspectClass="aspect-[3/1]"
+              />
+            </article>
           </div>
         </section>
 

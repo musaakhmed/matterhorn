@@ -25,6 +25,7 @@ import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref } from '@/lib/i18n/config';
 import { evaluateCrossBorderLink } from '@/lib/ski';
 import { getTrainsLiveStatus } from '@/lib/trains';
+import { photoForViewpoint } from '@/lib/place-photos';
 
 interface VisibilityClientShellProps {
   initialData: VisibilityApiResponse;
@@ -111,7 +112,7 @@ export default function VisibilityClientShell({
       />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
-        <HeroStatus data={activeData} />
+        <HeroStatus data={activeData} photo={photoForViewpoint(activeViewpointId)} />
 
         <ViewpointSwitcher
           places={places}
