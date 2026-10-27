@@ -29,6 +29,7 @@ const VIEWPOINT_SLUGS = [
   'gornergrat',
   'glacier-paradise',
   'sunnegga-riffelsee',
+  'zermatt-village',
 ];
 
 const GUIDE_SLUGS = [
@@ -38,6 +39,8 @@ const GUIDE_SLUGS = [
   'best-matterhorn-photo-viewpoints',
   'matterhorn-banner-cloud-fohn-wind',
   'zurich-geneva-to-zermatt-day-trip',
+  'christmas-in-zermatt-matterhorn',
+  'gornergrat-railway-vs-glacier-express',
 ];
 
 function generateAllPaths() {

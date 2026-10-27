@@ -30,7 +30,7 @@ export async function generateMetadata({
   return {
     title: `${guide.title} | Is The Matterhorn Visible?`,
     description: guide.description,
-    alternates: getAlternateUrls(`/guides/${slug}`),
+    alternates: getAlternateUrls(`/guides/${slug}`, locale as Locale),
     openGraph: {
       title: guide.title,
       description: guide.description,

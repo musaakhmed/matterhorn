@@ -30,7 +30,7 @@ export async function generateMetadata({
     title: 'Gornergrat Railway & Glacier Express (2026 Guide) | Tickets, Passes & Live Conditions',
     description:
       'Complete guide to Gornergrat Bahn & Glacier Express in Zermatt: 2026 ticket prices, Swiss Travel Pass discounts, seat reservations, live summit visibility scores, and scenic routes.',
-    alternates: getAlternateUrls('/trains'),
+    alternates: getAlternateUrls('/trains', locale as Locale),
     keywords: [
       'Gornergrat Bahn',
       'Gornergrat Railway',

@@ -227,29 +227,38 @@ export function switchLocalePath(currentPathname: string, targetLocale: Locale):
 const BASE_URL = 'https://isthematterhornvisible.com';
 
 /**
- * Generates SEO alternate link tags (hreflang) for all supported locales.
+ * Generates SEO alternate link tags (hreflang) and canonical URL for all supported locales.
  */
-export function getAlternateUrls(path: string): {
+export function getAlternateUrls(
+  path: string,
+  currentLocale?: Locale
+): {
   canonical: string;
   languages: Record<string, string>;
 } {
-  const { pathWithoutLocale } = stripLocaleFromPath(path);
+  const { locale: detectedLocale, pathWithoutLocale } = stripLocaleFromPath(path);
+  const activeLocale = currentLocale ?? detectedLocale;
   const cleanPath = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
 
   const languages: Record<string, string> = {
     'x-default': `${BASE_URL}${cleanPath || '/'}`,
-    en: `${BASE_URL}${cleanPath || '/'}`,
-    fr: `${BASE_URL}/fr${cleanPath}`,
-    de: `${BASE_URL}/de${cleanPath}`,
-    it: `${BASE_URL}/it${cleanPath}`,
-    ru: `${BASE_URL}/ru${cleanPath}`,
-    ja: `${BASE_URL}/ja${cleanPath}`,
-    'zh-CN': `${BASE_URL}/zh${cleanPath}`,
-    ko: `${BASE_URL}/ko${cleanPath}`,
   };
 
+  for (const loc of LOCALES) {
+    const hreflangCode = LOCALE_METAS[loc]?.htmlLang || loc;
+    languages[hreflangCode] =
+      loc === DEFAULT_LOCALE
+        ? `${BASE_URL}${cleanPath || '/'}`
+        : `${BASE_URL}/${loc}${cleanPath}`;
+  }
+
+  const canonical =
+    activeLocale === DEFAULT_LOCALE
+      ? `${BASE_URL}${cleanPath || '/'}`
+      : `${BASE_URL}/${activeLocale}${cleanPath}`;
+
   return {
-    canonical: languages[DEFAULT_LOCALE],
+    canonical,
     languages,
   };
 }

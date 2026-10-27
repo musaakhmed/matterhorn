@@ -30,7 +30,7 @@ export async function generateMetadata({
     title: 'Zermatt Ski Resort & Snow Report (2026) | Lifts, Cervinia Italy Link & Passes',
     description:
       'Live ski intelligence for Zermatt & Cervinia: snow depth at 3 elevations, real-time "Can I Ski to Italy?" border link status, 2026 dynamic ski pass pricing, Ikon Pass guide, and Findeln mountain restaurant directory.',
-    alternates: getAlternateUrls('/ski'),
+    alternates: getAlternateUrls('/ski', locale as Locale),
     keywords: [
       'Zermatt ski',
       'Zermatt ski resort',
