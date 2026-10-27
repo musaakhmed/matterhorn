@@ -35,6 +35,8 @@ import {
 } from '@/lib/schema';
 import { BadgeColor } from '@/lib/types';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
+import HowThisScoreWorks from '@/components/HowThisScoreWorks';
+import { getDictionary } from '@/lib/i18n/dictionaries';
 import HeroStatus from '@/components/HeroStatus';
 import ContingencyCard from '@/components/ContingencyCard';
 import HourlyTimeline from '@/components/HourlyTimeline';
@@ -98,6 +100,10 @@ export default async function ViewpointDetailView({
   const relatedGuides = GUIDES.filter((g) =>
     page.relatedGuideSlugs.includes(g.slug)
   ).map((g) => getLocalizedGuideArticle(g.slug, locale));
+  const dict = getDictionary(locale);
+  const sourcePage = VIEWPOINT_PAGES.find((vp) => vp.slug === page.slug);
+  const borrowedForecast =
+    sourcePage?.telemetryKey === 'gornergrat' && page.slug !== 'gornergrat';
 
   return (
     <>
@@ -176,6 +182,26 @@ export default async function ViewpointDetailView({
           </nav>
         </div>
 
+        <HeroStatus data={activeForecast} />
+
+        <div className="rounded-2xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200/90 dark:border-sky-800/80 p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-sm">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-slate-800 dark:text-slate-200">
+            <span className="inline-flex items-center gap-1.5 font-bold text-sky-900 dark:text-sky-300">
+              <Compass className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+              <span>{page.aspectLabel}</span>
+            </span>
+            <span className="font-medium">
+              <strong className="text-slate-900 dark:text-white">{page.transportSummary}</strong>
+              {' '}({page.journeyTime})
+            </span>
+          </div>
+          {borrowedForecast && (
+            <p className="text-xs font-medium text-sky-800 dark:text-sky-300">
+              {dict.navigation.sameForecast}
+            </p>
+          )}
+        </div>
+
         {/* Viewpoint Hero Header & Tactical Specs Card */}
         <header className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-6 sm:p-8 shadow-xs space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-2.5">
@@ -204,9 +230,9 @@ export default async function ViewpointDetailView({
           </div>
 
           <div className="space-y-3 max-w-4xl">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance leading-tight">
               {page.title}
-            </h1>
+            </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
               {page.description}
             </p>
@@ -232,26 +258,6 @@ export default async function ViewpointDetailView({
             ))}
           </div>
 
-          {/* Access, First Train/Lift & Optimal Lighting Strip */}
-          <div className="rounded-2xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200/90 dark:border-sky-800/80 p-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 text-xs sm:text-sm">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-slate-800 dark:text-slate-200">
-              <span className="inline-flex items-center gap-1.5 font-bold text-sky-900 dark:text-sky-300">
-                <Compass className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                <span>Aspect: {page.aspectLabel}</span>
-              </span>
-              <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">•</span>
-              <span className="font-medium">
-                <strong className="text-slate-900 dark:text-white">Access:</strong>{' '}
-                {page.transportSummary} ({page.journeyTime})
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-              <span className="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800 text-sky-900 dark:text-sky-300 font-bold">
-                Best Window: {page.bestTimeWindow}
-              </span>
-            </div>
-          </div>
         </header>
 
         {/* Specialized Riffelsee & Stellisee Mirror Reflection Diagnostic Card */}
@@ -363,9 +369,6 @@ export default async function ViewpointDetailView({
           </section>
         )}
 
-        {/* Live 1–10 AM/PM Hero Verdict Card for this Viewpoint */}
-        <HeroStatus data={activeForecast} />
-
         {/* Low-Visibility Contingency Card (Auto-renders when score <= 4) */}
         <ContingencyCard
           currentScore={activeForecast.currentScore}
@@ -380,11 +383,12 @@ export default async function ViewpointDetailView({
           viewpointLabel={page.shortName}
         />
 
-        {/* 4-Card Atmospheric Layer Diagnostics */}
-        <MetricsGrid
-          metrics={activeForecast.metrics}
-          viewpointLabel={page.shortName}
-        />
+        <HowThisScoreWorks>
+          <MetricsGrid
+            metrics={activeForecast.metrics}
+            viewpointLabel={page.shortName}
+          />
+        </HowThisScoreWorks>
 
         {/* Live Multi-Cam Grid Pre-Selected to this Viewpoint's Roundshot Feed */}
         <LiveWebcam defaultCamId={page.defaultWebcamId} />

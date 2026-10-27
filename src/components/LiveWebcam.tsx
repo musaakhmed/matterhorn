@@ -75,7 +75,6 @@ export default function LiveWebcam({
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [userVote, setUserVote] = useState<'yes' | 'no' | null>(null);
-  const [voteCounts, setVoteCounts] = useState({ yes: 42, no: 19 });
 
   const activeCam =
     WEBCAM_FEEDS.find((cam) => cam.id === selectedId) || WEBCAM_FEEDS[0];
@@ -87,26 +86,8 @@ export default function LiveWebcam({
   };
 
   const handleVote = (choice: 'yes' | 'no') => {
-    if (userVote === choice) return;
-    setVoteCounts((prev) => ({
-      yes:
-        choice === 'yes'
-          ? prev.yes + 1
-          : userVote === 'yes'
-          ? prev.yes - 1
-          : prev.yes,
-      no:
-        choice === 'no'
-          ? prev.no + 1
-          : userVote === 'no'
-          ? prev.no - 1
-          : prev.no,
-    }));
-    setUserVote(choice);
+    setUserVote((current) => (current === choice ? null : choice));
   };
-
-  const totalVotes = voteCounts.yes + voteCounts.no;
-  const yesPercent = Math.round((voteCounts.yes / totalVotes) * 100);
 
   return (
     <section
@@ -246,10 +227,7 @@ export default function LiveWebcam({
           <CheckCircle2 className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
           <div>
             <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-              Can you see the peak right now?
-            </span>
-            <span className="block sm:inline sm:ml-2 text-xs text-slate-500 dark:text-slate-400">
-              Crowd check • {yesPercent}% report visible today ({totalVotes} votes)
+              {dict.webcams.seePeak}
             </span>
           </div>
         </div>
@@ -266,7 +244,7 @@ export default function LiveWebcam({
             }`}
           >
             <ThumbsUp className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Yes ({voteCounts.yes})</span>
+            <span>{dict.webcams.looksRight}</span>
           </button>
 
           <button
@@ -280,7 +258,7 @@ export default function LiveWebcam({
             }`}
           >
             <ThumbsDown className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>No ({voteCounts.no})</span>
+            <span>{dict.webcams.looksWrong}</span>
           </button>
         </div>
       </div>

@@ -94,7 +94,7 @@ export default function LanguageSelector({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 transition-all active:scale-[0.97] shadow-2xs focus:outline-hidden focus:ring-2 focus:ring-sky-500/30 cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-2.5 min-h-11 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 transition-all active:scale-[0.97] shadow-2xs focus:outline-hidden focus:ring-2 focus:ring-sky-500/30 cursor-pointer"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label={dict.common.selectLanguage}

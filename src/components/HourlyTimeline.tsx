@@ -76,7 +76,7 @@ function PeriodPill({ block }: { block: ScoreBlock }) {
     <div
       className={`rounded-xl border ${style.border} ${style.bg} p-2 flex flex-col gap-1.5 transition-colors`}
     >
-      <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+      <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
         <span className="inline-flex items-center gap-1">
           {block.period === 'AM' ? (
             <Sunrise className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" aria-hidden="true" />
@@ -85,7 +85,7 @@ function PeriodPill({ block }: { block: ScoreBlock }) {
           )}
           <span>{block.period === 'AM' ? dict.hero.morningLabel : dict.hero.afternoonLabel}</span>
         </span>
-        <span className="font-mono text-[10px] text-slate-400 dark:text-slate-500">
+        <span className="font-mono text-xs text-slate-400 dark:text-slate-500">
           {block.period === 'AM' ? '06–12' : '12–18'}
         </span>
       </div>
@@ -99,13 +99,13 @@ function PeriodPill({ block }: { block: ScoreBlock }) {
         </div>
 
         <span
-          className={`inline-flex items-center justify-center px-1.5 py-0.5 rounded font-mono text-[11px] font-extrabold shrink-0 ${style.scoreBadge}`}
+          className={`inline-flex items-center justify-center px-1.5 py-0.5 rounded font-mono text-xs font-extrabold shrink-0 ${style.scoreBadge}`}
         >
           {block.score}/10
         </span>
       </div>
 
-      <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200/50 dark:border-slate-800/80">
+      <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200/50 dark:border-slate-800/80">
         <span className="inline-flex items-center gap-1">
           <Cloud className="w-2.5 h-2.5 text-slate-400" aria-hidden="true" />
           <span>Mid {block.metrics.cloudCoverMid}%</span>
@@ -154,7 +154,7 @@ export default function HourlyTimeline({
             type="button"
             onClick={() => handleScroll('left')}
             aria-label="Scroll 10-day forecast left"
-            className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
           >
             <ChevronLeft className="w-4 h-4" aria-hidden="true" />
           </button>
@@ -162,7 +162,7 @@ export default function HourlyTimeline({
             type="button"
             onClick={() => handleScroll('right')}
             aria-label="Scroll 10-day forecast right"
-            className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
           >
             <ChevronRight className="w-4 h-4" aria-hidden="true" />
           </button>
@@ -172,7 +172,7 @@ export default function HourlyTimeline({
       {/* Horizontal 10-Day Card Slider */}
       <div
         ref={sliderRef}
-        className="flex items-stretch gap-3.5 overflow-x-auto no-scrollbar pb-2 pt-0.5 snap-x snap-mandatory"
+        className="flex items-stretch gap-3.5 overflow-x-auto pb-3 pt-0.5 snap-x snap-mandatory"
       >
         {days.map((day) => {
           const dayIndex = new Date(day.dateIso + 'T12:00:00Z').getUTCDay();
@@ -195,7 +195,7 @@ export default function HourlyTimeline({
                       {localizedDayName}
                     </span>
                     {day.isToday && (
-                      <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-extrabold uppercase tracking-wider">
+                      <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-xs font-extrabold uppercase tracking-wider">
                         {dict.timeline.today.toUpperCase()}
                       </span>
                     )}
@@ -206,7 +206,7 @@ export default function HourlyTimeline({
                 </div>
 
                 <div className="text-right">
-                  <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 block">
+                  <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 block">
                     {dict.timeline.peakCol}
                   </span>
                   <span className="text-sm font-mono font-extrabold text-slate-900 dark:text-white">
@@ -245,7 +245,7 @@ export default function HourlyTimeline({
             <span>1–2 {dict.hero.statuses.notVisible}</span>
           </span>
         </div>
-        <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">
+        <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
           Swipe or use arrows to view all 10 days
         </span>
       </div>

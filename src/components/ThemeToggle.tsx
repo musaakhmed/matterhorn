@@ -58,7 +58,7 @@ export default function ThemeToggle({
           role="radio"
           aria-checked={theme === 'light'}
           onClick={() => setTheme('light')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 min-h-11 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mounted && theme === 'light'
               ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -73,7 +73,7 @@ export default function ThemeToggle({
           role="radio"
           aria-checked={theme === 'dark'}
           onClick={() => setTheme('dark')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 min-h-11 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mounted && theme === 'dark'
               ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -88,7 +88,7 @@ export default function ThemeToggle({
           role="radio"
           aria-checked={theme === 'system'}
           onClick={() => setTheme('system')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 min-h-11 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             mounted && theme === 'system'
               ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -112,7 +112,7 @@ export default function ThemeToggle({
             ? `Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`
             : 'Toggle Theme'
         }
-        className={`inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${className}`}
+        className={`inline-flex items-center justify-center w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${className}`}
       >
         {!mounted ? (
           <span className="w-4 h-4" />
@@ -140,7 +140,7 @@ export default function ThemeToggle({
         aria-haspopup="true"
         aria-expanded={dropdownOpen}
         aria-label="Toggle Theme Menu"
-        className="inline-flex items-center justify-center gap-1.5 h-9 sm:h-10 px-2.5 sm:px-3 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 dark:bg-slate-800/90 dark:hover:bg-slate-700/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all active:scale-[0.97] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 shadow-2xs"
+        className="inline-flex items-center justify-center gap-1.5 h-11 px-2.5 sm:px-3 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 dark:bg-slate-800/90 dark:hover:bg-slate-700/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all active:scale-[0.97] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 shadow-2xs"
       >
         {!mounted ? (
           <span className="w-4 h-4" />

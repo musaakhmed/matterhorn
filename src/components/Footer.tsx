@@ -9,13 +9,7 @@ import {
   BookOpen,
   Code2,
   ChevronUp,
-  Activity,
-  ArrowUpRight,
   MapPin,
-  ExternalLink,
-  Snowflake,
-  Camera,
-  Layers,
   Compass,
 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/context';
@@ -77,12 +71,12 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   Is The Matterhorn Visible?
                 </Link>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200 dark:border-sky-800 text-[10px] font-semibold text-sky-700 dark:text-sky-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200 dark:border-sky-800 text-xs font-semibold text-sky-700 dark:text-sky-300">
                   <MapPin className="w-3 h-3 shrink-0" aria-hidden="true" />
                   <span>4,478m • Zermatt, Switzerland</span>
                 </span>
               </div>
-              <p className="mt-1 text-slate-500 dark:text-slate-400 max-w-2xl text-[11px] sm:text-xs leading-relaxed">
+              <p className="mt-1 text-slate-500 dark:text-slate-400 max-w-2xl text-xs sm:text-xs leading-relaxed">
                 {dict?.footer?.tagline ||
                   'Real-time atmospheric summit telemetry, 10-day high-altitude visibility forecasting, and comprehensive vantage guides for the iconic Swiss alpine pyramid.'}
               </p>
@@ -90,23 +84,21 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           </div>
 
           <div className="flex flex-wrap items-center gap-3 self-stretch lg:self-auto justify-between lg:justify-end">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 text-[11px] font-mono">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 text-xs font-mono">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span className="text-slate-700 dark:text-slate-300 font-medium">Live Telemetry</span>
-              <span className="text-slate-400 dark:text-slate-600">•</span>
-              <span className="text-slate-500 dark:text-slate-400">15m Cache</span>
+              <span className="text-slate-700 dark:text-slate-300 font-medium">{dict.footer.updatedEvery}</span>
             </div>
 
             <button
               type="button"
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-700 shadow-2xs text-[11px] font-medium transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-700 shadow-2xs text-xs font-medium transition-all cursor-pointer"
               aria-label="Back to top of page"
             >
-              <span>Back to Top</span>
+              <span>{dict.common.backToTop}</span>
               <ChevronUp className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           </div>
@@ -123,7 +115,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           <div>
             <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-semibold text-xs tracking-wider uppercase mb-3.5">
               <Mountain className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>Matterhorn Viewpoints</span>
+              <span>{dict.footer.viewpointsColumn}</span>
             </div>
             <ul className="space-y-2.5">
               <li>
@@ -132,9 +124,9 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   className="group flex flex-col hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
                 >
                   <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-sky-600 dark:group-hover:text-sky-400">
-                    All 4 Zermatt Viewpoints Hub
+                    {dict.footer.allViewpointsHub}
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Comprehensive sector & elevation comparison
                   </span>
                 </Link>
@@ -146,9 +138,9 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
                     <span>Gornergrat Ridge</span>
-                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">3,089m</span>
+                    <span className="text-xs font-mono text-slate-600 dark:text-slate-400">3,089m</span>
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Cogwheel railway & iconic East face pyramid
                   </span>
                 </Link>
@@ -160,9 +152,9 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
                     <span>Matterhorn Glacier Paradise</span>
-                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">3,883m</span>
+                    <span className="text-xs font-mono text-slate-600 dark:text-slate-400">3,883m</span>
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Highest cable car station in Europe
                   </span>
                 </Link>
@@ -174,9 +166,9 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
                     <span>Sunnegga</span>
-                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">2,288m</span>
+                    <span className="text-xs font-mono text-slate-600 dark:text-slate-400">2,288m</span>
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Funicular terrace and the east face
                   </span>
                 </Link>
@@ -188,9 +180,9 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
                     <span>Riffelsee</span>
-                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">2,757m</span>
+                    <span className="text-xs font-mono text-slate-600 dark:text-slate-400">2,757m</span>
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Which mountain is reflected in the lake
                   </span>
                 </Link>
@@ -202,9 +194,9 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
                     <span>Zermatt Village & Kirchbrücke</span>
-                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">1,620m</span>
+                    <span className="text-xs font-mono text-slate-600 dark:text-slate-400">1,620m</span>
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Iconic golden hour photography bridge
                   </span>
                 </Link>
@@ -216,7 +208,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           <div>
             <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-semibold text-xs tracking-wider uppercase mb-3.5">
               <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>Alpine Travel & Transit</span>
+              <span>{dict.footer.travelColumn}</span>
             </div>
             <ul className="space-y-2.5">
               <li>
@@ -227,7 +219,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Scenic Trains Comparison
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Gornergrat Railway vs. Glacier Express
                   </span>
                 </Link>
@@ -240,7 +232,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Zermatt Ski Paradise & Slopes
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Klein Matterhorn & Cervinia international pistes
                   </span>
                 </Link>
@@ -253,7 +245,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Live Optical Webcams
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Gornergrat, Rothorn & Trockener Steg 4K
                   </span>
                 </Link>
@@ -266,7 +258,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     10-Day Alpine Visibility Forecast
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Hour-by-hour summit cloud & solar telemetry
                   </span>
                 </Link>
@@ -279,7 +271,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Zermatt on a Cloudy or Rainy Day
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Matterhorn Museum, Gorner Gorge & spas
                   </span>
                 </Link>
@@ -291,7 +283,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           <div>
             <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-semibold text-xs tracking-wider uppercase mb-3.5">
               <BookOpen className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>Field Guides & Planning</span>
+              <span>{dict.footer.guidesColumn}</span>
             </div>
             <ul className="space-y-2.5">
               <li>
@@ -302,7 +294,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     All Alpine Field Guides
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Essential reading for visiting Zermatt
                   </span>
                 </Link>
@@ -315,7 +307,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Best Time of Day to See Matterhorn
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Thermal updrafts & morning clarity analysis
                   </span>
                 </Link>
@@ -328,7 +320,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Best Matterhorn Photo Viewpoints
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Golden hour lighting & lens recommendations
                   </span>
                 </Link>
@@ -341,7 +333,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Gornergrat vs. Glacier Paradise
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Head-to-head ticket, route & view breakdown
                   </span>
                 </Link>
@@ -354,7 +346,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Zurich & Geneva to Zermatt Day Trip
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     SBB train timetables, passes & feasibility
                   </span>
                 </Link>
@@ -366,7 +358,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           <div>
             <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-semibold text-xs tracking-wider uppercase mb-3.5">
               <Code2 className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>Developer & Widgets</span>
+              <span>{dict.footer.developersColumn}</span>
             </div>
             <ul className="space-y-2.5">
               <li>
@@ -376,31 +368,12 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 >
                   <span className="font-semibold text-slate-800 dark:text-slate-200 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
                     <span>Embeddable Alpine Widget</span>
-                    <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded-sm bg-sky-100 dark:bg-sky-900/60 text-sky-700 dark:text-sky-300">
+                    <span className="text-xs font-semibold uppercase px-1.5 py-0.5 rounded-sm bg-sky-100 dark:bg-sky-900/60 text-sky-700 dark:text-sky-300">
                       Free
                     </span>
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Live score badge for hotels & travel blogs
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/api/visibility"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-                >
-                  <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center justify-between">
-                    <span className="flex items-center gap-1">
-                      <span>Live JSON API</span>
-                      <ArrowUpRight className="w-3 h-3 text-slate-400 group-hover:text-sky-500" aria-hidden="true" />
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400">REST</span>
-                  </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
-                    Real-time score & high-altitude telemetry endpoint
                   </span>
                 </Link>
               </li>
@@ -412,23 +385,8 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                   <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400">
                     Atmospheric Physics & Föhn Wind
                   </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
+                  <span className="text-xs text-slate-600 dark:text-slate-400">
                     Open-Meteo multi-altitude cloud layer modelling
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sitemap.xml"
-                  target="_blank"
-                  className="group flex flex-col hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-                >
-                  <span className="font-medium text-slate-700 dark:text-slate-300 group-hover:text-sky-600 dark:group-hover:text-sky-400 flex items-center gap-1">
-                    <span>Search Engine Sitemap</span>
-                    <ArrowUpRight className="w-3 h-3 text-slate-400 group-hover:text-sky-500" aria-hidden="true" />
-                  </span>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400">
-                    Direct XML index of all viewpoint & guide routes
                   </span>
                 </Link>
               </li>
@@ -439,7 +397,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
 
       {/* Bottom Legal, Sourcing & Geo Strip */}
       <div className="border-t border-slate-200/60 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col lg:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 dark:text-slate-400">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col lg:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-3 text-center sm:text-left">
             <span className="whitespace-nowrap">
               {dict?.footer?.copyright?.replace('{year}', currentYear.toString()) ||
@@ -453,12 +411,12 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           </div>
 
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 shrink-0">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 text-slate-600 dark:text-slate-300 font-mono text-[10px] whitespace-nowrap">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 text-slate-600 dark:text-slate-300 font-mono text-xs whitespace-nowrap">
               <Compass className="w-3 h-3 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
               <span>45.9765° N, 7.7491° E</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 font-mono text-[10px] whitespace-nowrap text-slate-500 dark:text-slate-400">
+            <div className="inline-flex items-center gap-2 font-mono text-xs whitespace-nowrap text-slate-500 dark:text-slate-400">
               <Link
                 href={getLocalizedHref('/widget', locale)}
                 className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors underline underline-offset-2"

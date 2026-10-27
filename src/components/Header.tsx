@@ -41,6 +41,7 @@ export interface HeaderTelemetrySummary {
 export interface HeaderProps {
   initialSwissTime?: string;
   activeViewpoint?: Viewpoint;
+  activeScore?: number;
   activeBadgeColor?: BadgeColor;
   telemetrySummary?: HeaderTelemetrySummary;
 }
@@ -70,6 +71,7 @@ const BADGE_COLOR_MAP: Record<BadgeColor, { pill: string; dot: string; text: str
 
 export default function Header({
   activeViewpoint,
+  activeScore,
   activeBadgeColor,
   telemetrySummary,
 }: HeaderProps) {
@@ -103,24 +105,27 @@ export default function Header({
     },
     {
       slug: 'sunnegga',
-      title: 'Sunnegga',
+      title: dict.navigation.sunneggaPlaceTitle,
       elevation: dict.navigation.sunneggaElevation,
-      aspect: 'Funicular & east face',
+      aspect: dict.navigation.sunneggaFace,
       badgeKey: null,
+      borrowed: true,
     },
     {
       slug: 'riffelsee',
-      title: 'Riffelsee',
-      elevation: '2,757 m',
-      aspect: dict.navigation.sunneggaAspect,
+      title: dict.navigation.riffelseeTitle,
+      elevation: dict.navigation.riffelseeElevation,
+      aspect: dict.navigation.riffelseeFace,
       badgeKey: null,
+      borrowed: true,
     },
     {
       slug: 'zermatt-village',
       title: dict.navigation.zermattVillageTitle || 'Zermatt Village (Kirchbrücke)',
       elevation: dict.navigation.zermattVillageElevation || '1,608 m',
-      aspect: dict.navigation.zermattVillageAspect || 'Village & River Perspective',
+      aspect: dict.navigation.zermattVillageAspect || dict.navigation.villageTransport,
       badgeKey: null,
+      borrowed: true,
     },
   ];
 
@@ -188,19 +193,20 @@ export default function Header({
     setViewpointsDropdownOpen(false);
   }, [pathname]);
 
-  // Summary badge logic
-  const gornergratBadge = telemetrySummary?.gornergratBadge || activeBadgeColor || 'emerald';
-  const gornergratScore = telemetrySummary?.gornergratScore ?? 9;
+  const usingActiveScore = typeof activeScore === 'number';
+  const liveScore = usingActiveScore ? activeScore : telemetrySummary?.gornergratScore;
+  const liveBadge = usingActiveScore ? activeBadgeColor : telemetrySummary?.gornergratBadge;
+  const hasLiveScore = typeof liveScore === 'number' && !!liveBadge;
 
   return (
-    <header className="w-full border-b border-slate-200/90 dark:border-slate-800/90 bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl sticky top-0 z-50 shadow-[0_1px_3px_rgba(15,23,42,0.04)] dark:shadow-none transition-colors">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-4">
+    <header className="relative w-full border-b border-slate-200/90 dark:border-slate-800/90 bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl sticky top-0 z-50 shadow-[0_1px_3px_rgba(15,23,42,0.04)] dark:shadow-none transition-colors">
+      <div className="relative z-50 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-4">
         {/* Brand Identity */}
         <div className="flex items-center gap-3 shrink-0">
           <Link
             href={getLocalizedHref('/', locale)}
             className="flex items-center gap-2.5 sm:gap-3 group focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none rounded-xl shrink-0"
-            aria-label="Is The Matterhorn Visible? Home"
+            aria-label={dict.common.siteName}
           >
             <div className="relative shrink-0">
               <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-900 ring-1 ring-sky-500/35 shadow-sm select-none group-hover:ring-sky-500 transition-all">
@@ -225,11 +231,12 @@ export default function Header({
 
             <div className="shrink-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs sm:text-sm font-extrabold tracking-tight text-slate-900 dark:text-white uppercase whitespace-nowrap group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
-                  {dict.common.siteName.toUpperCase()}
+                <span className="text-sm font-extrabold tracking-tight text-slate-900 dark:text-white whitespace-nowrap group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+                  <span className="sm:hidden">{dict.common.wordmarkShort}</span>
+                  <span className="hidden sm:inline">{dict.common.siteName}</span>
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-mono whitespace-nowrap">
+              <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 whitespace-nowrap">
                 <span className="text-sky-700 dark:text-sky-400 font-semibold">Zermatt 4,478m</span>
                 {activeViewpoint && (
                   <>
@@ -252,7 +259,7 @@ export default function Header({
           {/* Live Forecast / Home Link */}
           <Link
             href={getLocalizedHref('/', locale)}
-            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-11 ${
               isHome
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -263,18 +270,22 @@ export default function Header({
               className={`w-4 h-4 shrink-0 ${isHome ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
               aria-hidden="true"
             />
-            <span>{dict.common.liveScore}</span>
+            <span>{dict.common.today}</span>
           </Link>
 
           {/* Viewpoints Dropdown */}
-          <div className="relative shrink-0" ref={dropdownRef}>
+          <div
+            className="relative shrink-0"
+            ref={dropdownRef}
+            onMouseEnter={() => setViewpointsDropdownOpen(true)}
+            onMouseLeave={() => setViewpointsDropdownOpen(false)}
+          >
             <button
               type="button"
               onClick={() => setViewpointsDropdownOpen(!viewpointsDropdownOpen)}
-              onMouseEnter={() => setViewpointsDropdownOpen(true)}
               aria-expanded={viewpointsDropdownOpen}
               aria-haspopup="true"
-              className={`whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 cursor-pointer ${
+              className={`whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-11 cursor-pointer ${
                 isViewpoints
                   ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -296,13 +307,12 @@ export default function Header({
             {/* Dropdown Flyout */}
             {viewpointsDropdownOpen && (
               <div
-                onMouseLeave={() => setViewpointsDropdownOpen(false)}
-                className="absolute left-0 mt-2 w-[360px] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-50 animate-dropdown-left"
+                className="absolute left-0 top-full w-[360px] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-50 animate-dropdown-left"
                 role="menu"
                 aria-label="Viewpoints menu"
               >
                 <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 mb-1">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
+                  <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
                     {dict.viewpointSwitcher.selectVantagePoint}
                   </span>
                 </div>
@@ -327,20 +337,25 @@ export default function Header({
                         <div className="min-w-0 pr-2">
                           <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400">
                             <span className="truncate">{item.title}</span>
-                            <span className="whitespace-nowrap shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                            <span className="whitespace-nowrap shrink-0 text-xs font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                               {item.elevation}
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-600 dark:text-slate-300 font-sans mt-0.5 truncate">
+                          <p className="text-xs text-slate-600 dark:text-slate-300 font-sans mt-0.5 truncate">
                             {item.aspect}
                           </p>
+                          {item.borrowed && (
+                            <p className="text-xs text-sky-800 dark:text-sky-300 mt-0.5">
+                              {dict.navigation.sameForecast}
+                            </p>
+                          )}
                         </div>
 
                         <div className="shrink-0 flex items-center justify-end gap-2">
                           {scoreBadge ? (
                             <span
                               title="Live photo-conditions score"
-                              className={`inline-flex items-center justify-center gap-1 w-[58px] py-0.5 rounded-md text-[10px] font-mono font-bold border whitespace-nowrap ${
+                              className={`inline-flex items-center justify-center gap-1 w-[58px] py-0.5 rounded-md text-xs font-mono font-bold border whitespace-nowrap ${
                                 BADGE_COLOR_MAP[scoreBadge.color].pill
                               }`}
                             >
@@ -354,7 +369,7 @@ export default function Header({
                           ) : (
                             <span
                               aria-label="No live score"
-                              className="inline-flex items-center justify-center w-[58px] py-0.5 text-[10px] font-mono text-slate-400 dark:text-slate-500"
+                              className="inline-flex items-center justify-center w-[58px] py-0.5 text-xs font-mono text-slate-400 dark:text-slate-500"
                             >
                               –
                             </span>
@@ -370,11 +385,11 @@ export default function Header({
                   })}
                 </div>
 
-                <div className="pt-2 mt-1 border-t border-slate-100 dark:border-slate-800">
+                <div className="pt-2 mt-1 border-t border-slate-100 dark:border-slate-800 space-y-1">
                   <Link
                     href={getLocalizedHref('/viewpoints', locale)}
                     role="menuitem"
-                    className="group flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-950/50 transition-colors"
+                    className="group flex items-center justify-between px-3 py-2 min-h-11 rounded-xl text-xs font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-950/50 transition-colors"
                   >
                     <span className="flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5" aria-hidden="true" />
@@ -387,10 +402,9 @@ export default function Header({
             )}
           </div>
 
-          {/* Scenic Trains Link */}
           <Link
             href={getLocalizedHref('/trains', locale)}
-            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-11 ${
               isTrains
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -401,13 +415,13 @@ export default function Header({
               className={`w-4 h-4 shrink-0 ${isTrains ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
               aria-hidden="true"
             />
-            <span>Trains</span>
+            <span>{dict.common.trains}</span>
           </Link>
 
-          {/* Ski & Snow Intelligence Link */}
+          {/* Ski */}
           <Link
             href={getLocalizedHref('/ski', locale)}
-            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-11 ${
               isSki
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -418,13 +432,13 @@ export default function Header({
               className={`w-4 h-4 shrink-0 ${isSki ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
               aria-hidden="true"
             />
-            <span>Ski & Snow</span>
+            <span>{dict.common.ski}</span>
           </Link>
 
           {/* Field Guides Link */}
           <Link
             href={getLocalizedHref('/guides', locale)}
-            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
+            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-11 ${
               isGuides
                 ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
@@ -444,14 +458,21 @@ export default function Header({
         <div className="flex items-center gap-2 shrink-0">
           {/* Live Telemetry Score Pill */}
           <Link
-            href={getLocalizedHref(isHome ? '/viewpoints/gornergrat' : '/', locale)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all hover:scale-102 shadow-2xs shrink-0 ${
-              BADGE_COLOR_MAP[gornergratBadge].pill
+            href={`${getLocalizedHref('/', locale)}#forecast`}
+            className={`inline-flex items-center gap-1.5 px-2.5 min-h-11 rounded-lg border text-xs font-mono font-bold transition-colors shadow-2xs shrink-0 ${
+              hasLiveScore
+                ? BADGE_COLOR_MAP[liveBadge].pill
+                : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
             }`}
-            title={`Live Gornergrat Summit Visibility: ${gornergratScore}/10`}
+            title={hasLiveScore ? `${liveScore}/10` : dict.common.updating}
           >
-            <Radio className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 animate-pulse shrink-0" aria-hidden="true" />
-            <span>Live: {gornergratScore}/10</span>
+            {hasLiveScore && (
+              <Radio
+                className={`w-3.5 h-3.5 shrink-0 ${BADGE_COLOR_MAP[liveBadge].text}`}
+                aria-hidden="true"
+              />
+            )}
+            <span>{hasLiveScore ? `${liveScore}/10` : dict.common.updating}</span>
           </Link>
 
           {/* Multilingual Selector */}
@@ -467,7 +488,7 @@ export default function Header({
             aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation-drawer"
-            className="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 transition-colors active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none shrink-0"
+            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 transition-colors active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none shrink-0"
           >
             {mobileMenuOpen ? (
               <X className="w-5 h-5 text-slate-900 dark:text-white" aria-hidden="true" />
@@ -483,7 +504,7 @@ export default function Header({
         <>
           {/* Backdrop Blur */}
           <div
-            className="fixed inset-0 top-[61px] sm:top-[69px] bg-slate-900/40 dark:bg-black/60 backdrop-blur-xs z-40 lg:hidden animate-subtle-fade"
+            className="fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-xs z-40 lg:hidden animate-subtle-fade"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
@@ -491,7 +512,7 @@ export default function Header({
           {/* Slide-Down Drawer Container */}
           <div
             id="mobile-navigation-drawer"
-            className="fixed inset-x-0 top-[61px] sm:top-[69px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-b border-slate-200/90 dark:border-slate-800 shadow-2xl z-50 lg:hidden max-h-[calc(100vh-70px)] overflow-y-auto animate-drawer"
+            className="absolute inset-x-0 top-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-b border-slate-200/90 dark:border-slate-800 shadow-2xl z-50 lg:hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto animate-drawer"
           >
             <div className="p-4 space-y-4 max-w-lg mx-auto">
               {/* Primary Mobile Links */}
@@ -532,7 +553,7 @@ export default function Header({
                   }`}
                 >
                   <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">Scenic Trains</span>
+                  <span className="text-xs font-bold">{dict.navigation.scenicTrains}</span>
                 </Link>
 
                 <Link
@@ -545,7 +566,7 @@ export default function Header({
                   }`}
                 >
                   <Snowflake className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">Ski & Snow</span>
+                  <span className="text-xs font-bold">{dict.common.ski}</span>
                 </Link>
 
                 <Link
@@ -565,11 +586,11 @@ export default function Header({
               {/* Viewpoints Quick-Access Cards */}
               <div className="bg-slate-50/80 dark:bg-slate-800/50 rounded-2xl p-3 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
                 <div className="flex items-center justify-between px-1">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
+                  <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
                     {dict.viewpointSwitcher.selectVantagePoint}
                   </span>
-                  <span className="text-[10px] font-mono text-sky-700 dark:text-sky-400 font-semibold">
-                    Live Score
+                  <span className="text-xs font-mono text-sky-700 dark:text-sky-400 font-semibold">
+                    {dict.common.liveScore}
                   </span>
                 </div>
 
@@ -593,14 +614,14 @@ export default function Header({
                           <span className="text-xs font-bold block truncate text-slate-900 dark:text-white">
                             {item.title}
                           </span>
-                          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+                          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                             {item.elevation} • {item.aspect}
                           </span>
                         </div>
 
                         {scoreBadge ? (
                           <span
-                            className={`shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-mono font-bold border ${
+                            className={`shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-mono font-bold border ${
                               BADGE_COLOR_MAP[scoreBadge.color].pill
                             }`}
                           >
@@ -626,7 +647,7 @@ export default function Header({
               {/* Theme Selector Strip */}
               <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80">
                 <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                  Theme Appearance
+                  {dict.common.themeAppearance}
                 </span>
                 <ThemeToggle variant="segmented" />
               </div>
@@ -643,7 +664,7 @@ export default function Header({
                   className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors ml-auto"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-sky-200" aria-hidden="true" />
-                  <span>{dict.common.liveScore}</span>
+                  <span>{dict.common.today}</span>
                 </Link>
               </div>
             </div>

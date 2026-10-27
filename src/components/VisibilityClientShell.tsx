@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from './Header';
-import ViewpointSwitcher from './ViewpointSwitcher';
+import ViewpointSwitcher, { ViewpointPlace } from './ViewpointSwitcher';
+import HowThisScoreWorks from './HowThisScoreWorks';
 import HeroStatus from './HeroStatus';
 import ContingencyCard from './ContingencyCard';
 import HourlyTimeline from './HourlyTimeline';
@@ -18,8 +19,8 @@ import Footer from './Footer';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
-import { getViewpointScoreMap } from '@/lib/viewpoints';
-import { Activity, Info, BookOpen, ArrowUpRight, Code2, Camera, MountainSnow, TrainFront } from 'lucide-react';
+import { getViewpointScoreMap, VIEWPOINT_PAGES } from '@/lib/viewpoints';
+import { Info, BookOpen, ArrowUpRight, Camera, MountainSnow, TrainFront } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref } from '@/lib/i18n/config';
 import { evaluateCrossBorderLink } from '@/lib/ski';
@@ -42,29 +43,61 @@ export default function VisibilityClientShell({
   const borderStatus = evaluateCrossBorderLink(initialData);
   const trainsLive = getTrainsLiveStatus(initialData);
 
-  const viewpointsMap = {
-    gornergrat: initialData.viewpoints.gornergrat.viewpoint,
-    'glacier-paradise': initialData.viewpoints['glacier-paradise'].viewpoint,
-  };
-
-  const scoresMap = {
+  const scoreMap = getViewpointScoreMap(initialData);
+  const placeCopy: Record<
+    (typeof VIEWPOINT_PAGES)[number]['slug'],
+    { name: string; face: string; transport: string }
+  > = {
     gornergrat: {
-      am: initialData.viewpoints.gornergrat.today.morning.score,
-      pm: initialData.viewpoints.gornergrat.today.afternoon.score,
-      active: initialData.viewpoints.gornergrat.currentScore,
+      name: dict.navigation.gornergratTitle,
+      face: dict.navigation.gornergratAspect,
+      transport: dict.navigation.gornergratTransport,
     },
     'glacier-paradise': {
-      am: initialData.viewpoints['glacier-paradise'].today.morning.score,
-      pm: initialData.viewpoints['glacier-paradise'].today.afternoon.score,
-      active: initialData.viewpoints['glacier-paradise'].currentScore,
+      name: dict.navigation.glacierTitle,
+      face: dict.navigation.glacierAspect,
+      transport: dict.navigation.glacierTransport,
+    },
+    sunnegga: {
+      name: dict.navigation.sunneggaPlaceTitle,
+      face: dict.navigation.sunneggaFace,
+      transport: dict.navigation.sunneggaTransport,
+    },
+    riffelsee: {
+      name: dict.navigation.riffelseeTitle,
+      face: dict.navigation.riffelseeFace,
+      transport: dict.navigation.riffelseeTransport,
+    },
+    'zermatt-village': {
+      name: dict.navigation.zermattVillageTitle || 'Zermatt Village',
+      face: dict.navigation.zermattVillageAspect || dict.navigation.villageTransport,
+      transport: dict.navigation.villageTransport,
     },
   };
+  const places: ViewpointPlace[] = VIEWPOINT_PAGES.map((page) => {
+    const copy = placeCopy[page.slug];
+    const score = scoreMap[page.slug];
+    const modeled = page.slug === 'gornergrat' || page.slug === 'glacier-paradise';
+    return {
+      slug: page.slug,
+      name: copy.name,
+      face: copy.face,
+      transport: copy.transport,
+      score: score.score,
+      color: score.color,
+      borrowed: page.telemetryKey === 'gornergrat' && page.slug !== 'gornergrat',
+      mode: modeled ? 'switch' : 'link',
+      viewpointId: page.telemetryKey,
+    };
+  });
+  const webcamId = activeViewpointId === 'glacier-paradise' ? 'trockener-steg' : 'gornergrat';
 
   return (
     <>
       <Header
         initialSwissTime={initialData.swissTimeFormatted}
         activeViewpoint={activeData.viewpoint}
+        activeScore={activeData.currentScore}
         activeBadgeColor={activeData.currentBadgeColor}
         telemetrySummary={{
           gornergratScore: initialData.viewpoints.gornergrat.currentScore,
@@ -78,20 +111,16 @@ export default function VisibilityClientShell({
       />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
-        <h1 className="sr-only">{dict.common.siteTagline}</h1>
-
-        {/* 1. Prominent Multi-Aspect Viewpoint Switcher */}
-        <ViewpointSwitcher
-          viewpoints={viewpointsMap}
-          activeId={activeViewpointId}
-          onChange={setActiveViewpointId}
-          scores={scoresMap}
-        />
-
-        {/* 2. Hero Status Verdict Card (1–10 AM/PM Dual Index) */}
         <HeroStatus data={activeData} />
 
-        {/* 3. Adaptive Low-Visibility Contingency Card (Triggers when score <= 4) */}
+        <ViewpointSwitcher
+          places={places}
+          activeId={activeViewpointId}
+          onChange={setActiveViewpointId}
+        />
+
+        <LiveWebcam key={webcamId} defaultCamId={webcamId} />
+
         <ContingencyCard
           currentScore={activeData.currentScore}
           morningScore={activeData.today.morning.score}
@@ -99,60 +128,40 @@ export default function VisibilityClientShell({
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
 
-        <section aria-label="Today in Zermatt" className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <nav aria-label={dict.homeStatus.webcam} className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <a
             href="#webcams"
-            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:border-sky-400 dark:hover:border-sky-600 transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-sky-800 hover:text-sky-950 dark:text-sky-300 dark:hover:text-sky-100"
           >
-            <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
-              <Camera className="w-4 h-4" aria-hidden="true" />
-              <span className="text-xs font-mono uppercase tracking-wider font-bold">Webcam</span>
-            </div>
-            <h2 className="mt-2 text-lg font-extrabold text-slate-950 dark:text-white">Gornergrat is live</h2>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              The Gornergrat webcam is on this page. Trockener Steg is the Klein Matterhorn view in the same block.
-            </p>
+            <Camera className="w-4 h-4" aria-hidden="true" />
+            <span>{dict.homeStatus.webcam}</span>
           </a>
           <Link
             href={getLocalizedHref('/ski', locale)}
-            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:border-sky-400 dark:hover:border-sky-600 transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-sky-800 hover:text-sky-950 dark:text-sky-300 dark:hover:text-sky-100"
           >
-            <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
-              <MountainSnow className="w-4 h-4" aria-hidden="true" />
-              <span className="text-xs font-mono uppercase tracking-wider font-bold">Ski report</span>
-            </div>
-            <h2 className="mt-2 text-lg font-extrabold text-slate-950 dark:text-white">
-              Cervinia link {borderStatus.status.toLowerCase()}
-            </h2>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Plateau Rosa wind is {borderStatus.plateauRosaWindKmh} km/h. Open the Zermatt ski report for snow, season, and lifts.
-            </p>
+            <MountainSnow className="w-4 h-4" aria-hidden="true" />
+            <span>
+              {dict.homeStatus.cervinia}: {borderStatus.status.toLowerCase()}
+            </span>
           </Link>
           <Link
             href={getLocalizedHref('/trains', locale)}
-            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:border-sky-400 dark:hover:border-sky-600 transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-sky-800 hover:text-sky-950 dark:text-sky-300 dark:hover:text-sky-100"
           >
-            <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
-              <TrainFront className="w-4 h-4" aria-hidden="true" />
-              <span className="text-xs font-mono uppercase tracking-wider font-bold">Trains</span>
-            </div>
-            <h2 className="mt-2 text-lg font-extrabold text-slate-950 dark:text-white">
-              {trainsLive.glacierExpress.isOperating ? 'Glacier Express is running' : 'Glacier Express is paused'}
-            </h2>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Gornergrat scores {trainsLive.gornergrat.score}/10 today. {trainsLive.glacierExpress.operatingStatusLabel}
-            </p>
+            <TrainFront className="w-4 h-4" aria-hidden="true" />
+            <span>
+              {trainsLive.glacierExpress.isOperating
+                ? dict.homeStatus.trainsRunning
+                : dict.homeStatus.trainsPaused}
+            </span>
           </Link>
-        </section>
+        </nav>
 
-        {/* 4. 10-Day Horizon Card Slider */}
         <HourlyTimeline
           days={activeData.days}
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
-
-        {/* 5. Expanded Multi-Cam Grid + User Validation Micro-Poll */}
-        <LiveWebcam />
 
         {/* 6. Tactical Zermatt Sector Guide (Gornergrat vs Glacier Paradise vs Sunnegga) */}
         <ViewpointAdvice viewpoints={activeData.sectorRecommendations} />
@@ -166,13 +175,10 @@ export default function VisibilityClientShell({
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
 
-        {/* 9. Historical "Visibility by Month" Statistical Table */}
-        <HistoricalTable />
-
-        {/* 9. Meteorological Scoring Formula & Visual Scale Reference Card */}
+        <HowThisScoreWorks>
         <section
           aria-label="Visibility Scoring Methodology"
-          className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/85 dark:bg-slate-900/85 p-5 sm:p-6 text-xs sm:text-sm text-slate-600 dark:text-slate-300 shadow-2xs space-y-5"
+          className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-5"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="space-y-1.5 max-w-3xl">
@@ -192,7 +198,7 @@ export default function VisibilityClientShell({
               </p>
             </div>
 
-            <div className="shrink-0 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 p-3.5 font-mono text-[11px] text-slate-800 dark:text-slate-200 space-y-1">
+            <div className="shrink-0 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 p-3.5 font-mono text-xs text-slate-800 dark:text-slate-200 space-y-1">
               <div className="text-sky-700 dark:text-sky-400 font-bold">
                 Raw = 100 - (0.60·C_mid + 0.25·C_low + 0.15·C_high) - Penalties
               </div>
@@ -230,7 +236,7 @@ export default function VisibilityClientShell({
                         • {localizedTier.label}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 truncate mt-0.5">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                       {localizedTier.caption}
                     </p>
                   </div>
@@ -239,19 +245,10 @@ export default function VisibilityClientShell({
             })}
           </div>
         </section>
+        <HistoricalTable />
+        </HowThisScoreWorks>
 
-        {/* 10. Frequently Asked Questions (FAQPage Schema-Backed Accordion) */}
-        <FaqSection
-          faqs={dashboardFaqs}
-          groupName="dashboard-faq"
-          badgeLabel={dict.faq.badge}
-        />
-
-        {/* 11. Alpine Field Guides & Live Status Widget Quick-Access Strip */}
-        <section
-          aria-label="Zermatt Field Guides and Embeddable Live Status Widget"
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
-        >
+        <section aria-label={dict.guidesPromo.title}>
           <div className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-sky-50/80 via-white to-slate-50/90 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-slate-900/90 p-5 sm:p-6 shadow-2xs flex flex-col justify-between gap-4">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-slate-900 dark:text-white font-extrabold text-sm sm:text-base">
@@ -273,29 +270,13 @@ export default function VisibilityClientShell({
               </Link>
             </div>
           </div>
-
-          <div className="rounded-2xl border border-sky-200/90 dark:border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950 text-white p-5 sm:p-6 shadow-2xs flex flex-col justify-between gap-4">
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2 font-extrabold text-sm sm:text-base text-white">
-                <Code2 className="w-4 h-4 text-sky-400 shrink-0" aria-hidden="true" />
-                <span>{dict.widgetPromo.title}</span>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-300">
-                {dict.widgetPromo.desc}
-              </p>
-            </div>
-
-            <div>
-              <Link
-                href={getLocalizedHref('/widget', locale)}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-extrabold shadow-xs transition-colors"
-              >
-                <span>{dict.widgetPromo.cta}</span>
-                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
         </section>
+
+        <FaqSection
+          faqs={dashboardFaqs}
+          groupName="dashboard-faq"
+          badgeLabel={dict.faq.badge}
+        />
       </main>
 
       <Footer />

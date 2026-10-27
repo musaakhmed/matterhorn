@@ -13,20 +13,40 @@ export interface Dictionary {
     loading: string;
     updatedJustNow: string;
     updatedMinutesAgo: string;
+    wordmarkShort: string;
+    today: string;
+    ski: string;
+    trains: string;
+    updating: string;
+    themeAppearance: string;
+    howThisScoreWorks: string;
+    backToTop: string;
   };
   navigation: {
     gornergratTitle: string;
     gornergratElevation: string;
     gornergratAspect: string;
+    gornergratTransport: string;
     glacierTitle: string;
     glacierElevation: string;
     glacierAspect: string;
+    glacierTransport: string;
     sunneggaTitle: string;
+    sunneggaPlaceTitle: string;
     sunneggaElevation: string;
     sunneggaAspect: string;
+    sunneggaFace: string;
+    sunneggaTransport: string;
+    riffelseeTitle: string;
+    riffelseeElevation: string;
+    riffelseeFace: string;
+    riffelseeTransport: string;
     zermattVillageTitle?: string;
     zermattVillageElevation?: string;
     zermattVillageAspect?: string;
+    villageTransport: string;
+    sameForecast: string;
+    scenicTrains: string;
   };
   hero: {
     verdictAria: string;
@@ -123,6 +143,9 @@ export interface Dictionary {
     fullScreen: string;
     refreshFeed: string;
     opticalSensorNote: string;
+    seePeak: string;
+    looksRight: string;
+    looksWrong: string;
   };
   historical: {
     title: string;
@@ -177,6 +200,26 @@ export interface Dictionary {
     copyright: string;
     privacy: string;
     terms: string;
+    updatedEvery: string;
+    viewpointsColumn: string;
+    allViewpointsHub: string;
+    travelColumn: string;
+    guidesColumn: string;
+    developersColumn: string;
+  };
+  homeStatus: {
+    webcam: string;
+    cervinia: string;
+    trainsRunning: string;
+    trainsPaused: string;
+  };
+  skiPage: {
+    h1: string;
+    snowEyebrow: string;
+    snowTitle: string;
+    snowNote: string;
+    passEyebrow: string;
+    passTitle: string;
   };
   seo: {
     title: string;

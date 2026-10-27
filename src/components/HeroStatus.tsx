@@ -145,11 +145,11 @@ function DualPeriodCard({
           </div>
 
           {isActive ? (
-            <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-xs font-bold uppercase tracking-wider">
               {dict.hero.activeNow}
             </span>
           ) : (
-            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
               {block.timeRangeLabel}
             </span>
           )}
@@ -174,7 +174,7 @@ function DualPeriodCard({
         </div>
       </div>
 
-      <div className="mt-2.5 pt-2 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
+      <div className="mt-2.5 pt-2 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
         <span>{block.timeRangeLabel}</span>
         <span>{dict.hero.midCloudLabel}: {block.metrics.cloudCoverMid}%</span>
       </div>
@@ -243,8 +243,8 @@ export default function HeroStatus({ data }: HeroStatusProps) {
       />
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-        {/* Left: Unified Hero Visibility Gauge */}
-        <div className="lg:col-span-5 xl:col-span-4 min-w-0 flex flex-col items-center justify-center">
+        {/* Gauge is supporting. On small screens the sentence comes first. */}
+        <div className="order-2 lg:order-1 lg:col-span-5 xl:col-span-4 min-w-0 flex flex-col items-center justify-center">
           <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center bg-white/90 dark:bg-slate-900/90 rounded-full shadow-inner border border-slate-200/80 dark:border-slate-800">
             <svg
               className="w-full h-full -rotate-90 transform"
@@ -295,7 +295,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                   /10
                 </span>
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold">
                 {data.activePeriod} {dict.hero.visibilityIndex}
               </span>
             </div>
@@ -309,25 +309,26 @@ export default function HeroStatus({ data }: HeroStatusProps) {
             <span>{currentStatusLabel}</span>
           </div>
 
-          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1">
+          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
             {vpLabel.name} ({data.viewpoint.elevation.toLocaleString()}m)
           </span>
         </div>
 
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}
-        <div className="lg:col-span-7 xl:col-span-8 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
-          <div className="space-y-1">
-            <p className="text-xs font-mono font-bold uppercase tracking-wide text-sky-700 dark:text-sky-400 leading-none">
+        <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
+          <div className="space-y-2">
+            <p className="text-sm text-slate-600 dark:text-slate-400">{dict.common.siteTagline}</p>
+            <p className="text-sm font-bold text-sky-800 dark:text-sky-300 leading-snug">
               <Eye
-                className="inline-block w-3.5 h-3.5 mr-1 -mt-0.5 align-middle shrink-0"
+                className="inline-block w-4 h-4 mr-1 -mt-0.5 align-middle shrink-0"
                 aria-hidden="true"
               />
               <span>{answerWord}</span>
             </p>
 
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight break-words text-balance">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight break-words text-balance">
               {verdictSummary}
-            </h2>
+            </h1>
           </div>
 
           {/* Today's Morning (AM) & Afternoon (PM) Dual Index Split */}
@@ -368,7 +369,7 @@ export default function HeroStatus({ data }: HeroStatusProps) {
                 <strong className="font-mono text-slate-900 dark:text-white">
                   {bestDayLabel} {bestPeriodLabel}
                 </strong>{' '}
-                <span className="text-emerald-700 dark:text-emerald-400 font-bold">
+                <span className={`${THEME_STYLES[data.bestBlockNext48h.badgeColor].scoreText} font-bold`}>
                   ({data.bestBlockNext48h.score}/10 — {bestStatusLabel})
                 </span>
               </span>
