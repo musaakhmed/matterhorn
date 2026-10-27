@@ -1,5 +1,8 @@
 import { GuideArticle, GuideFaq, GUIDES } from './guides';
 import { VisibilityApiResponse } from './types';
+import { Locale, LOCALE_METAS } from './i18n/config';
+import { TRAINS_FAQS } from './trains';
+import { SKI_FAQS } from './ski';
 import {
   evaluateLakeReflectionConditions,
   getLiveForecastForViewpointPage,
@@ -316,13 +319,14 @@ export function buildWeatherForecastNode(data?: VisibilityApiResponse) {
  */
 export function buildFaqPageNode(
   faqs: GuideFaq[],
-  pageUrl: string = SITE_URL
+  pageUrl: string = SITE_URL,
+  inLanguage: string = 'en-CH'
 ) {
   return {
     '@type': 'FAQPage',
     '@id': `${pageUrl}#faq`,
     url: pageUrl,
-    inLanguage: 'en-CH',
+    inLanguage,
     mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
@@ -389,7 +393,7 @@ export function buildRootLayoutJsonLd() {
  * Complete Homepage (`/`) JSON-LD `@graph` combining live `WeatherForecast`,
  * `FAQPage`, and `BreadcrumbList` schemas.
  */
-export function buildHomePageJsonLd(data?: VisibilityApiResponse) {
+export function buildHomePageJsonLd(data?: VisibilityApiResponse, locale?: Locale) {
   const faqs = getDashboardFaqs(data);
 
   return {
@@ -489,11 +493,6 @@ export function buildGuideArticleJsonLd(
         datePublished: guide.publishedAt,
         dateModified: guide.updatedAt,
         inLanguage: 'en-CH',
-        author: {
-          '@type': 'Organization',
-          name: 'Is The Matterhorn Visible? Alpine Telemetry',
-          url: SITE_URL,
-        },
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },
@@ -770,6 +769,212 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
             '@type': 'ListItem',
             position: 2,
             name: 'Hotel & Partner Live Widget',
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+/**
+ * Complete Scenic Trains Page (`/trains`) JSON-LD `@graph` combining
+ * WebPage, TouristAttraction (Gornergrat Bahn), TouristTrip (Glacier Express),
+ * WeatherForecast, FAQPage, and BreadcrumbList.
+ */
+export function buildTrainsPageJsonLd(data?: VisibilityApiResponse) {
+  const pageUrl = `${SITE_URL}/trains`;
+  const faqs = TRAINS_FAQS.map((f) => ({
+    question: f.question,
+    answer: f.answer,
+  }));
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        name: 'Gornergrat Railway & Glacier Express: Scenic Swiss Trains Guide, Tickets & Live Conditions',
+        description:
+          'Complete 2026 travel guide to the Gornergrat Bahn and Glacier Express. Compare Swiss Travel Pass discounts, seat reservations, live summit visibility scores, timetables, and panoramic routes.',
+        url: pageUrl,
+        inLanguage: 'en-CH',
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`,
+        },
+      },
+      {
+        '@type': 'TouristAttraction',
+        '@id': `${pageUrl}#gornergrat-railway`,
+        name: 'Gornergrat Railway (Gornergrat Bahn)',
+        description:
+          'Europe’s highest open-air cogwheel electric railway ascending from Zermatt (1,604m) to Gornergrat summit (3,089m) facing the Matterhorn East Face.',
+        url: `${pageUrl}#gornergrat`,
+        isAccessibleForFree: false,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 45.984,
+          longitude: 7.7845,
+          elevation: 3089,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Bahnhofplatz 1',
+          addressLocality: 'Zermatt',
+          postalCode: '3920',
+          addressRegion: 'Valais',
+          addressCountry: 'CH',
+        },
+      },
+      {
+        '@type': 'TouristTrip',
+        '@id': `${pageUrl}#glacier-express`,
+        name: 'Glacier Express',
+        description:
+          'The world’s slowest express train connecting Zermatt and St. Moritz over 291 bridges, 91 tunnels, and the 2,033m Oberalp Pass.',
+        url: `${pageUrl}#glacier-express`,
+        itinerary: {
+          '@type': 'ItemList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Zermatt (1,604 m)' },
+            { '@type': 'ListItem', position: 2, name: 'Brig (678 m)' },
+            { '@type': 'ListItem', position: 3, name: 'Andermatt (1,437 m)' },
+            { '@type': 'ListItem', position: 4, name: 'Oberalp Pass (2,033 m)' },
+            { '@type': 'ListItem', position: 5, name: 'Disentis / Mustér (1,130 m)' },
+            { '@type': 'ListItem', position: 6, name: 'Chur & Rhine Gorge (585 m)' },
+            { '@type': 'ListItem', position: 7, name: 'Filisur & Landwasser Viaduct (1,080 m)' },
+            { '@type': 'ListItem', position: 8, name: 'St. Moritz (1,775 m)' },
+          ],
+        },
+      },
+      buildWeatherForecastNode(data),
+      buildFaqPageNode(faqs, pageUrl),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Live Dashboard',
+            item: SITE_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Scenic Trains (Gornergrat & Glacier Express)',
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+/**
+ * Complete Zermatt Ski Page (`/ski`) JSON-LD `@graph` combining
+ * WebPage, SkiResort (Matterhorn Ski Paradise), WeatherForecast, FAQPage, and BreadcrumbList.
+ */
+export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string = 'en') {
+  const pageUrl = locale === 'en' ? `${SITE_URL}/ski` : `${SITE_URL}/${locale}/ski`;
+  const faqs = SKI_FAQS.map((f) => ({
+    question: f.question,
+    answer: f.answer,
+  }));
+
+  const inLanguage = LOCALE_METAS[locale as Locale]?.htmlLang || 'en-CH';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        name: 'Zermatt Ski Resort & Matterhorn Ski Paradise: Live Snow, Lifts, Cervinia Link & 2026 Passes',
+        description:
+          'Live ski conditions for Zermatt & Cervinia: snow depth at 3 elevations, real-time Italy border link status, 2026 dynamic ski pass pricing, Ikon Pass guide, and mountain restaurant radar.',
+        url: pageUrl,
+        inLanguage,
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`,
+        },
+      },
+      {
+        '@type': 'SkiResort',
+        '@id': `${pageUrl}#resort`,
+        name: 'Matterhorn Ski Paradise (Zermatt & Breuil-Cervinia)',
+        alternateName: 'Zermatt Ski Resort',
+        description:
+          'Europe’s highest ski resort, offering 360 km of pistes spanning Switzerland and Italy under the iconic Matterhorn (Monte Cervino), open 365 days a year.',
+        url: pageUrl,
+        hasMap: 'https://www.matterhornparadise.ch/en/Current-information/Pistes-and-slopes',
+        priceRange: 'CHF 94 - 112 per day',
+        isAccessibleForFree: false,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 45.9765,
+          longitude: 7.7491,
+          elevation: 3883,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Schlattstrasse 86',
+          addressLocality: 'Zermatt',
+          postalCode: '3920',
+          addressRegion: 'Valais',
+          addressCountry: 'CH',
+        },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            ],
+            opens: '08:30',
+            closes: '16:30',
+          },
+        ],
+        amenityFeature: [
+          {
+            '@type': 'LocationFeatureSpecification',
+            name: 'Total Piste Length',
+            value: '360 km',
+          },
+          {
+            '@type': 'LocationFeatureSpecification',
+            name: 'Highest Ski Lift Elevation',
+            value: '3883 m (Matterhorn Glacier Paradise)',
+          },
+          {
+            '@type': 'LocationFeatureSpecification',
+            name: 'International Border Crossing',
+            value: 'Direct skiing to Breuil-Cervinia & Valtournenche, Italy',
+          },
+        ],
+      },
+      buildWeatherForecastNode(data),
+      buildFaqPageNode(faqs, pageUrl, inLanguage),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Live Dashboard',
+            item: SITE_URL,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Skiing in Zermatt & Matterhorn Ski Paradise',
             item: pageUrl,
           },
         ],

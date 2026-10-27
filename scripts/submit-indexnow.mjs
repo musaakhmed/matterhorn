@@ -1,29 +1,92 @@
 /**
- * Script to notify Bing & other search engines of site URLs via IndexNow.
+ * Script to notify Bing, Naver, Yandex, Seznam & other search engines of site URLs via IndexNow.
  * Run with: npm run indexnow
  */
 
 const INDEXNOW_KEY = 'be719268580c7746e467071e23d9e2a6';
 
-const PATHS = [
-  '',
-  '/viewpoints',
-  '/viewpoints/gornergrat',
-  '/viewpoints/glacier-paradise',
-  '/viewpoints/sunnegga-riffelsee',
-  '/guides',
-  '/guides/gornergrat-vs-glacier-paradise',
-  '/guides/best-time-to-see-matterhorn',
-  '/guides/zermatt-cloudy-rainy-day-guide',
-  '/guides/best-matterhorn-photo-viewpoints',
-  '/guides/matterhorn-banner-cloud-fohn-wind',
-  '/guides/zurich-geneva-to-zermatt-day-trip',
-  '/widget',
+const LOCALES = [
+  'en',
+  'az',
+  'id',
+  'de',
+  'es',
+  'fr',
+  'it',
+  'pt',
+  'tr',
+  'ru',
+  'ar',
+  'hi',
+  'th',
+  'ko',
+  'ja',
+  'zh',
+  'zh-tw',
 ];
+
+const VIEWPOINT_SLUGS = [
+  'gornergrat',
+  'glacier-paradise',
+  'sunnegga-riffelsee',
+];
+
+const GUIDE_SLUGS = [
+  'gornergrat-vs-glacier-paradise',
+  'best-time-to-see-matterhorn',
+  'zermatt-cloudy-rainy-day-guide',
+  'best-matterhorn-photo-viewpoints',
+  'matterhorn-banner-cloud-fohn-wind',
+  'zurich-geneva-to-zermatt-day-trip',
+];
+
+function generateAllPaths() {
+  const paths = new Set();
+
+  // Root / English default paths
+  paths.add('');
+  paths.add('/viewpoints');
+  paths.add('/trains');
+  paths.add('/ski');
+  paths.add('/guides');
+  paths.add('/widget');
+
+  for (const slug of VIEWPOINT_SLUGS) {
+    paths.add(`/viewpoints/${slug}`);
+  }
+
+  for (const slug of GUIDE_SLUGS) {
+    paths.add(`/guides/${slug}`);
+  }
+
+  // Localized routes for all 16 other languages
+  for (const locale of LOCALES) {
+    if (locale === 'en') continue;
+
+    paths.add(`/${locale}`);
+    paths.add(`/${locale}/viewpoints`);
+    paths.add(`/${locale}/trains`);
+    paths.add(`/${locale}/ski`);
+    paths.add(`/${locale}/guides`);
+    paths.add(`/${locale}/widget`);
+
+    for (const slug of VIEWPOINT_SLUGS) {
+      paths.add(`/${locale}/viewpoints/${slug}`);
+    }
+
+    for (const slug of GUIDE_SLUGS) {
+      paths.add(`/${locale}/guides/${slug}`);
+    }
+  }
+
+  return Array.from(paths);
+}
+
+const ALL_PATHS = generateAllPaths();
 
 async function submitForHost(host) {
   const baseUrl = `https://${host}`;
-  const urlList = PATHS.map((p) => `${baseUrl}${p}`);
+  const urlList = ALL_PATHS.map((p) => `${baseUrl}${p}`);
   const payload = {
     host,
     key: INDEXNOW_KEY,
@@ -31,11 +94,15 @@ async function submitForHost(host) {
     urlList,
   };
 
-  console.log(`\n--- Submitting ${urlList.length} URLs for ${host} ---`);
+  console.log(`\n==================================================`);
+  console.log(`Submitting ${urlList.length} multilingual URLs for ${host}`);
+  console.log(`==================================================`);
 
   const endpoints = [
     'https://api.indexnow.org/indexnow',
     'https://www.bing.com/indexnow',
+    'https://yandex.com/indexnow',
+    'https://searchadvisor.naver.com/indexnow',
   ];
 
   for (const endpoint of endpoints) {
@@ -45,17 +112,24 @@ async function submitForHost(host) {
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify(payload),
       });
-      console.log(`${endpoint} -> ${res.status} ${res.statusText}`);
+      console.log(`✓ ${endpoint} -> ${res.status} ${res.statusText}`);
     } catch (err) {
-      console.error(`Failed ${endpoint}:`, err.message);
+      console.error(`✗ Failed ${endpoint}:`, err.message);
     }
   }
 }
 
 async function main() {
-  await submitForHost('www.isthematterhornvisible.com');
-  await submitForHost('isthematterhornvisible.com');
-  console.log('\n✓ IndexNow submission completed.');
+  const hosts = [
+    'isthematterhornvisible.com',
+    'www.isthematterhornvisible.com',
+  ];
+
+  for (const host of hosts) {
+    await submitForHost(host);
+  }
+
+  console.log('\nAll IndexNow dispatches completed.');
 }
 
 main();
