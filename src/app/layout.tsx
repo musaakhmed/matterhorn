@@ -181,6 +181,11 @@ export default function RootLayout({
         <ThemeProvider>
           <I18nProvider locale="en">{children}</I18nProvider>
         </ThemeProvider>
+        <script
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "d3456b94d4da4b72a9616a39ab473d40"}'
+        />
       </body>
     </html>
   );
