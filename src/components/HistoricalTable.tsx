@@ -28,21 +28,21 @@ function getProbabilityStyle(pct: number) {
   if (pct >= 80) {
     return {
       bar: 'bg-emerald-500',
-      badge: 'bg-emerald-50 border-emerald-200 text-emerald-900',
-      text: 'text-emerald-700',
+      badge: 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-300',
+      text: 'text-emerald-700 dark:text-emerald-400',
     };
   }
   if (pct >= 65) {
     return {
       bar: 'bg-sky-500',
-      badge: 'bg-sky-50 border-sky-200 text-sky-900',
-      text: 'text-sky-700',
+      badge: 'bg-sky-50 dark:bg-sky-950/60 border-sky-200 dark:border-sky-800 text-sky-900 dark:text-sky-300',
+      text: 'text-sky-700 dark:text-sky-400',
     };
   }
   return {
     bar: 'bg-amber-500',
-    badge: 'bg-amber-50 border-amber-200 text-amber-900',
-    text: 'text-amber-700',
+    badge: 'bg-amber-50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-300',
+    text: 'text-amber-700 dark:text-amber-400',
   };
 }
 
@@ -50,48 +50,48 @@ export default function HistoricalTable() {
   return (
     <section
       aria-label="Historical Matterhorn Visibility by Month"
-      className="rounded-2xl border border-slate-200/90 bg-white/90 backdrop-blur-md p-5 sm:p-6 shadow-xs space-y-6"
+      className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-5 sm:p-6 shadow-xs space-y-6"
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-sky-600" aria-hidden="true" />
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            <BarChart3 className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
               Historical &ldquo;Visibility by Month&rdquo; Climatology (Zermatt 30-Year Index)
             </h3>
           </div>
-          <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
             Probability of catching at least one clear summit viewing window (Score ≥ 7/10) per day by month
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-2 self-start sm:self-auto px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-900">
-          <Snowflake className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
+        <div className="inline-flex items-center gap-2 self-start sm:self-auto px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs font-bold text-emerald-900 dark:text-emerald-300">
+          <Snowflake className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
           <span>Best Months: Dec (89%) &amp; Jan (88%)</span>
         </div>
       </div>
 
       {/* Authoritative 12-Month Statistical Table / Grid */}
-      <div className="overflow-x-auto rounded-xl border border-slate-200">
+      <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-100/90 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+            <tr className="bg-slate-100/90 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
               <th className="py-3 px-4">Month</th>
               <th className="py-3 px-4">Clear-Sky Probability</th>
               <th className="py-3 px-4 hidden sm:table-cell">Distribution Bar</th>
               <th className="py-3 px-4">Atmospheric Regime</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-200/70 text-xs sm:text-sm">
+          <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800 text-xs sm:text-sm">
             {MONTHLY_VISIBILITY_STATS.map((item) => {
               const style = getProbabilityStyle(item.probability);
               return (
                 <tr
                   key={item.monthShort}
-                  className="hover:bg-slate-50/90 transition-colors"
+                  className="hover:bg-slate-50/90 dark:hover:bg-slate-800/50 transition-colors"
                 >
-                  <td className="py-2.5 px-4 font-bold text-slate-900">
+                  <td className="py-2.5 px-4 font-bold text-slate-900 dark:text-white">
                     <span className="sm:hidden">{item.monthShort}</span>
                     <span className="hidden sm:inline">
                       {item.monthFull} ({item.monthShort})
@@ -105,14 +105,14 @@ export default function HistoricalTable() {
                     </span>
                   </td>
                   <td className="py-2.5 px-4 hidden sm:table-cell w-1/3">
-                    <div className="w-full h-2.5 rounded-full bg-slate-100 border border-slate-200/80 overflow-hidden">
+                    <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 overflow-hidden">
                       <div
                         className={`h-full rounded-full ${style.bar}`}
                         style={{ width: `${item.probability}%` }}
                       />
                     </div>
                   </td>
-                  <td className="py-2.5 px-4 text-xs font-medium text-slate-600">
+                  <td className="py-2.5 px-4 text-xs font-medium text-slate-600 dark:text-slate-400">
                     {item.seasonTag}
                   </td>
                 </tr>
@@ -123,10 +123,10 @@ export default function HistoricalTable() {
       </div>
 
       {/* SEO-Rich Explanatory Guide Block */}
-      <div className="rounded-2xl bg-slate-50 border border-slate-200/90 p-4 sm:p-5 space-y-2.5">
-        <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-slate-900">
+      <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/90 dark:border-slate-700/80 p-4 sm:p-5 space-y-2.5">
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
           <CloudLightning
-            className="w-4 h-4 text-amber-600 shrink-0"
+            className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0"
             aria-hidden="true"
           />
           <h4>
@@ -134,19 +134,19 @@ export default function HistoricalTable() {
           </h4>
         </div>
 
-        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
           While travelers instinctively book Alpine trips for mid-summer, <strong>June (48%) and July (52%)</strong> statistically record the lowest full-day visibility scores of the year. Strong solar radiation heats the dark rock faces of the Mattertal and Italian Val Tournenche, triggering vigorous <strong>anabatic thermal updrafts</strong> by 11:00 CET. As warm valley air rises and cools adiabatically past 3,000 meters, moisture condenses directly onto the Matterhorn’s Hörnli and Furgg ridges, forming afternoon convective cumulus towers and local banner clouds.
         </p>
 
-        <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
-          <span className="inline-flex items-center gap-1.5 font-semibold text-sky-800 bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-lg">
+        <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-400">
+          <span className="inline-flex items-center gap-1.5 font-semibold text-sky-800 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 px-2.5 py-1 rounded-lg">
             <Sun className="w-3.5 h-3.5 text-amber-500" aria-hidden="true" />
             <span>Summer Pro-Tip: Always target the 06:00–10:00 CET Morning (AM) block before thermal convection initiates.</span>
           </span>
 
           <Link
             href="/guides/best-time-to-see-matterhorn"
-            className="inline-flex items-center gap-1 font-bold text-sky-700 hover:text-sky-900 underline underline-offset-4"
+            className="inline-flex items-center gap-1 font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 underline underline-offset-4"
           >
             <span>Read 30-Year Climatology &amp; Best Month Guide</span>
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

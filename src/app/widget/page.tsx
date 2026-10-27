@@ -121,41 +121,41 @@ export default async function PartnerWidgetPage() {
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
-          className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500"
+          className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400"
         >
           <Link
             href="/"
-            className="hover:text-sky-700 transition-colors font-semibold"
+            className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
           >
             Live Dashboard
           </Link>
           <ChevronRight
-            className="w-3.5 h-3.5 text-slate-400"
+            className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600"
             aria-hidden="true"
           />
-          <span className="text-slate-800 font-bold">
+          <span className="text-slate-800 dark:text-slate-200 font-bold">
             Hotel &amp; Partner Live Status Widget
           </span>
         </nav>
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
+        <section className="relative overflow-hidden rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md p-6 sm:p-8 md:p-10 shadow-xs">
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800">
-              <Code2 className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
+              <Code2 className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
               <span>
                 FREE PARTNER TELEMETRY • ZERMATT HOTELS, CHALETS &amp; PORTALS
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight text-balance">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance">
               Publish Live Matterhorn Visibility on Your Website
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed text-pretty">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed text-pretty">
               Every morning in Zermatt, hotel guests ask the front desk the same
               question:{' '}
-              <em className="font-semibold text-slate-800">
+              <em className="font-semibold text-slate-800 dark:text-slate-200">
                 &ldquo;Can we see the Matterhorn today if we buy tickets for
                 Gornergrat or Glacier Paradise?&rdquo;
               </em>{' '}
@@ -175,10 +175,10 @@ export default async function PartnerWidgetPage() {
                 return (
                   <span
                     key={pill.text}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100/90 border border-slate-200/90 text-xs font-bold text-slate-800"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 text-xs font-bold text-slate-800 dark:text-slate-200"
                   >
                     <Icon
-                      className="w-3.5 h-3.5 text-sky-600 shrink-0"
+                      className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0"
                       aria-hidden="true"
                     />
                     <span>{pill.text}</span>
@@ -198,11 +198,11 @@ export default async function PartnerWidgetPage() {
           className="space-y-5"
         >
           <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-700">
+            <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400">
               <Building2 className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Designed for Alpine Hospitality</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight text-balance">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance">
               How Zermatt Hotels &amp; Mountain Partners Use the Live Widget
             </h2>
           </div>
@@ -213,23 +213,23 @@ export default async function PartnerWidgetPage() {
               return (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-2xs space-y-3"
+                  className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 shadow-2xs space-y-3"
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-50 border border-sky-200 text-xs font-bold text-sky-800">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-bold text-sky-800 dark:text-sky-300">
                       <Icon
-                        className="w-3.5 h-3.5 text-sky-600"
+                        className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"
                         aria-hidden="true"
                       />
                       <span>{item.badge}</span>
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+                  <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-pretty">
                     {item.description}
                   </p>
                 </div>
@@ -241,21 +241,21 @@ export default async function PartnerWidgetPage() {
         {/* Platform & CMS Quick-Start Guide */}
         <section
           aria-label="CMS Integration Instructions"
-          className="rounded-3xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-2xs space-y-5"
+          className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-2xs space-y-5"
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Works With Every Hotel CMS &amp; Website Builder
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-0.5">
                 No API keys, npm packages, or backend setup required—install in
                 under 60 seconds.
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-mono font-bold text-emerald-800 shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs font-mono font-bold text-emerald-800 dark:text-emerald-300 shrink-0">
               <CheckCircle2
-                className="w-3.5 h-3.5 text-emerald-600"
+                className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400"
                 aria-hidden="true"
               />
               <span>Plug &amp; Play Ready</span>
@@ -266,17 +266,17 @@ export default async function PartnerWidgetPage() {
             {CMS_PLATFORMS.map((cms, index) => (
               <div
                 key={cms.name}
-                className="rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 space-y-2"
+                className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/60 p-4 space-y-2"
               >
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-sky-600 text-white text-xs font-mono font-extrabold">
                     {index + 1}
                   </span>
-                  <h3 className="text-xs sm:text-sm font-extrabold text-slate-900">
+                  <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">
                     {cms.name}
                   </h3>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   {cms.step}
                 </p>
               </div>
@@ -294,7 +294,7 @@ export default async function PartnerWidgetPage() {
         />
 
         {/* Bottom CTA Banner */}
-        <section className="rounded-2xl border border-sky-200 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 text-white p-6 sm:p-8 shadow-sm">
+        <section className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-white p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
@@ -324,9 +324,9 @@ export default async function PartnerWidgetPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image
                 src={logoImg}
@@ -344,28 +344,28 @@ export default async function PartnerWidgetPage() {
           <div className="flex flex-wrap items-center gap-4 font-mono">
             <Link
               href="/"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Live Dashboard
             </Link>
             <span>•</span>
             <Link
               href="/viewpoints"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Viewpoints (/viewpoints)
             </Link>
             <span>•</span>
             <Link
               href="/guides"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Field Guides (/guides)
             </Link>
             <span>•</span>
             <Link
               href="/api/visibility"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               JSON API (/api/visibility)
             </Link>

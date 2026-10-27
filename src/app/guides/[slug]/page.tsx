@@ -99,37 +99,37 @@ export default async function GuideArticlePage({
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
-          className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500"
+          className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400"
         >
           <Link
             href="/"
-            className="hover:text-sky-700 transition-colors font-semibold"
+            className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
           >
             Live Dashboard
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
+          <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600" aria-hidden="true" />
           <Link
             href="/guides"
-            className="hover:text-sky-700 transition-colors font-semibold"
+            className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
           >
             Field Guides
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
-          <span className="text-slate-800 font-bold truncate">
+          <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600" aria-hidden="true" />
+          <span className="text-slate-800 dark:text-slate-200 font-bold truncate">
             {guide.shortTitle}
           </span>
         </nav>
 
         {/* Article Header Card */}
-        <header className="rounded-3xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs space-y-5">
+        <header className="rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs space-y-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-800">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-xs font-mono font-bold text-sky-800 dark:text-sky-300">
               <span>{guide.category} Field Guide</span>
             </span>
 
-            <div className="flex items-center gap-3 text-xs font-mono text-slate-500">
+            <div className="flex items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400">
               <span className="inline-flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-sky-600" aria-hidden="true" />
+                <Clock className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
                 <span>{guide.readingTimeMinutes} min read</span>
               </span>
               <span>•</span>
@@ -137,26 +137,26 @@ export default async function GuideArticlePage({
             </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight text-balance leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance leading-tight">
             {guide.title}
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {guide.description}
           </p>
 
           {/* Key Metric Highlight Bar */}
-          <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
-              <span className="text-xs font-bold text-slate-700">
+              <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                 {guide.heroStat.label}:
               </span>
-              <span className="text-xs sm:text-sm font-mono font-extrabold text-sky-900 bg-sky-100 border border-sky-200 px-2.5 py-0.5 rounded-lg">
+              <span className="text-xs sm:text-sm font-mono font-extrabold text-sky-900 dark:text-sky-200 bg-sky-100 dark:bg-sky-950/80 border border-sky-200 dark:border-sky-800 px-2.5 py-0.5 rounded-lg">
                 {guide.heroStat.value}
               </span>
             </div>
-            <span className="text-xs font-mono text-slate-600">
+            <span className="text-xs font-mono text-slate-600 dark:text-slate-400">
               {guide.heroStat.detail}
             </span>
           </div>
@@ -165,10 +165,10 @@ export default async function GuideArticlePage({
         {/* Key Takeaways Box (TL;DR for Readers & AI Search) */}
         <section
           aria-label="Key Takeaways"
-          className="rounded-2xl border border-emerald-200/90 bg-gradient-to-br from-emerald-50/70 via-white to-sky-50/40 p-6 sm:p-7 shadow-2xs space-y-4"
+          className="rounded-2xl border border-emerald-200/90 dark:border-emerald-800/80 bg-gradient-to-br from-emerald-50/70 via-white to-sky-50/40 dark:from-emerald-950/40 dark:via-slate-900/80 dark:to-slate-900/50 p-6 sm:p-7 shadow-2xs space-y-4"
         >
-          <div className="flex items-center gap-2 text-sm sm:text-base font-extrabold text-slate-900">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" aria-hidden="true" />
+          <div className="flex items-center gap-2 text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" aria-hidden="true" />
             <h2>Key Alpine Takeaways (TL;DR)</h2>
           </div>
 
@@ -176,9 +176,9 @@ export default async function GuideArticlePage({
             {guide.keyTakeaways.map((item, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
+                className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
               >
-                <span className="font-mono font-bold text-emerald-700 mt-0.5 shrink-0">
+                <span className="font-mono font-bold text-emerald-700 dark:text-emerald-400 mt-0.5 shrink-0">
                   0{idx + 1}.
                 </span>
                 <span>{item}</span>
@@ -191,16 +191,16 @@ export default async function GuideArticlePage({
         {guide.comparisonTable && (
           <section
             aria-label={guide.comparisonTable.caption}
-            className="rounded-2xl border border-slate-200/90 bg-white/95 p-5 sm:p-6 shadow-xs space-y-4"
+            className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 sm:p-6 shadow-xs space-y-4"
           >
-            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
               {guide.comparisonTable.caption}
             </h2>
 
-            <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-100/90 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                  <tr className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
                     {guide.comparisonTable.headers.map((header) => (
                       <th key={header} className="py-3 px-4">
                         {header}
@@ -208,19 +208,19 @@ export default async function GuideArticlePage({
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200/70 text-xs sm:text-sm">
+                <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800 text-xs sm:text-sm">
                   {guide.comparisonTable.rows.map((row, rowIdx) => (
                     <tr
                       key={rowIdx}
-                      className="hover:bg-slate-50/90 transition-colors"
+                      className="hover:bg-slate-50/90 dark:hover:bg-slate-800/60 transition-colors"
                     >
                       {row.map((cell, cellIdx) => (
                         <td
                           key={cellIdx}
                           className={`py-3 px-4 leading-relaxed ${
                             cellIdx === 0
-                              ? 'font-bold text-slate-900 whitespace-nowrap'
-                              : 'text-slate-700'
+                              ? 'font-bold text-slate-900 dark:text-white whitespace-nowrap'
+                              : 'text-slate-700 dark:text-slate-300'
                           }`}
                         >
                           {cell}
@@ -249,10 +249,10 @@ export default async function GuideArticlePage({
         {guide.embeddedWidget === 'scoring-formula' && (
           <section
             aria-label="Visibility Scoring Methodology"
-            className="rounded-2xl border border-sky-200 bg-sky-50/60 p-5 sm:p-6 text-xs sm:text-sm text-slate-700 shadow-2xs space-y-4"
+            className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-slate-900/90 p-5 sm:p-6 text-xs sm:text-sm text-slate-700 dark:text-slate-300 shadow-2xs space-y-4"
           >
-            <div className="flex items-center gap-2 text-slate-900 font-extrabold">
-              <Info className="w-4 h-4 text-sky-600 shrink-0" aria-hidden="true" />
+            <div className="flex items-center gap-2 text-slate-900 dark:text-white font-extrabold">
+              <Info className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
               <span>How Our High-Altitude 1–10 Scoring Engine Works</span>
             </div>
             <p className="leading-relaxed">
@@ -260,11 +260,11 @@ export default async function GuideArticlePage({
               <strong>3,089m (Gornergrat)</strong> and{' '}
               <strong>3,883m (Glacier Paradise)</strong> and computes a weighted hourly score:
             </p>
-            <div className="rounded-xl bg-white border border-slate-200 p-3.5 font-mono text-xs text-slate-800 space-y-1">
-              <div className="text-sky-700 font-bold">
+            <div className="rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-3.5 font-mono text-xs text-slate-800 dark:text-slate-200 space-y-1">
+              <div className="text-sky-700 dark:text-sky-400 font-bold">
                 Raw = 100 - (0.60·C_mid + 0.25·C_low + 0.15·C_high) - Penalties
               </div>
-              <div className="text-slate-600">
+              <div className="text-slate-600 dark:text-slate-400">
                 Penalties: Visibility &lt; 10km (-25) • Precip &gt; 50% (-15) • Föhn Wind 180°–270° ≥ 35km/h (-10)
               </div>
             </div>
@@ -272,14 +272,14 @@ export default async function GuideArticlePage({
               {VISIBILITY_SCALE_TIERS.map((tier) => (
                 <div
                   key={tier.status}
-                  className="flex items-center gap-3 rounded-xl bg-white border border-slate-200/90 p-2.5"
+                  className="flex items-center gap-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-200/90 dark:border-slate-800 p-2.5"
                 >
                   <VisibilityIcon badgeColor={tier.badgeColor} size="md" />
                   <div className="min-w-0">
-                    <div className="text-xs font-extrabold text-slate-900">
+                    <div className="text-xs font-extrabold text-slate-900 dark:text-white">
                       {tier.scoreRange}/10 — {tier.status}
                     </div>
-                    <div className="text-[11px] text-slate-600 truncate">
+                    <div className="text-[11px] text-slate-600 dark:text-slate-400 truncate">
                       {tier.shortCaption}
                     </div>
                   </div>
@@ -295,9 +295,9 @@ export default async function GuideArticlePage({
             <section
               key={section.id}
               id={section.id}
-              className="rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs space-y-4"
+              className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs space-y-4"
             >
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight text-balance">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance">
                 {section.heading}
               </h2>
 
@@ -305,7 +305,7 @@ export default async function GuideArticlePage({
                 {section.paragraphs.map((paragraph, pIdx) => (
                   <p
                     key={pIdx}
-                    className="text-sm sm:text-base text-slate-700 leading-relaxed"
+                    className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed"
                   >
                     {paragraph}
                   </p>
@@ -317,9 +317,9 @@ export default async function GuideArticlePage({
                   {section.bulletPoints.map((bp, bIdx) => (
                     <li
                       key={bIdx}
-                      className="rounded-xl bg-slate-50 border border-slate-200/80 p-3.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
+                      className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
                     >
-                      <strong className="text-slate-900 font-bold">
+                      <strong className="text-slate-900 dark:text-white font-bold">
                         {bp.bold}
                       </strong>{' '}
                       {bp.text}
@@ -329,13 +329,13 @@ export default async function GuideArticlePage({
               )}
 
               {section.proTip && (
-                <div className="rounded-xl bg-sky-50/90 border border-sky-200 p-4 flex items-start gap-3">
+                <div className="rounded-xl bg-sky-50/90 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 p-4 flex items-start gap-3">
                   <Lightbulb
-                    className="w-5 h-5 text-sky-600 shrink-0 mt-0.5"
+                    className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5"
                     aria-hidden="true"
                   />
-                  <div className="text-xs sm:text-sm text-sky-950 leading-relaxed">
-                    <strong className="font-extrabold uppercase tracking-wider text-sky-800 mr-1.5">
+                  <div className="text-xs sm:text-sm text-sky-950 dark:text-sky-200 leading-relaxed">
+                    <strong className="font-extrabold uppercase tracking-wider text-sky-800 dark:text-sky-300 mr-1.5">
                       {section.proTip.label}:
                     </strong>
                     <span>{section.proTip.text}</span>
@@ -349,31 +349,31 @@ export default async function GuideArticlePage({
         {/* Frequently Asked Questions (Schema-Backed Native Accordion) */}
         <section
           aria-label="Frequently Asked Questions"
-          className="rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs space-y-5"
+          className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs space-y-5"
         >
           <div className="flex items-center gap-2">
-            <HelpCircle className="w-5 h-5 text-sky-600 shrink-0" aria-hidden="true" />
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+            <HelpCircle className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Frequently Asked Questions
             </h2>
           </div>
 
-          <div className="divide-y divide-slate-200/80 border border-slate-200 rounded-xl overflow-hidden">
+          <div className="divide-y divide-slate-200/80 dark:divide-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
             {guide.faqs.map((faq, idx) => (
               <details
                 key={idx}
                 name="guide-faq"
                 open={idx === 0}
-                className="group bg-white open:bg-slate-50/70 transition-colors"
+                className="group bg-white dark:bg-slate-900/90 open:bg-slate-50/70 dark:open:bg-slate-800/50 transition-colors"
               >
-                <summary className="cursor-pointer list-none px-4 sm:px-5 py-4 font-bold text-xs sm:text-sm text-slate-900 flex items-center justify-between gap-3 hover:text-sky-700">
+                <summary className="cursor-pointer list-none px-4 sm:px-5 py-4 font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center justify-between gap-3 hover:text-sky-700 dark:hover:text-sky-400">
                   <span>{faq.question}</span>
                   <ChevronRight
-                    className="w-4 h-4 text-slate-400 shrink-0 transition-transform group-open:rotate-90"
+                    className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 transition-transform group-open:rotate-90"
                     aria-hidden="true"
                   />
                 </summary>
-                <div className="px-4 sm:px-5 pb-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <div className="px-4 sm:px-5 pb-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   {faq.answer}
                 </div>
               </details>
@@ -382,7 +382,7 @@ export default async function GuideArticlePage({
         </section>
 
         {/* Live Telemetry Conversion Banner */}
-        <section className="rounded-2xl border border-sky-200 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 text-white p-6 sm:p-8 shadow-sm">
+        <section className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-white p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
             <div className="space-y-1.5 max-w-xl">
               <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
@@ -410,12 +410,12 @@ export default async function GuideArticlePage({
         {/* Related Field Guides */}
         <section aria-label="More Matterhorn Field Guides" className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
               More Zermatt &amp; Matterhorn Field Guides
             </h2>
             <Link
               href="/guides"
-              className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 hover:text-sky-900"
+              className="inline-flex items-center gap-1 text-xs font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300"
             >
               <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
               <span>All Guides</span>
@@ -427,21 +427,21 @@ export default async function GuideArticlePage({
               <Link
                 key={item.slug}
                 href={`/guides/${item.slug}`}
-                className="group rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all flex flex-col justify-between"
+                className="group rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-2xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 transition-all flex flex-col justify-between"
               >
                 <div className="space-y-2">
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-sky-700">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400">
                     {item.category}
                   </span>
-                  <h3 className="text-sm font-extrabold text-slate-900 group-hover:text-sky-700 transition-colors leading-snug">
+                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors leading-snug">
                     {item.shortTitle}
                   </h3>
-                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400">
                   <span>{item.readingTimeMinutes} min read</span>
                   <ArrowRight
                     className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5"
@@ -454,9 +454,9 @@ export default async function GuideArticlePage({
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/90 py-6 px-4 sm:px-6 text-xs text-slate-600">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 py-6 px-4 sm:px-6 text-xs text-slate-600 dark:text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 font-medium text-slate-700">
+          <div className="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
             <span className="relative inline-flex items-center justify-center overflow-hidden shrink-0 w-6 h-6 rounded-[20%] bg-slate-800 ring-1 ring-slate-900/15 shadow-2xs select-none">
               <Image
                 src={logoImg}
@@ -474,21 +474,21 @@ export default async function GuideArticlePage({
           <div className="flex flex-wrap items-center gap-4 font-mono">
             <Link
               href="/"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               Live Dashboard
             </Link>
             <span>•</span>
             <Link
               href="/guides"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               All Field Guides
             </Link>
             <span>•</span>
             <Link
               href="/api/visibility"
-              className="text-sky-700 hover:text-sky-900 font-semibold transition-colors underline underline-offset-4"
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >
               JSON API (/api/visibility)
             </Link>
