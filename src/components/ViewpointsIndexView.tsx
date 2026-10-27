@@ -317,6 +317,13 @@ export default async function ViewpointsIndexView({
             </Link>
             <span>•</span>
             <Link
+              href={getLocalizedHref('/widget', locale)}
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
+            >
+              Widget & API
+            </Link>
+            <span>•</span>
+            <Link
               href={getLocalizedHref('/guides', locale)}
               className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold transition-colors underline underline-offset-4"
             >

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { fetchMatterhornVisibility } from '@/lib/weather';
+import { getViewpointScoreMap } from '@/lib/viewpoints';
 
 export default async function LiveVisibilityBanner() {
   const telemetry = await fetchMatterhornVisibility();
@@ -17,6 +18,7 @@ export default async function LiveVisibilityBanner() {
         glacierScore: glacier.currentScore,
         glacierBadge: glacier.currentBadgeColor,
         glacierStatus: glacier.currentStatus,
+        viewpointScores: getViewpointScoreMap(telemetry),
       }}
     />
   );

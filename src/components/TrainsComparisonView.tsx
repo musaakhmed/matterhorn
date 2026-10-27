@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { TRAINS, TRAINS_FAQS, getTrainsLiveStatus } from '@/lib/trains';
 import { VisibilityApiResponse, BadgeColor } from '@/lib/types';
+import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import Header from '@/components/Header';
 import logoImg from '../../public/logo.jpeg';
@@ -84,6 +85,7 @@ export default function TrainsComparisonView({
                 glacierScore: glacierView.currentScore,
                 glacierBadge: glacierView.currentBadgeColor,
                 glacierStatus: glacierView.currentStatus,
+                viewpointScores: getViewpointScoreMap(initialData),
               }
             : undefined
         }
@@ -811,6 +813,13 @@ export default function TrainsComparisonView({
               className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
             >
               Live Dashboard
+            </Link>
+            <span>•</span>
+            <Link
+              href={getLocalizedHref('/widget', locale)}
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
+            >
+              Widget & API
             </Link>
             <span>•</span>
             <Link

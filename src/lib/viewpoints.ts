@@ -825,3 +825,27 @@ export function getLiveForecastForViewpointPage(
 ): ViewpointForecastData {
   return data.viewpoints[page.telemetryKey];
 }
+
+export interface ViewpointScoreEntry {
+  score: number;
+  color: BadgeColor;
+}
+
+/**
+ * Live 1–10 score and badge color for every viewpoint page, keyed by page slug.
+ * Pages without a dedicated grid cell (Sunnegga, Zermatt Village) use the
+ * telemetry source configured in their `telemetryKey`, matching /viewpoints.
+ */
+export function getViewpointScoreMap(
+  data: VisibilityApiResponse
+): Record<ViewpointPageSlug, ViewpointScoreEntry> {
+  const entries = {} as Record<ViewpointPageSlug, ViewpointScoreEntry>;
+  for (const page of VIEWPOINT_PAGES) {
+    const forecast = getLiveForecastForViewpointPage(page, data);
+    entries[page.slug] = {
+      score: forecast.currentScore,
+      color: forecast.currentBadgeColor,
+    };
+  }
+  return entries;
+}

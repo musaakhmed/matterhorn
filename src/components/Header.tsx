@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import {
   Compass,
   BookOpen,
-  Code2,
   Menu,
   X,
   ChevronDown,
@@ -19,6 +18,7 @@ import {
   Sparkles,
   TrainFront,
   Snowflake,
+  Check,
 } from 'lucide-react';
 import { BadgeColor, Viewpoint } from '@/lib/types';
 import ThemeToggle from './ThemeToggle';
@@ -34,6 +34,8 @@ export interface HeaderTelemetrySummary {
   glacierScore?: number;
   glacierBadge?: BadgeColor;
   glacierStatus?: string;
+  /** Live score + badge color for every viewpoint, keyed by page slug */
+  viewpointScores?: Partial<Record<string, { score: number; color: BadgeColor }>>;
 }
 
 export interface HeaderProps {
@@ -83,7 +85,6 @@ export default function Header({
   const isTrains = pathWithoutLocale.startsWith('/trains');
   const isSki = pathWithoutLocale.startsWith('/ski');
   const isGuides = pathWithoutLocale.startsWith('/guides');
-  const isWidget = pathWithoutLocale.startsWith('/widget');
 
   const viewpointNavItems = [
     {
@@ -115,6 +116,27 @@ export default function Header({
       badgeKey: null,
     },
   ];
+
+  const getScoreBadge = (
+    slug: string,
+    badgeKey: 'gornergrat' | 'glacier' | null
+  ): { score: number; color: BadgeColor } | null => {
+    const mapped = telemetrySummary?.viewpointScores?.[slug];
+    if (mapped?.score) return mapped;
+    if (badgeKey === 'gornergrat' && telemetrySummary?.gornergratScore) {
+      return {
+        score: telemetrySummary.gornergratScore,
+        color: telemetrySummary.gornergratBadge || 'emerald',
+      };
+    }
+    if (badgeKey === 'glacier' && telemetrySummary?.glacierScore) {
+      return {
+        score: telemetrySummary.glacierScore,
+        color: telemetrySummary.glacierBadge || 'emerald',
+      };
+    }
+    return null;
+  };
 
   // Close dropdown on outside click or escape key
   useEffect(() => {
@@ -273,7 +295,7 @@ export default function Header({
                 aria-label="Viewpoints menu"
               >
                 <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 mb-1">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
                     {dict.viewpointSwitcher.selectVantagePoint}
                   </span>
                 </div>
@@ -281,25 +303,15 @@ export default function Header({
                 <div className="space-y-1">
                   {viewpointNavItems.map((item) => {
                     const isItemActive = pathWithoutLocale === `/viewpoints/${item.slug}`;
-                    let scoreBadge: { score: number; color: BadgeColor } | null = null;
-                    if (item.badgeKey === 'gornergrat' && telemetrySummary?.gornergratScore) {
-                      scoreBadge = {
-                        score: telemetrySummary.gornergratScore,
-                        color: telemetrySummary.gornergratBadge || 'emerald',
-                      };
-                    } else if (item.badgeKey === 'glacier' && telemetrySummary?.glacierScore) {
-                      scoreBadge = {
-                        score: telemetrySummary.glacierScore,
-                        color: telemetrySummary.glacierBadge || 'emerald',
-                      };
-                    }
+                    const scoreBadge = getScoreBadge(item.slug, item.badgeKey);
 
                     return (
                       <Link
                         key={item.slug}
                         href={getLocalizedHref(`/viewpoints/${item.slug}`, locale)}
                         role="menuitem"
-                        className={`group flex items-center justify-between p-2.5 rounded-xl transition-all ${
+                        aria-current={isItemActive ? 'page' : undefined}
+                        className={`group flex items-center justify-between p-2.5 rounded-xl transition-all focus-visible:outline-2 focus-visible:outline-sky-500 ${
                           isItemActive
                             ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-950 dark:text-sky-200 font-semibold ring-1 ring-sky-200 dark:ring-sky-800'
                             : 'hover:bg-slate-50 dark:hover:bg-slate-800/70 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
@@ -312,25 +324,40 @@ export default function Header({
                               {item.elevation}
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-500 dark:text-slate-400 font-sans mt-0.5 truncate">
+                          <p className="text-[11px] text-slate-600 dark:text-slate-300 font-sans mt-0.5 truncate">
                             {item.aspect}
                           </p>
                         </div>
 
-                        {scoreBadge && (
-                          <span
-                            className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-mono font-bold border whitespace-nowrap ${
-                              BADGE_COLOR_MAP[scoreBadge.color].pill
-                            }`}
-                          >
+                        <div className="shrink-0 flex items-center justify-end gap-2">
+                          {scoreBadge ? (
                             <span
-                              className={`w-1.5 h-1.5 rounded-full ${
-                                BADGE_COLOR_MAP[scoreBadge.color].dot
+                              title="Live photo-conditions score"
+                              className={`inline-flex items-center justify-center gap-1 w-[58px] py-0.5 rounded-md text-[10px] font-mono font-bold border whitespace-nowrap ${
+                                BADGE_COLOR_MAP[scoreBadge.color].pill
                               }`}
-                            />
-                            <span>{scoreBadge.score}/10</span>
+                            >
+                              <span
+                                className={`w-1.5 h-1.5 rounded-full ${
+                                  BADGE_COLOR_MAP[scoreBadge.color].dot
+                                }`}
+                              />
+                              <span>{scoreBadge.score}/10</span>
+                            </span>
+                          ) : (
+                            <span
+                              aria-label="No live score"
+                              className="inline-flex items-center justify-center w-[58px] py-0.5 text-[10px] font-mono text-slate-400 dark:text-slate-500"
+                            >
+                              –
+                            </span>
+                          )}
+                          <span className="w-3.5 h-3.5 flex items-center justify-center">
+                            {isItemActive && (
+                              <Check className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+                            )}
                           </span>
-                        )}
+                        </div>
                       </Link>
                     );
                   })}
@@ -404,22 +431,6 @@ export default function Header({
             <span>{dict.common.guides}</span>
           </Link>
 
-          {/* Embed Widget Link */}
-          <Link
-            href={getLocalizedHref('/widget', locale)}
-            className={`whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg transition-all h-9 ${
-              isWidget
-                ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 font-bold border border-sky-200/90 dark:border-sky-800/80 shadow-2xs'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
-            }`}
-            aria-current={isWidget ? 'page' : undefined}
-          >
-            <Code2
-              className={`w-4 h-4 shrink-0 ${isWidget ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'}`}
-              aria-hidden="true"
-            />
-            <span>{dict.common.widgetApi}</span>
-          </Link>
         </nav>
 
         {/* Right Status Cluster: Telemetry Pill & Language & Theme Toggle */}
@@ -542,19 +553,6 @@ export default function Header({
                   <BookOpen className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
                   <span className="text-xs font-bold">{dict.common.guides}</span>
                 </Link>
-
-                <Link
-                  href={getLocalizedHref('/widget', locale)}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-2.5 p-3 rounded-xl border transition-all ${
-                    isWidget
-                      ? 'bg-sky-50 dark:bg-sky-950/60 border-sky-300 dark:border-sky-700 text-sky-900 dark:text-sky-200 font-bold shadow-2xs'
-                      : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/60'
-                  }`}
-                >
-                  <Code2 className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold">{dict.common.widgetApi}</span>
-                </Link>
               </div>
 
               {/* Viewpoints Quick-Access Cards */}
@@ -571,18 +569,7 @@ export default function Header({
                 <div className="space-y-1.5">
                   {viewpointNavItems.map((item) => {
                     const isItemActive = pathWithoutLocale === `/viewpoints/${item.slug}`;
-                    let scoreBadge: { score: number; color: BadgeColor } | null = null;
-                    if (item.badgeKey === 'gornergrat' && telemetrySummary?.gornergratScore) {
-                      scoreBadge = {
-                        score: telemetrySummary.gornergratScore,
-                        color: telemetrySummary.gornergratBadge || 'emerald',
-                      };
-                    } else if (item.badgeKey === 'glacier' && telemetrySummary?.glacierScore) {
-                      scoreBadge = {
-                        score: telemetrySummary.glacierScore,
-                        color: telemetrySummary.glacierBadge || 'emerald',
-                      };
-                    }
+                    const scoreBadge = getScoreBadge(item.slug, item.badgeKey);
 
                     return (
                       <Link

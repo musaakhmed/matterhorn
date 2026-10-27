@@ -32,6 +32,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { VisibilityApiResponse } from '@/lib/types';
+import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import Header from '@/components/Header';
 import LiveWebcam from '@/components/LiveWebcam';
@@ -106,6 +107,7 @@ export default function SkiDashboardView({
                 glacierScore: glacier.currentScore,
                 glacierBadge: glacier.currentBadgeColor,
                 glacierStatus: glacier.currentStatus,
+                viewpointScores: getViewpointScoreMap(initialData),
               }
             : undefined
         }
@@ -909,6 +911,13 @@ export default function SkiDashboardView({
               className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
             >
               Live Dashboard
+            </Link>
+            <span>•</span>
+            <Link
+              href={getLocalizedHref('/widget', locale)}
+              className="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-semibold underline underline-offset-4"
+            >
+              Widget & API
             </Link>
             <span>•</span>
             <Link

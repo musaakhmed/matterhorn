@@ -17,6 +17,7 @@ import FaqSection from './FaqSection';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
+import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { Activity, Info, BookOpen, ArrowUpRight, Code2 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref } from '@/lib/i18n/config';
@@ -68,6 +69,7 @@ export default function VisibilityClientShell({
           glacierScore: initialData.viewpoints['glacier-paradise'].currentScore,
           glacierBadge: initialData.viewpoints['glacier-paradise'].currentBadgeColor,
           glacierStatus: initialData.viewpoints['glacier-paradise'].currentStatus,
+          viewpointScores: getViewpointScoreMap(initialData),
         }}
       />
 
