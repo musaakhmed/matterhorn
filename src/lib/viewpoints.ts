@@ -10,7 +10,8 @@ import { GuideComparisonTable, GuideFaq, GuideSection } from './guides';
 export type ViewpointPageSlug =
   | 'gornergrat'
   | 'glacier-paradise'
-  | 'sunnegga-riffelsee';
+  | 'sunnegga-riffelsee'
+  | 'zermatt-village';
 
 export interface ViewpointQuickFact {
   label: string;
@@ -647,6 +648,161 @@ export const VIEWPOINT_PAGES: ViewpointPageConfig[] = [
         question: 'What should I do if Riffelsee is too windy for a reflection?',
         answer:
           'First, walk 100 meters west past the main Riffelsee basin to the smaller "Lower Riffelsee" pond, which sits in a sheltered hollow and often stays mirror-smooth when the main lake is choppy. Alternatively, attach a 6-stop or 10-stop ND filter and shoot a 15-to-30-second long exposure to smooth the water ripples into a misty reflection.',
+      },
+    ],
+    relatedGuideSlugs: [
+      'best-matterhorn-photo-viewpoints',
+      'best-time-to-see-matterhorn',
+      'gornergrat-vs-glacier-paradise',
+    ],
+  },
+  {
+    slug: 'zermatt-village',
+    telemetryKey: 'gornergrat',
+    defaultWebcamId: 'kirchbruecke',
+    targetKeyword: 'Matterhorn view from Zermatt village Kirchbrücke',
+    name: 'Zermatt Village (Kirchbrücke & Riedweg)',
+    shortName: 'Zermatt Village',
+    title: 'Can You See the Matterhorn from Zermatt Village Today? Live Kirchbrücke Visibility & Webcam',
+    seoTitle:
+      'Can You See the Matterhorn from Zermatt Village Today? | Kirchbrücke Viewpoint & Live Webcam',
+    description:
+      'Check real-time Matterhorn visibility from Zermatt village (Kirchbrücke bridge & Riedweg viewpoint). Live webcam feed, sunrise alpenglow timing, and valley fog conditions with zero lift tickets required.',
+    elevationLabel: '1,608 m – 1,620 m',
+    elevationMeters: 1608,
+    coordinatesLabel: '46.0189° N, 7.7469° E',
+    latitude: 46.0189,
+    longitude: 7.7469,
+    aspectLabel: 'North-East Ridge & East Face Valley Framing',
+    transportSummary: '5-minute walk from Zermatt Bahnhof / Church Square (No Ticket Required)',
+    journeyTime: '0 – 10 minutes walking (Free public viewpoint)',
+    firstDepartureLabel: 'Open 24/7 (Public bridge & walking trails)',
+    bestTimeWindow: '20 mins before sunrise – 08:30 CET (Morning Alpenglow & Still Air)',
+    updatedAt: '2026-10-27',
+    heroStat: {
+      label: 'Ticket Cost',
+      value: 'CHF 0 (Free)',
+      detail: 'Public bridge & trail viewpoints accessible 24/7 without mountain railways',
+    },
+    quickFacts: [
+      {
+        label: 'Best Vantage',
+        value: 'Kirchbrücke Bridge',
+        detail: 'Direct line over Mattervispa river towards the East Face',
+      },
+      {
+        label: 'Elevated Spot',
+        value: 'Riedweg / Mürini',
+        detail: '10-min uphill walk above chalet rooftops with fewer crowds',
+      },
+      {
+        label: 'Sunrise Golden Hour',
+        value: 'Summit Alpenglow',
+        detail: 'Tip ignites pink and orange ~15-20 mins before valley sunrise',
+      },
+      {
+        label: 'Valley Fog Risk',
+        value: 'Check Cloud Base',
+        detail: 'Low fog (<2,000m) obscures village views even if peaks are clear',
+      },
+    ],
+    keyTakeaways: [
+      'Kirchbrücke (Church Bridge) is Zermatt’s premier free viewpoint: no mountain railway tickets (CHF 90–220+) needed, accessible 24/7 right in the heart of town.',
+      'For the famous "Golden Horn" alpenglow, arrive on the bridge 20–30 minutes before official sunrise time; the highest 200 meters of the peak catch the morning light first.',
+      'If Kirchbrücke is crowded with photographers, walk 10 minutes uphill towards Riedweg / Mürini for a breathtaking perspective looking over traditional Valais wooden chalets.',
+      'Check our live Low Cloud diagnostic above: if low-level valley fog (<1,800m) settles over the village, the Matterhorn may be invisible from Kirchbrücke while basking in brilliant sunshine up at Gornergrat (3,089m) or Glacier Paradise (3,883m).',
+    ],
+    comparisonTable: {
+      caption: 'Zermatt Village Public Viewpoints Comparison',
+      headers: [
+        'Village Vantage Point',
+        'Elevation',
+        'Walk Time from Train Station',
+        'Best For & Framing',
+      ],
+      rows: [
+        [
+          'Kirchbrücke (Church Bridge)',
+          '1,608 m',
+          '8 mins walk',
+          'Classic postcard shot framed by the rushing Mattervispa river; world-famous sunrise alpenglow gathering spot.',
+        ],
+        [
+          'Riedweg / Mürini Hillside',
+          '1,660 m',
+          '15 mins walk (gentle uphill)',
+          'Elevated panorama showing historic weathered larch wood chalets leading the eye to the Matterhorn.',
+        ],
+        [
+          'Hohbalmen Lower Meadow',
+          '1,750 m',
+          '25 mins walk',
+          'Peaceful pasture edge offering an uncluttered direct line-of-sight above village electric e-taxis.',
+        ],
+        [
+          'Kirchplatz / Zermatterhof',
+          '1,620 m',
+          '6 mins walk',
+          'Historic town center view next to St. Mauritius Church and Matterhorn Museum.',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'zermatt-village-matterhorn-views',
+        heading: '1. Why Kirchbrücke is the Heart of Zermatt Photography',
+        paragraphs: [
+          'You do not always need to ride high-altitude cable cars or cogwheel trains to experience the majesty of the Matterhorn. Kirchbrücke (the Church Bridge), spanning the glacier-fed Mattervispa river, offers an iconic sightline straight down the valley directly to the mountain’s jagged East Face and Hörnli Ridge.',
+          'Because the bridge is fully accessible 24 hours a day and completely free of charge, it serves as the ultimate morning test: if the summit is crisp from Kirchbrücke at dawn, it is time to head to the mountain stations.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Morning Alpenglow Spectacle:',
+            text: 'Because the Matterhorn faces East, sunrise hits the summit pyramid while the village below remains in shadow. The tip glows fiery amber and soft magenta for roughly 15 minutes.',
+          },
+          {
+            bold: 'River Foreground Reflection:',
+            text: 'The glacial waters of the Mattervispa river provide dynamic moving water in the foreground, creating a classic leading line directly towards the peak.',
+          },
+          {
+            bold: 'Avoid The Bridge Crowds:',
+            text: 'On clear mornings, dozens of tripods line the Kirchbrücke railing. For a tranquil alternative, continue walking 10 minutes uphill towards Riedweg / Mürini for an elevated vista with wooden chalet roofs.',
+          },
+        ],
+        proTip: {
+          label: 'The Low Fog Inversion Rule',
+          text: 'If Zermatt village is shrouded in cold gray fog, do not give up! Check our live score: when low cloud cover is high but mid/high clouds are zero, high viewpoints like Gornergrat (3,089m) and Glacier Paradise (3,883m) stand above the clouds under pure blue skies.',
+        },
+      },
+      {
+        id: 'sunrise-timing-and-tips',
+        heading: '2. Best Timing & Photography Tips for Village Views',
+        paragraphs: [
+          'Arrive at Kirchbrücke or Riedweg at least 20 minutes before official sunrise. The first light does not appear at ground level; it touches the highest needle tip of the Matterhorn (4,478m) first, slowly descending down the rock face.',
+          'In winter, the village view is blanketed in snow with smoking chalet chimneys. In summer and autumn, golden larches on the surrounding valley slopes add vibrant contrast to the gray gneiss pyramid.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can you see the Matterhorn from Zermatt village?',
+        answer:
+          'Yes! The Matterhorn is clearly visible from numerous public spots in Zermatt village, most famously from Kirchbrücke (the Church Bridge over the Mattervispa river) and the uphill Riedweg / Mürini walking path, completely free of charge.',
+      },
+      {
+        question: 'What is the best free viewpoint for the Matterhorn in Zermatt?',
+        answer:
+          'Kirchbrücke is the most famous free spot for watching the sunrise alpenglow. For a panoramic view looking over traditional chalet rooftops with fewer crowds, walk 10–15 minutes up the Riedweg path.',
+      },
+      {
+        question: 'What time is sunrise at Kirchbrücke for the Matterhorn alpenglow?',
+        answer:
+          'In summer (June–July), sunrise light touches the summit around 05:30–05:50 CET. In autumn (September–October), it occurs between 06:45 and 07:30 CET. In winter, around 07:45–08:15 CET. Always arrive 20 minutes before official sunrise.',
+      },
+      {
+        question: 'What if it is foggy in Zermatt village?',
+        answer:
+          'Low valley fog (stratus) often forms over Zermatt village at 1,600m while the peaks are completely clear. Check our live high-altitude scores: if Gornergrat (3,089m) or Glacier Paradise (3,883m) score 8–10/10, ride the train or cable car up to emerge above the clouds.',
       },
     ],
     relatedGuideSlugs: [

@@ -271,6 +271,28 @@ export function generateSectorRecommendations(
       'Up-close glacier dramatic views, though drifting clouds at 4,000m may intermittently veil the summit cross.';
   }
 
+  let villageSuitability: 'Optimal' | 'Fair' | 'Poor' = 'Optimal';
+  let villageColor: BadgeColor = 'emerald';
+  let villageAdvice =
+    'Iconic Kirchbrücke bridge & Riedweg village perspective. Best for sunrise alpenglow without buying tickets.';
+
+  if (cloudCoverLow > 65) {
+    villageSuitability = 'Poor';
+    villageColor = 'rose';
+    villageAdvice =
+      'Low valley fog (<1,800m) settles in Zermatt village. Ascend via Gornergrat or Glacier Paradise to rise above the fog deck.';
+  } else if (score <= 4) {
+    villageSuitability = 'Poor';
+    villageColor = 'rose';
+    villageAdvice =
+      'Summit enveloped in clouds from the valley perspective. Stroll through the village or visit Zermatlantis museum instead.';
+  } else if (score <= 7) {
+    villageSuitability = 'Fair';
+    villageColor = 'amber';
+    villageAdvice =
+      'Good village visibility with intermittent clouds drifting past the East Face. Kirchbrücke sunrise remains worthwhile.';
+  }
+
   return [
     {
       id: 'gornergrat',
@@ -301,6 +323,16 @@ export function generateSectorRecommendations(
       tagline: 'High-Altitude Above Low Fog',
       advice: glacierAdvice,
       transportType: '45 min Matterhorn Express + 3S Lift',
+    },
+    {
+      id: 'zermatt-village',
+      name: 'Zermatt Village',
+      elevation: '1,608 m',
+      suitability: villageSuitability,
+      badgeColor: villageColor,
+      tagline: 'Kirchbrücke & Sunrise Alpenglow',
+      advice: villageAdvice,
+      transportType: 'Free 5-min walk from Church Square',
     },
   ];
 }

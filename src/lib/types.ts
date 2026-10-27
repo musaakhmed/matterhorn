@@ -71,7 +71,7 @@ export interface DayForecast {
 }
 
 export interface ViewpointRecommendation {
-  id: 'gornergrat' | 'sunnegga' | 'glacier-paradise';
+  id: 'gornergrat' | 'sunnegga' | 'glacier-paradise' | 'zermatt-village';
   name: string;
   elevation: string;
   suitability: 'Optimal' | 'Fair' | 'Poor';
