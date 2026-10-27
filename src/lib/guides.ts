@@ -4,7 +4,17 @@ export type GuideCategory =
   | 'Bad Weather'
   | 'Photography'
   | 'Meteorology'
-  | 'Day Trips';
+  | 'Day Trips'
+  | 'Winter & Seasons';
+
+export interface GuideImage {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  width?: number;
+  height?: number;
+}
 
 export interface GuideComparisonTable {
   caption: string;
@@ -16,6 +26,7 @@ export interface GuideSection {
   id: string;
   heading: string;
   paragraphs: string[];
+  image?: GuideImage;
   bulletPoints?: {
     bold: string;
     text: string;
@@ -41,6 +52,7 @@ export interface GuideArticle {
   publishedAt: string;
   updatedAt: string;
   readingTimeMinutes: number;
+  coverImage: GuideImage;
   heroStat: {
     label: string;
     value: string;
@@ -48,7 +60,11 @@ export interface GuideArticle {
   };
   keyTakeaways: string[];
   comparisonTable?: GuideComparisonTable;
-  embeddedWidget?: 'historical-table' | 'contingency-plans' | 'scoring-formula';
+  embeddedWidget?:
+    | 'historical-table'
+    | 'contingency-plans'
+    | 'scoring-formula'
+    | 'trains-comparison';
   sections: GuideSection[];
   faqs: GuideFaq[];
 }
@@ -66,6 +82,11 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: '2026-01-15',
     updatedAt: '2026-10-25',
     readingTimeMinutes: 6,
+    coverImage: {
+      src: '/guides/gornergrat-vs-glacier-paradise.jpg',
+      alt: 'Observation terrace at Gornergrat (3,089m) overlooking the Gorner Glacier and the classic East Face pyramid of the Matterhorn',
+      caption: 'The classic "Toblerone" East Face seen from the Gornergrat observation ridge (3,089m) overlooking the vast Gorner Glacier.',
+    },
     heroStat: {
       label: 'Elevation Delta',
       value: '794 m',
@@ -187,6 +208,11 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: '2026-01-20',
     updatedAt: '2026-10-25',
     readingTimeMinutes: 5,
+    coverImage: {
+      src: '/guides/best-time-to-see-matterhorn.jpg',
+      alt: 'Dramatic sunrise alpenglow illuminating the sharp summit of the Matterhorn in pink and gold against a clear blue morning sky',
+      caption: 'First light ignites the 4,478m Matterhorn summit in intense golden alpenglow—the Morning (AM) window is clearer 78% of the year.',
+    },
     heroStat: {
       label: 'Peak Clarity Window',
       value: '06:00–10:30',
@@ -266,6 +292,11 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: '2026-02-02',
     updatedAt: '2026-10-25',
     readingTimeMinutes: 5,
+    coverImage: {
+      src: '/guides/zermatt-cloudy-rainy-day-guide.jpg',
+      alt: 'Dramatic view of the Matterhorn mountain partially engulfed and shrouded in thick stormy clouds and alpine mist in Zermatt',
+      caption: 'When visibility scores drop to 1–4/10, thick mid-level storm clouds and fog swallow the 4,478m Matterhorn summit.',
+    },
     heroStat: {
       label: 'Ticket Savings',
       value: 'CHF 110+',
@@ -349,6 +380,11 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: '2026-02-10',
     updatedAt: '2026-10-25',
     readingTimeMinutes: 6,
+    coverImage: {
+      src: '/guides/best-matterhorn-photo-viewpoints.jpg',
+      alt: 'Crystal clear mirror reflection of the iconic Matterhorn mountain in the calm waters of Riffelsee lake near Rotenboden',
+      caption: 'The inverted Matterhorn pyramid mirrored on the glassy surface of Riffelsee (2,757m) during early morning calm wind conditions.',
+    },
     heroStat: {
       label: 'Top Reflection Lakes',
       value: '2,537m & 2,757m',
@@ -417,6 +453,11 @@ export const GUIDES: GuideArticle[] = [
       {
         id: 'mirror-lakes',
         heading: '2. Stellisee vs. Riffelsee: Which Mirror Lake Should You Choose?',
+        image: {
+          src: '/guides/riffelsee-matterhorn-reflection.jpg',
+          alt: 'Still water mirror reflection of the Matterhorn in Riffelsee at 2,757 meters',
+          caption: 'Early morning glassy conditions at Riffelsee before mountain thermal winds ripple the surface.',
+        },
         paragraphs: [
           'Zermatt has two world-famous alpine lakes that reflect the Matterhorn like glass—provided two conditions are met: the lake is thawed (typically mid-June through mid-October) and surface wind is calm (<12 km/h).',
         ],
@@ -457,6 +498,11 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: '2026-02-18',
     updatedAt: '2026-10-25',
     readingTimeMinutes: 5,
+    coverImage: {
+      src: '/guides/matterhorn-banner-cloud-fohn-wind.jpg',
+      alt: 'Isolated Matterhorn peak under azure sky with a distinctive white banner cloud streaming off its summit in Föhn winds',
+      caption: 'A classic lee-wave banner cloud streaming from the Matterhorn summit under clear blue skies due to aerodynamic pressure drop.',
+    },
     heroStat: {
       label: 'Summit Elevation',
       value: '4,478 m',
@@ -531,6 +577,11 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: '2026-03-01',
     updatedAt: '2026-10-25',
     readingTimeMinutes: 6,
+    coverImage: {
+      src: '/guides/zurich-geneva-to-zermatt-day-trip.jpg',
+      alt: 'Scenic red Swiss mountain train traveling along a curved alpine canyon railway towards Zermatt with snow peaks',
+      caption: 'The Matterhorn Gotthard Bahn scenic railway winding through the Vispa Valley gorge on the final leg into Zermatt.',
+    },
     heroStat: {
       label: 'Round-Trip Rail Time',
       value: '6.5 – 7.5 hrs',
@@ -648,6 +699,442 @@ export const GUIDES: GuideArticle[] = [
         question: 'What is the last train back from Zermatt to Zurich or Geneva?',
         answer:
           'Trains depart Zermatt every 30 to 60 minutes until roughly 20:37 CET (reaching Zurich HB around 00:05 and Geneva around 00:20). Most day-trippers take the 16:37, 17:37, or 18:37 CET departure after watching sunset alpenglow from Kirchbrücke.',
+      },
+    ],
+  },
+  {
+    slug: 'christmas-in-zermatt-matterhorn',
+    title: 'Christmas in Zermatt: Winter Magic, Cozy Chalets & Clear-Sky Matterhorn Views',
+    shortTitle: 'Christmas in Zermatt Guide',
+    seoTitle:
+      'Christmas in Zermatt (2026) | Winter Magic, Cozy Chalets & Matterhorn Views',
+    description:
+      'Everything you need to know about celebrating Christmas in Zermatt: fairy-tale snow-covered chalets, 89% December clear-sky odds, cozy fondue firesides, horse-drawn sleighs, and holiday mountain excursions.',
+    category: 'Winter & Seasons',
+    publishedAt: '2026-11-01',
+    updatedAt: '2026-11-01',
+    readingTimeMinutes: 6,
+    coverImage: {
+      src: '/guides/christmas-in-zermatt-matterhorn.jpg',
+      alt: 'Zermatt alpine village illuminated at night in winter with heavy snow blanketing chalets under the starry sky',
+      caption: 'Zermatt village glowing in festive winter light under heavy alpine snow on a December night.',
+    },
+    heroStat: {
+      label: 'December Clear-Sky Rate',
+      value: '89% Clarity',
+      detail: 'Highest monthly clear-sky summit probability of the entire year',
+    },
+    keyTakeaways: [
+      'December boasts an 89% statistical clear-sky summit probability—the highest of any month in Zermatt—due to cold, dry high-pressure air and zero summer thermal updrafts.',
+      'Zermatt is strictly car-free; at Christmas, quiet cobblestone lanes are navigated by electric taxis, horse-drawn sleighs with brass bells, and walking under glowing street illuminations.',
+      'Christmas Eve and Christmas Day dinners (traditional Swiss cheese fondue, Valais raclette, and black-truffle specialties) book out months ahead—secure table reservations by October/November.',
+      'The Gornergrat cogwheel train and Klein Matterhorn cable cars operate 365 days a year, making a Christmas morning summit ascent to 3,089m an unforgettable alpine tradition.',
+    ],
+    comparisonTable: {
+      caption: 'Zermatt Christmas Excursions & Winter Highlights Quick Reference',
+      headers: [
+        'Activity / Tradition',
+        'Location / Route',
+        'Best Timing',
+        'Why It Is Magical at Christmas',
+      ],
+      rows: [
+        [
+          'Christmas Eve Stroll & Glühwein',
+          'Bahnhofstrasse & Kirchplatz',
+          '17:00–19:30 CET (Twilight)',
+          'Illuminated village Christmas tree, choir carols by St. Mauritius church, roasted chestnuts.',
+        ],
+        [
+          'Gornergrat Winter Panorama Rail',
+          'Cogwheel train from Zermatt (33m)',
+          '09:00–14:00 CET',
+          'Ascends through deep snowy pine forests to 3,089m with 360° views of 29 four-thousand-meter peaks.',
+        ],
+        [
+          'Historic Hinterdorf Chalet Walk',
+          'Behind Monte Rosa Hotel',
+          'Blue hour (16:30–17:30 CET)',
+          '500-year-old larchwood barns (Gädi) heavily blanketed in pristine powder snow.',
+        ],
+        [
+          'Fireside Cheese Fondue Dinner',
+          'Traditional Zermatt Stübli & Chalets',
+          '19:00–22:00 CET',
+          'Local Valais AOP cheeses melted with garlic and Fendant wine beside a crackling hearth.',
+        ],
+        [
+          'Matterhorn Glacier Palace & Skiing',
+          'Klein Matterhorn (3,883m)',
+          '10:00–14:30 CET',
+          'Europe’s highest ski slopes and ice sculpture tunnels 15m deep inside the natural glacier.',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'why-zermatt-christmas-is-magical',
+        heading: '1. Why Zermatt Is the Quintessential Alpine Christmas Destination',
+        image: {
+          src: '/guides/zermatt-winter-chalets.jpg',
+          alt: 'Traditional wooden Swiss chalets in Zermatt dusted with thick winter snow beneath the Matterhorn',
+          caption: 'Historic sun-darkened larchwood chalets draped in fresh December powder snow in Zermatt.',
+        },
+        paragraphs: [
+          'Few places on Earth embody the fairy-tale spirit of Christmas quite like Zermatt. Nestled in a deep valley pocket beneath the sheer pyramid of the Matterhorn (4,478m), this car-free Swiss village transforms each December into a living snow globe.',
+          'Because combustion-engine vehicles have been banned since 1966, there is no roar of traffic or exhaust slush—only the crunch of fresh snow underfoot, the gentle hum of small electric buses, and the rhythmic jingle of brass bells on horse-drawn sleighs outside historic hotels like the Mont Cervin Palace and Grand Hotel Zermatterhof.',
+          'Along Bahnhofstrasse and Kirchplatz, warm golden fairy lights wrap snow-laden evergreen trees, while shop windows display handcrafted Swiss wooden ornaments, artisanal chocolates, and steaming copper cauldrons of spiced Glühwein (mulled wine) and roasted chestnuts (marroni).',
+        ],
+        proTip: {
+          label: 'Local Secret',
+          text: 'Wander into the Hinterdorf quarter just behind Bahnhofstrasse at dusk (16:45 CET). The narrow pedestrian lanes between 16th-century larch barns look straight out of a 19th-century winter painting when draped in heavy snow.',
+        },
+      },
+      {
+        id: 'december-weather-matterhorn-clarity',
+        heading: '2. December Weather: Why Christmas Has the Clearest Skies of the Year',
+        paragraphs: [
+          'Travelers often assume summer offers the best mountain weather, but 30 years of official Swiss alpine telemetry tell the exact opposite story. December is statistically the clearest month of the entire calendar year in Zermatt, recording an astonishing 89% clear-sky probability for the Matterhorn summit.',
+          'In winter, the atmosphere over the Pennine Alps is dominated by cold, stable, dry continental high-pressure systems. Unlike July and August—when intense valley solar heating creates afternoon thermal updrafts (anabatic winds) that trigger thick cumulus clouds by 13:00 CET—December air is crystal clear all day long. When you look up toward the Matterhorn at 10:00 CET or 15:00 CET, the mountain stands sharply etched against a deep indigo sky.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Sub-Zero Crisp Air Keeps Visibility Pristine:',
+            text: 'Average December temperatures in Zermatt village range from -6°C to +1°C, while summit platforms (3,089m–3,883m) range from -14°C to -8°C. Cold air holds minimal moisture, eliminating hazy summit fog.',
+          },
+          {
+            bold: 'Early Winter Sunset Alpenglow (16:30–16:50 CET):',
+            text: 'Because sunset occurs early in late December, you do not have to wait until late evening to photograph the pink and violet alpenglow across the Matterhorn’s East Face.',
+          },
+          {
+            bold: 'Check Live Telemetry for Föhn Gales:',
+            text: 'Even in winter, periodic southerly Föhn wind fronts can bring high-altitude wind gusts over 45 km/h across Klein Matterhorn. Check our live 1–10 AM/PM Visibility Score each morning before boarding the lifts.',
+          },
+        ],
+      },
+      {
+        id: 'cozy-dining-fireside-fondue',
+        heading: '3. Cozy Alpine Dining: Fireside Fondue, Raclette & Christmas Feasts',
+        image: {
+          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          alt: 'A pot of bubbling Swiss cheese fondue with bread and wine overlooking the snowy Matterhorn',
+          caption: 'Nothing compares to bubbling Valais cheese fondue and a glass of crisp Fendant wine after a day in the snow.',
+        },
+        paragraphs: [
+          'After spending a crisp winter morning riding the Gornergrat Bahn or skiing the international slopes to Cervinia, nothing warms the alpine soul like gathering around a bubbling ceramic caquelon of authentic Swiss cheese fondue.',
+          'Zermatt’s cozy alpine restaurants and traditional Stüblis—such as Ferdinand by Cervo, Saycheese!, Chez Vrony, and Schäferstube—specialize in Valais AOP cheeses melted with dry white wine, garlic, and a splash of Kirsch cherry brandy. Savoring hot melted cheese scraped over baby potatoes (raclette) beside a crackling stone hearth while snow falls quietly outside is the ultimate Christmas comfort.',
+        ],
+        proTip: {
+          label: 'Christmas Dinner Strategy',
+          text: 'Christmas Eve (December 24) and Christmas Day (December 25) dinners in Zermatt book out weeks or even months in advance. Many village restaurants offer special festive multi-course menus. Make table reservations as early as October or November.',
+        },
+      },
+      {
+        id: 'christmas-day-mountain-excursions',
+        heading: '4. Christmas Day Mountain Excursions: Gornergrat & Glacier Paradise',
+        image: {
+          src: '/guides/zermatt-winter-snow-village.jpg',
+          alt: 'Snowy alpine slopes and winter landscape above Zermatt village with pristine powder snow',
+          caption: 'Winter wonderland: high-alpine slopes above Zermatt open for scenic cogwheel rides and winter hiking on Christmas Day.',
+        },
+        paragraphs: [
+          'A common concern for first-time visitors is whether Swiss mountain railways operate on Christmas Day. The answer is an emphatic yes: both the Gornergrat Bahn cogwheel train and the Matterhorn Glacier Paradise cableways operate 365 days a year, weather permitting.',
+          'Riding the heated cogwheel train uphill from Zermatt Bahnhof on Christmas morning is an unforgettable journey. The red train climbs steadily through snow-laden larch and Swiss stone pine forests, emerging onto open high-alpine snowfields at Riffelberg (2,582m) and Rotenboden (2,815m) before terminating at the Gornergrat observatory terrace (3,089m). From here, you can gaze across the frozen expanses of the Gorner and Findel glaciers toward the pristine, snow-plastered North and East faces of the Matterhorn.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Does it always snow in Zermatt at Christmas?',
+        answer:
+          'Zermatt sits at 1,608 meters with surrounding ski terrain rising to 3,883 meters, giving it one of the most reliable natural snow records in the European Alps. A white Christmas in Zermatt village is virtually guaranteed, and the high-altitude ski slopes are 100% snow-covered throughout December.',
+      },
+      {
+        question: 'Are mountain trains and ski lifts open on Christmas Day in Zermatt?',
+        answer:
+          'Yes! The Gornergrat Bahn, Sunnegga funicular, and Matterhorn Glacier Paradise cableways operate on their standard winter schedules on December 24, 25, and 26. Always check our live 1–10 AM/PM Visibility Score on the morning of travel to ensure summit clarity.',
+      },
+      {
+        question: 'Are restaurants and shops open during Christmas week in Zermatt?',
+        answer:
+          'Yes, Christmas week through New Year’s is the peak winter festive season in Zermatt. Grocery stores and ski rental shops remain open (with slightly reduced hours on December 24 evening and December 25), while restaurants and bars operate at full capacity. Dinner reservations for Christmas Eve and Christmas Day are essential.',
+      },
+      {
+        question: 'What is the best way to see the Matterhorn on Christmas Day?',
+        answer:
+          'Take the 08:24 or 09:00 CET Gornergrat cogwheel train from Zermatt station. Sit on the right-hand side facing uphill for breathtaking, continuous views of the snow-clad Matterhorn East Face as the morning sun casts warm golden light across the fresh snow.',
+      },
+    ],
+  },
+  {
+    slug: 'gornergrat-railway-vs-glacier-express',
+    title:
+      'Gornergrat Railway vs. Glacier Express: Comparing Switzerland’s Most Iconic Mountain Trains',
+    shortTitle: 'Gornergrat vs. Glacier Express',
+    seoTitle:
+      'Gornergrat Railway vs. Glacier Express (2026 Comparison) | Tickets, Passes & Views',
+    description:
+      'Compare Zermatt’s two legendary railways: the Gornergrat 3,089m cogwheel mountain ascent vs. the Glacier Express 8-hour panoramic trans-alpine journey. Complete with Swiss Travel Pass rules, seat reservation fees, best side to sit, and live status.',
+    category: 'Day Trips',
+    publishedAt: '2026-11-05',
+    updatedAt: '2026-11-05',
+    readingTimeMinutes: 7,
+    coverImage: {
+      src: '/guides/gornergrat-railway-vs-glacier-express.jpg',
+      alt: 'Gornergrat Bahn electric cogwheel mountain train ascending through rocky alpine terrain towards 3,089m with dramatic mountain backdrop',
+      caption:
+        'The Gornergrat Bahn cogwheel train climbing 1,485 vertical meters above Zermatt towards the 3,089m Gornergrat summit ridge.',
+    },
+    heroStat: {
+      label: 'Journey Type Delta',
+      value: '33 min vs. 7h 45m',
+      detail:
+        'Vertical summit cogwheel climb (3,089m) vs. 291km panoramic trans-alpine rail',
+    },
+    keyTakeaways: [
+      'Gornergrat Railway (GGB) is a vertical cogwheel ascent taking 33 minutes from Zermatt (1,604m) straight to the 3,089m summit ridge, providing the front-row iconic East Face Matterhorn view.',
+      'The Glacier Express (GEX) is an 8-hour, 291-kilometer trans-alpine scenic journey crossing 291 bridges and 91 tunnels between Zermatt and St. Moritz.',
+      'Swiss Travel Pass rules differ sharply: Gornergrat offers a 50% discount with no seat reservations required, whereas the Glacier Express has 100% ticket coverage but MANDATORY paid seat reservations (CHF 39–49).',
+      'You do not need to choose between them: both trains meet directly opposite each other at Zermatt Bahnhof square, making it effortless to ride the Glacier Express into town and then ride Gornergrat to the summit.',
+      'Check our dedicated [Scenic Trains Live Hub & Ticket Comparison](/trains) for live summit weather scores, carriage layouts, and timetable updates before booking.',
+    ],
+    comparisonTable: {
+      caption: 'Gornergrat Bahn vs. Glacier Express: Feature & Ticket Comparison (2026)',
+      headers: [
+        'Feature / Attribute',
+        'Gornergrat Railway (GGB)',
+        'Glacier Express (GEX)',
+      ],
+      rows: [
+        [
+          'Primary Purpose',
+          'Vertical mountain summit excursion & Matterhorn viewpoint',
+          'Trans-alpine grand panoramic overland journey',
+        ],
+        [
+          'Route & Terminus',
+          'Zermatt (1,604 m) ↔ Gornergrat Summit (3,089 m)',
+          'Zermatt (Valais) ↔ St. Moritz / Davos (Graubünden)',
+        ],
+        [
+          'Journey Duration',
+          '33 minutes each way',
+          '7 hours 45 minutes (full 291 km route)',
+        ],
+        [
+          'Track & Propulsion',
+          'Abt double-rack cogwheel (metric gauge, 1,000 mm)',
+          'Adhesion & rack sections (Matterhorn Gotthard Bahn / RhB)',
+        ],
+        [
+          'Elevation Gain / Peak',
+          '+1,485 m climb (Peak: 3,089 m summit)',
+          'Peak: Oberalp Pass (2,033 m) / Low: Chur (585 m)',
+        ],
+        [
+          'Operating Season',
+          '365 days a year (no seasonal closure)',
+          'Early Dec to late Oct (annual maintenance shut Nov–early Dec)',
+        ],
+        [
+          'Swiss Travel Pass',
+          '50% Discount (CHF 51–66 return)',
+          '100% Free Ticket (Mandatory seat reservation fee applies)',
+        ],
+        [
+          'Seat Reservation',
+          'Not required (walk-on, optional CHF 7 priority pass)',
+          'MANDATORY (CHF 39 low season / CHF 49 peak summer)',
+        ],
+        [
+          'Eurail / Interrail',
+          'No discount (full price ticket)',
+          '100% Free Ticket (Mandatory seat reservation fee applies)',
+        ],
+        [
+          'Best Side to Sit',
+          'Right side ascending from Zermatt (Matterhorn view)',
+          'Left side departing Zermatt to Disentis / Either side in Rhine Gorge',
+        ],
+        [
+          'Matterhorn Visibility',
+          'Continuous direct views during entire ride & summit',
+          'Only visible departing/arriving within Zermatt valley',
+        ],
+        [
+          'Key Scenic Highlights',
+          'Riffelsee reflection, Gorner Glacier, 29 four-thousanders',
+          'Landwasser Viaduct, Rhine Gorge, Oberalp Pass lake',
+        ],
+      ],
+    },
+    embeddedWidget: 'trains-comparison',
+    sections: [
+      {
+        id: 'gornergrat-overview',
+        heading:
+          'Gornergrat Bahn (GGB): Europe’s Highest Open-Air Cogwheel Railway',
+        image: {
+          src: '/guides/gornergrat-bahn-cogwheel-train.jpg',
+          alt: 'Gornergrat Bahn cogwheel train climbing the steep alpine rack railway towards the Gornergrat summit with the Matterhorn in the background',
+          caption:
+            'The Gornergrat Bahn cogwheel train ascending past alpine meadows and larch forests towards the 3,089-meter observation terrace.',
+        },
+        paragraphs: [
+          'Opened in 1898 as Switzerland’s first fully electric rack railway, the Gornergrat Bahn (GGB) is an engineering marvel. In just 33 minutes, its distinctive crimson and golden trainsets scale 1,485 vertical meters from Zermatt village (1,604m) straight up to the rocky summit ridge of Gornergrat (3,089m).',
+          'Unlike ordinary scenic trains that glide through river valleys, the Gornergrat Bahn is a pure vertical mountain ascent. As the cogwheel claws its way up 20% gradients, passengers are treated to an ever-expanding panorama of the Matterhorn’s iconic East Face. Intermediate stops include Findelbach (crossing a dramatic stone viaduct), Riffelalp (2,211m), Riffelberg (2,582m), and Rotenboden (2,815m)—the starting trailhead for the world-famous 10-minute walk to Riffelsee, where the Matterhorn mirrors in pristine alpine water.',
+          'At the summit terminus (3,089m), you step directly out onto the observation deck of the historic 3100 Kulmhotel Gornergrat. From here, you have an unobstructed 360-degree panorama encompassing Monte Rosa (4,634m, Switzerland’s highest peak), the colossal Gorner Glacier tongue, and 29 individual peaks towering above 4,000 meters.',
+          'To plan your ascent and check real-time summit cloud coverage, visit our dedicated [Gornergrat Railway Guide on the Trains Hub](/trains#gornergrat).',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Speed & Duration:',
+            text: '33 minutes each way across 9.3 km of track, operating year-round with departures every 24 to 48 minutes.',
+          },
+          {
+            bold: 'Elevation Profile:',
+            text: 'Ascends from 1,604m in Zermatt to 3,089m at Gornergrat summit (+1,485m vertical gain).',
+          },
+          {
+            bold: 'Walk-On Simplicity:',
+            text: 'No advance seat reservation required. Simply scan your QR code or Swiss Pass at the turnstiles and board.',
+          },
+          {
+            bold: 'Intermediate Hikes:',
+            text: 'Hop off at Rotenboden for the Riffelsee mirror photo walk, or at Riffelberg for scenic alpine lunches overlooking the Matterhorn.',
+          },
+        ],
+        proTip: {
+          label: 'Best Side to Sit',
+          text: 'Always sit on the RIGHT side of the carriage (starboard) when boarding at Zermatt. The right-hand windows deliver continuous, escalating views of the Matterhorn pyramid as the train climbs above the tree line.',
+        },
+      },
+      {
+        id: 'glacier-express-overview',
+        heading:
+          'Glacier Express (GEX): "The World’s Slowest Express Train"',
+        image: {
+          src: '/guides/glacier-express-panoramic-train.jpg',
+          alt: 'Glacier Express panoramic train traversing the Swiss Alps with dome windows under clear blue skies',
+          caption:
+            'The Glacier Express gliding through the Swiss Alps, featuring panoramic dome windows that curve into the ceiling.',
+        },
+        paragraphs: [
+          'If the Gornergrat Bahn is an exhilarating vertical elevator into the alpine sky, the Glacier Express is the ultimate slow-travel horizontal odyssey across the spine of the Swiss Alps. Linking the world-renowned resort towns of Zermatt in Valais and St. Moritz in the Engadin valley, the Glacier Express covers 291 kilometers (181 miles) over the course of roughly 7 hours and 45 minutes.',
+          'Along the way, the train crosses 291 soaring viaducts, dives through 91 alpine tunnels, and scales the dramatic Oberalp Pass at 2,033 meters (6,670 ft)—the highest point on the line and the source of the Rhine River. Highlights along the route include the dizzying Landwasser Viaduct (a 65-meter-high curved limestone bridge plunging straight into a sheer cliff tunnel) and the Rhine Gorge ("Ruinaulta"), often celebrated as the Swiss Grand Canyon.',
+          'The carriages are purpose-built panoramic coaches with vast curved windows extending into the ceiling, giving passengers an unbroken view of towering granite walls, cascading waterfalls, and glacial peaks. Fresh three-course meals are cooked on board and served directly to your table at your seat while the alpine landscape drifts silently past.',
+          'Detailed seating configurations, dining menus, and booking strategies are available in our [Glacier Express Route & Seat Guide](/trains#glacier-express).',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Route & Duration:',
+            text: '291 km between Zermatt and St. Moritz, taking approximately 7 hours and 45 minutes.',
+          },
+          {
+            bold: 'Key Engineering Feats:',
+            text: 'Crosses 291 stone viaducts and traverses 91 tunnels, including the helical spiral tunnels of the Albula UNESCO World Heritage line.',
+          },
+          {
+            bold: 'Excellence Class:',
+            text: 'Ultra-luxurious premium class featuring guaranteed single window seats, dedicated concierge, private Glacier Bar, and a 5-course gourmet regional tasting menu with wine pairings.',
+          },
+          {
+            bold: 'Seasonal Closure:',
+            text: 'Unlike Gornergrat (which runs 365 days), the Glacier Express pauses for annual maintenance between late October and mid-December.',
+          },
+        ],
+        proTip: {
+          label: 'Mandatory Seat Reservations',
+          text: 'Unlike standard Swiss trains, you CANNOT board the Glacier Express without a reserved seat, even if you hold an unlimited 1st Class Swiss Travel Pass. Booking opens exactly 93 days in advance on the official portal—set a calendar alert, as panoramic seats on peak summer and ski dates sell out within hours.',
+        },
+      },
+      {
+        id: 'pass-rules-pricing',
+        heading:
+          'Swiss Travel Pass, Half Fare Card & Ticket Pricing Compared',
+        paragraphs: [
+          'Travelers often assume that holding a Swiss Travel Pass allows them to hop onto any train in Switzerland for free. While the Swiss rail network is famously integrated, the Gornergrat Bahn and Glacier Express fall under completely different tariff categories.',
+          'Understanding these rules ahead of time will prevent unexpected counter surcharges or reservation penalties at the boarding gates.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Gornergrat Bahn with Swiss Travel Pass:',
+            text: 'You receive a 50% discount on standard adult tickets (summer return drops from ~CHF 132 to CHF 66; winter drops from ~CHF 102 to CHF 51). It is NOT 100% free because it is classified as a mountain summit excursion railway. No seat reservation is needed.',
+          },
+          {
+            bold: 'Gornergrat with Swiss Half Fare Card:',
+            text: 'Identical 50% discount as the Swiss Travel Pass. Children aged 6–15 holding a Swiss Family Card travel completely free when accompanied by a paying parent.',
+          },
+          {
+            bold: 'Glacier Express with Swiss Travel Pass:',
+            text: 'Your rail fare is 100% COVERED by the Swiss Travel Pass (and Eurail / Interrail). However, you MUST pay the mandatory seat reservation fee: CHF 39 in low season (spring/autumn) or CHF 49 in peak summer and winter. Without the seat reservation slip, boarding is refused.',
+          },
+          {
+            bold: 'Glacier Express Excellence Class Supplement:',
+            text: 'Requires a valid 1st class rail ticket (or 1st class Swiss Travel Pass) plus a non-discountable Excellence Class supplement of CHF 470 per person.',
+          },
+        ],
+        proTip: {
+          label: 'Live Ticket & Pass Comparison',
+          text: 'Compare side-by-side fares, children policies, and dog allowances on our interactive [Swiss Mountain Trains Comparison Page](/trains).',
+        },
+      },
+      {
+        id: 'which-train-to-choose',
+        heading:
+          'Which Train Should You Ride? (Or How to Combine Both)',
+        paragraphs: [
+          'Because both trains depart from the same central hub at Zermatt Bahnhof square, they are natural companions rather than direct rivals. Choosing which one to prioritize depends on your itinerary length and sightseeing priorities:',
+          '1. If you only have 1 or 2 days in Zermatt: Ride the Gornergrat Bahn. Your primary goal is seeing and photographing the Matterhorn, hiking the Riffelsee reflection trail, and reaching 3,089 meters. In just over half an hour, Gornergrat puts you directly in front of the mountain.',
+          '2. If you are traveling between eastern Switzerland and Zermatt: Take the Glacier Express as your scenic long-distance transit. Instead of taking standard regional trains through the long Lötschberg Base Tunnel, riding the Glacier Express transforms your transit day into a world-class scenic experience.',
+          '3. The Ultimate 48-Hour Alpine Itinerary: Arrive in Zermatt aboard the Glacier Express in the late afternoon, marveling at the Mattertal valley cliffs. Check into your Zermatt hotel, enjoy a fondue dinner in the village, and board the first morning Gornergrat train at 08:00 to catch pristine golden-hour light reflecting across the Gorner Glacier and Matterhorn.',
+          'Explore live weather scores and contingency routes before booking on our [Matterhorn Visibility Live Dashboard](/).',
+        ],
+      },
+      {
+        id: 'live-tracking-and-weather',
+        heading:
+          'Live Summit Weather & Why Timing Your Ride Matters',
+        paragraphs: [
+          'One fundamental difference between these two journeys is weather dependency. The Glacier Express travels primarily through deep valleys and mountain passes; even on overcast or lightly raining days, the misty alpine scenery, rushing waterfalls, and limestone gorges remain visually breathtaking.',
+          'The Gornergrat Bahn, however, is an open-air mountain summit ascent. If localized low-hanging stratus clouds or a South Föhn banner cloud envelops the 3,089m ridge, visibility from the summit platform can drop to zero, obscuring both the Matterhorn and the Gorner Glacier.',
+          'Because Gornergrat tickets are date-flexible, never purchase your tickets days in advance without verifying live summit conditions. Before boarding, check our real-time [Gornergrat Visibility Score on the Live Trains Tracker](/trains), which combines high-altitude cloud cover, summit webcams, and wind shear to give you a definitive 1–10 Go/No-Go score.',
+        ],
+        proTip: {
+          label: 'Cloud Inversion Phenomenon',
+          text: 'In late autumn and winter, Zermatt village can sit under thick fog ("Nebeldecke") while Gornergrat at 3,089m basks under crystal-clear blue skies above a sea of clouds. Check our live high-altitude webcams before assuming a cloudy village means bad summit weather!',
+        },
+      },
+    ],
+    faqs: [
+      {
+        question:
+          'Do the Gornergrat Bahn and Glacier Express depart from the same station in Zermatt?',
+        answer:
+          'Yes, they depart within 50 meters of each other at Zermatt Bahnhof. The Glacier Express arrives and departs directly at the main Matterhorn Gotthard Bahn (MGB) / SBB platforms, while the Gornergrat Bahn has its own dedicated heritage terminal building immediately across the outdoor station square.',
+      },
+      {
+        question: 'Is the Gornergrat Bahn 100% free with the Swiss Travel Pass?',
+        answer:
+          'No. The Gornergrat Bahn is classified as a high-altitude mountain excursion railway, so the Swiss Travel Pass provides a 50% discount rather than free travel. In 2026, an adult return ticket costs approximately CHF 66 in summer and CHF 51 in winter with the pass.',
+      },
+      {
+        question:
+          'Can I ride only a portion of the Glacier Express route instead of the full 8 hours?',
+        answer:
+          'Yes. Popular shorter sections include Zermatt to Brig (1h 20m), Zermatt to Andermatt (3h 15m), and Chur to St. Moritz over the Landwasser Viaduct (2h). Mandatory seat reservations are required for all segments.',
+      },
+      {
+        question:
+          'Which side of the train has the best view on the Gornergrat Bahn?',
+        answer:
+          'Always sit on the right side of the carriage when ascending from Zermatt to Gornergrat (and on the left side when descending). The right-hand windows face directly towards the Matterhorn throughout almost the entire 33-minute climb.',
+      },
+      {
+        question:
+          'What happens if I book a Gornergrat ticket and the Matterhorn is hidden by clouds?',
+        answer:
+          'Standard Gornergrat Bahn tickets are valid for any train on the selected calendar date, but are generally non-refundable once activated. To avoid disappointment, check our real-time 1–10 AM/PM Visibility Score and live summit webcams on the [Trains Dashboard](/trains) before purchasing tickets at the station.',
       },
     ],
   },
