@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   Mountain,
   Compass,
@@ -38,6 +37,7 @@ import { useTranslation } from '@/lib/i18n/context';
 import Header from '@/components/Header';
 import LiveWebcam from '@/components/LiveWebcam';
 import Footer from '@/components/Footer';
+import SkiScene from '@/components/scenes/SkiScene';
 import {
   SKI_SECTORS,
   MOUNTAIN_DINING,
@@ -132,21 +132,23 @@ export default function SkiDashboardView({
           </span>
         </nav>
 
-        {/* Hero Header (Consistent with Trains & Viewpoints Pages) */}
-        <header className="space-y-4 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200/90 dark:border-sky-800 text-sky-800 dark:text-sky-300 text-xs font-bold shadow-2xs">
-            <Snowflake className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-            <span>Matterhorn Ski Paradise • 360 km International Domain</span>
+        <header className="relative overflow-hidden pb-32">
+          <SkiScene />
+          <div className="relative z-10 max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200/90 dark:border-sky-800 text-sky-800 dark:text-sky-300 text-xs font-bold shadow-2xs">
+              <Snowflake className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+              <span>Matterhorn Ski Paradise • 360 km International Domain</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
+              {dict.skiPage.h1}
+            </h1>
+
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
+              See whether the link to Cervinia is open, what the crest wind is doing, and what a pass costs.
+              Snow depths further down are a seasonal guide.
+            </p>
           </div>
-
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
-            {dict.skiPage.h1}
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
-            See whether the link to Cervinia is open, what the crest wind is doing, and what a pass costs.
-            Snow depths further down are a seasonal guide.
-          </p>
         </header>
 
 
