@@ -56,6 +56,17 @@ const BADGE_PILL_STYLE: Record<BadgeColor, string> = {
   rose: 'bg-rose-100 dark:bg-rose-950/80 border-rose-300 dark:border-rose-700 text-rose-900 dark:text-rose-200',
 };
 
+const SCORE_TEXT: Record<BadgeColor, string> = {
+  emerald: 'text-emerald-700 dark:text-emerald-300',
+  amber: 'text-amber-700 dark:text-amber-300',
+  orange: 'text-orange-700 dark:text-orange-300',
+  rose: 'text-rose-700 dark:text-rose-300',
+};
+
+function switcherLabel(shortName: string): string {
+  return shortName.replace(/\s*\([^)]*\)\s*$/, '');
+}
+
 function ViewpointRouteIcon({ slug }: { slug: ViewpointPageSlug }) {
   switch (slug) {
     case 'gornergrat':
@@ -116,41 +127,40 @@ export default async function ViewpointDetailView({
       <LiveVisibilityBanner />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
-        {/* Top Row: Breadcrumb + Direct Viewpoint Route Switcher */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        {/* Breadcrumb, then one even row of viewpoint scores */}
+        <div className="space-y-3">
           <nav
             aria-label="Breadcrumb"
-            className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400"
+            className="flex min-w-0 items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400"
           >
             <Link
               href={getLocalizedHref('/', locale)}
-              className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
+              className="shrink-0 font-semibold transition-colors duration-200 ease-out hover:text-sky-700 dark:hover:text-sky-400"
             >
               Live Dashboard
             </Link>
             <ChevronRight
-              className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500"
+              className="h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
               aria-hidden="true"
             />
             <Link
               href={getLocalizedHref('/viewpoints', locale)}
-              className="hover:text-sky-700 dark:hover:text-sky-400 transition-colors font-semibold"
+              className="shrink-0 font-semibold transition-colors duration-200 ease-out hover:text-sky-700 dark:hover:text-sky-400"
             >
               Matterhorn Viewpoints
             </Link>
             <ChevronRight
-              className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500"
+              className="h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
               aria-hidden="true"
             />
-            <span className="text-slate-900 dark:text-white font-bold truncate">
+            <span className="truncate font-bold text-slate-900 dark:text-white">
               {page.shortName}
             </span>
           </nav>
 
-          {/* 3-Viewpoint Sub-Route Switcher */}
           <nav
             aria-label="Switch Matterhorn Viewpoint Page"
-            className="flex flex-wrap items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-1.5 rounded-xl shadow-2xs"
+            className="flex gap-1 overflow-x-auto rounded-xl border border-slate-200/90 bg-white/90 p-1 shadow-2xs md:grid md:grid-cols-5 md:overflow-visible dark:border-slate-800 dark:bg-slate-900/90"
           >
             {VIEWPOINT_PAGES.map((vp) => {
               const localizedVp = getLocalizedViewpointPage(vp.slug, locale);
@@ -161,19 +171,15 @@ export default async function ViewpointDetailView({
                   key={vp.slug}
                   href={getLocalizedHref(`/viewpoints/${vp.slug}`, locale)}
                   aria-current={isCurrent ? 'page' : undefined}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex shrink-0 items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-xs font-bold transition-[background-color,transform] duration-200 ease-out active:scale-[0.98] md:min-w-0 md:shrink ${
                     isCurrent
-                      ? 'bg-sky-600 text-white shadow-2xs'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                      ? 'bg-slate-100 text-slate-950 ring-1 ring-sky-500/70 dark:bg-slate-800 dark:text-white'
+                      : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
                   }`}
                 >
-                  <span>{localizedVp.shortName}</span>
+                  <span className="truncate">{switcherLabel(localizedVp.shortName)}</span>
                   <span
-                    className={`font-mono text-[11px] px-1.5 py-0.2 rounded ${
-                      isCurrent
-                        ? 'bg-sky-800/80 text-sky-100'
-                        : 'bg-slate-200/80 dark:bg-slate-700 text-slate-800 dark:text-slate-200'
-                    }`}
+                    className={`shrink-0 font-mono text-[11px] tabular-nums ${SCORE_TEXT[vpForecast.currentBadgeColor]}`}
                   >
                     {vpForecast.currentScore}/10
                   </span>
