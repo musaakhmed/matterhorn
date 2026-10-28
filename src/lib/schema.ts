@@ -1,4 +1,5 @@
 import { GuideArticle, GuideFaq, GUIDES } from './guides';
+import { PLANNING_GUIDES } from './planning-guides';
 import { VisibilityApiResponse } from './types';
 import { getLocalizedHref, isValidLocale, Locale } from './i18n/config';
 import { getSeo, getWidgetFaqs, schemaLanguage, viewpointLivePrefix } from './i18n/seo';
@@ -392,12 +393,26 @@ export function buildGuidesIndexJsonLd(
         },
         mainEntity: {
           '@type': 'ItemList',
-          itemListElement: GUIDES.map((guide, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            url: `${SITE_URL}${getLocalizedHref(`/guides/${guide.slug}`, locale)}`,
-            name: getLocalizedGuideArticle(guide.slug, locale).title,
-          })),
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              url: `${SITE_URL}${getLocalizedHref(`/guides/${GUIDES[0].slug}`, locale)}`,
+              name: getLocalizedGuideArticle(GUIDES[0].slug, locale).title,
+            },
+            ...PLANNING_GUIDES.map((guide, index) => ({
+              '@type': 'ListItem',
+              position: index + 2,
+              url: `${SITE_URL}${guide.path}`,
+              name: guide.linkTitle,
+            })),
+            ...GUIDES.slice(1).map((guide, index) => ({
+              '@type': 'ListItem',
+              position: PLANNING_GUIDES.length + index + 2,
+              url: `${SITE_URL}${getLocalizedHref(`/guides/${guide.slug}`, locale)}`,
+              name: getLocalizedGuideArticle(guide.slug, locale).title,
+            })),
+          ],
         },
       },
       buildWeatherForecastNode(data, locale),
@@ -487,6 +502,77 @@ export function buildGuideArticleJsonLd(
         ],
       },
     ],
+  };
+}
+
+export function buildStaticGuideJsonLd(input: {
+  path: string;
+  headline: string;
+  description: string;
+  breadcrumb: string;
+  datePublished: string;
+  dateModified: string;
+  faqs?: GuideFaq[];
+  howTo?: {
+    name: string;
+    description: string;
+    totalTime: string;
+    steps: { name: string; text: string; anchor: string }[];
+  };
+}) {
+  const pageUrl = `${SITE_URL}${input.path}`;
+  const graph: Record<string, unknown>[] = [
+    {
+      '@type': 'Article',
+      '@id': `${pageUrl}#article`,
+      headline: input.headline,
+      description: input.description,
+      datePublished: input.datePublished,
+      dateModified: input.dateModified,
+      inLanguage: 'en-CH',
+      mainEntityOfPage: pageUrl,
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      about: {
+        '@type': 'Mountain',
+        name: 'Matterhorn',
+        elevation: '4478 m',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Guides', item: `${SITE_URL}/guides` },
+        { '@type': 'ListItem', position: 3, name: input.breadcrumb, item: pageUrl },
+      ],
+    },
+  ];
+
+  if (input.faqs && input.faqs.length > 0) {
+    graph.push(buildFaqPageNode(input.faqs, pageUrl, 'en-CH'));
+  }
+
+  if (input.howTo) {
+    graph.push({
+      '@type': 'HowTo',
+      '@id': `${pageUrl}#howto`,
+      name: input.howTo.name,
+      description: input.howTo.description,
+      totalTime: input.howTo.totalTime,
+      step: input.howTo.steps.map((step, index) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.name,
+        text: step.text,
+        url: `${pageUrl}#${step.anchor}`,
+      })),
+    });
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph,
   };
 }
 

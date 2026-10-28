@@ -17,6 +17,7 @@ import {
   Snowflake,
 } from 'lucide-react';
 import { GUIDES, GuideCategory } from '@/lib/guides';
+import { PLANNING_GUIDE_BADGE, PLANNING_GUIDES } from '@/lib/planning-guides';
 import { fetchMatterhornVisibility } from '@/lib/weather';
 import {
   buildGuidesIndexJsonLd,
@@ -128,7 +129,7 @@ export default async function GuidesIndexView({
             const IconComponent = catConfig.icon;
             const isFeatured = idx === 0;
 
-            return (
+            const fieldGuideCard = (
               <article
                 key={guide.slug}
                 className={`group rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between ${
@@ -282,6 +283,99 @@ export default async function GuidesIndexView({
                   </>
                 )}
               </article>
+            );
+
+            if (idx !== 0) {
+              return fieldGuideCard;
+            }
+
+            return (
+              <React.Fragment key={guide.slug}>
+                {fieldGuideCard}
+                {PLANNING_GUIDES.map((planningGuide) => {
+                  const planningCategory =
+                    CATEGORY_STYLE[planningGuide.category] || CATEGORY_STYLE.Viewpoints;
+                  const PlanningIcon = planningCategory.icon;
+
+                  return (
+                    <article
+                      key={planningGuide.path}
+                      className="group relative rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 sm:p-7 shadow-xs hover:shadow-md hover:border-sky-300 dark:hover:border-sky-700 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
+                    >
+                      <div className="space-y-4">
+                        <div className="relative h-44 sm:h-48 w-full rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-950">
+                          <Image
+                            src={planningGuide.coverImage.src}
+                            alt={planningGuide.coverImage.alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span
+                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-bold ${planningCategory.badge}`}
+                            >
+                              <PlanningIcon className="w-3.5 h-3.5" aria-hidden="true" />
+                              <span>{planningGuide.category}</span>
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-100 px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-900 dark:border-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-200">
+                              <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                              </span>
+                              {PLANNING_GUIDE_BADGE}
+                            </span>
+                          </div>
+                          <span className="inline-flex items-center gap-1 text-xs font-mono text-slate-500 dark:text-slate-400">
+                            <Clock className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
+                            <span>{planningGuide.readingTimeMinutes} min read</span>
+                          </span>
+                        </div>
+
+                        <div className="space-y-2">
+                          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors text-balance">
+                            <Link href={planningGuide.path} className="focus:outline-none">
+                              <span className="absolute inset-0" aria-hidden="true" />
+                              {planningGuide.linkTitle}
+                            </Link>
+                          </h2>
+                          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">
+                            {planningGuide.description}
+                          </p>
+                        </div>
+
+                        <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 p-3.5 space-y-2">
+                          <div className="flex items-center justify-between gap-2 flex-wrap">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <Sparkles className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
+                              <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                                {planningGuide.heroStat.label}:
+                              </span>
+                            </div>
+                            <span className="text-xs font-mono font-extrabold text-sky-800 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/80 px-2 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                              {planningGuide.heroStat.value}
+                            </span>
+                          </div>
+                          <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 leading-relaxed">
+                            {planningGuide.heroStat.detail}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-400 group-hover:text-sky-900 dark:group-hover:text-sky-300">
+                        <span>Read Planning Guide</span>
+                        <ArrowRight
+                          className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </article>
+                  );
+                })}
+              </React.Fragment>
             );
           })}
         </section>

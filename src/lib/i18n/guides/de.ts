@@ -599,7 +599,7 @@ export const deGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. Warum Zermatt das Inbild eines alpinen Weihnachtsziels ist',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: 'Traditionelle Holzhäuser in Zermatt unter dickem Winterschnee, im Hintergrund das Matterhorn',
           caption: 'Historische, sonnengebräunte Lärchenchalets unter frischem Dezember-Pulverschnee in Zermatt.',
         },
@@ -639,7 +639,7 @@ export const deGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. Gemütliches Essen: Fondue am Kamin, Raclette und Weihnachtsmenüs',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: 'Blubberndes Schweizer Käsefondue mit Brot und Wein, im Hintergrund das verschneite Matterhorn',
           caption: 'Walliser Käsefondue und ein Glas kühler Fendant nach einem Tag im Schnee.',
         },
@@ -656,7 +656,7 @@ export const deGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. Bergausflüge am Weihnachtstag: Gornergrat und Glacier Paradise',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: 'Verschneite Alpenhänge über dem Dorf Zermatt unter einer geschlossenen Pulverschneedecke',
           caption: 'Winterwunder: Die hochalpinen Hänge über Zermatt sind am Weihnachtstag für Zahnradbahn und Winterwandern geöffnet.',
         },

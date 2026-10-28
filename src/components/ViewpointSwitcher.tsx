@@ -60,7 +60,11 @@ export default function ViewpointSwitcher({
   const { dict, locale } = useTranslation();
 
   return (
-    <section aria-label={dict.viewpointSwitcher.title} className="space-y-3">
+    <section
+      id="viewpoint-toggle"
+      aria-label={dict.viewpointSwitcher.title}
+      className="scroll-mt-24 space-y-3"
+    >
       <h2 className="text-sm font-bold text-slate-900 dark:text-white">
         {dict.viewpointSwitcher.title}
       </h2>

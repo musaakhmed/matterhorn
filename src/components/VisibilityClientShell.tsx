@@ -16,6 +16,7 @@ import ViewpointAdvice from './ViewpointAdvice';
 import ScenicTrainsCard from './ScenicTrainsCard';
 import FaqSection from './FaqSection';
 import Footer from './Footer';
+import AlpinePlanningLinks from '@/components/AlpinePlanningLinks';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
@@ -272,6 +273,8 @@ export default function VisibilityClientShell({
             </div>
           </div>
         </section>
+
+        <AlpinePlanningLinks />
 
         <FaqSection
           faqs={dashboardFaqs}

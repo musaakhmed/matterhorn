@@ -547,7 +547,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. 為什麼策馬特是阿爾卑斯聖誕的樣板地',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: '策馬特傳統瑞士木屋覆著厚雪，馬特洪峰立在後方',
           caption: '12月的新雪落在策馬特被日曬染深的歷史落葉松木屋上。',
         },
@@ -587,7 +587,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. 暖和的高山晚餐：壁爐、起司鍋、拉克萊特與聖誕宴',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: '一鍋冒泡的瑞士起司鍋，配麵包與葡萄酒，窗外是積雪的馬特洪峰',
           caption: '在雪地裡走完一天，冒泡的瓦萊起司鍋配一杯清爽芬當白葡萄酒最撫人。',
         },
@@ -604,7 +604,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. 聖誕節的高山行程：高納葛拉特與冰川天堂',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: '策馬特村上方的積雪山坡與乾淨粉雪',
           caption: '冬日仙境：聖誕節當天，策馬特上方的高山坡仍開放全景齒軌與冬季健行。',
         },

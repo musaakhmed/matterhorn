@@ -547,7 +547,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. 为什么采尔马特是阿尔卑斯圣诞的样板目的地',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: '采尔马特传统瑞士木屋覆着厚雪，马特洪峰立在后方',
           caption: '12月新雪落在采尔马特被阳光晒深的历史落叶松木屋上。',
         },
@@ -587,7 +587,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. 温暖的高山晚餐：壁炉、奶酪火锅、拉克莱特与圣诞宴',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: '一锅冒泡的瑞士奶酪火锅，配面包与葡萄酒，窗外是积雪的马特洪峰',
           caption: '在雪地里走完一天后，冒泡的瓦莱奶酪火锅配一杯清爽的芬当白葡萄酒最抚人。',
         },
@@ -604,7 +604,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. 圣诞节的高山行程：戈尔内格拉特与冰川天堂',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: '采尔马特村上方的积雪高山坡地与干净粉雪',
           caption: '冬日仙境：圣诞节当天，采尔马特上方的高山坡仍开放全景齿轨与冬季徒步。',
         },

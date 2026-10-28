@@ -477,8 +477,8 @@ export const GUIDES: GuideArticle[] = [
         id: 'mirror-lakes',
         heading: '2. Stellisee vs. Riffelsee: Which Mirror Lake Should You Choose?',
         image: {
-          src: '/guides/riffelsee-matterhorn-reflection.jpg',
-          alt: 'Still water mirror reflection of the Matterhorn in Riffelsee at 2,757 meters',
+          src: '/guides/riffelsee-shore-walk.jpg',
+          alt: 'A photographer on the shore path at Riffelsee, with the Matterhorn mirrored in still water',
           caption: 'Early morning glassy conditions at Riffelsee before mountain thermal winds ripple the surface.',
         },
         paragraphs: [
@@ -737,7 +737,7 @@ export const GUIDES: GuideArticle[] = [
     updatedAt: '2026-11-01',
     readingTimeMinutes: 6,
     coverImage: {
-      src: '/guides/christmas-in-zermatt-matterhorn.jpg',
+      src: '/guides/christmas-zermatt-night.jpg',
       alt: 'Zermatt alpine village illuminated at night in winter with heavy snow blanketing chalets under the starry sky',
       caption: 'Zermatt village glowing in festive winter light under heavy alpine snow on a December night.',
     },
@@ -798,7 +798,7 @@ export const GUIDES: GuideArticle[] = [
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. Why Zermatt Is the Quintessential Alpine Christmas Destination',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: 'Traditional wooden Swiss chalets in Zermatt dusted with thick winter snow beneath the Matterhorn',
           caption: 'Historic sun-darkened larchwood chalets draped in fresh December powder snow in Zermatt.',
         },
@@ -838,7 +838,7 @@ export const GUIDES: GuideArticle[] = [
         id: 'cozy-dining-fireside-fondue',
         heading: '3. Cozy Alpine Dining: Fireside Fondue, Raclette & Christmas Feasts',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: 'A pot of bubbling Swiss cheese fondue with bread and wine overlooking the snowy Matterhorn',
           caption: 'Nothing compares to bubbling Valais cheese fondue and a glass of crisp Fendant wine after a day in the snow.',
         },
@@ -855,8 +855,8 @@ export const GUIDES: GuideArticle[] = [
         id: 'christmas-day-mountain-excursions',
         heading: '4. Christmas Day Mountain Excursions: Gornergrat & Glacier Paradise',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
-          alt: 'Snowy alpine slopes and winter landscape above Zermatt village with pristine powder snow',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
+          alt: 'A red cogwheel train crossing pristine powder snow above Zermatt, with the Matterhorn in morning light',
           caption: 'Winter wonderland: high-alpine slopes above Zermatt open for scenic cogwheel rides and winter hiking on Christmas Day.',
         },
         paragraphs: [
@@ -1172,8 +1172,8 @@ export const GUIDES: GuideArticle[] = [
     updatedAt: '2026-10-27',
     readingTimeMinutes: 4,
     coverImage: {
-      src: '/guides/best-time-to-see-matterhorn.jpg',
-      alt: 'The Matterhorn pyramid above Zermatt at sunrise',
+      src: '/guides/what-is-the-matterhorn.jpg',
+      alt: 'The Matterhorn pyramid above Zermatt village and its stone church on a clear summer day',
       caption: 'The Matterhorn, 4,478 m, above Zermatt on the Swiss–Italian border.',
     },
     heroStat: {
@@ -1243,9 +1243,9 @@ export const GUIDES: GuideArticle[] = [
     updatedAt: '2026-10-27',
     readingTimeMinutes: 3,
     coverImage: {
-      src: '/guides/christmas-in-zermatt-matterhorn.jpg',
-      alt: 'Snowy Zermatt village with the Matterhorn in December',
-      caption: 'December is a viewing and skiing month. The lakes are frozen.',
+      src: '/guides/zermatt-weather-december.jpg',
+      alt: 'The Matterhorn fully clear above a snow-covered Zermatt under a cold December sky',
+      caption: 'December is the clearest month. The peak stands in a cold blue sky, and the lakes are frozen.',
     },
     heroStat: {
       label: 'Clear-sky chance',
@@ -1292,9 +1292,9 @@ export const GUIDES: GuideArticle[] = [
     updatedAt: '2026-10-27',
     readingTimeMinutes: 3,
     coverImage: {
-      src: '/guides/best-time-to-see-matterhorn.jpg',
-      alt: 'The Matterhorn above golden larches in September',
-      caption: 'September is the month for hiking and a liquid Riffelsee reflection.',
+      src: '/guides/zermatt-weather-september.jpg',
+      alt: 'The Matterhorn above a hillside of golden larch trees in September',
+      caption: 'September brings gold larches, open hiking trails, and a liquid Riffelsee.',
     },
     heroStat: {
       label: 'Clear-sky chance',
@@ -1342,9 +1342,9 @@ export const GUIDES: GuideArticle[] = [
     updatedAt: '2026-10-27',
     readingTimeMinutes: 3,
     coverImage: {
-      src: '/guides/best-time-to-see-matterhorn.jpg',
-      alt: 'The Matterhorn above Zermatt in late spring',
-      caption: 'May is a morning-only month. The high lakes are still frozen.',
+      src: '/guides/zermatt-weather-may.jpg',
+      alt: 'The Matterhorn in late May, with a green valley and clouds building in the afternoon',
+      caption: 'May greens the valley while snow stays on the peak. The clear window is the morning.',
     },
     heroStat: {
       label: 'Clear-sky chance',
@@ -1479,8 +1479,8 @@ export const GUIDES: GuideArticle[] = [
     updatedAt: '2026-10-27',
     readingTimeMinutes: 4,
     coverImage: {
-      src: '/guides/best-matterhorn-photo-viewpoints.jpg',
-      alt: 'The Matterhorn east face above Zermatt',
+      src: '/guides/hotels-with-matterhorn-view.jpg',
+      alt: 'A wooden hotel balcony in Zermatt looking straight at the Matterhorn east face',
       caption: 'A Matterhorn view depends on which way the room faces, and how high the cloud base sits.',
     },
     heroStat: {

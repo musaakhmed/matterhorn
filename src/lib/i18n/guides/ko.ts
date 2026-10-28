@@ -547,7 +547,7 @@ export const koGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. 체르마트가 알프스 크리스마스의 정석인 이유',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: '마터호른 아래, 두꺼운 겨울 눈을 인 체르마트의 전통 나무 샬레',
           caption: '12월의 새 눈에 덮인, 햇볕에 검게 그을린 역사적인 낙엽송 샬레.',
         },
@@ -587,7 +587,7 @@ export const koGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. 벽난로 식사: 퐁뒤, 라클렛, 크리스마스 만찬',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: '눈 덮인 마터호른을 바라보며 보글거리는 스위스 치즈 퐁뒤와 빵, 와인',
           caption: '눈 속의 하루 끝에는, 끓는 발레 치즈 퐁뒤와 시원한 팽당 한 잔을 따를 것이 없습니다.',
         },
@@ -604,7 +604,7 @@ export const koGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. 크리스마스 당일의 산: 고르너그라트와 글래시어 파라다이스',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: '체르마트 마을 위의 눈 덮인 알프스 슬로프와 겨울 풍경',
           caption: '겨울 풍경: 크리스마스 당일에도 마을 위 고산 슬로프는 톱니바퀴 열차와 겨울 하이킹에 열려 있습니다.',
         },

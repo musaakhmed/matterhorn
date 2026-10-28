@@ -876,7 +876,7 @@ export const itGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. Perché Zermatt è la meta alpina del Natale per eccellenza',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: 'Chalet svizzeri in legno a Zermatt sotto una neve invernale spessa, con il Cervino sullo sfondo',
           caption: 'Chalet storici in larice scurito dal sole, coperti di neve fresca di dicembre a Zermatt.',
         },
@@ -916,7 +916,7 @@ export const itGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. Tavola alpina: fonduta al fuoco, raclette e cene di Natale',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: 'Pentola di fonduta al formaggio svizzero con pane e vino, di fronte al Cervino innevato',
           caption: 'Niente vale una fonduta vallesana e un bicchiere di Fendant fresco dopo una giornata nella neve.',
         },
@@ -933,7 +933,7 @@ export const itGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. Escursioni del giorno di Natale: Gornergrat e Glacier Paradise',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: 'Pendii alpini innevati sopra il paese di Zermatt sotto neve fresca intatta',
           caption: 'Paesaggio invernale: i pendii sopra Zermatt restano aperti il giorno di Natale per la cremagliera e le camminate.',
         },

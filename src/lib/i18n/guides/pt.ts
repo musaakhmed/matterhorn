@@ -357,7 +357,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
         id: 'mirror-lakes',
         heading: '2. Stellisee vs. Riffelsee: que lago espelho deve escolher?',
         image: {
-          src: '/guides/riffelsee-matterhorn-reflection.jpg',
+          src: '/guides/riffelsee-shore-walk.jpg',
           alt: 'Reflexo espelhado do Matterhorn na água parada do Riffelsee, a 2.757 metros',
           caption:
             'Condições de vidro ao início da manhã no Riffelsee, antes de os ventos térmicos da montanha encresparem a superfície.',
@@ -649,7 +649,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. Porque é que Zermatt é o destino alpino de Natal por excelência',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: 'Chalés suíços tradicionais de madeira em Zermatt, cobertos de neve espessa de inverno, sob o Matterhorn',
           caption: 'Chalés históricos de lariço escurecido pelo sol, vestidos de neve fresca de dezembro em Zermatt.',
         },
@@ -689,7 +689,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. Mesa alpina aconchegante: fondue à lareira, raclette e festins de Natal',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: 'Um pote de fondue de queijo suíço a borbulhar, com pão e vinho, com o Matterhorn nevado ao fundo',
           caption:
             'Nada se compara a um fondue de queijo do Valais a borbulhar e a um copo de Fendant fresco, depois de um dia na neve.',
@@ -707,7 +707,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. Excursões de montanha no dia de Natal: Gornergrat e Glacier Paradise',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: 'Encostas alpinas nevadas e paisagem de inverno acima da aldeia de Zermatt, com neve fofa imaculada',
           caption:
             'País das maravilhas de inverno: as encostas de alta montanha acima de Zermatt abrem para passeios de cremalheira e caminhadas de inverno no dia de Natal.',

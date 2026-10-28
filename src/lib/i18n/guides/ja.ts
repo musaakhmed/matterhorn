@@ -547,7 +547,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. ツェルマットがアルプスのクリスマスの定番である理由',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: 'マッターホルンの下、厚い冬の雪をかぶったツェルマットの伝統的な木造シャレー',
           caption: '12月の新雪に包まれた、陽に焼けた歴史的なカラマツのシャレー。',
         },
@@ -587,7 +587,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. 暖炉の食事：フォンデュ、ラクレット、クリスマスの祝宴',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: '雪のマッターホルンを望む、煮えたぎるスイスのチーズフォンデュとパン、ワイン',
           caption: '雪の一日のあと、ヴァレーのチーズフォンデュと冷えたファンダンに勝るものはありません。',
         },
@@ -604,7 +604,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. クリスマス当日の山：ゴルナーグラートとグレイシャー・パラダイス',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: 'ツェルマットの村の上に広がる、粉雪のアルプス斜面と冬の景色',
           caption: '冬の景色：クリスマス当日も、村の上の斜面は登山鉄道と冬のハイキングに開いています。',
         },

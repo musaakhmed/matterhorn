@@ -133,7 +133,7 @@ export default function HourlyTimeline({
     <section
       id="forecast"
       aria-label="10-Day Matterhorn Visibility Horizon"
-      className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-5 sm:p-6 shadow-xs w-full overflow-hidden"
+      className="scroll-mt-24 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-5 sm:p-6 shadow-xs w-full overflow-hidden"
     >
       {/* Header Row with Keyboard/Button Scroll Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">

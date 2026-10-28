@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { GUIDES } from '@/lib/guides';
+import { PLANNING_GUIDES } from '@/lib/planning-guides';
 import { VIEWPOINT_PAGES } from '@/lib/viewpoints';
 import { LOCALES, DEFAULT_LOCALE, getAlternateUrls } from '@/lib/i18n/config';
 
@@ -101,6 +102,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
     })
   );
+
+  const planningGuideEntries: MetadataRoute.Sitemap = PLANNING_GUIDES.map((guide) => ({
+    url: `${BASE_URL}${guide.path}`,
+    lastModified: new Date('2026-10-28'),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
 
   const guideEntries: MetadataRoute.Sitemap = GUIDES.map((guide) => ({
     url: `${BASE_URL}/guides/${guide.slug}`,
@@ -204,6 +212,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...localizedHomeEntries,
     ...viewpointEntries,
     ...guideEntries,
+    ...planningGuideEntries,
     ...localizedViewpointIndexEntries,
     ...localizedGuideIndexEntries,
     ...localizedTrainEntries,

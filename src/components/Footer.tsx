@@ -15,6 +15,7 @@ import {
 import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import logoImg from '../../public/logo.jpeg';
+import AlpinePlanningLinks from '@/components/AlpinePlanningLinks';
 
 export interface FooterProps {
   locale?: Locale;
@@ -394,6 +395,8 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           </div>
         </nav>
       </div>
+
+      <AlpinePlanningLinks variant="footer" />
 
       {/* Bottom Legal, Sourcing & Geo Strip */}
       <div className="border-t border-slate-200/60 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40">

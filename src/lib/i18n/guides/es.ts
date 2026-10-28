@@ -601,7 +601,7 @@ export const esGuides: Record<string, GuideTranslation> = {
         id: 'why-zermatt-christmas-is-magical',
         heading: '1. Por qué Zermatt es el destino alpino de Navidad por excelencia',
         image: {
-          src: '/guides/zermatt-winter-chalets.jpg',
+          src: '/guides/zermatt-christmas-chalets.jpg',
           alt: 'Chalets suizos de madera tradicionales en Zermatt, cubiertos de nieve espesa de invierno, bajo el Cervino',
           caption: 'Chalets históricos de alerce oscurecido por el sol, cubiertos de nieve polvo reciente de diciembre en Zermatt.',
         },
@@ -641,7 +641,7 @@ export const esGuides: Record<string, GuideTranslation> = {
         id: 'cozy-dining-fireside-fondue',
         heading: '3. Cocina alpina junto al fuego: fondue, raclette y banquetes de Navidad',
         image: {
-          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          src: '/guides/zermatt-christmas-fondue.jpg',
           alt: 'Una olla de fondue de queso suizo burbujeante, con pan y vino, frente al Cervino nevado',
           caption: 'Nada se compara con una fondue de queso del Valais y una copa de Fendant fresco después de un día en la nieve.',
         },
@@ -658,7 +658,7 @@ export const esGuides: Record<string, GuideTranslation> = {
         id: 'christmas-day-mountain-excursions',
         heading: '4. Excursiones de montaña el día de Navidad: Gornergrat y Glacier Paradise',
         image: {
-          src: '/guides/zermatt-winter-snow-village.jpg',
+          src: '/guides/zermatt-christmas-morning-train.jpg',
           alt: 'Laderas alpinas nevadas y paisaje de invierno sobre el pueblo de Zermatt, con nieve polvo intacta',
           caption: 'Paisaje de invierno: las laderas de alta montaña sobre Zermatt abren el día de Navidad para el tren cremallera y las caminatas.',
         },
