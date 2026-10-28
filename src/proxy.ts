@@ -13,16 +13,6 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, { status: 308 });
   }
 
-  // 2. Returning visitor cookie preference redirect on root visit '/'
-  if (pathname === '/') {
-    const savedLocale = request.cookies.get('NEXT_LOCALE')?.value;
-    if (savedLocale && isValidLocale(savedLocale) && savedLocale !== 'en') {
-      const url = request.nextUrl.clone();
-      url.pathname = `/${savedLocale}`;
-      return NextResponse.redirect(url, { status: 307 });
-    }
-  }
-
   const requestHeaders = new Headers(request.headers);
   const firstSegment = pathname.split('/')[1] ?? '';
   requestHeaders.set('x-locale', isValidLocale(firstSegment) ? firstSegment : 'en');

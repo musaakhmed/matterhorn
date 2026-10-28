@@ -1,18 +1,40 @@
 import type { MetadataRoute } from 'next';
-import { GUIDES } from '@/lib/guides';
-import { PLANNING_GUIDES } from '@/lib/planning-guides';
+import { publicGuides } from '@/lib/guides';
+import { PLANNING_GUIDE_UPDATED, PLANNING_GUIDES } from '@/lib/planning-guides';
 import { VIEWPOINT_PAGES } from '@/lib/viewpoints';
 import { LOCALES, DEFAULT_LOCALE, getAlternateUrls } from '@/lib/i18n/config';
+import { fetchMatterhornVisibility } from '@/lib/weather';
 
 const BASE_URL = 'https://isthematterhornvisible.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+function latestContentUpdate(): Date {
+  const times = [
+    ...publicGuides().map((guide) => new Date(guide.updatedAt).getTime()),
+    new Date(PLANNING_GUIDE_UPDATED).getTime(),
+  ].filter((time) => !Number.isNaN(time));
+  return new Date(Math.max(...times));
+}
+
+async function liveContentUpdate(): Promise<Date> {
+  try {
+    const data = await fetchMatterhornVisibility();
+    const parsed = new Date(data.updatedAt);
+    if (!Number.isNaN(parsed.getTime())) return parsed;
+  } catch {
+    // Telemetry can fail while the sitemap is built. Use the last content edit.
+  }
+  return latestContentUpdate();
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const liveModified = await liveContentUpdate();
+  const contentModified = latestContentUpdate();
   const nonDefaultLocales = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
 
   const baseEntries: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
-      lastModified: new Date(),
+      lastModified: liveModified,
       changeFrequency: 'hourly',
       priority: 1.0,
       alternates: {
@@ -30,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/viewpoints`,
-      lastModified: new Date(),
+      lastModified: liveModified,
       changeFrequency: 'hourly',
       priority: 0.9,
       alternates: {
@@ -40,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/guides`,
-      lastModified: new Date(),
+      lastModified: contentModified,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
@@ -50,7 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/trains`,
-      lastModified: new Date(),
+      lastModified: liveModified,
       changeFrequency: 'hourly',
       priority: 0.92,
       alternates: {
@@ -63,7 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/ski`,
-      lastModified: new Date(),
+      lastModified: liveModified,
       changeFrequency: 'hourly',
       priority: 0.95,
       alternates: {
@@ -76,7 +98,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/widget`,
-      lastModified: new Date(),
+      lastModified: contentModified,
       changeFrequency: 'weekly',
       priority: 0.88,
       alternates: {
@@ -89,7 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const viewpointEntries: MetadataRoute.Sitemap = VIEWPOINT_PAGES.map(
     (viewpoint) => ({
       url: `${BASE_URL}/viewpoints/${viewpoint.slug}`,
-      lastModified: new Date(),
+      lastModified: liveModified,
       changeFrequency: 'hourly',
       priority: 0.95,
       alternates: {
@@ -105,12 +127,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const planningGuideEntries: MetadataRoute.Sitemap = PLANNING_GUIDES.map((guide) => ({
     url: `${BASE_URL}${guide.path}`,
-    lastModified: new Date('2026-10-28'),
+    lastModified: new Date(PLANNING_GUIDE_UPDATED),
     changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
-  const guideEntries: MetadataRoute.Sitemap = GUIDES.map((guide) => ({
+  const guideEntries: MetadataRoute.Sitemap = publicGuides().map((guide) => ({
     url: `${BASE_URL}/guides/${guide.slug}`,
     lastModified: new Date(guide.updatedAt),
     changeFrequency: 'weekly',
@@ -124,7 +146,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Localized route entries for all non-default locales
   const localizedHomeEntries: MetadataRoute.Sitemap = nonDefaultLocales.map((locale) => ({
     url: `${BASE_URL}/${locale}`,
-    lastModified: new Date(),
+    lastModified: liveModified,
     changeFrequency: 'hourly',
     priority: 0.9,
     alternates: {
@@ -134,7 +156,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const localizedViewpointIndexEntries: MetadataRoute.Sitemap = nonDefaultLocales.map((locale) => ({
     url: `${BASE_URL}/${locale}/viewpoints`,
-    lastModified: new Date(),
+    lastModified: liveModified,
     changeFrequency: 'hourly',
     priority: 0.85,
     alternates: {
@@ -144,7 +166,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const localizedGuideIndexEntries: MetadataRoute.Sitemap = nonDefaultLocales.map((locale) => ({
     url: `${BASE_URL}/${locale}/guides`,
-    lastModified: new Date(),
+    lastModified: contentModified,
     changeFrequency: 'weekly',
     priority: 0.85,
     alternates: {
@@ -154,7 +176,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const localizedTrainEntries: MetadataRoute.Sitemap = nonDefaultLocales.map((locale) => ({
     url: `${BASE_URL}/${locale}/trains`,
-    lastModified: new Date(),
+    lastModified: liveModified,
     changeFrequency: 'hourly',
     priority: 0.88,
     alternates: {
@@ -164,7 +186,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const localizedSkiEntries: MetadataRoute.Sitemap = nonDefaultLocales.map((locale) => ({
     url: `${BASE_URL}/${locale}/ski`,
-    lastModified: new Date(),
+    lastModified: liveModified,
     changeFrequency: 'hourly',
     priority: 0.9,
     alternates: {
@@ -174,7 +196,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const localizedWidgetEntries: MetadataRoute.Sitemap = nonDefaultLocales.map((locale) => ({
     url: `${BASE_URL}/${locale}/widget`,
-    lastModified: new Date(),
+    lastModified: contentModified,
     changeFrequency: 'weekly',
     priority: 0.8,
     alternates: {
@@ -185,7 +207,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const localizedViewpointEntries: MetadataRoute.Sitemap = nonDefaultLocales.flatMap((locale) =>
     VIEWPOINT_PAGES.map((viewpoint) => ({
       url: `${BASE_URL}/${locale}/viewpoints/${viewpoint.slug}`,
-      lastModified: new Date(),
+      lastModified: liveModified,
       changeFrequency: 'hourly',
       priority: 0.85,
       alternates: {
@@ -195,7 +217,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const localizedGuideEntries: MetadataRoute.Sitemap = nonDefaultLocales.flatMap((locale) =>
-    GUIDES.map((guide) => ({
+    publicGuides().map((guide) => ({
       url: `${BASE_URL}/${locale}/guides/${guide.slug}`,
       lastModified: new Date(guide.updatedAt),
       changeFrequency: 'weekly',

@@ -2,7 +2,7 @@ import { GuideTranslation } from '../guides';
 
 export const zhGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
-    title: '戈尔内格拉特 vs. 马特洪峰冰川天堂：哪个观景台看马特洪峰更震撼？',
+    title: '戈尔内格拉特 vs 冰川天堂',
     shortTitle: '戈尔内格拉特 vs 冰川天堂',
     description: '海拔高度、齿轨火车与缆车对比、观赏角度与天气云层抗风险能力：采尔马特两大王牌观景台终极对比指南。',
     category: 'Viewpoints',
@@ -346,7 +346,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
       '马特洪峰孤立陡峭的四棱锥造型在高空气流中宛如机翼，在背风面（背风侧）形成显著的局部低压涡流。',
       '低空较湿润的空气被吸入低压涡流后绝热上升冷却，凝结出仿佛固定附着在山脊背面的白烟状“旗状云”。',
       '手机常规天气App在采尔马特村（1,608米）报“晴/降水概率0%”，而山顶上方500米却可能完全被旗云遮蔽。',
-      '我们的评分算法专门针对中层湿度与南向焚风矢量（180°–270°且≥ 35km/h）实施精准扣分预警。',
+      '我们的评分算法专门针对中层湿度与南向焚风矢量（150°–210°且超过30公里/小时）实施精准扣分预警。',
     ],
     sections: [
       {
@@ -367,7 +367,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
         heading: '2. 为什么常规手机天气预报在采尔马特经常失灵？',
         paragraphs: [
           '常规天气应用预报的是海拔1,608米的山谷村庄，那里的空气温暖、干燥且受到两侧山谷的严密庇护。',
-          '然而在垂直落差近3,000米的高空巅峰，气流与湿度环境完全是另一个世界。这就是为什么 isthematterhornvisible.com 直接提取高空关键海拔（3,089米与3,883米）格点气象，并在南向风速突破35公里/小时时自动触发焚风惩罚。',
+          '然而在垂直落差近3,000米的高空巅峰，气流与湿度环境完全是另一个世界。这就是为什么 isthematterhornvisible.com 直接提取高空关键海拔（3,089米与3,883米）格点气象，并在南向风（150°–210°）超过30公里/小时时自动触发焚风惩罚。',
         ],
         bulletPoints: [
           {
@@ -1098,7 +1098,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
         heading: '今天值得上车吗？',
         paragraphs: [
           '[列车页](/trains)会显示冰川快车是在季节时刻表上，还是处于秋季停运，并给出戈尔内格拉特的实时评分。高分表示采尔马特这一端的马特洪峰是晴的，并不会改变路线中段奥伯阿尔普的天气。',
-          '戈尔内格拉特铁路是另一列火车：从采尔马特到3,089米的33分钟齿轨，没有强制订座。两者的对比见[戈尔内格拉特与冰川快车指南](/guides/gornergrat-railway-vs-glacier-express)。',
+          '戈尔内格拉特铁路是另一列火车：从采尔马特到3,089米的33分钟齿轨，没有强制订座。两者的对比见[戈尔内格拉特与冰川快车指南](/trains)。',
         ],
       },
     ],

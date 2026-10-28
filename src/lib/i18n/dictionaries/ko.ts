@@ -48,6 +48,7 @@ export const ko: Dictionary = {
     scenicTrains: "관광 열차",
   },
   hero: {
+    pageHeading: '마터호른이 보이나요?',
     verdictAria: '현재 마터호른 가시성 종합 판정',
     visibilityIndex: '시야 지수',
     activeNow: '현재 적용 중',

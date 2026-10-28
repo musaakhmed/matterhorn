@@ -2,7 +2,7 @@ import { GuideTranslation } from '../guides';
 
 export const ptGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
-    title: 'Gornergrat vs. Matterhorn Glacier Paradise: qual miradouro é melhor?',
+    title: 'Gornergrat ou Glacier Paradise',
     shortTitle: 'Gornergrat vs. Glacier Paradise',
     description:
       'Compare o Gornergrat (face leste, 3.089 m) e o Matterhorn Glacier Paradise (face sul e vertente do Breithorn, 3.883 m) pelo ângulo sobre o Matterhorn, a resistência às nuvens, o preço do bilhete e a altitude.',
@@ -406,7 +406,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
       'A geometria piramidal isolada do Matterhorn funciona como uma asa aerodinâmica no fluxo de altitude e cria um vórtice de baixa pressão no lado de sotavento.',
       'O ar sugado para cima nesse vórtice arrefece de forma adiabática e condensa humidade invisível numa «nuvem bandeira» estacionária, colada ao cume.',
       'As aplicações meteorológicas habituais dizem «sol / 0% de chuva» em Zermatt (1.608 m) mesmo quando uma nuvem bandeira densa esconde os 500 m de cima do cume.',
-      'O nosso algoritmo penaliza de propósito a humidade a nível médio (3.000 m) e os vetores de Föhn de sul (180°–270° a ≥ 35 km/h) para prever nuvens bandeira.',
+      'O nosso algoritmo penaliza de propósito a humidade a nível médio (3.000 m) e os vetores de Föhn de sul (150°–210° acima de 30 km/h) para prever nuvens bandeira.',
     ],
     sections: [
       {
@@ -427,7 +427,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
         heading: '2. Porque é que as aplicações meteorológicas habituais falham em Zermatt',
         paragraphs: [
           'As aplicações genéricas no telemóvel interpolam as condições da aldeia de Zermatt, no fundo do vale, a 1.608 metros. A 1.608 metros o ar é quente, seco e muitas vezes abrigado dos ventos de níveis altos.',
-          'Entretanto, quase 3.000 metros verticais acima, no cume, os ventos da troposfera superior e a humidade a meia altitude decidem se o pico está limpo. É por isso que isthematterhornvisible.com consulta as camadas atmosféricas diretamente nas cotas dos miradouros de alta montanha (3.089 m e 3.883 m) e aplica uma penalização própria de risco de bandeira de Föhn sempre que ventos de sul ou sudoeste (180°–270°) passam de 35 km/h.',
+          'Entretanto, quase 3.000 metros verticais acima, no cume, os ventos da troposfera superior e a humidade a meia altitude decidem se o pico está limpo. É por isso que isthematterhornvisible.com consulta as camadas atmosféricas diretamente nas cotas dos miradouros de alta montanha (3.089 m e 3.883 m) e aplica uma penalização própria de risco de bandeira de Föhn sempre que ventos de sul (150°–210°) passam de 30 km/h.',
         ],
         bulletPoints: [
           {
@@ -1227,7 +1227,7 @@ export const ptGuides: Record<string, GuideTranslation> = {
         heading: 'Vale a pena embarcar hoje?',
         paragraphs: [
           'A [página dos comboios](/trains) mostra se o Glacier Express está no horário de época ou na pausa de outono, mais a pontuação ao vivo do Gornergrat. Uma pontuação alta significa que o Matterhorn está limpo no extremo de Zermatt. Não altera o tempo no Oberalp, a meio da rota.',
-          'O comboio do Gornergrat é outro comboio: 33 minutos de cremalheira de Zermatt até 3.089 m, sem reserva obrigatória. Compare os dois no [guia Gornergrat vs. Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
+          'O comboio do Gornergrat é outro comboio: 33 minutos de cremalheira de Zermatt até 3.089 m, sem reserva obrigatória. Compare os dois no [guia Gornergrat vs. Glacier Express](/trains).',
         ],
       },
     ],

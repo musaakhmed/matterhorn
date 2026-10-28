@@ -2,7 +2,7 @@ import { GuideTranslation } from '../guides';
 
 export const deGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
-    title: 'Gornergrat vs. Matterhorn Glacier Paradise: Welcher Aussichtspunkt ist besser?',
+    title: 'Gornergrat vs. Glacier Paradise',
     shortTitle: 'Gornergrat vs. Glacier Paradise',
     description: 'Höhenlage, Zahnradbahn vs. Seilbahn, Blickwinkel und Wolkenanfälligkeit der beiden Top-Aussichtspunkte in Zermatt im direkten Vergleich.',
     category: 'Aussichtspunkte',
@@ -395,7 +395,7 @@ export const deGuides: Record<string, GuideTranslation> = {
       'Die isolierte Pyramidenform des Matterhorns wirkt bei Höhenwind wie eine Tragfläche und erzeugt auf der windabgewandten Leeseite einen Unterdruck-Wirbel.',
       'Aufsteigende Luft kühlt adiabatisch ab und kondensiert zu einer stationären Fahnenwolke, die am Gipfelgrat befestigt scheint.',
       'Standard-Wetter-Apps melden oft "Sonnig / 0 % Regen" in Zermatt (1.608 m), obwohl die oberen 500 Meter des Berges in einer Wolkenfahne stecken.',
-      'Unser Algorithmus bestraft gezielt feuchte Südföhn-Vektoren (180°–270° ≥ 35 km/h), um Fahnenwolken verlässlich vorherzusagen.',
+      'Unser Algorithmus bestraft gezielt feuchte Südföhn-Vektoren (150°–210° über 30 km/h), um Fahnenwolken verlässlich vorherzusagen.',
     ],
     sections: [
       {
@@ -416,7 +416,7 @@ export const deGuides: Record<string, GuideTranslation> = {
         heading: '2. Warum herkömmliche Wetter-Apps in Zermatt versagen',
         paragraphs: [
           'Smartphone-Apps berechnen das Wetter meist für das Tal auf 1.608 Metern Höhe, wo es warm, trocken und windgeschützt sein kann.',
-          'Fast 3.000 Höhenmeter weiter oben am Gipfel herrschen jedoch völlig andere Wind- und Feuchtigkeitsverhältnisse. Deshalb bezieht isthematterhornvisible.com die Daten direkt auf 3.089 m und 3.883 m und verhängt Abzüge bei Föhnwinden über 35 km/h.',
+          'Fast 3.000 Höhenmeter weiter oben am Gipfel herrschen jedoch völlig andere Wind- und Feuchtigkeitsverhältnisse. Deshalb bezieht isthematterhornvisible.com die Daten direkt auf 3.089 m und 3.883 m und verhängt Abzüge bei Südföhn aus 150°–210° über 30 km/h.',
         ],
         bulletPoints: [
           {
@@ -1142,7 +1142,7 @@ export const deGuides: Record<string, GuideTranslation> = {
         heading: 'Lohnt die Fahrt heute?',
         paragraphs: [
           'Die [Zugseite](/trains) zeigt, ob der Glacier Express nach Fahrplan fährt oder in der Herbstpause ist, plus den Live-Score am Gornergrat. Ein hoher Score bedeutet freie Sicht am Zermatter Ende. Er sagt nichts über das Wetter am Oberalp.',
-          'Die Gornergratbahn ist ein anderer Zug: 33 Minuten Zahnradbahn auf 3.089 m, ohne Pflichtreservierung. Der Vergleich steht im [Guide Gornergrat gegen Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
+          'Die Gornergratbahn ist ein anderer Zug: 33 Minuten Zahnradbahn auf 3.089 m, ohne Pflichtreservierung. Der Vergleich steht im [Guide Gornergrat gegen Glacier Express](/trains).',
         ],
       },
     ],

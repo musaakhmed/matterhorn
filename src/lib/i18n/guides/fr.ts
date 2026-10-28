@@ -2,7 +2,7 @@ import { GuideTranslation } from '../guides';
 
 export const frGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
-    title: 'Gornergrat vs Matterhorn Glacier Paradise : Quel est le meilleur point de vue sur le Cervin ?',
+    title: 'Gornergrat ou Glacier Paradise',
     shortTitle: 'Gornergrat vs Glacier Paradise',
     description: 'Altitude, train à crémaillère contre téléphérique, angle de vue et météo : le comparatif complet entre les deux sommets emblématiques de Zermatt.',
     category: 'Viewpoints',
@@ -395,7 +395,7 @@ export const frGuides: Record<string, GuideTranslation> = {
       'La géométrie pyramidale du Cervin agit comme une aile d’avion face aux courants d’altitude, générant un vortex de basse pression sur sa face sous le vent.',
       'L’air aspiré vers le haut se refroidit par détente adiabatique et condense la vapeur en un nuage en bannière stationnaire rattaché à l’arête.',
       'Les applications météo classiques indiquent "Ensoleillé / 0 % pluie" à Zermatt (1 608 m) alors que les 500 derniers mètres de la pyramide sont masqués.',
-      'Notre algorithme applique une pénalité dédiée sur l’humidité moyenne et les vecteurs de Fœhn du Sud (180°–270° ≥ 35 km/h) pour anticiper ces panaches.',
+      'Notre algorithme applique une pénalité dédiée sur l’humidité moyenne et les vecteurs de Fœhn du Sud (150°–210° au-dessus de 30 km/h) pour anticiper ces panaches.',
     ],
     sections: [
       {
@@ -416,7 +416,7 @@ export const frGuides: Record<string, GuideTranslation> = {
         heading: '2. Pourquoi les applications météo standard échouent à Zermatt',
         paragraphs: [
           'Les applications grand public sur smartphone modélisent les conditions pour le fond de vallée à 1 608 mètres, où l’air est doux, sec et abrité.',
-          'Près de 3 000 mètres de dénivelé plus haut, les courants de la haute troposphère imposent leur loi. C’est pourquoi isthematterhornvisible.com interroge les couches atmosphériques directement à 3 089 m et 3 883 m avec un malus Fœhn au-delà de 35 km/h.',
+          'Près de 3 000 mètres de dénivelé plus haut, les courants de la haute troposphère imposent leur loi. C’est pourquoi isthematterhornvisible.com interroge les couches atmosphériques directement à 3 089 m et 3 883 m avec un malus Fœhn lorsque le vent du sud (150°–210°) dépasse 30 km/h.',
         ],
         bulletPoints: [
           {
@@ -1142,7 +1142,7 @@ export const frGuides: Record<string, GuideTranslation> = {
         heading: 'Faut-il monter aujourd’hui ?',
         paragraphs: [
           'La [page des trains](/trains) indique si le Glacier Express suit son horaire de saison ou s’il est en pause d’automne, plus le score du Gornergrat. Un score élevé veut dire un Cervin dégagé à Zermatt. Il ne décrit pas le temps à l’Oberalp.',
-          'Le Gornergrat est un autre train : 33 minutes de crémaillère jusqu’à 3 089 m, sans réservation obligatoire. La comparaison est dans le [guide Gornergrat contre Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
+          'Le Gornergrat est un autre train : 33 minutes de crémaillère jusqu’à 3 089 m, sans réservation obligatoire. La comparaison est dans le [guide Gornergrat contre Glacier Express](/trains).',
         ],
       },
     ],

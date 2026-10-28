@@ -48,6 +48,7 @@ export const ja: Dictionary = {
     scenicTrains: "観光列車",
   },
   hero: {
+    pageHeading: 'マッターホルンは見えますか？',
     verdictAria: '現在のマッターホルン視界判定',
     visibilityIndex: '視界指数',
     activeNow: '現在適用中',

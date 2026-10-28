@@ -51,6 +51,7 @@ export const it: Dictionary = {
     zermattVillageAspect: 'Prospettiva del villaggio e fiume',
   },
   hero: {
+    pageHeading: 'Il Cervino è visibile?',
     verdictAria: 'Verdetto attuale sulla visibilità del Cervino',
     visibilityIndex: 'Indice',
     activeNow: 'Attivo ora',

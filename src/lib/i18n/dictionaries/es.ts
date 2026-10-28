@@ -51,6 +51,7 @@ export const es: Dictionary = {
     zermattVillageAspect: 'Perspectiva del pueblo y río',
   },
   hero: {
+    pageHeading: '¿Se ve el Matterhorn?',
     verdictAria: 'Veredicto actual de visibilidad del Matterhorn',
     visibilityIndex: 'Índice',
     activeNow: 'Activo ahora',

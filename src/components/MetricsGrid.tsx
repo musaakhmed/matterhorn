@@ -10,19 +10,23 @@ import {
   CheckCircle2,
   Compass,
 } from 'lucide-react';
-import { AtmosphericMetrics } from '@/lib/types';
+import { AtmosphericMetrics, BannerCloudReport } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n/context';
+import { bannerBadgeLabel, bannerDetail } from '@/lib/banner-copy';
 
 interface MetricsGridProps {
   metrics: AtmosphericMetrics;
+  banner: BannerCloudReport;
   viewpointLabel: string;
 }
 
 export default function MetricsGrid({
   metrics,
+  banner,
   viewpointLabel,
 }: MetricsGridProps) {
-  const { dict } = useTranslation();
+  const { dict, locale } = useTranslation();
+  const bannerOn = banner.status === 'seen' || banner.status === 'likely';
   const isMidCloudWarning = metrics.cloudCoverMid > 30;
   const isLowFogWarning = metrics.cloudCoverLow > 50;
   const isVisibilityReduced = metrics.visibilityMeters < 20000;
@@ -204,8 +208,8 @@ export default function MetricsGrid({
         {/* Card 4: Wind & Föhn Risk */}
         <div
           className={`group rounded-2xl border p-4 backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xs flex flex-col justify-between ${
-            metrics.isFohnRisk
-              ? 'border-rose-300 dark:border-rose-700/80 bg-rose-50/50 dark:bg-rose-950/30'
+            bannerOn
+              ? 'border-amber-300 dark:border-amber-700/80 bg-amber-50/50 dark:bg-amber-950/30'
               : 'border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90'
           }`}
         >
@@ -214,14 +218,14 @@ export default function MetricsGrid({
               <span className="p-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-sky-600 dark:text-sky-400">
                 <Wind className="w-4 h-4" aria-hidden="true" />
               </span>
-              {metrics.isFohnRisk ? (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/80 border border-rose-300 dark:border-rose-700 text-[10px] font-bold text-rose-900 dark:text-rose-200">
+              {bannerOn ? (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 border border-amber-300 dark:border-amber-700 text-[10px] font-bold text-amber-950 dark:text-amber-200">
                   <AlertTriangle className="w-3 h-3" aria-hidden="true" />
-                  <span>Föhn Banner Active</span>
+                  <span>{bannerBadgeLabel(banner.status, locale)}</span>
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-semibold text-slate-700 dark:text-slate-300">
-                  No Banner Penalty
+                  {bannerBadgeLabel(banner.status, locale)}
                 </span>
               )}
             </div>
@@ -245,15 +249,21 @@ export default function MetricsGrid({
             <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden mb-1.5">
               <div
                 className={`h-full rounded-full transition-all duration-500 ease-out ${
-                  metrics.isFohnRisk ? 'bg-rose-500' : 'bg-sky-500'
+                  bannerOn ? 'bg-amber-500' : 'bg-sky-500'
                 }`}
                 style={{ width: `${Math.min(100, (metrics.windSpeedKmh / 60) * 100)}%` }}
               />
             </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2">
-              {metrics.isFohnRisk
-                ? 'Southerly Föhn wind creating leeward banner cloud (-15 pts).'
-                : 'Wind vector outside southerly Föhn banner zone.'}
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-3">
+              {bannerDetail(banner.reason, locale)}{' '}
+              <a
+                href={banner.cameraUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-sky-800 underline underline-offset-2 dark:text-sky-300"
+              >
+                {banner.cameraName}
+              </a>
             </p>
           </div>
         </div>

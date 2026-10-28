@@ -12,7 +12,7 @@ import { buildStaticGuideJsonLd } from '@/lib/schema';
 export const revalidate = 900;
 
 const PATH = '/guides/riffelsee-lake-matterhorn-reflection-guide';
-const TITLE = 'Riffelsee Matterhorn Reflection Guide: Best Time, Hike & Wind Conditions';
+const TITLE = 'Riffelsee Matterhorn Reflection | Time & Wind';
 const DESCRIPTION =
   'Complete guide to photographing the iconic Matterhorn reflection at Lake Riffelsee. Best morning hours, wind speed limits for still water, seasonal thaw dates, and walking directions from Rotenboden.';
 
@@ -57,6 +57,7 @@ export default function RiffelseeReflectionGuidePage() {
     breadcrumb: 'Riffelsee reflection',
     datePublished: PLANNING_GUIDE_UPDATED,
     dateModified: PLANNING_GUIDE_UPDATED,
+    image: '/guides/riffelsee-shore-walk.jpg',
     faqs: FAQS,
     howTo: {
       name: 'Walk from Rotenboden station to the Riffelsee shore',
@@ -120,7 +121,7 @@ export default function RiffelseeReflectionGuidePage() {
         The wider viewpoint list, including Stellisee, is in the{' '}
         <Link href="/guides/best-matterhorn-photo-viewpoints">photo viewpoints guide</Link>.
         Gornergrat versus the cable car is in the{' '}
-        <Link href="/guides/gornergrat-vs-klein-matterhorn">viewpoint comparison</Link>.
+        <Link href="/guides/gornergrat-vs-glacier-paradise">viewpoint comparison</Link>.
       </p>
 
       <h2>Photography cheat sheet</h2>

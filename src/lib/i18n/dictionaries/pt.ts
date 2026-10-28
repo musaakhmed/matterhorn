@@ -48,6 +48,7 @@ export const pt: Dictionary = {
     scenicTrains: "Comboios panorâmicos",
   },
   hero: {
+    pageHeading: 'O Matterhorn está visível?',
     verdictAria: 'Veredito atual de visibilidade do Matterhorn',
     visibilityIndex: 'Índice',
     activeNow: 'Ativo agora',

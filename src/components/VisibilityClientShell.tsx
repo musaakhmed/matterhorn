@@ -17,6 +17,7 @@ import ScenicTrainsCard from './ScenicTrainsCard';
 import FaqSection from './FaqSection';
 import Footer from './Footer';
 import AlpinePlanningLinks from '@/components/AlpinePlanningLinks';
+import LocaleSuggestion from '@/components/LocaleSuggestion';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
 import { getDashboardFaqs } from '@/lib/schema';
@@ -96,6 +97,7 @@ export default function VisibilityClientShell({
 
   return (
     <>
+      <LocaleSuggestion />
       <Header
         initialSwissTime={initialData.swissTimeFormatted}
         activeViewpoint={activeData.viewpoint}
@@ -113,7 +115,11 @@ export default function VisibilityClientShell({
       />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
-        <HeroStatus data={activeData} photo={photoForViewpoint(activeViewpointId)} />
+        <HeroStatus
+          queryHeading
+          data={activeData}
+          photo={photoForViewpoint(activeViewpointId)}
+        />
 
         <ViewpointSwitcher
           places={places}
@@ -174,6 +180,7 @@ export default function VisibilityClientShell({
         {/* 8. Atmospheric Layer Diagnostics (4-Card Telemetry Grid) */}
         <MetricsGrid
           metrics={activeData.metrics}
+          banner={activeData.banner}
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
 

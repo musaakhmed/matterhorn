@@ -1,3 +1,4 @@
+import { bannerViewingAdvice } from '../banner-copy';
 import { BadgeColor, ViewpointForecastData } from '../types';
 import { Locale } from './config';
 import { Dictionary } from './types';
@@ -129,29 +130,8 @@ export function getLocalizedGuideAdvice(
   const bestScore = data.bestBlockNext48h.score;
 
   if (score >= 8) {
-    if (metrics.isFohnRisk) {
-      switch (locale) {
-        case 'fr':
-          return `Conditions idéales à ${vpLabel} (${score}/10). La pyramide se détache nettement dans le ciel, bien que des vents de Fœhn du sud à ${metrics.windSpeedKmh} km/h forment un panache nuageux spectaculaire sous le vent.`;
-        case 'de':
-          return `Beste Sicht am ${vpLabel} (${score}/10). Die Pyramide steht scharf am Himmel, während ${metrics.windSpeedKmh} km/h Südföhn eine eindrucksvolle Lee-Fahnenwolke formen.`;
-        case 'it':
-          return `Condizioni ideali al ${vpLabel} (${score}/10). La piramide si staglia nitida nel cielo, sebbene il Föhn da sud a ${metrics.windSpeedKmh} km/h stia sollevando una spettacolare nube a bandiera.`;
-        case 'es':
-          return `Condiciones óptimas en ${vpLabel} (${score}/10). La pirámide se recorta nítida en el cielo, aunque vientos Föhn del sur a ${metrics.windSpeedKmh} km/h forman una espectacular nube en bandera.`;
-        case 'zh':
-          return `${vpLabel} 处于绝佳观赏窗口（${score}/10）！峰体在天际中格外锐利，但南向 ${metrics.windSpeedKmh} 公里/小时的焚风正卷起壮观的背风旗状云。`;
-        case 'zh-tw':
-          return `${vpLabel} 處於絕佳觀賞窗口（${score}/10）！峰體在天際中格外銳利，但南向 ${metrics.windSpeedKmh} 公里/小時的焚風正捲起壯觀的背風旗狀雲。`
-        case 'ja':
-          return `${vpLabel}（${score}/10）は最高の観賞コンディションです。青空にピラミッドが鋭く際立っていますが、風速${metrics.windSpeedKmh}km/hの南風フェーンにより風下にドラマチックな旗雲が発生しています。`;
-        case 'ko':
-          return `${vpLabel}(${score}/10) 전망이 최고조에 달했습니다! 피라미드가 하늘을 배경으로 선명하지만, ${metrics.windSpeedKmh}km/h의 남풍 푄 현상으로 산 뒤편에 역동적인 깃발 구름이 피어오르고 있습니다.`;
-        case 'pt':
-          return `Condições excelentes em ${vpLabel} (${score}/10). A pirâmide está nítida no céu, embora um Föhn de sul a ${metrics.windSpeedKmh} km/h forme uma nuvem em bandeira a sotavento.`;
-        default:
-          return `Prime viewing at ${vpLabel} (${score}/10). The pyramid is sharp against the sky, though ${metrics.windSpeedKmh} km/h southerly Föhn winds are whipping up a dramatic leeward banner cloud.`;
-      }
+    if (metrics.bannerStatus === 'seen' || metrics.bannerStatus === 'likely') {
+      return bannerViewingAdvice(locale, vpLabel, score, metrics.bannerStatus);
     }
 
     switch (locale) {

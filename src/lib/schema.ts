@@ -1,4 +1,4 @@
-import { GuideArticle, GuideFaq, GUIDES } from './guides';
+import { GuideArticle, GuideFaq, publicGuides } from './guides';
 import { PLANNING_GUIDES } from './planning-guides';
 import { VisibilityApiResponse } from './types';
 import { getLocalizedHref, isValidLocale, Locale } from './i18n/config';
@@ -16,6 +16,12 @@ import {
 
 export const SITE_URL = 'https://isthematterhornvisible.com';
 export const SITE_NAME = 'Is The Matterhorn Visible?';
+
+/** One forecast entity per language, so locales do not contradict a shared @id. */
+function weatherForecastId(locale: Locale): string {
+  const base = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
+  return `${base}/#weather-forecast`;
+}
 
 export interface RichFaqItem extends GuideFaq {
   guideHref?: string;
@@ -174,11 +180,19 @@ export function buildWeatherForecastNode(
       },
       {
         '@type': 'PropertyValue',
-        name: 'Surface Wind & Southerly Föhn Banner Risk',
-        value: `${gornergrat.metrics.windSpeedKmh} km/h ${gornergrat.metrics.windCardinal} (${gornergrat.metrics.windDirectionDeg}°)`,
-        description: gornergrat.metrics.isFohnRisk
-          ? 'Active southerly Föhn wind banner cloud risk on leeward summit ridge'
-          : 'No southerly Föhn banner cloud penalty active',
+        name: 'Matterhorn Banner Cloud',
+        value:
+          gornergrat.banner.status === 'seen'
+            ? 'Seen on the Hotel Schönegg camera'
+            : gornergrat.banner.status === 'likely'
+              ? 'Likely from summit wind and humidity'
+              : 'None',
+        description:
+          gornergrat.banner.status === 'seen'
+            ? 'Banner cloud seen streaming off the 4,478 m summit on the Zermatt camera.'
+            : gornergrat.banner.status === 'likely'
+              ? `Banner likely: summit wind ${gornergrat.banner.windSpeedKmh} km/h ${gornergrat.banner.windCardinal}, lifting condensation level ${gornergrat.banner.liftingCondensationLevelM ?? 'unknown'} m. Camera has not confirmed a plume.`
+              : 'No banner cloud indicated at the Matterhorn summit.',
       },
       {
         '@type': 'PropertyValue',
@@ -196,7 +210,7 @@ export function buildWeatherForecastNode(
 
   return {
     '@type': 'WeatherForecast',
-    '@id': `${SITE_URL}/#weather-forecast`,
+    '@id': weatherForecastId(locale),
     name: 'Matterhorn 10-Day AM/PM Visibility Forecast (Gornergrat & Glacier Paradise)',
     alternateName: 'Zermatt Matterhorn Summit (4,478m) Live Visibility Index',
     url: locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`,
@@ -393,26 +407,34 @@ export function buildGuidesIndexJsonLd(
         },
         mainEntity: {
           '@type': 'ItemList',
-          itemListElement: [
-            {
+          itemListElement: (() => {
+            const listed = publicGuides();
+            const [first, ...rest] = listed;
+            const entries = [
+              ...(first
+                ? [
+                    {
+                      url: `${SITE_URL}${getLocalizedHref(`/guides/${first.slug}`, locale)}`,
+                      name: getLocalizedGuideArticle(first.slug, locale).title,
+                    },
+                  ]
+                : []),
+              ...PLANNING_GUIDES.map((guide) => ({
+                url: `${SITE_URL}${guide.path}`,
+                name: guide.linkTitle,
+              })),
+              ...rest.map((guide) => ({
+                url: `${SITE_URL}${getLocalizedHref(`/guides/${guide.slug}`, locale)}`,
+                name: getLocalizedGuideArticle(guide.slug, locale).title,
+              })),
+            ];
+            return entries.map((entry, index) => ({
               '@type': 'ListItem',
-              position: 1,
-              url: `${SITE_URL}${getLocalizedHref(`/guides/${GUIDES[0].slug}`, locale)}`,
-              name: getLocalizedGuideArticle(GUIDES[0].slug, locale).title,
-            },
-            ...PLANNING_GUIDES.map((guide, index) => ({
-              '@type': 'ListItem',
-              position: index + 2,
-              url: `${SITE_URL}${guide.path}`,
-              name: guide.linkTitle,
-            })),
-            ...GUIDES.slice(1).map((guide, index) => ({
-              '@type': 'ListItem',
-              position: PLANNING_GUIDES.length + index + 2,
-              url: `${SITE_URL}${getLocalizedHref(`/guides/${guide.slug}`, locale)}`,
-              name: getLocalizedGuideArticle(guide.slug, locale).title,
-            })),
-          ],
+              position: index + 1,
+              url: entry.url,
+              name: entry.name,
+            }));
+          })(),
         },
       },
       buildWeatherForecastNode(data, locale),
@@ -463,6 +485,7 @@ export function buildGuideArticleJsonLd(
         description: guide.description,
         datePublished: guide.publishedAt,
         dateModified: guide.updatedAt,
+        image: `${SITE_URL}${guide.coverImage.src}`,
         inLanguage: lang,
         publisher: {
           '@id': `${SITE_URL}/#organization`,
@@ -472,7 +495,7 @@ export function buildGuideArticleJsonLd(
           '@id': pageUrl,
         },
         about: {
-          '@id': `${SITE_URL}/#weather-forecast`,
+          '@id': weatherForecastId(locale),
         },
       },
       buildWeatherForecastNode(data, locale),
@@ -512,6 +535,7 @@ export function buildStaticGuideJsonLd(input: {
   breadcrumb: string;
   datePublished: string;
   dateModified: string;
+  image?: string;
   faqs?: GuideFaq[];
   howTo?: {
     name: string;
@@ -529,6 +553,13 @@ export function buildStaticGuideJsonLd(input: {
       description: input.description,
       datePublished: input.datePublished,
       dateModified: input.dateModified,
+      ...(input.image
+        ? {
+            image: input.image.startsWith('http')
+              ? input.image
+              : `${SITE_URL}${input.image}`,
+          }
+        : {}),
       inLanguage: 'en-CH',
       mainEntityOfPage: pageUrl,
       publisher: { '@id': `${SITE_URL}/#organization` },

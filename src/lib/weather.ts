@@ -1,4 +1,6 @@
 import { cache } from 'react';
+import { bannerViewingAdvice } from './banner-copy';
+import { isSoutherlyFohnWind, loadBannerCloud } from './banner';
 import {
   AtmosphericMetrics,
   BadgeColor,
@@ -93,11 +95,7 @@ export function calculateHourlyRawScore(metrics: {
     raw -= 20;
   }
 
-  if (
-    windDirectionDeg >= 150 &&
-    windDirectionDeg <= 210 &&
-    windSpeedKmh > 30
-  ) {
+  if (isSoutherlyFohnWind(windDirectionDeg, windSpeedKmh)) {
     raw -= 15;
   }
 
@@ -176,8 +174,13 @@ export function generateAlpineGuideAdvice(
   const metrics = activeBlock.metrics;
 
   if (score >= 8) {
-    if (metrics.isFohnRisk) {
-      return `Prime viewing at ${viewpoint.shortLabel} (${score}/10). The pyramid is sharp against the sky, though ${metrics.windSpeedKmh} km/h southerly Föhn winds are whipping up a dramatic leeward banner cloud.`;
+    if (metrics.bannerStatus === 'seen' || metrics.bannerStatus === 'likely') {
+      return bannerViewingAdvice(
+        'en',
+        viewpoint.shortLabel,
+        score,
+        metrics.bannerStatus
+      );
     }
     return `Bluebird alpine window at ${viewpoint.shortLabel} (${score}/10)! Board the first train or gondola—${metrics.visibilityKm} km horizontal visibility with virtually zero mid-level ridge obstruction.`;
   }
@@ -207,7 +210,7 @@ export function generateSectorRecommendations(
   score: number,
   metrics: AtmosphericMetrics
 ): ViewpointRecommendation[] {
-  const { cloudCoverLow, cloudCoverMid, windSpeedKmh, isFohnRisk } = metrics;
+  const { cloudCoverLow, cloudCoverMid, windSpeedKmh } = metrics;
 
   let gornergratSuitability: 'Optimal' | 'Fair' | 'Poor' = 'Optimal';
   let gornergratColor: BadgeColor = 'emerald';
@@ -219,11 +222,19 @@ export function generateSectorRecommendations(
     gornergratColor = 'rose';
     gornergratAdvice =
       'Mid-level clouds (3,000m+) are sitting directly across the Gornergrat line of sight. Verify on the Roundshot cam before boarding.';
-  } else if (score <= 6 || isFohnRisk) {
+  } else if (
+    score <= 6 ||
+    metrics.bannerStatus === 'likely' ||
+    metrics.bannerStatus === 'seen'
+  ) {
     gornergratSuitability = 'Fair';
     gornergratColor = 'amber';
     gornergratAdvice =
-      'Good elevated vantage above valley haze, though banner clouds may intermittently wrap the upper Hörnli ridge.';
+      metrics.bannerStatus === 'seen'
+        ? 'The Zermatt camera shows a banner on the summit. The east ridge often stays clearer than Klein Matterhorn.'
+        : metrics.bannerStatus === 'likely'
+          ? 'Summit wind and humidity favor a banner. The camera has not confirmed it. The east ridge often stays clearer than Klein Matterhorn.'
+          : 'Good elevated vantage above valley haze, though passing cloud may kiss the upper Hörnli ridge.';
   }
 
   let sunneggaSuitability: 'Optimal' | 'Fair' | 'Poor' = 'Optimal';
@@ -538,7 +549,8 @@ function computeScoreBlock(
     windSpeedKmh: avgWindSpeed,
     windDirectionDeg: windDeg,
     windCardinal: degreesToCardinal(windDeg),
-    isFohnRisk: windDeg >= 150 && windDeg <= 210 && avgWindSpeed > 30,
+    isFohnRisk: isSoutherlyFohnWind(windDeg, avgWindSpeed),
+    bannerStatus: 'none',
   };
 
   return {
@@ -654,6 +666,8 @@ async function fetchSingleViewpointForecast(
   const activePeriod: 'AM' | 'PM' = currentHour < 12 ? 'AM' : 'PM';
   const activeBlock =
     activePeriod === 'AM' ? today.morning : today.afternoon;
+  const banner = await loadBannerCloud(now);
+  activeBlock.metrics.bannerStatus = banner.status;
 
   // Find best block over the next 3 days for actionable advice
   let bestBlock = {
@@ -714,6 +728,7 @@ async function fetchSingleViewpointForecast(
     today,
     days,
     metrics: activeBlock.metrics,
+    banner,
     sectorRecommendations,
     bestBlockNext48h: bestBlock,
   };
@@ -745,6 +760,7 @@ export const fetchMatterhornVisibility = cache(
         gornergrat: gornergratData,
         'glacier-paradise': glacierParadiseData,
       },
+      banner: gornergratData.banner,
       updatedAt: now.toISOString(),
       swissTimeFormatted: formattedClock,
     };

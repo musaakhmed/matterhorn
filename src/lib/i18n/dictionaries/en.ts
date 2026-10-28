@@ -51,6 +51,7 @@ export const en: Dictionary = {
     zermattVillageAspect: 'Village River & Chalet View',
   },
   hero: {
+    pageHeading: 'Is the Matterhorn Visible?',
     verdictAria: 'Current Matterhorn Visibility Verdict',
     visibilityIndex: 'Index',
     activeNow: 'Active Now',

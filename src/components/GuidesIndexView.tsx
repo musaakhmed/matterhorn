@@ -16,7 +16,7 @@ import {
   ChevronRight,
   Snowflake,
 } from 'lucide-react';
-import { GUIDES, GuideCategory } from '@/lib/guides';
+import { publicGuides, GuideCategory } from '@/lib/guides';
 import { PLANNING_GUIDE_BADGE, PLANNING_GUIDES } from '@/lib/planning-guides';
 import { fetchMatterhornVisibility } from '@/lib/weather';
 import {
@@ -123,7 +123,7 @@ export default async function GuidesIndexView({
 
         {/* Guides Grid */}
         <section aria-label="All Matterhorn Field Guides" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GUIDES.map((rawGuide, idx) => {
+          {publicGuides().map((rawGuide, idx) => {
             const guide = getLocalizedGuideArticle(rawGuide.slug, locale);
             const catConfig = CATEGORY_STYLE[guide.category] || CATEGORY_STYLE['Viewpoints'];
             const IconComponent = catConfig.icon;

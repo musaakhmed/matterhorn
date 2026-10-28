@@ -231,9 +231,9 @@ export default async function ViewpointDetailView({
           </div>
 
           <div className="space-y-3 max-w-4xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-balance leading-tight">
               {page.title}
-            </h2>
+            </h1>
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
               {page.description}
             </p>
@@ -387,6 +387,7 @@ export default async function ViewpointDetailView({
         <HowThisScoreWorks>
           <MetricsGrid
             metrics={activeForecast.metrics}
+            banner={activeForecast.banner}
             viewpointLabel={page.shortName}
           />
         </HowThisScoreWorks>

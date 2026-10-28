@@ -310,7 +310,7 @@ export default async function GuideArticleView({
                 Raw = 100 - (0.60·C_mid + 0.25·C_low + 0.15·C_high) - Penalties
               </div>
               <div className="text-slate-600 dark:text-slate-400">
-                Penalties: Visibility &lt; 10km (-25) • Precip &gt; 50% (-15) • Föhn Wind 180°–270° ≥ 35km/h (-10)
+                Penalties: Visibility &lt; 10km (-25) • Visibility &lt; 20km (-10) • Precip &gt; 0.1mm or &gt; 30% (-20) • Föhn wind 150°–210° above 30km/h (-15)
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">

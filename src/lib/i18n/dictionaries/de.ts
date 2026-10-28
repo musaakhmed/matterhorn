@@ -51,6 +51,7 @@ export const de: Dictionary = {
     zermattVillageAspect: 'Tal- & Flussperspektive',
   },
   hero: {
+    pageHeading: 'Ist das Matterhorn sichtbar?',
     verdictAria: 'Aktuelle Beurteilung der Matterhorn-Sichtbarkeit',
     visibilityIndex: 'Index',
     activeNow: 'Jetzt aktiv',

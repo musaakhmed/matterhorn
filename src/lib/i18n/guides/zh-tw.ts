@@ -2,7 +2,7 @@ import { GuideTranslation } from '../guides';
 
 export const zhTwGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
-    title: '高納葛拉特 vs. 馬特洪峰冰川天堂：哪座觀景台看馬特洪峰最震撼？',
+    title: '高納葛拉特 vs 冰川天堂',
     shortTitle: '高納葛拉特 vs 冰川天堂',
     description: '海拔高度、齒軌火車與纜車比較、觀賞視角與天氣雲層抗風能力：策馬特兩大經典觀景台終極評比指南。',
     category: 'Viewpoints',
@@ -346,7 +346,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
       '馬特洪峰孤立陡峭的四稜金字塔造型在高空氣流中宛若機翼，在背風面（背風側）形成顯著的局部低壓渦流。',
       '低層相對濕潤的空氣被抽入低壓渦流後絕熱上升降溫，凝結成宛如固定附著在山脊背面的白煙狀「旗狀雲」。',
       '手機常見的天氣App在策馬特村（1,608公尺）標示「晴朗/降雨率0%」，而山頂上方500公尺卻可能完全被旗雲遮蓋。',
-      '我們的評分模型專門針對中層濕度與南向焚風向量（180°–270°且≥ 35km/h）實施精準扣分預警。',
+      '我們的評分模型專門針對中層濕度與南向焚風向量（150°–210°且超過30公里/小時）實施精準扣分預警。',
     ],
     sections: [
       {
@@ -367,7 +367,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
         heading: '2. 為什麼一般手機天氣預報在策馬特經常失靈？',
         paragraphs: [
           '一般天氣應用程式預報的是海拔1,608公尺的谷底村落，那裡的空氣溫和乾燥且受到周圍高山嚴密庇護。',
-          '但在落差將近3,000公尺的高空之巔，氣流與濕度完全是另一套物理規則。這也是為什麼 isthematterhornvisible.com 直接提取高空關鍵海拔（3,089公尺與3,883公尺）網格氣象，並在南向風速超過35公里/小時自動觸發焚風扣分。',
+          '但在落差將近3,000公尺的高空之巔，氣流與濕度完全是另一套物理規則。這也是為什麼 isthematterhornvisible.com 直接提取高空關鍵海拔（3,089公尺與3,883公尺）網格氣象，並在南向風（150°–210°）超過30公里/小時時自動觸發焚風扣分。',
         ],
         bulletPoints: [
           {
@@ -1098,7 +1098,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
         heading: '今天值得上車嗎？',
         paragraphs: [
           '[列車頁](/trains)會顯示冰川快車是在季節時刻表上，還是處於秋季停駛，並給出高納葛拉特的即時評分。高分表示策馬特這一端的馬特洪峰是晴的，並不會改變路線中段奧伯阿爾卑的天氣。',
-          '高納葛拉特鐵路是另一列火車：從策馬特到3,089公尺的33分鐘齒軌，沒有強制訂位。兩者的比較見[高納葛拉特與冰川快車指南](/guides/gornergrat-railway-vs-glacier-express)。',
+          '高納葛拉特鐵路是另一列火車：從策馬特到3,089公尺的33分鐘齒軌，沒有強制訂位。兩者的比較見[高納葛拉特與冰川快車指南](/trains)。',
         ],
       },
     ],

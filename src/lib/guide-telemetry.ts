@@ -12,6 +12,7 @@ export interface GuideTelemetrySnapshot {
   cloudMid: number;
   cloudLow: number;
   fohn: boolean;
+  banner: 'none' | 'likely' | 'seen';
   updatedLabel: string;
 }
 
@@ -32,6 +33,7 @@ export const loadGuideTelemetry = cache(
         cloudMid: east.metrics.cloudCoverMid,
         cloudLow: east.metrics.cloudCoverLow,
         fohn: east.metrics.isFohnRisk,
+        banner: east.banner.status,
         updatedLabel: data.swissTimeFormatted,
       };
     } catch {

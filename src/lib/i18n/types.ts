@@ -49,6 +49,7 @@ export interface Dictionary {
     scenicTrains: string;
   };
   hero: {
+    pageHeading: string;
     verdictAria: string;
     visibilityIndex: string;
     activeNow: string;

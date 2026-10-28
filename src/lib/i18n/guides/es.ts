@@ -2,7 +2,7 @@ import { GuideTranslation } from '../guides';
 
 export const esGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
-    title: 'Gornergrat vs. Matterhorn Glacier Paradise: ¿Cuál es el mejor mirador del Cervino?',
+    title: 'Gornergrat o Glacier Paradise',
     shortTitle: 'Gornergrat vs. Glacier Paradise',
     description: 'Altitud, tren cremallera vs. teleférico, perspectivas y clima comparados para los dos grandes miradores de Zermatt.',
     category: 'Viewpoints',
@@ -395,7 +395,7 @@ export const esGuides: Record<string, GuideTranslation> = {
       'La silueta piramidal aislada del Cervino actúa como el ala de un avión ante vientos de altura, generando una zona de baja presión a sotavento.',
       'El aire aspirado se enfría de forma adiabática, condensando el vapor en una nube en bandera estacionaria anclada a la arista.',
       'Las aplicaciones móviles normales marcan "Soleado / 0% lluvia" en Zermatt (1.608 m) aunque los últimos 500 metros del pico estén ocultos.',
-      'Nuestro algoritmo penaliza la humedad en capas medias y vientos de Föhn del sur (180°–270° ≥ 35 km/h) para predecir nubes en bandera.',
+      'Nuestro algoritmo penaliza la humedad en capas medias y vientos de Föhn del sur (150°–210° por encima de 30 km/h) para predecir nubes en bandera.',
     ],
     sections: [
       {
@@ -416,7 +416,7 @@ export const esGuides: Record<string, GuideTranslation> = {
         heading: '2. Por qué las aplicaciones del móvil fallan en Zermatt',
         paragraphs: [
           'Las apps generalistas calculan las previsiones para el fondo del valle a 1.608 metros, donde el aire es templado, seco y está resguardado.',
-          'Casi 3.000 metros de desnivel más arriba en la cumbre, la atmósfera superior y la humedad media marcan las reglas. Por eso isthematterhornvisible.com consulta las capas directamente a 3.089 m y 3.883 m e impone penalizaciones por viento Föhn a partir de 35 km/h.',
+          'Casi 3.000 metros de desnivel más arriba en la cumbre, la atmósfera superior y la humedad media marcan las reglas. Por eso isthematterhornvisible.com consulta las capas directamente a 3.089 m y 3.883 m e impone penalizaciones por viento Föhn del sur (150°–210°) a partir de 30 km/h.',
         ],
         bulletPoints: [
           {
@@ -1181,7 +1181,7 @@ export const esGuides: Record<string, GuideTranslation> = {
         heading: '¿Conviene subir hoy?',
         paragraphs: [
           'La [página de trenes](/trains) indica si el Glacier Express está en su horario de temporada o en la pausa de otoño, además del índice de Gornergrat en vivo. Una nota alta significa que el Cervino está despejado en el extremo de Zermatt. No cambia el tiempo del Oberalp a mitad de ruta.',
-          'El tren cremallera de Gornergrat es otro tren: 33 minutos desde Zermatt hasta 3.089 m, sin reserva obligatoria. Compare los dos en la [guía de Gornergrat vs. Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
+          'El tren cremallera de Gornergrat es otro tren: 33 minutos desde Zermatt hasta 3.089 m, sin reserva obligatoria. Compare los dos en la [guía de Gornergrat vs. Glacier Express](/trains).',
         ],
       },
     ],

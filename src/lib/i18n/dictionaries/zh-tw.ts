@@ -48,6 +48,7 @@ export const zhTw: Dictionary = {
     scenicTrains: "觀光列車",
   },
   hero: {
+    pageHeading: '馬特洪峰看得到嗎？',
     verdictAria: '當前馬特洪峰能見度判定',
     visibilityIndex: '指數',
     activeNow: '目前即時狀態',

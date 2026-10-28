@@ -32,7 +32,23 @@ export default async function GuideLayout({
   const scoreLabel = snap
     ? `East ${snap.east}/10 · South ${snap.south}/10`
     : 'Score updating';
-  const others = PLANNING_GUIDES.filter((guide) => guide.path !== path);
+  const others = [
+    {
+      path: '/guides/gornergrat-vs-glacier-paradise',
+      title: 'Gornergrat vs Glacier Paradise',
+      blurb: 'East-face postcard from the cogwheel, or the south crest into Italy.',
+    },
+    {
+      path: '/guides/zurich-geneva-to-zermatt-day-trip',
+      title: 'Zurich to Zermatt Train',
+      blurb: 'A day trip only pays off when the morning east-face score holds.',
+    },
+    ...PLANNING_GUIDES.filter((guide) => guide.path !== path).map((guide) => ({
+      path: guide.path,
+      title: guide.title,
+      blurb: guide.blurb,
+    })),
+  ];
 
   return (
     <>
@@ -371,9 +387,13 @@ export async function LiveConditionCallout({
     heading = 'Live east vs. south';
     detail = !snap
       ? 'Scores are refreshing. Compare both viewpoints on the tracker before you buy.'
-      : snap.fohn
-        ? 'Southerly Föhn risk is active. Klein Matterhorn usually socks in first, while Gornergrat can stay clear.'
-        : 'No southerly Föhn penalty is active on the east ridge right now. Still compare both scores before you buy.';
+      : snap.banner === 'seen'
+        ? 'The Zermatt camera shows a banner cloud on the summit. Klein Matterhorn usually socks in first, while Gornergrat can stay clear.'
+        : snap.banner === 'likely'
+          ? 'Summit wind and humidity favor a banner cloud. The camera has not confirmed it. Klein Matterhorn usually socks in first.'
+          : snap.fohn
+            ? 'Southerly wind is up, without enough moisture for a banner. Still compare both scores before you buy.'
+            : 'No banner cloud is indicated on the summit right now. Still compare both scores before you buy.';
   } else if (mode === 'reflection') {
     heading = 'Reflection window';
     href = '/';

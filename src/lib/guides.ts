@@ -72,10 +72,9 @@ export interface GuideArticle {
 export const GUIDES: GuideArticle[] = [
   {
     slug: 'gornergrat-vs-glacier-paradise',
-    title: 'Gornergrat vs. Matterhorn Glacier Paradise: Which Viewpoint is Better?',
+    title: 'Gornergrat vs Glacier Paradise',
     shortTitle: 'Gornergrat vs. Glacier Paradise',
-    seoTitle:
-      'Gornergrat vs. Matterhorn Glacier Paradise (2026 Comparison) | Altitude, Views & Weather',
+    seoTitle: 'Gornergrat vs Glacier Paradise | Views & Weather',
     description:
       'Compare Gornergrat (3,089m East Face) and Matterhorn Glacier Paradise (3,883m South/Breithorn Aspect) by Matterhorn angle, cloud resilience, ticket cost, and altitude.',
     category: 'Viewpoints',
@@ -519,7 +518,7 @@ export const GUIDES: GuideArticle[] = [
       'Learn the atmospheric physics behind the Matterhorn’s famous lee-wave "banner cloud," how southerly Föhn winds form it on otherwise clear days, and how we score it.',
     category: 'Meteorology',
     publishedAt: '2026-02-18',
-    updatedAt: '2026-10-25',
+    updatedAt: '2026-10-28',
     readingTimeMinutes: 5,
     coverImage: {
       src: '/guides/matterhorn-banner-cloud-fohn-wind.jpg',
@@ -535,7 +534,7 @@ export const GUIDES: GuideArticle[] = [
       'The Matterhorn’s isolated pyramidal geometry acts like an aerodynamic wing in high-altitude airflow, creating a low-pressure vortex on its downwind (leeward) side.',
       'Air sucked upward into this leeward vortex cools adiabatically, condensing invisible moisture into a stationary "banner cloud" attached to the summit.',
       'Standard weather apps report "Sunny / 0% Rain" in Zermatt (1,608m) even when a dense banner cloud hides the top 500m of the peak.',
-      'Our scoring algorithm specifically penalizes mid-level (3,000m) moisture and southerly Föhn wind vectors (180°–270° ≥ 35 km/h) to predict banner clouds.',
+      'Our scoring algorithm specifically penalizes mid-level (3,000m) moisture and southerly Föhn wind vectors (150°–210° above 30 km/h) to predict banner clouds.',
     ],
     embeddedWidget: 'scoring-formula',
     sections: [
@@ -557,7 +556,7 @@ export const GUIDES: GuideArticle[] = [
         heading: '2. Why Standard Weather Apps Fail in Zermatt',
         paragraphs: [
           'Generic weather apps on your phone interpolate conditions for Zermatt village on the valley floor at 1,608 meters. At 1,608 meters, air is warm, dry, and often sheltered from upper-level winds.',
-          'Meanwhile, almost 3,000 vertical meters higher at the summit, upper-tropospheric winds and mid-level humidity dictate whether the peak is clear. That is why isthematterhornvisible.com queries atmospheric layers directly at high-alpine vantage elevations (3,089m and 3,883m) and applies a dedicated Föhn Banner Risk penalty whenever southerly/southwesterly winds (180°–270°) exceed 35 km/h.',
+          'Meanwhile, almost 3,000 vertical meters higher at the summit, upper-tropospheric winds and mid-level humidity dictate whether the peak is clear. That is why isthematterhornvisible.com queries atmospheric layers directly at high-alpine vantage elevations (3,089m and 3,883m) and applies a dedicated Föhn banner penalty whenever southerly winds (150°–210°) exceed 30 km/h.',
         ],
         bulletPoints: [
           {
@@ -1445,7 +1444,7 @@ export const GUIDES: GuideArticle[] = [
         heading: 'Is it worth boarding today?',
         paragraphs: [
           'The [trains page](/trains) shows whether the Glacier Express is on its seasonal schedule or in the autumn pause, plus the live Gornergrat score. A high score means the Matterhorn is clear at the Zermatt end. It does not change the Oberalp weather in the middle of the route.',
-          'The Gornergrat railway is a different train: a 33-minute cogwheel from Zermatt to 3,089 m, with no mandatory reservation. Compare the two on the [Gornergrat vs Glacier Express guide](/guides/gornergrat-railway-vs-glacier-express).',
+          'The Gornergrat railway is a different train: a 33-minute cogwheel from Zermatt to 3,089 m, with no mandatory reservation. Compare the two on the [Gornergrat and Glacier Express page](/trains).',
         ],
       },
     ],
@@ -1534,20 +1533,33 @@ export const GUIDES: GuideArticle[] = [
   },
 ];
 
+/** These intents live on /trains. The guide URLs 308 there and stay out of the index. */
+export const TRAINS_CANONICAL_SLUGS = [
+  'glacier-express',
+  'gornergrat-railway-vs-glacier-express',
+] as const;
+
+export function publicGuides(): GuideArticle[] {
+  return GUIDES.filter(
+    (guide) => !(TRAINS_CANONICAL_SLUGS as readonly string[]).includes(guide.slug)
+  );
+}
+
 export function getGuideBySlug(slug: string): GuideArticle | undefined {
   return GUIDES.find((guide) => guide.slug === slug);
 }
 
 /** Same-topic guides first, then the guides that follow this one in the index. */
 export function getRelatedGuides(slug: string, limit = 3): GuideArticle[] {
-  const index = GUIDES.findIndex((guide) => guide.slug === slug);
-  if (index === -1) return [];
+  const index = publicGuides().findIndex((guide) => guide.slug === slug);
+  const listed = publicGuides();
+  if (index === -1) return listed.slice(0, limit);
 
-  const current = GUIDES[index];
-  const sameCategory = GUIDES.filter(
+  const current = listed[index];
+  const sameCategory = listed.filter(
     (guide) => guide.slug !== slug && guide.category === current.category
   );
-  const otherCategories = [...GUIDES.slice(index + 1), ...GUIDES.slice(0, index)].filter(
+  const otherCategories = [...listed.slice(index + 1), ...listed.slice(0, index)].filter(
     (guide) => guide.category !== current.category
   );
 

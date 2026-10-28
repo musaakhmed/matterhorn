@@ -48,6 +48,7 @@ export const zh: Dictionary = {
     scenicTrains: "观光列车",
   },
   hero: {
+    pageHeading: '马特洪峰能看见吗？',
     verdictAria: '马特洪峰当前可见度研判',
     visibilityIndex: '可见度指数',
     activeNow: '当前生效',

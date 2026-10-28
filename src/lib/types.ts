@@ -32,6 +32,39 @@ export interface Viewpoint {
   transportInfo: string;
 }
 
+export type BannerCloudStatus = 'none' | 'likely' | 'seen';
+
+export type BannerCloudReason =
+  | 'seen'
+  | 'likely'
+  | 'clear'
+  | 'dry'
+  | 'overcast'
+  | 'socked'
+  | 'unavailable';
+
+export type BannerCameraReading = 'clear' | 'plume' | 'socked' | 'unavailable';
+
+/** Summit banner state. "Seen" requires the Zermatt camera; "likely" is wind plus moisture only. */
+export interface BannerCloudReport {
+  status: BannerCloudStatus;
+  reason: BannerCloudReason;
+  windFavorable: boolean;
+  moistureFavorable: boolean;
+  skyOpen: boolean;
+  windSpeedKmh: number;
+  windDirectionDeg: number;
+  windCardinal: string;
+  temperatureC: number | null;
+  dewPointC: number | null;
+  relativeHumidity: number | null;
+  liftingCondensationLevelM: number | null;
+  cloudCover: number | null;
+  cameraReading: BannerCameraReading;
+  cameraName: string;
+  cameraUrl: string;
+}
+
 export interface AtmosphericMetrics {
   cloudCoverTotal: number;
   cloudCoverLow: number;
@@ -45,6 +78,8 @@ export interface AtmosphericMetrics {
   windDirectionDeg: number;
   windCardinal: string;
   isFohnRisk: boolean;
+  /** Live summit banner state for the current hour. Historical blocks stay `none`. */
+  bannerStatus: BannerCloudStatus;
 }
 
 export interface ScoreBlock {
@@ -94,6 +129,7 @@ export interface ViewpointForecastData {
   today: DayForecast;
   days: DayForecast[]; // 10-day horizon
   metrics: AtmosphericMetrics;
+  banner: BannerCloudReport;
   sectorRecommendations: ViewpointRecommendation[];
   bestBlockNext48h: {
     dayLabel: string;
@@ -108,6 +144,7 @@ export interface ViewpointForecastData {
 export interface VisibilityApiResponse {
   defaultViewpoint: ViewpointId;
   viewpoints: Record<ViewpointId, ViewpointForecastData>;
+  banner: BannerCloudReport;
   updatedAt: string;
   swissTimeFormatted: string;
 }

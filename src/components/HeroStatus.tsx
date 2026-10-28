@@ -22,10 +22,13 @@ import {
   getLocalizedGuideAdvice,
   getLocalizedViewpointLabel,
 } from '@/lib/i18n/dispatch';
+import { bannerBadgeLabel } from '@/lib/banner-copy';
 
 interface HeroStatusProps {
   data: ViewpointForecastData;
   photo: PlacePhoto;
+  /** Homepage only. Viewpoint pages pass their own h1. */
+  queryHeading?: boolean;
 }
 
 const THEME_STYLES: Record<
@@ -185,7 +188,7 @@ function DualPeriodCard({
   );
 }
 
-export default function HeroStatus({ data, photo }: HeroStatusProps) {
+export default function HeroStatus({ data, photo, queryHeading = false }: HeroStatusProps) {
   const { dict, locale } = useTranslation();
   const style = THEME_STYLES[data.currentBadgeColor];
   const radius = 68;
@@ -330,6 +333,11 @@ export default function HeroStatus({ data, photo }: HeroStatusProps) {
         <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
           <div className="space-y-2">
             <p className="text-sm text-slate-600 dark:text-slate-400">{dict.common.siteTagline}</p>
+            {queryHeading ? (
+              <h1 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight text-balance">
+                {dict.hero.pageHeading}
+              </h1>
+            ) : null}
             <p className="text-sm font-bold text-sky-800 dark:text-sky-300 leading-snug">
               <Eye
                 className="inline-block w-4 h-4 mr-1 -mt-0.5 align-middle shrink-0"
@@ -338,9 +346,9 @@ export default function HeroStatus({ data, photo }: HeroStatusProps) {
               <span>{answerWord}</span>
             </p>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight break-words text-balance">
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight break-words text-balance">
               {verdictSummary}
-            </h1>
+            </p>
           </div>
 
           {/* Today's Morning (AM) & Afternoon (PM) Dual Index Split */}
@@ -371,6 +379,26 @@ export default function HeroStatus({ data, photo }: HeroStatusProps) {
 
           {/* Bottom Summary Strip */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-0.5">
+            <a
+              href={data.banner.cameraUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs sm:text-sm shadow-2xs ${
+                data.banner.status === 'none'
+                  ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                  : 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-700 text-amber-950 dark:text-amber-100'
+              }`}
+            >
+              <CloudSun
+                className={`w-4 h-4 shrink-0 ${
+                  data.banner.status === 'none'
+                    ? 'text-sky-600 dark:text-sky-400'
+                    : 'text-amber-600 dark:text-amber-300'
+                }`}
+                aria-hidden="true"
+              />
+              <span className="font-bold">{bannerBadgeLabel(data.banner.status, locale)}</span>
+            </a>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 shadow-2xs">
               <CalendarClock
                 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0"
