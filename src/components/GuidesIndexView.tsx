@@ -20,7 +20,7 @@ import { GUIDES, GuideCategory } from '@/lib/guides';
 import { fetchMatterhornVisibility } from '@/lib/weather';
 import {
   buildGuidesIndexJsonLd,
-  GUIDES_INDEX_FAQS,
+  getGuidesIndexFaqItems,
   serializeJsonLd,
 } from '@/lib/schema';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
@@ -72,7 +72,8 @@ export default async function GuidesIndexView({
   locale?: Locale;
 } = {}) {
   const telemetry = await fetchMatterhornVisibility();
-  const jsonLd = buildGuidesIndexJsonLd(telemetry);
+  const jsonLd = buildGuidesIndexJsonLd(telemetry, locale);
+  const guidesIndexFaqs = getGuidesIndexFaqItems(locale);
 
   return (
     <>
@@ -289,7 +290,7 @@ export default async function GuidesIndexView({
         <FaqSection
           title="Zermatt & Matterhorn Planning FAQs"
           subtitle="Essential answers before booking Gornergrat or Matterhorn Glacier Paradise excursions"
-          faqs={GUIDES_INDEX_FAQS}
+          faqs={guidesIndexFaqs}
           groupName="guides-index-faq"
           badgeLabel="FAQPage Schema • Field Guide Verified"
         />

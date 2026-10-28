@@ -15,10 +15,15 @@ import {
   ArrowUpRight,
   ExternalLink,
 } from 'lucide-react';
-import { TRAINS, TRAINS_FAQS, getTrainsLiveStatus } from '@/lib/trains';
 import { VisibilityApiResponse, BadgeColor } from '@/lib/types';
 import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
+import {
+  getLocalizedTrainsLiveStatus,
+  getTrains,
+  getTrainsComparisonUi,
+  getTrainsFaqs,
+} from '@/lib/i18n/trains-copy';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FramedPhoto from '@/components/FramedPhoto';
@@ -53,6 +58,27 @@ const BADGE_COLOR_MAP: Record<BadgeColor, { pill: string; dot: string; text: str
   },
 };
 
+function RichText({ text }: { text: string }) {
+  const chunks = text.split(/(\[\[(?:b|em|amber)\|[\s\S]*?\]\])/g);
+  return chunks.map((chunk, index) => {
+    if (!chunk) return null;
+    if (chunk.startsWith('[[b|') && chunk.endsWith(']]')) {
+      return <strong key={index}>{chunk.slice(4, -2)}</strong>;
+    }
+    if (chunk.startsWith('[[em|') && chunk.endsWith(']]')) {
+      return <em key={index}>{chunk.slice(5, -2)}</em>;
+    }
+    if (chunk.startsWith('[[amber|') && chunk.endsWith(']]')) {
+      return (
+        <strong key={index} className="text-amber-700 dark:text-amber-400">
+          {chunk.slice(8, -2)}
+        </strong>
+      );
+    }
+    return <span key={index}>{chunk}</span>;
+  });
+}
+
 function ConditionStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex h-full flex-col justify-center rounded-xl bg-slate-50 px-3 py-2.5 dark:bg-slate-900/70">
@@ -66,9 +92,12 @@ export default function TrainsComparisonView({
   initialData,
   locale = 'en',
 }: TrainsComparisonViewProps) {
-  const liveStatus = getTrainsLiveStatus(initialData);
-  const gornergrat = TRAINS.gornergrat;
-  const glacier = TRAINS['glacier-express'];
+  const ui = getTrainsComparisonUi(locale);
+  const liveStatus = getLocalizedTrainsLiveStatus(initialData, locale);
+  const trains = getTrains(locale);
+  const trainFaqs = getTrainsFaqs(locale);
+  const gornergrat = trains.gornergrat;
+  const glacier = trains['glacier-express'];
 
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -104,13 +133,13 @@ export default function TrainsComparisonView({
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+        <nav aria-label={ui.breadcrumbAria} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
           <Link href={getLocalizedHref('/', locale)} className="hover:text-slate-900 dark:hover:text-white transition-colors">
-            Home
+            {ui.home}
           </Link>
           <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
           <span className="text-slate-900 dark:text-white font-semibold" aria-current="page">
-            Scenic Swiss Trains (Gornergrat & Glacier Express)
+            {ui.breadcrumbCurrent}
           </span>
         </nav>
 
@@ -120,38 +149,38 @@ export default function TrainsComparisonView({
         <header className="relative z-10 space-y-4 max-w-4xl pb-24">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200/90 dark:border-sky-800 text-sky-800 dark:text-sky-300 text-xs font-bold shadow-2xs">
             <TrainFront className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-            <span>2026 Swiss Scenic Railway Field Guide & Live Telemetry</span>
+            <span>{ui.heroBadge}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-            Gornergrat Timetable & Tickets | Glacier Express Price
+            {ui.h1}
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-            Everything you need to know about Switzerland’s two most famous train experiences terminating in Zermatt: Europe’s highest open-air cogwheel railway to <strong>Gornergrat (3,089 m)</strong> and the legendary 8-hour trans-alpine <strong>Glacier Express</strong> to St. Moritz. Compare live summit visibility, Swiss Travel Pass coverage, ticket pricing, and insider seating strategies.
+            <RichText text={ui.heroLead} />
           </p>
 
           {/* Key Stat Strips */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-3.5 shadow-2xs">
-              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">Gornergrat Altitude</span>
+              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">{ui.statGornerAlt}</span>
               <p className="text-xl font-black text-slate-900 dark:text-white mt-0.5">3,089 m</p>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">+1,485 m climb • 33 mins</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">{ui.statGornerDetail}</span>
             </div>
             <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-3.5 shadow-2xs">
-              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">Glacier Express Route</span>
+              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">{ui.statGexRoute}</span>
               <p className="text-xl font-black text-slate-900 dark:text-white mt-0.5">291 km</p>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">291 bridges • 91 tunnels</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">{ui.statGexDetail}</span>
             </div>
             <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-3.5 shadow-2xs">
-              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">Swiss Pass Gornergrat</span>
-              <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">50% Off</p>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">CHF 66 return (Summer)</span>
+              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">{ui.statSwissGorner}</span>
+              <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">{ui.statSwissGornerValue}</p>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">{ui.statSwissGornerDetail}</span>
             </div>
             <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-3.5 shadow-2xs">
-              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">Swiss Pass Glacier Exp.</span>
-              <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">100% Free</p>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">Seat reservation req.</span>
+              <span className="text-[11px] font-mono uppercase text-slate-500 dark:text-slate-400">{ui.statSwissGex}</span>
+              <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">{ui.statSwissGexValue}</p>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">{ui.statSwissGexDetail}</span>
             </div>
           </div>
         </header>
@@ -159,7 +188,7 @@ export default function TrainsComparisonView({
 
         {/* Live Conditions Dashboard Bar */}
         <section
-          aria-label="Live Telemetry for Gornergrat and Glacier Express"
+          aria-label={ui.liveAria}
           className="rounded-3xl border border-sky-200/80 dark:border-sky-900/60 bg-gradient-to-r from-sky-50/80 via-white to-sky-50/60 dark:from-slate-900 dark:via-sky-950/30 dark:to-slate-900 p-5 sm:p-6 shadow-sm space-y-4"
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -169,11 +198,11 @@ export default function TrainsComparisonView({
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span>
               <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
-                Live Mountain Conditions & Rail Status Today
+                {ui.liveTitle}
               </h2>
             </div>
             <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Updated every 15 mins via Swiss High-Altitude Telemetry
+              {ui.liveUpdated}
             </span>
           </div>
 
@@ -182,7 +211,7 @@ export default function TrainsComparisonView({
               <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5">
                 <div className="flex min-w-0 items-center gap-2">
                   <TrainFront className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">Gornergrat Bahn (3,089 m)</h3>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">{ui.gornerCardTitle}</h3>
                 </div>
                 <div className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${gBadge.pill}`}>
                   <span className={`h-2 w-2 rounded-full ${gBadge.dot}`} />
@@ -193,15 +222,15 @@ export default function TrainsComparisonView({
                 {liveStatus.gornergrat.verdictText}
               </p>
               <dl className="grid h-full grid-cols-3 grid-rows-2 gap-2 px-4 sm:px-5">
-                <ConditionStat label="This morning" value={`${liveStatus.gornergrat.todayAmScore}/10`} />
-                <ConditionStat label="This afternoon" value={`${liveStatus.gornergrat.todayPmScore}/10`} />
-                <ConditionStat label="Summit" value={liveStatus.gornergrat.tempEstimated} />
-                <ConditionStat label="Mid-layer cloud" value={`${liveStatus.gornergrat.cloudMid}%`} />
-                <ConditionStat label="Wind" value={`${liveStatus.gornergrat.windKmh} km/h`} />
-                <ConditionStat label="Ride" value="33 min" />
+                <ConditionStat label={ui.morning} value={`${liveStatus.gornergrat.todayAmScore}/10`} />
+                <ConditionStat label={ui.afternoon} value={`${liveStatus.gornergrat.todayPmScore}/10`} />
+                <ConditionStat label={ui.summit} value={liveStatus.gornergrat.tempEstimated} />
+                <ConditionStat label={ui.midCloud} value={`${liveStatus.gornergrat.cloudMid}%`} />
+                <ConditionStat label={ui.wind} value={`${liveStatus.gornergrat.windKmh} km/h`} />
+                <ConditionStat label={ui.ride} value={ui.rideGorner} />
               </dl>
               <p className="px-4 text-sm leading-6 text-slate-600 sm:px-5 dark:text-slate-300">
-                {gornergrat.seasonality.schedule}. {gornergrat.swissPassCoverage.shortBadge}. Sit on the right side going up.
+                {gornergrat.seasonality.schedule}. {gornergrat.swissPassCoverage.shortBadge}. {ui.sitRight}
               </p>
               <FramedPhoto
                 photo={PLACE_PHOTOS.gornergratBahn}
@@ -217,23 +246,23 @@ export default function TrainsComparisonView({
               <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5">
                 <div className="flex min-w-0 items-center gap-2">
                   <Mountain className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">Glacier Express Corridor</h3>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">{ui.gexCardTitle}</h3>
                 </div>
                 <div className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold ${gexBadge.pill}`}>
                   <span className={`h-2 w-2 rounded-full ${gexBadge.dot}`} />
-                  <span>{liveStatus.glacierExpress.isOperating ? 'Running' : 'Paused'}</span>
+                  <span>{liveStatus.glacierExpress.isOperating ? ui.running : ui.paused}</span>
                 </div>
               </div>
               <p className="px-4 text-sm leading-6 text-slate-700 sm:px-5 dark:text-slate-200">
                 {liveStatus.glacierExpress.oberalpPassStatus}. {liveStatus.glacierExpress.regionalAlternative}
               </p>
               <dl className="grid h-full grid-cols-3 grid-rows-2 gap-2 px-4 sm:px-5">
-                <ConditionStat label="Service" value={liveStatus.glacierExpress.isOperating ? 'In season' : 'Maintenance'} />
-                <ConditionStat label="Peak pass" value="2,033 m" />
-                <ConditionStat label="Ride" value="7h 45m" />
-                <ConditionStat label="Swiss Pass" value="Included" />
-                <ConditionStat label="Seat" value="Required" />
-                <ConditionStat label="Booking" value="93 days" />
+                <ConditionStat label={ui.service} value={liveStatus.glacierExpress.isOperating ? ui.inSeason : ui.maintenance} />
+                <ConditionStat label={ui.peakPass} value="2,033 m" />
+                <ConditionStat label={ui.rideGexShort} value={ui.rideGex} />
+                <ConditionStat label={ui.swissPass} value={ui.included} />
+                <ConditionStat label={ui.seat} value={ui.required} />
+                <ConditionStat label={ui.booking} value={ui.days93} />
               </dl>
               <p className="px-4 text-sm leading-6 text-slate-600 sm:px-5 dark:text-slate-300">
                 {liveStatus.glacierExpress.operatingStatusLabel}. {liveStatus.glacierExpress.seatAvailabilityNotice}
@@ -250,36 +279,36 @@ export default function TrainsComparisonView({
         </section>
 
         {/* Quick Navigation Jump Anchors */}
-        <nav aria-label="Page Sections" className="flex flex-wrap gap-2 pt-2">
+        <nav aria-label={ui.navAria} className="flex flex-wrap gap-2 pt-2">
           <a
             href="#comparison"
             className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 text-slate-700 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 text-xs font-semibold transition-colors border border-slate-200/80 dark:border-slate-700/80"
           >
-            Side-by-Side Comparison Matrix
+            {ui.navCompare}
           </a>
           <a
             href="#gornergrat"
             className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 text-slate-700 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 text-xs font-semibold transition-colors border border-slate-200/80 dark:border-slate-700/80"
           >
-            Gornergrat Railway Guide
+            {ui.navGorner}
           </a>
           <a
             href="#glacier-express"
             className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 text-slate-700 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 text-xs font-semibold transition-colors border border-slate-200/80 dark:border-slate-700/80"
           >
-            Glacier Express & Excellence Class
+            {ui.navGex}
           </a>
           <a
             href="#tickets-passes"
             className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 text-slate-700 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 text-xs font-semibold transition-colors border border-slate-200/80 dark:border-slate-700/80"
           >
-            Swiss Travel Pass & Ticket Rules
+            {ui.navTickets}
           </a>
           <a
             href="#faqs"
             className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 text-slate-700 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 text-xs font-semibold transition-colors border border-slate-200/80 dark:border-slate-700/80"
           >
-            Frequently Asked Questions
+            {ui.navFaq}
           </a>
         </nav>
 
@@ -287,10 +316,10 @@ export default function TrainsComparisonView({
         <section id="comparison" className="space-y-4">
           <div className="space-y-1">
             <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Side-by-Side Comparison Matrix
+              {ui.compareTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              Direct telemetry, logistical differences, pass coverage, and seating guidance for both rail journeys.
+              {ui.compareIntro}
             </p>
           </div>
 
@@ -299,96 +328,96 @@ export default function TrainsComparisonView({
               <table className="w-full text-left text-xs sm:text-sm">
                 <thead>
                   <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/60 text-slate-800 dark:text-slate-200">
-                    <th scope="col" className="p-4 font-bold w-1/4">Feature</th>
+                    <th scope="col" className="p-4 font-bold w-1/4">{ui.colFeature}</th>
                     <th scope="col" className="p-4 font-bold w-3/8 text-sky-800 dark:text-sky-300">
-                      Gornergrat Railway (Gornergrat Bahn)
+                      {ui.colGorner}
                     </th>
                     <th scope="col" className="p-4 font-bold w-3/8 text-indigo-800 dark:text-indigo-300">
-                      Glacier Express
+                      {ui.colGex}
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-slate-600 dark:text-slate-300">
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Primary Purpose</td>
-                    <td className="p-4">Mountain summit excursion to 3,089 m facing the Matterhorn East Face</td>
-                    <td className="p-4">All-day trans-alpine scenic transit connecting Valais and Engadin (St. Moritz)</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowPurpose}</td>
+                    <td className="p-4">{ui.purposeGorner}</td>
+                    <td className="p-4">{ui.purposeGex}</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Route & Termini</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowRoute}</td>
                     <td className="p-4">{gornergrat.route}</td>
                     <td className="p-4">{glacier.route}</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Travel Time</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowTime}</td>
                     <td className="p-4 font-semibold text-slate-900 dark:text-white">{gornergrat.duration}</td>
                     <td className="p-4 font-semibold text-slate-900 dark:text-white">{glacier.duration}</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Peak Elevation</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowPeak}</td>
                     <td className="p-4">
-                      <span className="font-bold text-sky-700 dark:text-sky-400">3,089 m</span> (Gornergrat Summit)
+                      <span className="font-bold text-sky-700 dark:text-sky-400">3,089 m</span> {ui.peakGorner}
                     </td>
                     <td className="p-4">
-                      <span className="font-bold text-indigo-700 dark:text-indigo-400">2,033 m</span> (Oberalp Pass)
+                      <span className="font-bold text-indigo-700 dark:text-indigo-400">2,033 m</span> {ui.peakGex}
                     </td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Swiss Travel Pass</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowSwiss}</td>
                     <td className="p-4">
                       <span className="inline-block px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
-                        50% Discount
+                        {ui.discount50}
                       </span>
-                      <p className="text-xs text-slate-500 mt-1">CHF 66 return summer / CHF 51 winter</p>
+                      <p className="text-xs text-slate-500 mt-1">{ui.swissPrices}</p>
                     </td>
                     <td className="p-4">
                       <span className="inline-block px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
-                        100% Free Ticket
+                        {ui.freeTicket}
                       </span>
-                      <p className="text-xs text-slate-500 mt-1">Seat reservation mandatory (CHF 39–49)</p>
+                      <p className="text-xs text-slate-500 mt-1">{ui.seatFee}</p>
                     </td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Eurail / Interrail</td>
-                    <td className="p-4 text-rose-700 dark:text-rose-400 font-medium">No discount (Full fare applies)</td>
-                    <td className="p-4 text-emerald-700 dark:text-emerald-400 font-medium">100% Ticket covered + seat reservation</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowEurail}</td>
+                    <td className="p-4 text-rose-700 dark:text-rose-400 font-medium">{ui.eurailNone}</td>
+                    <td className="p-4 text-emerald-700 dark:text-emerald-400 font-medium">{ui.eurailFull}</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Seat Reservations</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowSeats}</td>
                     <td className="p-4">
-                      <strong>Not required</strong> (Free seating; optional CHF 7 priority boarding)
-                    </td>
-                    <td className="p-4">
-                      <strong className="text-amber-700 dark:text-amber-400">MANDATORY</strong> for all passengers (Opens 93 days in advance)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Operating Season</td>
-                    <td className="p-4">365 days a year (Year-round operation)</td>
-                    <td className="p-4">Runs mid-Dec to mid-Oct (Annual pause mid-Oct to early Dec)</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Best Side to Sit</td>
-                    <td className="p-4">
-                      <strong>Right side</strong> ascending from Zermatt for direct Matterhorn views
+                      <RichText text={ui.notRequired} />
                     </td>
                     <td className="p-4">
-                      <strong>Left side</strong> for Rhine Gorge; panoramic glass covers whole carriage
+                      <RichText text={ui.mandatory} />
                     </td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Dogs & Pets Policy</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowSeason}</td>
+                    <td className="p-4">{ui.seasonGorner}</td>
+                    <td className="p-4">{ui.seasonGex}</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowSide}</td>
+                    <td className="p-4">
+                      <RichText text={ui.sideGorner} />
+                    </td>
+                    <td className="p-4">
+                      <RichText text={ui.sideGex} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowDogs}</td>
                     <td className="p-4 text-emerald-700 dark:text-emerald-400">
-                      ✓ <strong>Dogs allowed</strong> (Small free in carrier; large 50% fare)
+                      ✓ <RichText text={ui.dogsYes} />
                     </td>
                     <td className="p-4 text-rose-700 dark:text-rose-400">
-                      ✕ <strong>Dogs NOT allowed</strong> in panoramic coaches
+                      ✕ <RichText text={ui.dogsNo} />
                     </td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-slate-900 dark:text-white">Dining on Board</td>
-                    <td className="p-4">3100 Kulmhotel restaurant & self-service summit buffet</td>
-                    <td className="p-4">Fresh hot multi-course meals served at seat; 5-course in Excellence Class</td>
+                    <td className="p-4 font-bold text-slate-900 dark:text-white">{ui.rowDining}</td>
+                    <td className="p-4">{ui.diningGorner}</td>
+                    <td className="p-4">{ui.diningGex}</td>
                   </tr>
                 </tbody>
               </table>
@@ -401,20 +430,20 @@ export default function TrainsComparisonView({
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="space-y-1">
               <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold">
-                Summit Mountain Excursion
+                {ui.gornerEyebrow}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                Gornergrat Railway (Gornergrat Bahn)
+                {ui.gornerHeading}
               </h2>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Europe’s highest open-air cogwheel electric railway, operating continuously since 1898.
+                {ui.gornerLead}
               </p>
             </div>
             <Link
               href={getLocalizedHref('/viewpoints/gornergrat', locale)}
               className="self-start md:self-auto inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 dark:bg-sky-950/80 dark:hover:bg-sky-900/90 text-sky-700 dark:text-sky-300 font-bold text-xs shadow-2xs transition-colors"
             >
-              <span>View Gornergrat Live Cam & Score</span>
+              <span>{ui.viewCam}</span>
               <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
@@ -423,16 +452,16 @@ export default function TrainsComparisonView({
             {/* 2-column description */}
             <div className="lg:col-span-2 space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <p>
-                The <strong>Gornergrat Bahn (GGB)</strong> departs directly from Zermatt Bahnhofplatz (across the square from the Swiss Federal Railways SBB station) and climbs <strong>1,485 vertical meters in just 33 minutes</strong> to the Gornergrat observation ridge at 3,089 meters.
+                <RichText text={ui.gornerP1} />
               </p>
               <p>
-                As the train ascends, it offers unbroken views of the Matterhorn’s classic triangular East Face (the famous silhouette depicted on Swiss chocolate boxes). At the summit, passengers step out onto a 360-degree observation deck surrounded by <strong>29 four-thousand-meter peaks</strong>—including Monte Rosa (4,634m, Switzerland’s highest summit) and the dramatic ice tongues of the Gorner Glacier.
+                <RichText text={ui.gornerP2} />
               </p>
 
               {/* Station Stops Timeline */}
               <div className="pt-2">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3">
-                  Gornergrat Station Stops & Elevations:
+                  {ui.stationStops}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {gornergrat.topStations.map((station, i) => (
@@ -456,10 +485,10 @@ export default function TrainsComparisonView({
               <div className="rounded-2xl border border-amber-200/90 dark:border-amber-900/60 bg-amber-50/70 dark:bg-amber-950/30 p-4 text-xs text-amber-900 dark:text-amber-200 space-y-1.5">
                 <div className="flex items-center gap-2 font-bold">
                   <Camera className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" aria-hidden="true" />
-                  <span>The Riffelsee Reflection Hack: Hop off at Rotenboden</span>
+                  <span>{ui.riffelTitle}</span>
                 </div>
                 <p className="leading-relaxed">
-                  Your return ticket allows unlimited intermediate hop-offs. When traveling down from the summit, disembark at <strong>Rotenboden (2,815 m)</strong> and walk 10 minutes downhill to the <strong>Riffelsee</strong> alpine lake. On wind-still mornings before 11:00 AM, the Matterhorn reflects perfectly in the crystal water. You can then re-board the next train down to Zermatt at no extra charge.
+                  <RichText text={ui.riffelBody} />
                 </p>
               </div>
             </div>
@@ -467,36 +496,36 @@ export default function TrainsComparisonView({
             {/* Quick Facts Sidebar */}
             <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 p-5 space-y-4 text-xs">
               <h3 className="font-extrabold text-sm text-slate-900 dark:text-white">
-                Gornergrat Quick Telemetry
+                {ui.telemetryTitle}
               </h3>
 
               <div className="space-y-3 divide-y divide-slate-200/70 dark:divide-slate-800">
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">2026 RETURN TICKET PRICE</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.returnPrice}</span>
                   <span className="font-bold text-slate-900 dark:text-white text-sm">
                     {gornergrat.ticketPricing2026.standardAdultReturn}
                   </span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">WITH SWISS TRAVEL PASS</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.withPass}</span>
                   <span className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">
                     {gornergrat.ticketPricing2026.swissPassPrice}
                   </span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">FREQUENCY</span>
-                  <span className="font-bold text-slate-900 dark:text-white">Every 24 minutes (Peak) / 48 mins</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.frequency}</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{ui.frequencyValue}</span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">SEATING STRATEGY</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.seating}</span>
                   <span className="font-bold text-slate-900 dark:text-white">
                     {gornergrat.bestSideToSit.side}
                   </span>
                   <p className="text-[11px] text-slate-500 mt-0.5">{gornergrat.bestSideToSit.reason}</p>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">PETS</span>
-                  <span className="font-bold text-slate-900 dark:text-white">Dogs welcome on all trains</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.pets}</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{ui.petsWelcome}</span>
                 </div>
                 <div className="pt-3">
                   <a
@@ -505,11 +534,11 @@ export default function TrainsComparisonView({
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-xs transition-colors"
                   >
-                    <span>Gornergrat Official Tickets</span>
+                    <span>{ui.officialTickets}</span>
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                   </a>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 text-center mt-1.5">
-                    Select Half-Fare option for 50% Swiss Travel Pass rate
+                    {ui.halfFareHint}
                   </p>
                 </div>
               </div>
@@ -522,18 +551,18 @@ export default function TrainsComparisonView({
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="space-y-1">
               <span className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-bold">
-                World’s Slowest Express Train
+                {ui.gexEyebrow}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                Glacier Express (Zermatt ↔ St. Moritz)
+                {ui.gexHeading}
               </h2>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                A 7.5 to 8-hour panoramic odyssey through the heart of the Swiss Alps across 291 bridges.
+                {ui.gexLead}
               </p>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/90 dark:border-indigo-800 text-indigo-800 dark:text-indigo-300 text-xs font-bold shadow-2xs">
               <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
-              <span>Panoramic Roof Windows</span>
+              <span>{ui.roofWindows}</span>
             </div>
           </div>
 
@@ -541,40 +570,40 @@ export default function TrainsComparisonView({
             {/* 2-column description */}
             <div className="lg:col-span-2 space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <p>
-                Known affectionally as the <em>“slowest express train in the world”</em>, the <strong>Glacier Express</strong> connects two of Switzerland’s most prestigious alpine resorts: <strong>Zermatt</strong> (at the base of the Matterhorn in Valais) and <strong>St. Moritz</strong> (in the high Engadin valley of Graubünden).
+                <RichText text={ui.gexP1} />
               </p>
               <p>
-                During the nearly 8-hour journey, the train negotiates three cantons, scales the <strong>Oberalp Pass (2,033 m / 6,670 ft)</strong>, plunges through the sheer limestone chasm of the <strong>Rhine Gorge (Ruinaulta)</strong>, and traverses the breathtaking 65-meter-high stone arches of the <strong>Landwasser Viaduct</strong> near Filisur.
+                <RichText text={ui.gexP2} />
               </p>
 
               {/* Class Comparison Grid */}
               <div className="pt-2 space-y-3">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                  Travel Classes on the Glacier Express:
+                  {ui.classTitle}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-3.5 text-xs space-y-1.5">
-                    <span className="font-bold text-slate-900 dark:text-white block">2nd Class</span>
-                    <span className="text-[11px] text-slate-500 block">4 seats per row (2+2)</span>
+                    <span className="font-bold text-slate-900 dark:text-white block">{ui.class2}</span>
+                    <span className="text-[11px] text-slate-500 block">{ui.class2Seats}</span>
                     <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                      Panoramic roof glass, fold-out tables, trolley snack cart & seat-delivered hot lunch options.
+                      {ui.class2Body}
                     </p>
                   </div>
                   <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-3.5 text-xs space-y-1.5">
-                    <span className="font-bold text-slate-900 dark:text-white block">1st Class</span>
-                    <span className="text-[11px] text-slate-500 block">3 seats per row (2+1)</span>
+                    <span className="font-bold text-slate-900 dark:text-white block">{ui.class1}</span>
+                    <span className="text-[11px] text-slate-500 block">{ui.class1Seats}</span>
                     <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                      Extra legroom, wider seats, quieter carriage ambiance, individual power sockets and audio guide.
+                      {ui.class1Body}
                     </p>
                   </div>
                   <div className="rounded-xl border border-amber-300 dark:border-amber-700/80 bg-amber-50/60 dark:bg-amber-950/40 p-3.5 text-xs space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-amber-900 dark:text-amber-200">Excellence Class</span>
+                      <span className="font-bold text-amber-900 dark:text-amber-200">{ui.classEx}</span>
                       <Sparkles className="w-3.5 h-3.5 text-amber-500" aria-hidden="true" />
                     </div>
-                    <span className="text-[11px] text-amber-700 dark:text-amber-300 block">1+1 layout (Window Guaranteed)</span>
+                    <span className="text-[11px] text-amber-700 dark:text-amber-300 block">{ui.classExSeats}</span>
                     <p className="text-[11px] text-amber-800 dark:text-amber-300 leading-relaxed">
-                      Dedicated concierge, champagne bar, 5-course regional feast with paired Swiss wines, iPad guide & high tea.
+                      {ui.classExBody}
                     </p>
                   </div>
                 </div>
@@ -584,10 +613,10 @@ export default function TrainsComparisonView({
               <div className="rounded-2xl border border-rose-200/90 dark:border-rose-900/60 bg-rose-50/70 dark:bg-rose-950/30 p-4 text-xs text-rose-900 dark:text-rose-200 space-y-1.5">
                 <div className="flex items-center gap-2 font-bold">
                   <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" aria-hidden="true" />
-                  <span>Mandatory Seat Reservation Rule (93-Day Booking Window)</span>
+                  <span>{ui.alertTitle}</span>
                 </div>
                 <p className="leading-relaxed">
-                  Even if you hold an unlimited <strong>Swiss Travel Pass</strong> or <strong>Eurail Pass</strong>, you <strong>CANNOT</strong> board the Glacier Express without a reserved seat. Seat reservations cost CHF 39 (low season) to CHF 49 (summer) and open <strong>exactly 93 days in advance</strong>. Excellence Class (only 20 seats per train) frequently sells out within minutes of the 93-day window opening.
+                  <RichText text={ui.alertBody} />
                 </p>
               </div>
             </div>
@@ -595,36 +624,36 @@ export default function TrainsComparisonView({
             {/* Quick Facts Sidebar */}
             <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 p-5 space-y-4 text-xs">
               <h3 className="font-extrabold text-sm text-slate-900 dark:text-white">
-                Glacier Express Telemetry
+                {ui.gexTelemetry}
               </h3>
 
               <div className="space-y-3 divide-y divide-slate-200/70 dark:divide-slate-800">
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">JOURNEY DURATION</span>
-                  <span className="font-bold text-slate-900 dark:text-white text-sm">7 hours 45 minutes</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.journeyDuration}</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-sm">{ui.durationValue}</span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">SWISS TRAVEL PASS TICKET</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.swissTicket}</span>
                   <span className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">
-                    100% Free Rail Ticket
+                    {ui.swissTicketValue}
                   </span>
-                  <p className="text-[11px] text-slate-500 mt-0.5">+ mandatory CHF 39–49 reservation</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">{ui.swissTicketNote}</p>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">PEAK ELEVATION PASS</span>
-                  <span className="font-bold text-slate-900 dark:text-white">Oberalp Pass (2,033 m / 6,670 ft)</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.peakElevation}</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{ui.peakElevationValue}</span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">BEST SIDE TO SIT</span>
-                  <span className="font-bold text-slate-900 dark:text-white">Left side heading East (Rhine Gorge)</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.bestSideLabel}</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{ui.bestSideValue}</span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">DOGS / PETS</span>
-                  <span className="font-bold text-rose-600 dark:text-rose-400">Strictly not allowed in coaches</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.dogsLabel}</span>
+                  <span className="font-bold text-rose-600 dark:text-rose-400">{ui.dogsStrict}</span>
                 </div>
                 <div className="pt-2">
-                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">ANNUAL MAINTENANCE PAUSE</span>
-                  <span className="font-bold text-amber-600 dark:text-amber-400">Mid-October to Mid-December</span>
+                  <span className="text-slate-500 dark:text-slate-400 block font-mono text-[11px]">{ui.pauseLabel}</span>
+                  <span className="font-bold text-amber-600 dark:text-amber-400">{ui.pauseValue}</span>
                 </div>
                 <div className="pt-3">
                   <a
@@ -633,11 +662,11 @@ export default function TrainsComparisonView({
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs transition-colors"
                   >
-                    <span>Glacier Express Reservations</span>
+                    <span>{ui.gexReserve}</span>
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                   </a>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 text-center mt-1.5">
-                    Mandatory seat bookings open 93 days in advance
+                    {ui.gexReserveHint}
                   </p>
                 </div>
               </div>
@@ -649,10 +678,10 @@ export default function TrainsComparisonView({
         <section id="tickets-passes" className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800">
           <div className="space-y-1">
             <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Swiss Travel Pass & Ticket Booking Strategy (2026)
+              {ui.ticketsTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              How to avoid overpaying or double-booking across both Swiss train systems.
+              {ui.ticketsIntro}
             </p>
           </div>
 
@@ -660,50 +689,30 @@ export default function TrainsComparisonView({
             <div className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-5 space-y-3">
               <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400 font-extrabold text-sm">
                 <Ticket className="w-4 h-4" aria-hidden="true" />
-                <span>Gornergrat Bahn Ticket Strategy</span>
+                <span>{ui.strategyGorner}</span>
               </div>
               <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Swiss Travel Pass / Half Fare Card:</strong> Always select the &quot;50% Half-Fare&quot; option when buying online to pay CHF 66 instead of CHF 132.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Flexible Timing:</strong> Tickets are valid for any train all day; don’t stress about specific departure hours.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Swiss Family Card:</strong> Children under 16 travel 100% free with their parents. Request the Family Card for free when buying your Swiss Travel Pass.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Check Live Clarity First:</strong> Never buy non-refundable Gornergrat tickets weeks in advance. Check our live 1–10 AM/PM index on the morning of your ride.</span>
-                </li>
+                {ui.gornerTips.map((tip) => (
+                  <li key={tip.title} className="flex items-start gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
+                    <span><strong>{tip.title}</strong> {tip.body}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-5 space-y-3">
               <div className="flex items-center gap-2 text-indigo-700 dark:text-indigo-400 font-extrabold text-sm">
                 <Ticket className="w-4 h-4" aria-hidden="true" />
-                <span>Glacier Express Reservation Strategy</span>
+                <span>{ui.strategyGex}</span>
               </div>
               <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Reserve First, Buy Pass Later:</strong> You do NOT need your Swiss Travel Pass number to book your seat reservation 93 days ahead. Simply select &quot;Seat Only / Swiss Pass&quot; at checkout.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Budget Alternative (Regional Trains):</strong> If the Glacier Express is fully booked or on maintenance pause, regional Matterhorn Gotthard Bahn & RhB trains run the identical tracks with free travel on the Swiss Travel Pass and zero seat reservations.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Pre-order Dining:</strong> Standard class hot meals are cooked fresh in the galley. Pre-ordering online ensures your meal choice isn’t sold out on busy runs.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
-                  <span><strong>Luggage Forwarding:</strong> If doing the 8-hour trip, use SBB Station-to-Station luggage dispatch so you don’t manage multiple suitcases in the train aisle.</span>
-                </li>
+                {ui.gexTips.map((tip) => (
+                  <li key={tip.title} className="flex items-start gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
+                    <span><strong>{tip.title}</strong> {tip.body}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -713,18 +722,18 @@ export default function TrainsComparisonView({
         <section id="faqs" className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800">
           <div className="space-y-1">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold">
-              Traveller Knowledgebase
+              {ui.faqEyebrow}
             </span>
             <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Frequently Asked Questions (Gornergrat & Glacier Express)
+              {ui.faqTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              The most commonly searched questions regarding passes, pricing, seating, and live weather conditions.
+              {ui.faqIntro}
             </p>
           </div>
 
           <div className="space-y-2.5">
-            {TRAINS_FAQS.map((faq, index) => {
+            {trainFaqs.map((faq, index) => {
               const isOpen = activeFaq === index;
               return (
                 <div
@@ -745,7 +754,7 @@ export default function TrainsComparisonView({
                           ? 'bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300'
                           : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
                       }`}>
-                        {faq.train === 'gornergrat' ? 'Gornergrat' : faq.train === 'glacier-express' ? 'Glacier Exp.' : 'Combined'}
+                        {faq.train === 'gornergrat' ? ui.badgeGorner : faq.train === 'glacier-express' ? ui.badgeGex : ui.badgeBoth}
                       </span>
                       <span>{faq.question}</span>
                     </div>
@@ -769,9 +778,9 @@ export default function TrainsComparisonView({
         </section>
 
         {/* Related Guides & Viewpoints Strip */}
-        <section aria-label="Related Guides" className="pt-6 border-t border-slate-200 dark:border-slate-800">
+        <section aria-label={ui.relatedAria} className="pt-6 border-t border-slate-200 dark:border-slate-800">
           <h2 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">
-            Related Zermatt Alpine Telemetry & Guides
+            {ui.relatedTitle}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <Link
@@ -779,13 +788,13 @@ export default function TrainsComparisonView({
               className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-4 hover:border-sky-300 dark:hover:border-sky-700 transition-colors group"
             >
               <span className="text-[11px] font-mono uppercase text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Live Vantage Point
+                {ui.cardLive}
               </span>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
-                Gornergrat (3,089 m) Live Cams & Score →
+                {ui.cardGornerTitle}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                Real-time Roundshot webcams and 10-day AM/PM summit clarity projections.
+                {ui.cardGornerBody}
               </p>
             </Link>
 
@@ -794,13 +803,13 @@ export default function TrainsComparisonView({
               className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-4 hover:border-sky-300 dark:hover:border-sky-700 transition-colors group"
             >
               <span className="text-[11px] font-mono uppercase text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Comparison Guide
+                {ui.cardCompare}
               </span>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
-                Gornergrat vs. Glacier Paradise →
+                {ui.cardCompareTitle}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                Compare Matterhorn view angles, altitude differences (794 m), and wind resilience.
+                {ui.cardCompareBody}
               </p>
             </Link>
 
@@ -809,13 +818,13 @@ export default function TrainsComparisonView({
               className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-4 hover:border-sky-300 dark:hover:border-sky-700 transition-colors group"
             >
               <span className="text-[11px] font-mono uppercase text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Climatology Data
+                {ui.cardClimate}
               </span>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
-                Best Month & Time of Day to Visit →
+                {ui.cardClimateTitle}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                30-year historical visibility statistics: Why mornings beat afternoons 78% of the year.
+                {ui.cardClimateBody}
               </p>
             </Link>
           </div>

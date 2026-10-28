@@ -40,7 +40,7 @@ export default function VisibilityClientShell({
   );
 
   const activeData = initialData.viewpoints[activeViewpointId];
-  const dashboardFaqs = getDashboardFaqs(initialData);
+  const dashboardFaqs = getDashboardFaqs(initialData, locale);
   const borderStatus = evaluateCrossBorderLink(initialData);
   const trainsLive = getTrainsLiveStatus(initialData);
 

@@ -3,50 +3,40 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  Mountain,
-  Compass,
   ArrowRight,
   Clock,
   Wind,
   Snowflake,
-  ShieldCheck,
   AlertTriangle,
   XCircle,
   CheckCircle2,
-  UtensilsCrossed,
-  GlassWater,
   Ticket,
-  HelpCircle,
   ExternalLink,
   ChevronDown,
   ChevronRight,
   Sparkles,
   Info,
-  Layers,
-  MapPin,
   Calendar,
   Users,
-  Camera,
-  TrainFront,
-  BookOpen,
 } from 'lucide-react';
 import { VisibilityApiResponse } from '@/lib/types';
 import { getViewpointScoreMap } from '@/lib/viewpoints';
 import { getLocalizedHref, Locale } from '@/lib/i18n/config';
 import { useTranslation } from '@/lib/i18n/context';
+import {
+  getApresSkiSpots,
+  getLocalizedCrossBorderLink,
+  getLocalizedSkiPassEstimate,
+  getLocalizedSnowAltitudeTiers,
+  getMountainDining,
+  getSkiDashboardUi,
+  getSkiFaqs,
+  getSkiSectors,
+} from '@/lib/i18n/ski-copy';
 import Header from '@/components/Header';
 import LiveWebcam from '@/components/LiveWebcam';
 import Footer from '@/components/Footer';
 import SkiScene from '@/components/scenes/SkiScene';
-import {
-  SKI_SECTORS,
-  MOUNTAIN_DINING,
-  APRES_SKI_SPOTS,
-  SKI_FAQS,
-  calculateSkiPassEstimate,
-  getSnowAltitudeTiers,
-  evaluateCrossBorderLink,
-} from '@/lib/ski';
 
 interface SkiDashboardViewProps {
   initialData?: VisibilityApiResponse;
@@ -58,13 +48,23 @@ export default function SkiDashboardView({
   locale = 'en',
 }: SkiDashboardViewProps) {
   const { dict } = useTranslation();
-  // Cross-Border Link Status
-  const borderStatus = evaluateCrossBorderLink(initialData);
-  const snowTiers = getSnowAltitudeTiers(initialData);
+  const ui = getSkiDashboardUi(locale);
+  const skiSectors = getSkiSectors(locale);
+  const mountainDining = getMountainDining(locale);
+  const apresSkiSpots = getApresSkiSpots(locale);
+  const skiFaqs = getSkiFaqs(locale);
+  const borderStatus = getLocalizedCrossBorderLink(initialData, locale);
+  const snowTiers = getLocalizedSnowAltitudeTiers(initialData, locale);
+  const borderStatusLabel =
+    borderStatus.status === 'OPEN'
+      ? ui.statusOpen
+      : borderStatus.status === 'STANDBY'
+        ? ui.statusStandby
+        : ui.statusClosed;
 
   // Sector selector state
   const [selectedSectorId, setSelectedSectorId] = useState<string>('sunnegga-rothorn');
-  const activeSector = SKI_SECTORS.find((s) => s.id === selectedSectorId) || SKI_SECTORS[0];
+  const activeSector = skiSectors.find((s) => s.id === selectedSectorId) || skiSectors[0];
 
   // Pass Calculator state
   const [calcDays, setCalcDays] = useState<number>(3);
@@ -79,17 +79,20 @@ export default function SkiDashboardView({
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   // Compute live pass estimate
-  const passEstimate = calculateSkiPassEstimate({
-    days: calcDays,
-    wantsItaly: calcWantsItaly,
-    ageCategory: calcAge,
-    hasIkonPass: calcHasIkon,
-  });
+  const passEstimate = getLocalizedSkiPassEstimate(
+    {
+      days: calcDays,
+      wantsItaly: calcWantsItaly,
+      ageCategory: calcAge,
+      hasIkonPass: calcHasIkon,
+    },
+    locale,
+  );
 
   const filteredDining =
     diningFilter === 'all'
-      ? MOUNTAIN_DINING
-      : MOUNTAIN_DINING.filter((d) => d.sector === diningFilter);
+      ? mountainDining
+      : mountainDining.filter((d) => d.sector === diningFilter);
 
   const gornergrat = initialData?.viewpoints.gornergrat;
   const glacier = initialData?.viewpoints['glacier-paradise'];
@@ -119,16 +122,16 @@ export default function SkiDashboardView({
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
         
         {/* Unified Site Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+        <nav aria-label={ui.breadcrumbAria} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
           <Link
             href={getLocalizedHref('/', locale)}
             className="hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded"
           >
-            Home
+            {ui.home}
           </Link>
           <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
           <span className="text-slate-900 dark:text-white font-semibold" aria-current="page">
-            Ski & Snow Intelligence (Zermatt & Cervinia)
+            {ui.breadcrumbCurrent}
           </span>
         </nav>
 
@@ -137,7 +140,7 @@ export default function SkiDashboardView({
           <div className="relative z-10 max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/80 border border-sky-200/90 dark:border-sky-800 text-sky-800 dark:text-sky-300 text-xs font-bold shadow-2xs">
               <Snowflake className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-              <span>Matterhorn Ski Paradise • 360 km International Domain</span>
+              <span>{ui.heroBadge}</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-tight">
@@ -145,8 +148,7 @@ export default function SkiDashboardView({
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
-              See whether the link to Cervinia is open, what the crest wind is doing, and what a pass costs.
-              Snow depths further down are a seasonal guide.
+              {ui.heroLead}
             </p>
           </div>
         </header>
@@ -177,11 +179,14 @@ export default function SkiDashboardView({
                   {borderStatus.status === 'OPEN' && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
                   {borderStatus.status === 'STANDBY' && <AlertTriangle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
                   {borderStatus.status === 'CLOSED' && <XCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
-                  <span>{borderStatus.status}: Switzerland ↔ Italy Border Link</span>
+                  <span>
+                    {borderStatusLabel}
+                    {ui.borderLinkSuffix}
+                  </span>
                 </span>
 
                 <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                  Plateau Rosa & Testa Grigia (3,480 m)
+                  {ui.plateauRosa}
                 </span>
               </div>
 
@@ -199,26 +204,26 @@ export default function SkiDashboardView({
               <div className="bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
                 <span className="flex items-center justify-center gap-1.5 text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
                   <Wind className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                  <span>Crest Wind</span>
+                  <span>{ui.crestWind}</span>
                 </span>
                 <p className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1.5">
                   {borderStatus.plateauRosaWindKmh} <span className="text-xs font-sans font-normal text-slate-500">km/h</span>
                 </p>
                 <span className="text-xs font-mono text-slate-500 dark:text-slate-400 block mt-0.5">
-                  Safety limit: 55 km/h
+                  {ui.safetyLimit}
                 </span>
               </div>
 
               <div className="bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
                 <span className="flex items-center justify-center gap-1.5 text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
                   <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" aria-hidden="true" />
-                  <span>Last Return</span>
+                  <span>{ui.lastReturn}</span>
                 </span>
                 <p className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1.5">
                   {borderStatus.lastLiftReturnTime.split(' ')[0]}
                 </p>
                 <span className="text-xs font-mono text-rose-600 dark:text-rose-400 font-medium block mt-0.5">
-                  Do not miss lift
+                  {ui.doNotMiss}
                 </span>
               </div>
             </div>
@@ -227,14 +232,14 @@ export default function SkiDashboardView({
           <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-600 dark:text-slate-400 gap-3">
             <div className="flex items-center gap-2">
               <Info className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>International ski pass or 55 CHF Cervinia daily supplement required before boarding Italian lifts.</span>
+              <span>{ui.passNote}</span>
             </div>
 
             <Link
               href="#pass-calculator"
               className="font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded"
             >
-              <span>Calculate international pass price</span>
+              <span>{ui.calculatePass}</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </Link>
           </div>
@@ -249,7 +254,7 @@ export default function SkiDashboardView({
               {dict.skiPage.passTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Estimate ticket costs based on duration, international border access, age group, and Ikon Pass validity.
+              {ui.passIntro}
             </p>
           </div>
 
@@ -262,10 +267,10 @@ export default function SkiDashboardView({
                 <div className="flex justify-between items-center text-sm font-semibold">
                   <label htmlFor="duration-slider" className="flex items-center gap-2 text-slate-950 dark:text-white">
                     <Calendar className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                    <span>Duration:</span>
+                    <span>{ui.duration}</span>
                   </label>
                   <span className="font-mono text-base font-bold text-sky-600 dark:text-sky-400">
-                    {calcDays} {calcDays === 1 ? 'Day' : 'Days'}
+                    {calcDays} {calcDays === 1 ? ui.day : ui.days}
                   </span>
                 </div>
 
@@ -280,10 +285,10 @@ export default function SkiDashboardView({
                 />
 
                 <div className="flex justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
-                  <span>1 day</span>
-                  <span>3 days</span>
-                  <span>6 days (Typical)</span>
-                  <span>14 days</span>
+                  <span>{ui.tick1}</span>
+                  <span>{ui.tick3}</span>
+                  <span>{ui.tick6}</span>
+                  <span>{ui.tick14}</span>
                 </div>
               </div>
 
@@ -292,16 +297,16 @@ export default function SkiDashboardView({
                 <span className="block text-sm font-semibold text-slate-950 dark:text-white">
                   <span className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                    <span>Age Category:</span>
+                    <span>{ui.ageCategory}</span>
                   </span>
                 </span>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {[
-                    { id: 'adult', label: 'Adult (20+)' },
-                    { id: 'youth', label: 'Youth (16–19)' },
-                    { id: 'child', label: 'Child (9–15)' },
-                    { id: 'under9', label: 'Under 9 (Free)' },
+                    { id: 'adult', label: ui.ageAdult },
+                    { id: 'youth', label: ui.ageYouth },
+                    { id: 'child', label: ui.ageChild },
+                    { id: 'under9', label: ui.ageUnder9 },
                   ].map((cat) => (
                     <button
                       key={cat.id}
@@ -325,10 +330,10 @@ export default function SkiDashboardView({
                 <label className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 cursor-pointer">
                   <div className="pr-4">
                     <span className="text-xs font-bold text-slate-950 dark:text-white block">
-                      Include Cervinia (Italy) Border Crossing
+                      {ui.italyToggleTitle}
                     </span>
                     <span className="text-xs text-slate-500 dark:text-slate-400">
-                      Unlocks full 360 km International domain and ski descents into Italy.
+                      {ui.italyToggleBody}
                     </span>
                   </div>
                   <input
@@ -342,10 +347,10 @@ export default function SkiDashboardView({
                 <label className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 cursor-pointer">
                   <div className="pr-4">
                     <span className="text-xs font-bold text-slate-950 dark:text-white block">
-                      I have an Ikon Pass (Base or Full)
+                      {ui.ikonTitle}
                     </span>
                     <span className="text-xs text-slate-500 dark:text-slate-400">
-                      Ikon Pass covers 5 to 7 days direct-to-lift across all Swiss sectors.
+                      {ui.ikonBody}
                     </span>
                   </div>
                   <input
@@ -363,10 +368,10 @@ export default function SkiDashboardView({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-mono uppercase text-slate-400 font-bold tracking-wider">
-                    Estimated Pass Cost
+                    {ui.estimatedCost}
                   </span>
                   <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                    2026 Dynamic
+                    {ui.dynamic2026}
                   </span>
                 </div>
 
@@ -380,7 +385,7 @@ export default function SkiDashboardView({
 
                   {calcDays > 1 && (
                     <span className="text-xs font-mono text-slate-400 mt-1 block">
-                      Avg. ~{passEstimate.dailyAverageChf} CHF / day
+                      {ui.avgPerDay(passEstimate.dailyAverageChf)}
                     </span>
                   )}
                 </div>
@@ -409,7 +414,7 @@ export default function SkiDashboardView({
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-bold text-xs transition-colors shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 cursor-pointer"
                 >
-                  <span>Book Early on Official Portal</span>
+                  <span>{ui.bookEarly}</span>
                   <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
               </div>
@@ -419,13 +424,13 @@ export default function SkiDashboardView({
 
         <section aria-labelledby="ski-season-heading" className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 sm:p-6 shadow-2xs space-y-3">
           <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold">
-            Zermatt Bergbahnen
+            {ui.seasonBrand}
           </span>
           <h2 id="ski-season-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-            Zermatt ski season
+            {ui.seasonTitle}
           </h2>
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-            Zermatt Bergbahnen run the lifts. Glacier skiing on the Theodul, up to 3,883 m at Matterhorn Glacier Paradise, runs year-round. The village slopes are the winter season. Early December and late May still ski on the glacier when the lower mountain is thin.
+            {ui.seasonBody}
           </p>
         </section>
 
@@ -471,7 +476,7 @@ export default function SkiDashboardView({
                   <div className="grid grid-cols-2 gap-3 my-5 py-3.5 border-y border-slate-100 dark:border-slate-800">
                     <div>
                       <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold block">
-                        Total Base
+                        {ui.totalBase}
                       </span>
                       <p className="text-3xl font-mono font-extrabold text-slate-950 dark:text-white mt-1">
                         {tier.snowDepthCm} <span className="text-xs font-sans font-normal text-slate-500">cm</span>
@@ -479,7 +484,7 @@ export default function SkiDashboardView({
                     </div>
                     <div>
                       <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold block">
-                        24h Fresh
+                        {ui.fresh24h}
                       </span>
                       <p className="text-3xl font-mono font-extrabold text-sky-600 dark:text-sky-400 mt-1">
                         +{tier.fresh24hCm} <span className="text-xs font-sans font-normal text-slate-500">cm</span>
@@ -489,7 +494,7 @@ export default function SkiDashboardView({
                 </div>
 
                 <div className="flex items-center justify-between text-xs pt-1">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">Condition:</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-medium">{ui.condition}</span>
                   <span className="font-semibold text-slate-950 dark:text-slate-200 font-mono">
                     {tier.surfaceQuality}
                   </span>
@@ -502,19 +507,19 @@ export default function SkiDashboardView({
         <section aria-labelledby="sectors-heading" className="space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-              Infrastructure & Terrain
+              {ui.sectorsEyebrow}
             </span>
             <h2 id="sectors-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              The 4 Mountain Sectors of Matterhorn Ski Paradise
+              {ui.sectorsTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Select a sector to review elevation span, lift networks, sun aspect, and signature descents.
+              {ui.sectorsIntro}
             </p>
           </div>
 
           {/* Sector Navigation Tabs */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 bg-slate-200/70 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800">
-            {SKI_SECTORS.map((sector) => {
+            {skiSectors.map((sector) => {
               const isSelected = sector.id === selectedSectorId;
               return (
                 <button
@@ -548,7 +553,7 @@ export default function SkiDashboardView({
                     {activeSector.country}
                   </span>
                   <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                    Elevation: {activeSector.elevationMin} m – {activeSector.elevationMax} m
+                    {ui.elevationRange(activeSector.elevationMin, activeSector.elevationMax)}
                   </span>
                 </div>
 
@@ -564,24 +569,24 @@ export default function SkiDashboardView({
               {/* Piste Metrics Summary Block */}
               <div className="bg-slate-50 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shrink-0 space-y-2.5">
                 <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold block">
-                  Piste Breakdown ({activeSector.totalKm} km Total)
+                  {ui.pisteBreakdown(activeSector.totalKm)}
                 </span>
 
                 <div className="flex items-center gap-2 text-xs font-mono font-bold">
                   <span className="px-2.5 py-1 rounded bg-blue-500 text-white">
-                    Blue {activeSector.blueKm} km
+                    {ui.blue} {activeSector.blueKm} km
                   </span>
                   <span className="px-2.5 py-1 rounded bg-rose-600 text-white">
-                    Red {activeSector.redKm} km
+                    {ui.red} {activeSector.redKm} km
                   </span>
                   <span className="px-2.5 py-1 rounded bg-slate-900 text-white dark:bg-black">
-                    Black {activeSector.blackKm} km
+                    {ui.black} {activeSector.blackKm} km
                   </span>
                 </div>
 
                 {activeSector.yellowItineraryKm > 0 && (
                   <span className="text-xs font-mono text-amber-600 dark:text-amber-400 block font-semibold">
-                    + {activeSector.yellowItineraryKm} km Ungroomed Yellow Itineraries
+                    {ui.yellowItineraries(activeSector.yellowItineraryKm)}
                   </span>
                 )}
               </div>
@@ -592,7 +597,7 @@ export default function SkiDashboardView({
               <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700/80 space-y-2.5">
                 <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-sky-700 dark:text-sky-300">
                   <Sparkles className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-                  <span>Signature Descent</span>
+                  <span>{ui.signatureDescent}</span>
                 </div>
 
                 <h4 className="text-base font-bold text-slate-950 dark:text-white">
@@ -604,14 +609,14 @@ export default function SkiDashboardView({
                 </p>
 
                 <div className="pt-2 text-xs font-mono text-slate-700 dark:text-slate-300 border-t border-slate-200 dark:border-slate-700/60 font-semibold">
-                  Best For: {activeSector.bestFor}
+                  {ui.bestFor} {activeSector.bestFor}
                 </div>
               </div>
 
               {/* Lift Network */}
               <div className="space-y-3">
                 <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold block">
-                  Key Lifts & Ropeways ({activeSector.liftCount} total)
+                  {ui.keyLifts(activeSector.liftCount)}
                 </span>
 
                 <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
@@ -630,35 +635,35 @@ export default function SkiDashboardView({
         <section aria-labelledby="cervinia-ski-heading" className="space-y-4">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-              Italy side of the ski area
+              {ui.italyEyebrow}
             </span>
             <h2 id="cervinia-ski-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              Ski Cervinia, Webcam & Meteo
+              {ui.italyHeading}
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Meteo Cervinia</h3>
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">{ui.meteoTitle}</h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                The Italy side closes with the same crest wind as the Swiss border. Plateau Rosa is at {borderStatus.plateauRosaWindKmh} km/h right now, against a 55 km/h safety limit. The link above is {borderStatus.status}.
+                {ui.meteoBody(borderStatus.plateauRosaWindKmh, borderStatusLabel)}
               </p>
             </div>
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Skipass Cervinia Zermatt</h3>
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">{ui.skipassTitle}</h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                Board Italian lifts with an international ski pass, or add the 55 CHF Cervinia day supplement to a Swiss pass. The calculator below prices the cross-border option.
+                {ui.skipassBody}
               </p>
             </div>
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Cervinia webcam</h3>
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">{ui.webcamTitle}</h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                This page does not embed an Italian camera. The Trockener Steg webcam at 2,939 m is the Swiss view toward the glacier and the Italy link.
+                {ui.webcamBody}
               </p>
               <a
                 href="#ski-webcams"
                 className="inline-flex items-center gap-1 mt-3 text-sm font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
               >
-                Open the Trockener Steg webcam
+                {ui.openWebcam}
                 <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
               </a>
             </div>
@@ -668,13 +673,13 @@ export default function SkiDashboardView({
         <section id="ski-webcams" aria-labelledby="ski-webcams-heading" className="space-y-4">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-              Live Visual Telemetry
+              {ui.webcamsEyebrow}
             </span>
             <h2 id="ski-webcams-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              Slope & Summit Webcams
+              {ui.webcamsTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Real-time 360° Roundshot panoramic feeds from Rothorn, Gornergrat, and Trockener Steg glacier approach.
+              {ui.webcamsIntro}
             </p>
           </div>
 
@@ -686,23 +691,23 @@ export default function SkiDashboardView({
         <section aria-labelledby="chamonix-heading" className="space-y-4">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-              Two resorts
+              {ui.resortsEyebrow}
             </span>
             <h2 id="chamonix-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              Zermatt or Chamonix
+              {ui.resortsTitle}
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Zermatt and Cervinia</h3>
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">{ui.zcTitle}</h3>
               <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                This is one ski area. The link to Italy is the Plateau Rosa border above Trockener Steg. An international pass, or the 55 CHF Cervinia day supplement on a Swiss pass, is what lets you ski across.
+                {ui.zcBody}
               </p>
             </div>
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/90 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-950 dark:text-white">Chamonix is a different resort</h3>
+              <h3 className="text-base font-bold text-slate-950 dark:text-white">{ui.chamonixTitle}</h3>
               <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                Chamonix sits under Mont Blanc, in France. Zermatt and Chamonix do not share a piste. Getting from one to the other is a travel day, not a lift ride. Cervinia remains the only ski link out of Zermatt.
+                {ui.chamonixBody}
               </p>
             </div>
           </div>
@@ -713,23 +718,23 @@ export default function SkiDashboardView({
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
             <div>
               <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Culinary Guide
+                {ui.culinaryEyebrow}
               </span>
               <h2 id="dining-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-                Findeln Gourmet Chalets & Slope-Side Dining
+                {ui.diningTitle}
               </h2>
               <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                Explore premier mountain huts across Switzerland and Italy with slope access requirements and booking recommendations.
+                {ui.diningIntro}
               </p>
             </div>
 
             {/* Filter Buttons */}
             <div className="flex flex-wrap gap-1.5 bg-slate-200/70 dark:bg-slate-900 p-1 rounded-xl text-xs font-medium">
               {[
-                { id: 'all', label: 'All Huts' },
-                { id: 'Findeln / Sunnegga', label: 'Findeln' },
-                { id: 'Cervinia / Plateau Rosa', label: 'Italy / Cervinia' },
-                { id: 'Gornergrat / Riffelalp', label: 'Gornergrat' },
+                { id: 'all', label: ui.filterAll },
+                { id: 'Findeln / Sunnegga', label: ui.filterFindeln },
+                { id: 'Cervinia / Plateau Rosa', label: ui.filterItaly },
+                { id: 'Gornergrat / Riffelalp', label: ui.filterGornergrat },
               ].map((btn) => (
                 <button
                   key={btn.id}
@@ -775,14 +780,14 @@ export default function SkiDashboardView({
                   </p>
 
                   <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1 text-xs">
-                    <span className="text-slate-400 text-xs uppercase font-mono block">Signature Dish</span>
+                    <span className="text-slate-400 text-xs uppercase font-mono block">{ui.signatureDish}</span>
                     <span className="font-semibold text-slate-900 dark:text-slate-100">{spot.signatureDish}</span>
                   </div>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <span className="text-xs font-mono font-semibold text-amber-700 dark:text-amber-400">
-                    {spot.reservationRequired ? 'Booking Required' : 'Walk-ins OK'}
+                    {spot.reservationRequired ? ui.bookingRequired : ui.walkIns}
                   </span>
 
                   {spot.reservationUrl && (
@@ -792,7 +797,7 @@ export default function SkiDashboardView({
                       rel="noopener noreferrer"
                       className="text-xs font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 flex items-center gap-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded"
                     >
-                      <span>Reserve</span>
+                      <span>{ui.reserve}</span>
                       <ExternalLink className="w-3 h-3" aria-hidden="true" />
                     </a>
                   )}
@@ -806,19 +811,19 @@ export default function SkiDashboardView({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
               <div>
                 <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold block mb-1">
-                  15:30 Onward
+                  {ui.apresEyebrow}
                 </span>
                 <h3 className="text-2xl font-bold text-white">
-                  Legendary Après-Ski Progression
+                  {ui.apresTitle}
                 </h3>
               </div>
               <span className="text-xs text-slate-400 font-mono">
-                Slope-side huts to village taverns
+                {ui.apresSubtitle}
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {APRES_SKI_SPOTS.map((bar) => (
+              {apresSkiSpots.map((bar) => (
                 <div
                   key={bar.name}
                   className="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2.5"
@@ -834,7 +839,7 @@ export default function SkiDashboardView({
                   <p className="text-xs text-slate-300 leading-relaxed">{bar.highlight}</p>
 
                   <div className="pt-2 text-xs font-mono text-slate-400 border-t border-slate-700/80">
-                    Location: {bar.location}
+                    {ui.locationLabel} {bar.location}
                   </div>
                 </div>
               ))}
@@ -846,18 +851,18 @@ export default function SkiDashboardView({
         <section aria-labelledby="faq-heading" className="space-y-6 max-w-4xl mx-auto pt-4">
           <div className="text-center space-y-2 border-b border-slate-200 dark:border-slate-800 pb-4">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block">
-              Knowledge Base
+              {ui.faqEyebrow}
             </span>
             <h2 id="faq-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-              Frequently Asked Questions About Skiing in Zermatt
+              {ui.faqTitle}
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              Clear answers regarding cross-border link rules, Ikon Pass redemption, dynamic pricing, and dining.
+              {ui.faqIntro}
             </p>
           </div>
 
           <div className="space-y-3">
-            {SKI_FAQS.map((faq, index) => {
+            {skiFaqs.map((faq, index) => {
               const isOpen = openFaqIndex === index;
               return (
                 <div
@@ -901,13 +906,13 @@ export default function SkiDashboardView({
         <section aria-labelledby="cross-nav-heading" className="space-y-4 pt-6 border-t border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between">
             <h2 id="cross-nav-heading" className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
-              Continue Exploring Matterhorn & Zermatt
+              {ui.exploreTitle}
             </h2>
             <Link
               href={getLocalizedHref('/viewpoints', locale)}
               className="text-xs text-sky-600 dark:text-sky-400 font-semibold hover:underline"
             >
-              All Vantage Points →
+              {ui.allViewpoints}
             </Link>
           </div>
 
@@ -917,13 +922,13 @@ export default function SkiDashboardView({
               className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-4 hover:border-sky-300 dark:hover:border-sky-700 transition-colors group shadow-2xs"
             >
               <span className="text-xs font-mono uppercase text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Live Vantage Point
+                {ui.cardLive}
               </span>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
-                Gornergrat (3,089 m) Live Cams & Score →
+                {ui.cardGornergratTitle}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                Real-time Roundshot webcams and 10-day AM/PM summit clarity projections.
+                {ui.cardGornergratBody}
               </p>
             </Link>
 
@@ -932,13 +937,13 @@ export default function SkiDashboardView({
               className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-4 hover:border-sky-300 dark:hover:border-sky-700 transition-colors group shadow-2xs"
             >
               <span className="text-xs font-mono uppercase text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Scenic Rail Guide
+                {ui.cardRail}
               </span>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
-                Gornergrat Bahn & Glacier Express →
+                {ui.cardTrainsTitle}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                Compare Swiss Travel Pass discounts, seat reservations, and cogwheel train timetables.
+                {ui.cardTrainsBody}
               </p>
             </Link>
 
@@ -947,13 +952,13 @@ export default function SkiDashboardView({
               className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 p-4 hover:border-sky-300 dark:hover:border-sky-700 transition-colors group shadow-2xs"
             >
               <span className="text-xs font-mono uppercase text-sky-600 dark:text-sky-400 font-bold block mb-1">
-                Field Comparison
+                {ui.cardField}
               </span>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-600 transition-colors">
-                Gornergrat vs. Glacier Paradise →
+                {ui.cardCompareTitle}
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                Compare view angles, altitude differences (794 m), and high-wind weather resilience.
+                {ui.cardCompareBody}
               </p>
             </Link>
           </div>

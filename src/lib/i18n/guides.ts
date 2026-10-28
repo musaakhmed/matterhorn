@@ -15,6 +15,7 @@ import { zhGuides } from './guides/zh';
 import { zhTwGuides } from './guides/zh-tw';
 import { jaGuides } from './guides/ja';
 import { koGuides } from './guides/ko';
+import { ptGuides } from './guides/pt';
 
 export interface GuideTranslation {
   title?: string;
@@ -37,44 +38,7 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
   'zh-tw': zhTwGuides,
   ja: jaGuides,
   ko: koGuides,
-  pt: {
-    'gornergrat-vs-glacier-paradise': {
-      title: 'Gornergrat vs. Glacier Paradise: Qual o melhor mirante para ver o Matterhorn?',
-      shortTitle: 'Gornergrat vs Glacier Paradise',
-      description: 'Altitude, trem de cremalheira vs teleférico, ângulos de visão e tempo nos dois mirantes icônicos de Zermatt.',
-      category: 'Mirantes',
-    },
-    'best-time-to-see-matterhorn': {
-      title: 'Tempo em Zermatt por mês | Melhor hora para ver o Matterhorn',
-      shortTitle: 'Melhor época e hora',
-      description: 'Por que dezembro e janeiro têm 88%+ de céu limpo, enquanto as tardes de verão acumulam nuvens convectivas.',
-      category: 'Climatologia',
-    },
-    'zermatt-cloudy-rainy-day-guide': {
-      title: 'O que fazer em Zermatt quando o Matterhorn está nublado (Guia de mau tempo)',
-      shortTitle: 'Guia para dias nublados',
-      description: 'Economize seus 100+ CHF de teleférico na neblina e explore desfiladeiros, museus e spas alpinos em Zermatt.',
-      category: 'Mau tempo',
-    },
-    'best-matterhorn-photo-viewpoints': {
-      title: 'Melhores pontos para fotografar o Matterhorn e o nascer do sol em Zermatt',
-      shortTitle: 'Melhores fotos e alvorada',
-      description: 'Localizações exatas, caminhadas e luz ideal: Kirchbrücke, Stellisee, Riffelsee e Mürini.',
-      category: 'Fotografia',
-    },
-    'matterhorn-banner-cloud-fohn-wind': {
-      title: 'Por que o Matterhorn quase sempre tem uma nuvem no topo? Física do Föhn',
-      shortTitle: 'Nuvem em bandeira e Föhn',
-      description: 'A física por trás da famosa nuvem orográfica que surge mesmo sob céu azul límpido.',
-      category: 'Meteorologia',
-    },
-    'zurich-geneva-to-zermatt-day-trip': {
-      title: 'Trem Zurique–Zermatt | Horários, baldeação em Visp',
-      shortTitle: 'Passeio de Zurique ou Genebra',
-      description: 'Conexões em Visp, tempos de viagem e regra Go/No-Go para decidir antes de embarcar.',
-      category: 'Passeios de 1 dia',
-    },
-  },
+  pt: ptGuides,
 };
 
 /**

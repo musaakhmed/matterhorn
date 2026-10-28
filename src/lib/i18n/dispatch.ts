@@ -83,6 +83,10 @@ export function getLocalizedViewpointLabel(
       return isGlacier
         ? { name: 'Matterhorn Glacier Paradise (3.883 m)', shortLabel: 'Glacier Paradise (Sur)' }
         : { name: 'Gornergrat & Sunnegga (3.089 m)', shortLabel: 'Gornergrat (Este)' };
+    case 'pt':
+      return isGlacier
+        ? { name: 'Matterhorn Glacier Paradise (3.883 m)', shortLabel: 'Glacier Paradise (Sul)' }
+        : { name: 'Gornergrat e Sunnegga (3.089 m)', shortLabel: 'Gornergrat (Este)' };
     case 'zh':
       return isGlacier
         ? { name: '马特洪峰冰川天堂 (3,883米)', shortLabel: '冰川天堂 (南面)' }
@@ -143,6 +147,8 @@ export function getLocalizedGuideAdvice(
           return `${vpLabel}（${score}/10）は最高の観賞コンディションです。青空にピラミッドが鋭く際立っていますが、風速${metrics.windSpeedKmh}km/hの南風フェーンにより風下にドラマチックな旗雲が発生しています。`;
         case 'ko':
           return `${vpLabel}(${score}/10) 전망이 최고조에 달했습니다! 피라미드가 하늘을 배경으로 선명하지만, ${metrics.windSpeedKmh}km/h의 남풍 푄 현상으로 산 뒤편에 역동적인 깃발 구름이 피어오르고 있습니다.`;
+        case 'pt':
+          return `Condições excelentes em ${vpLabel} (${score}/10). A pirâmide está nítida no céu, embora um Föhn de sul a ${metrics.windSpeedKmh} km/h forme uma nuvem em bandeira a sotavento.`;
         default:
           return `Prime viewing at ${vpLabel} (${score}/10). The pyramid is sharp against the sky, though ${metrics.windSpeedKmh} km/h southerly Föhn winds are whipping up a dramatic leeward banner cloud.`;
       }
@@ -191,6 +197,8 @@ export function getLocalizedGuideAdvice(
           return `${vpLabel}の典型的な日中パターン：午前中は堅実な${data.today.morning.score}/10点ですが、午後は積雲が発達します（${data.today.afternoon.score}/10点）。正午前に登るのが得策です。`
         case 'ko':
           return `${vpLabel} 전형적인 고산 일교차 패턴: 오전에는 안정적인 ${data.today.morning.score}/10점이나 오후에는 대류운이 발달합니다(${data.today.afternoon.score}/10점). 정오 전에 오르세요.`;
+        case 'pt':
+          return `Padrão diurno alpino clássico em ${vpLabel}: a manhã marca ${data.today.morning.score}/10 antes das nuvens de convecção da tarde (${data.today.afternoon.score}/10). Suba antes do meio-dia.`;
         default:
           return `Classic alpine diurnal pattern at ${vpLabel}: Morning scores a solid ${data.today.morning.score}/10 before afternoon convective clouds build (${data.today.afternoon.score}/10). Go before noon CET.`;
       }
@@ -213,6 +221,8 @@ export function getLocalizedGuideAdvice(
         return `${vpLabel}からの眺望は良好（${score}/10）。通り過ぎる雲がヘルンリ尾根をかすめることがありますが、ドラマチックな光の切れ目を狙うチャンスです。`;
       case 'ko':
         return `${vpLabel} 양호한 관람 조건(${score}/10). 지나가는 구름이 회른리 능선을 스칠 수 있으니, 구름 사이로 쏟아지는 빛줄기를 놓치지 마세요.`;
+      case 'pt':
+        return `Boas condições (${score}/10) a partir de ${vpLabel}. Nuvens passageiras podem roçar a aresta Hörnli — tenha a câmara pronta para aberturas de luz.`;
       default:
         return `Solid viewing conditions (${score}/10) from ${vpLabel}. Passing clouds may briefly kiss the Hörnli ridge—keep your shutter ready for dramatic light breaks.`;
     }
@@ -237,6 +247,8 @@ export function getLocalizedGuideAdvice(
           return `谷霧が低標高を覆っています（${score}/10）。逆転層の雲海の上に抜けるため、グレイシャー・パラダイス（3,883m）への変更をご検討ください。`;
         case 'ko':
           return `계곡 안개가 낮은 고도를 덮고 있습니다(${score}/10). 운해 위로 올라설 수 있는 글래시어 파라다이스(3,883m)로 일정을 전환해 보세요.`;
+        case 'pt':
+          return `O nevoeiro de vale tapa as cotas baixas (${score}/10). Vale a pena subir ao Glacier Paradise (3.883 m) para ficar acima do mar de nuvens.`;
         default:
           return `Valley fog is trapping lower elevations (${score}/10). Consider switching to Glacier Paradise (3,883m) to ascend above the inversion deck.`;
       }
@@ -259,6 +271,8 @@ export function getLocalizedGuideAdvice(
         return `${vpLabel}は中層雲が${metrics.cloudCoverMid}%あり視界不良気味（${score}/10）。次のベストなチャンスは${bestDay}の${bestPeriod}（${bestScore}/10）です。`;
       case 'ko':
         return `${vpLabel} 중층운 ${metrics.cloudCoverMid}%로 시야가 까다롭습니다(${score}/10). 다가오는 가장 좋은 관람 시간대는 ${bestDay} ${bestPeriod}(${bestScore}/10)입니다.`;
+      case 'pt':
+        return `Visibilidade difícil (${score}/10) em ${vpLabel}, com ${metrics.cloudCoverMid}% de nuvens médias. A melhor janela seguinte é ${bestDay} ${bestPeriod} (${bestScore}/10).`;
       default:
         return `Challenging visibility (${score}/10) at ${vpLabel} with ${metrics.cloudCoverMid}% mid-cloud cover. Best upcoming window is ${bestDay} ${bestPeriod} (${bestScore}/10).`;
     }
@@ -281,6 +295,8 @@ export function getLocalizedGuideAdvice(
       return `${vpLabel}からのマッターホルンは完全に濃い雲の中です（${score}/10）。登山チケットは${bestDay}の${bestPeriod}（${bestScore}/10）まで温存し、村内の雨天おすすめプランをお楽しみください。`;
     case 'ko':
       return `${vpLabel}에서 마터호른이 짙은 구름에 완전히 갇혀 있습니다(${score}/10). 산악 티켓은 ${bestDay} ${bestPeriod}(${bestScore}/10)로 아껴두시고 아래의 비 오는 날 추천 일정을 즐겨보세요.`;
+    case 'pt':
+      return `O Matterhorn está completamente tapado (${score}/10) a partir de ${vpLabel}. Guarde o bilhete para ${bestDay} ${bestPeriod} (${bestScore}/10) e use as alternativas de mau tempo na aldeia, mais abaixo.`;
     default:
       return `The Matterhorn is completely socked in (${score}/10) from ${vpLabel}. Save your mountain pass for ${bestDay} ${bestPeriod} (${bestScore}/10) and explore our rainy-day Zermatt contingency picks below.`;
   }

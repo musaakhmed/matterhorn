@@ -553,6 +553,141 @@ export const deGuides: Record<string, GuideTranslation> = {
       'Weihnachtsessen (Walliser Käsefondue, Raclette und Gourmetmenüs) sind oft Wochen im Voraus ausgebucht – reservieren Sie frühzeitig.',
       'Gornergratbahn und Klein Matterhorn fahren 365 Tage im Jahr – ein Gipfelausflug am Weihnachtsmorgen auf 3.089 m ist unvergesslich.',
     ],
+    comparisonTable: {
+      caption: 'Weihnachtsausflüge und Winterhighlights in Zermatt auf einen Blick',
+      headers: [
+        'Aktivität / Tradition',
+        'Ort / Route',
+        'Beste Zeit',
+        'Warum es an Weihnachten besonders ist',
+      ],
+      rows: [
+        [
+          'Weihnachtsspaziergang und Glühwein',
+          'Bahnhofstrasse und Kirchplatz',
+          '17:00–19:30 Uhr (CET, Dämmerung)',
+          'Beleuchteter Weihnachtsbaum, Chorgesang an der Kirche St. Mauritius, heiße Maroni.',
+        ],
+        [
+          'Winterpanorama Gornergrat',
+          'Zahnradbahn ab Zermatt (33 Min.)',
+          '09:00–14:00 Uhr (CET)',
+          'Fahrt durch tief verschneite Arvenwälder auf 3.089 m, 360°-Blick auf 29 Viertausender.',
+        ],
+        [
+          'Historischer Rundgang im Hinterdorf',
+          'Hinter dem Hotel Monte Rosa',
+          'Blaue Stunde (16:30–17:30 Uhr CET)',
+          '500 Jahre alte Lärchenstadel (Gädi) unter einer dicken Schicht Pulverschnee.',
+        ],
+        [
+          'Käsefondue am Kamin',
+          'Traditionelle Stübli und Chalets in Zermatt',
+          '19:00–22:00 Uhr (CET)',
+          'Walliser AOP-Käse mit Knoblauch und Fendant, neben dem knisternden Feuer geschmolzen.',
+        ],
+        [
+          'Matterhorn Glacier Palace und Skifahren',
+          'Klein Matterhorn (3.883 m)',
+          '10:00–14:30 Uhr (CET)',
+          'Europas höchste Pisten und Eisskulpturen in Gängen 15 m tief im Gletscher.',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'why-zermatt-christmas-is-magical',
+        heading: '1. Warum Zermatt das Inbild eines alpinen Weihnachtsziels ist',
+        image: {
+          src: '/guides/zermatt-winter-chalets.jpg',
+          alt: 'Traditionelle Holzhäuser in Zermatt unter dickem Winterschnee, im Hintergrund das Matterhorn',
+          caption: 'Historische, sonnengebräunte Lärchenchalets unter frischem Dezember-Pulverschnee in Zermatt.',
+        },
+        paragraphs: [
+          'Kaum ein Ort verkörpert den märchenhaften Geist von Weihnachten so wie Zermatt. Tief im Tal unter der steilen Pyramide des Matterhorns (4.478 m) wird das autofreie Dorf jeden Dezember zu einer lebendigen Schneekugel.',
+          'Verbrennungsmotoren sind seit 1966 verboten. Es gibt kein Verkehrsrauschen und keinen Schneematsch von Auspuffen, nur knirschenden Neuschnee, das leise Summen kleiner Elektrobusse und das rhythmische Bimmeln der Messingglocken an Pferdeschlitten vor Häusern wie dem Mont Cervin Palace und dem Grand Hotel Zermatterhof.',
+          'An der Bahnhofstrasse und am Kirchplatz legen sich warme Lichterketten um schneeschwere Tannen. In den Schaufenstern liegen handgeschnitzte Holzornamente, Confiserie-Schokolade und dampfende Kupferkessel mit Glühwein und gerösteten Maroni.',
+        ],
+        proTip: {
+          label: 'Geheimtipp',
+          text: 'Schlendern Sie in der Dämmerung (16:45 Uhr CET) ins Hinterdorf direkt hinter der Bahnhofstrasse. Die schmalen Gassen zwischen den Lärchenstadel aus dem 16. Jahrhundert wirken unter schwerem Schnee wie ein Wintergemälde aus dem 19. Jahrhundert.',
+        },
+      },
+      {
+        id: 'december-weather-matterhorn-clarity',
+        heading: '2. Dezemberwetter: Warum Weihnachten den klarsten Himmel des Jahres hat',
+        paragraphs: [
+          'Viele vermuten, der Sommer bringe das beste Bergwetter. 30 Jahre offizielle Schweizer Alpenmessungen sagen das Gegenteil. Der Dezember ist statistisch der klarste Monat des Jahres in Zermatt, mit 89 % Gipfelsicht auf das Matterhorn.',
+          'Im Winter bestimmen kalte, stabile und trockene Hochdrucklagen die Walliser Alpen. Anders als im Juli und August, wenn die Talsonne nachmittags Thermik (anabatische Winde) auslöst und bis 13:00 Uhr CET dichte Quellwolken aufbaut, bleibt die Dezemberluft den ganzen Tag kristallklar. Ob Sie um 10:00 oder um 15:00 Uhr CET zum Matterhorn schauen: Der Berg steht scharf gezeichnet vor tiefblauem Himmel.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Klirrende Kälte hält die Sicht rein:',
+            text: 'Die Dezembertemperaturen im Dorf liegen bei -6 °C bis +1 °C, auf den Gipfelplattformen (3.089–3.883 m) bei -14 °C bis -8 °C. Kalte Luft trägt kaum Feuchtigkeit, deshalb bleibt der Gipfelnebel aus.',
+          },
+          {
+            bold: 'Frühes Alpenglühen (16:30–16:50 Uhr CET):',
+            text: 'Weil die Sonne Ende Dezember früh untergeht, müssen Sie nicht bis in den späten Abend warten, um das rosa-violette Alpenglühen an der Ostwand zu fotografieren.',
+          },
+          {
+            bold: 'Live-Telemetrie bei Föhnsturm prüfen:',
+            text: 'Auch im Winter können südliche Föhnfronten Böen über 45 km/h am Klein Matterhorn bringen. Prüfen Sie morgens unseren Live-Sichtwert von 1–10 (AM/PM), bevor Sie in die Bahn steigen.',
+          },
+        ],
+      },
+      {
+        id: 'cozy-dining-fireside-fondue',
+        heading: '3. Gemütliches Essen: Fondue am Kamin, Raclette und Weihnachtsmenüs',
+        image: {
+          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          alt: 'Blubberndes Schweizer Käsefondue mit Brot und Wein, im Hintergrund das verschneite Matterhorn',
+          caption: 'Walliser Käsefondue und ein Glas kühler Fendant nach einem Tag im Schnee.',
+        },
+        paragraphs: [
+          'Nach einem klaren Wintermorgen auf der Gornergratbahn oder auf den Pisten Richtung Cervinia wärmt kaum etwas so wie ein blubberndes Caquelon mit echtem Schweizer Käsefondue.',
+          'Die Stübli in Zermatt, darunter Ferdinand by Cervo, Saycheese!, Chez Vrony und die Schäferstube, schmelzen Walliser AOP-Käse mit trockenem Weißwein, Knoblauch und einem Schuss Kirsch. Heißer Käse über kleinen Kartoffeln (Raclette) am knisternden Steinofen, während draußen leise Schnee fällt: das ist das Weihnachtsgefühl.',
+        ],
+        proTip: {
+          label: 'Strategie fürs Weihnachtsessen',
+          text: 'Die Tische am Heiligabend (24. Dezember) und am ersten Weihnachtstag (25. Dezember) sind Wochen oder Monate im Voraus weg. Viele Restaurants bieten festliche Menüs. Reservieren Sie schon im Oktober oder November.',
+        },
+      },
+      {
+        id: 'christmas-day-mountain-excursions',
+        heading: '4. Bergausflüge am Weihnachtstag: Gornergrat und Glacier Paradise',
+        image: {
+          src: '/guides/zermatt-winter-snow-village.jpg',
+          alt: 'Verschneite Alpenhänge über dem Dorf Zermatt unter einer geschlossenen Pulverschneedecke',
+          caption: 'Winterwunder: Die hochalpinen Hänge über Zermatt sind am Weihnachtstag für Zahnradbahn und Winterwandern geöffnet.',
+        },
+        paragraphs: [
+          'Viele Erstbesucher fragen sich, ob die Bergbahnen am Weihnachtstag fahren. Die Antwort ist eindeutig ja: Die Gornergratbahn und die Bahnen zum Matterhorn Glacier Paradise verkehren an 365 Tagen im Jahr, sofern das Wetter mitspielt.',
+          'Die geheizte Zahnradbahn am Weihnachtsmorgen ab Zermatt Bahnhof ist eine Fahrt, die bleibt. Der rote Zug steigt durch schneeschwere Lärchen- und Arvenwälder, erreicht die offenen Schneefelder am Riffelberg (2.582 m) und am Rotenboden (2.815 m) und endet auf der Terrasse des Gornergrat (3.089 m). Von dort blicken Sie über die gefrorenen Zungen von Gorner- und Findelgletscher auf die schneeweiße Nord- und Ostwand des Matterhorns.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Schneit es in Zermatt an Weihnachten immer?',
+        answer:
+          'Zermatt liegt auf 1.608 Metern, das Skigebiet steigt bis 3.883 Meter. Damit gehört der Ort zu den schneesichersten der Alpen. Ein weißes Weihnachten im Dorf ist praktisch sicher, und die hohen Pisten sind im ganzen Dezember vollständig eingeschneit.',
+      },
+      {
+        question: 'Fahren Bergbahnen und Skilifte am Weihnachtstag in Zermatt?',
+        answer:
+          'Ja. Gornergratbahn, Sunnegga-Standseilbahn und die Bahnen zum Matterhorn Glacier Paradise fahren am 24., 25. und 26. Dezember nach dem üblichen Winterfahrplan. Prüfen Sie am Reisetag morgens den Live-Sichtwert von 1–10 (AM/PM), damit der Gipfel frei ist.',
+      },
+      {
+        question: 'Sind Restaurants und Läden in der Weihnachtswoche in Zermatt geöffnet?',
+        answer:
+          'Ja. Von der Weihnachtswoche bis Neujahr ist Hochsaison. Lebensmittelgeschäfte und Skiverleihe bleiben offen, am Abend des 24. und am 25. Dezember mit etwas kürzeren Zeiten. Restaurants und Bars laufen auf voller Kapazität. Für Heiligabend und den ersten Weihnachtstag brauchen Sie eine Tischreservation.',
+      },
+      {
+        question: 'Wie sieht man das Matterhorn am Weihnachtstag am besten?',
+        answer:
+          'Nehmen Sie um 08:24 oder 09:00 Uhr CET die Gornergratbahn ab Zermatt. Setzen Sie sich bergwärts auf die rechte Seite: Die verschneite Ostwand bleibt im warmen Morgenlicht fast die ganze Fahrt im Fenster.',
+      },
+    ],
   },
   'gornergrat-railway-vs-glacier-express': {
     title:
@@ -573,6 +708,229 @@ export const deGuides: Record<string, GuideTranslation> = {
       'Swiss Travel Pass: Auf die Gornergratbahn erhalten Sie 50 % Rabatt (keine Reservierung nötig); der Glacier Express ist zu 100 % im Pass inbegriffen, erfordert jedoch eine OBLIGATORISCHE Sitzplatzreservierung (CHF 39–49).',
       'Beide Züge halten direkt gegenüber am Bahnhof Zermatt und lassen sich perfekt zu einem zweitägigen Alpentrip kombinieren.',
       'Besuchen Sie unsere Live-Übersicht auf der [Zugvergleichsseite](/trains) für aktuelle Sichtweiten am Gornergrat, Ticketpreise und Sitzplatz-Tipps.',
+    ],
+    comparisonTable: {
+      caption: 'Gornergratbahn vs. Glacier Express: Merkmale und Tickets im Vergleich (2026)',
+      headers: ['Merkmal', 'Gornergratbahn (GGB)', 'Glacier Express (GEX)'],
+      rows: [
+        [
+          'Hauptzweck',
+          'Senkrechter Gipfelausflug und Matterhorn-Aussicht',
+          'Große transalpine Panoramafahrt',
+        ],
+        [
+          'Route und Endpunkt',
+          'Zermatt (1.604 m) ↔ Gornergrat (3.089 m)',
+          'Zermatt (Wallis) ↔ St. Moritz / Davos (Graubünden)',
+        ],
+        [
+          'Fahrtdauer',
+          '33 Minuten je Richtung',
+          '7 Stunden 45 Minuten (volle Strecke, 291 km)',
+        ],
+        [
+          'Gleis und Antrieb',
+          'Abt-Doppelzahnstange (Meterspur, 1.000 mm)',
+          'Adhäsion und Zahnstangenabschnitte (Matterhorn Gotthard Bahn / RhB)',
+        ],
+        [
+          'Höhengewinn / Scheitel',
+          '+1.485 m (Scheitel: Gipfel 3.089 m)',
+          'Scheitel: Oberalppass (2.033 m) / Tiefstpunkt: Chur (585 m)',
+        ],
+        [
+          'Saison',
+          '365 Tage im Jahr (keine Betriebspause)',
+          'Anfang Dezember bis Ende Oktober (Werkstattpause November bis Anfang Dezember)',
+        ],
+        [
+          'Swiss Travel Pass',
+          '50 % Rabatt (Retour CHF 51–66)',
+          'Billett zu 100 % inklusive (Pflichtreservierung extra)',
+        ],
+        [
+          'Sitzplatzreservierung',
+          'Nicht nötig (freier Zustieg, optionaler Priority-Pass CHF 7)',
+          'PFLICHT (CHF 39 Nebensaison / CHF 49 Hochsommer)',
+        ],
+        [
+          'Eurail / Interrail',
+          'Kein Rabatt (volles Billett)',
+          'Billett zu 100 % inklusive (Pflichtreservierung extra)',
+        ],
+        [
+          'Beste Sitzseite',
+          'Rechts bergwärts ab Zermatt (Matterhorn-Blick)',
+          'Links bei der Abfahrt Zermatt–Disentis / beide Seiten in der Rheinschlucht',
+        ],
+        [
+          'Matterhorn-Sicht',
+          'Durchgehend auf der ganzen Fahrt und am Gipfel',
+          'Nur bei Abfahrt oder Ankunft im Mattertal',
+        ],
+        [
+          'Höhepunkte',
+          'Riffelsee-Spiegelung, Gornergletscher, 29 Viertausender',
+          'Landwasserviadukt, Rheinschlucht, See am Oberalppass',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'gornergrat-overview',
+        heading: 'Gornergratbahn (GGB): Europas höchste offene Zahnradbahn',
+        image: {
+          src: '/guides/gornergrat-bahn-cogwheel-train.jpg',
+          alt: 'Zahnradzug der Gornergratbahn auf der steilen Bergstrecke zum Gornergrat, im Hintergrund das Matterhorn',
+          caption: 'Die Gornergratbahn steigt durch Alpwiesen und Lärchenwälder zur Aussichtsterrasse auf 3.089 Metern.',
+        },
+        paragraphs: [
+          '1898 als erste vollständig elektrische Zahnradbahn der Schweiz eröffnet, ist die Gornergratbahn (GGB) ein Stück Ingenieurskunst. In 33 Minuten überwinden die rot-goldenen Züge 1.485 Höhenmeter von Zermatt (1.604 m) auf den Felsgrat des Gornergrat (3.089 m).',
+          'Anders als Panoramazüge in Flusstälern ist die Gornergratbahn eine reine Steilfahrt. Während das Zahnrad Steigungen bis 20 % hinaufklettert, öffnet sich die Ostwand des Matterhorns immer weiter. Unterwegs halten die Züge in Findelbach (über ein steinernes Viadukt), Riffelalp (2.211 m), Riffelberg (2.582 m) und Rotenboden (2.815 m), dem Ausgangspunkt des berühmten zehnminütigen Wegs zum Riffelsee, wo sich das Matterhorn im Bergwasser spiegelt.',
+          'An der Bergstation (3.089 m) treten Sie direkt auf die Terrasse des historischen 3100 Kulmhotel Gornergrat. Von dort liegt ein freier Rundblick über das Monte Rosa (4.634 m, höchster Gipfel der Schweiz), die Zunge des Gornergletschers und 29 Gipfel über 4.000 Metern.',
+          'Für die Auffahrt und die aktuelle Wolkendecke am Gipfel gibt es den [Gornergrat-Guide im Zug-Hub](/trains#gornergrat).',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Tempo und Dauer:',
+            text: '33 Minuten je Richtung auf 9,3 km Gleis, ganzjährig, mit Abfahrten alle 24 bis 48 Minuten.',
+          },
+          {
+            bold: 'Höhenprofil:',
+            text: 'Von 1.604 m in Zermatt auf 3.089 m am Gornergrat (+1.485 m Höhengewinn).',
+          },
+          {
+            bold: 'Einfach einsteigen:',
+            text: 'Keine Sitzplatzreservierung im Voraus. QR-Code oder Swiss Pass an der Sperre scannen und einsteigen.',
+          },
+          {
+            bold: 'Zwischenhalte zum Wandern:',
+            text: 'In Rotenboden aussteigen für den Spiegelweg zum Riffelsee, oder am Riffelberg für ein Bergessen mit Blick auf das Matterhorn.',
+          },
+        ],
+        proTip: {
+          label: 'Beste Sitzseite',
+          text: 'Setzen Sie sich in Zermatt auf die RECHTE Seite des Wagens. Die rechten Fenster zeigen die Matterhorn-Pyramide durchgehend, sobald der Zug über die Waldgrenze steigt.',
+        },
+      },
+      {
+        id: 'glacier-express-overview',
+        heading: 'Glacier Express (GEX): "Der langsamste Schnellzug der Welt"',
+        image: {
+          src: '/guides/glacier-express-panoramic-train.jpg',
+          alt: 'Panoramazug Glacier Express mit bis in die Decke gezogenen Fenstern in den Schweizer Alpen unter klarem Himmel',
+          caption: 'Der Glacier Express gleitet durch die Alpen; die Panoramafenster ziehen sich bis in die Decke.',
+        },
+        paragraphs: [
+          'Ist die Gornergratbahn ein senkrechter Lift in den alpinen Himmel, ist der Glacier Express die langsame Querung über den Rücken der Schweizer Alpen. Er verbindet Zermatt im Wallis mit St. Moritz im Engadin und legt 291 Kilometer (181 Meilen) in etwa 7 Stunden und 45 Minuten zurück.',
+          'Unterwegs quert der Zug 291 Viadukte, durchfährt 91 Tunnel und erklimmt den Oberalppass auf 2.033 Metern (6.670 Fuß), den höchsten Punkt der Strecke und die Quelle des Rheins. Zu den Höhepunkten zählen das Landwasserviadukt, eine 65 Meter hohe gekrümmte Kalksteinbrücke, die direkt in einen Felstunnel führt, und die Rheinschlucht (Ruinaulta), oft der Grand Canyon der Schweiz genannt.',
+          'Die Wagen sind Panoramawagen mit hohen, bis in die Decke gezogenen Scheiben. Drei-Gänge-Menüs werden an Bord gekocht und an den Platz serviert, während die Landschaft vorbeizieht.',
+          'Sitzpläne, Speisekarten und Buchungstipps stehen im [Glacier-Express-Routen- und Sitzplatzguide](/trains#glacier-express).',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Route und Dauer:',
+            text: '291 km zwischen Zermatt und St. Moritz, etwa 7 Stunden und 45 Minuten.',
+          },
+          {
+            bold: 'Ingenieursleistungen:',
+            text: '291 Steinviadukte und 91 Tunnel, darunter die Kehrtunnel der Albula-Linie, UNESCO-Welterbe.',
+          },
+          {
+            bold: 'Excellence Class:',
+            text: 'Luxusklasse mit garantiertem Einzelfensterplatz, Concierge, privater Glacier Bar und einem regionalen Fünf-Gänge-Menü mit Weinbegleitung.',
+          },
+          {
+            bold: 'Saisonpause:',
+            text: 'Anders als die Gornergratbahn, die an 365 Tagen fährt, pausiert der Glacier Express für die Werkstatt von Ende Oktober bis Mitte Dezember.',
+          },
+        ],
+        proTip: {
+          label: 'Pflichtreservierung',
+          text: 'Anders als in normalen Schweizer Zügen dürfen Sie den Glacier Express nicht ohne reservierten Sitzplatz betreten, auch nicht mit unlimitiertem Swiss Travel Pass 1. Klasse. Die Buchung öffnet genau 93 Tage im Voraus auf dem offiziellen Portal. Setzen Sie einen Kalenderalarm: Panoramasitzplätze an Spitzentagen im Sommer und in den Skiferien sind in wenigen Stunden weg.',
+        },
+      },
+      {
+        id: 'pass-rules-pricing',
+        heading: 'Preis, Sitzplatzreservierung und Swiss Travel Pass beim Glacier Express',
+        paragraphs: [
+          'Viele nehmen an, der Swiss Travel Pass gelte für jeden Zug in der Schweiz gratis. Das Netz ist eng verzahnt, doch Gornergratbahn und Glacier Express fallen unter völlig verschiedene Tarife.',
+          'Wer die Regeln vorher kennt, vermeidet Zuschläge am Schalter und abgewiesene Einstiege am Bahnsteig.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Gornergratbahn mit Swiss Travel Pass:',
+            text: 'Sie erhalten 50 % auf das normale Erwachsenenbillett (Retour im Sommer von etwa CHF 132 auf CHF 66, im Winter von etwa CHF 102 auf CHF 51). Die Fahrt ist nicht gratis, weil die Bahn als Gipfelausflug gilt. Eine Sitzplatzreservierung ist nicht nötig.',
+          },
+          {
+            bold: 'Gornergrat mit Halbtax:',
+            text: 'Derselbe Rabatt von 50 % wie mit dem Swiss Travel Pass. Kinder von 6–15 Jahren mit Swiss Family Card fahren gratis, wenn ein zahlender Elternteil dabei ist.',
+          },
+          {
+            bold: 'Glacier Express mit Swiss Travel Pass:',
+            text: 'Das Billett ist zu 100 % gedeckt, auch mit Eurail / Interrail. Die Sitzplatzreservierung bleibt Pflicht: CHF 39 in der Nebensaison (Frühling/Herbst) oder CHF 49 im Hochsommer und im Winter. Ohne Reservierungsbeleg wird der Einstieg verweigert.',
+          },
+          {
+            bold: 'Zuschlag Excellence Class:',
+            text: 'Gültiges Billett 1. Klasse oder Swiss Travel Pass 1. Klasse plus nicht rabattierbarer Zuschlag von CHF 470 pro Person.',
+          },
+        ],
+        proTip: {
+          label: 'Live-Vergleich von Billett und Pass',
+          text: 'Tarife, Kinderregelung und Hunde nebeneinander auf unserer [Vergleichsseite der Schweizer Bergbahnen](/trains).',
+        },
+      },
+      {
+        id: 'which-train-to-choose',
+        heading: 'Welchen Zug nehmen, oder wie Sie beide kombinieren',
+        paragraphs: [
+          'Beide Züge starten am Bahnhofsplatz in Zermatt, direkt gegenüber. Sie ergänzen sich. Was zuerst kommt, hängt von der Reisedauer und davon ab, was Sie sehen wollen:',
+          '1. Nur ein oder zwei Tage in Zermatt: Nehmen Sie die Gornergratbahn. Ziel ist das Matterhorn, der Spiegelweg am Riffelsee und die Höhe von 3.089 Metern. In etwas mehr als einer halben Stunde stehen Sie direkt vor dem Berg.',
+          '2. Unterwegs zwischen der Ostschweiz und Zermatt: Nehmen Sie den Glacier Express als landschaftliche Fernverbindung. Statt der Regionalzüge durch den langen Lötschberg-Basistunnel wird der Reisetag selbst zum Ausflug.',
+          '3. Das alpine Programm für 48 Stunden: Kommen Sie am späten Nachmittag mit dem Glacier Express an und schauen Sie auf die Felswände des Mattertals. Nach dem Fondue im Dorf nehmen Sie um 08:00 Uhr die erste Gornergratbahn und erwischen das goldene Morgenlicht auf Gornergletscher und Matterhorn.',
+          'Live-Sichtwerte und Ausweichrouten vor der Buchung stehen auf dem [Matterhorn-Sicht-Dashboard](/).',
+        ],
+      },
+      {
+        id: 'live-tracking-and-weather',
+        heading: 'Live-Wetter am Gipfel und warum der Zeitpunkt zählt',
+        paragraphs: [
+          'Ein grundlegender Unterschied ist die Wetterabhängigkeit. Der Glacier Express fährt vor allem durch tiefe Täler und über Pässe. Auch bei Wolken oder leichtem Regen bleiben Schluchten, Wasserfälle und Kalkwände eindrucksvoll.',
+          'Die Gornergratbahn ist eine offene Gipfelfahrt. Liegt eine tiefe Stratusdecke oder eine Föhn-Fahnenwolke auf dem Grat bei 3.089 m, kann die Sicht auf der Terrasse auf null fallen. Matterhorn und Gornergletscher verschwinden.',
+          'Gornergrat-Billetts gelten flexibel für den gewählten Kalendertag. Kaufen Sie sie nicht Tage im Voraus, ohne die Gipfellage zu prüfen. Vor dem Einstieg den Echtzeit-[Gornergrat-Sichtwert im Live-Zugtracker](/trains) ansehen: Er verbindet hohe Wolken, Gipfelwebcams und Windscherung zu einem klaren Wert von 1–10, Go oder No-Go.',
+        ],
+        proTip: {
+          label: 'Inversionswolken',
+          text: 'Im Spätherbst und Winter kann Zermatt unter dichtem Nebel (Nebeldecke) liegen, während der Gornergrat auf 3.089 m in klarem Blau über einem Wolkenmeer steht. Schauen Sie auf die Höhenwebcams, bevor Sie aus einem grauen Dorf auf schlechtes Gipfelwetter schließen.',
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: 'Fahren Gornergratbahn und Glacier Express vom selben Bahnhof in Zermatt ab?',
+        answer:
+          'Ja, die Abfahrten liegen etwa 50 Meter auseinander am Bahnhof Zermatt. Der Glacier Express hält an den Bahnsteigen der Matterhorn Gotthard Bahn (MGB) / SBB. Die Gornergratbahn hat ein eigenes historisches Empfangsgebäude direkt gegenüber auf dem Bahnhofsplatz.',
+      },
+      {
+        question: 'Ist die Gornergratbahn mit dem Swiss Travel Pass zu 100 % gratis?',
+        answer:
+          'Nein. Sie gilt als hochalpine Ausflugsbahn, der Pass gibt 50 % Rabatt statt Freifahrt. 2026 kostet ein Erwachsenen-Retourbillett mit Pass etwa CHF 66 im Sommer und CHF 51 im Winter.',
+      },
+      {
+        question: 'Kann ich nur einen Abschnitt des Glacier Express fahren statt der vollen 8 Stunden?',
+        answer:
+          'Ja. Beliebte kürzere Stücke sind Zermatt–Brig (1 Std. 20 Min.), Zermatt–Andermatt (3 Std. 15 Min.) und Chur–St. Moritz über das Landwasserviadukt (2 Std.). Für jeden Abschnitt ist die Sitzplatzreservierung Pflicht.',
+      },
+      {
+        question: 'Welche Seite hat auf der Gornergratbahn die bessere Sicht?',
+        answer:
+          'Bergwärts von Zermatt zum Gornergrat immer rechts sitzen, talwärts links. Die rechten Fenster zeigen fast die gesamten 33 Minuten direkt auf das Matterhorn.',
+      },
+      {
+        question: 'Was passiert, wenn ich ein Gornergrat-Billett habe und das Matterhorn in Wolken steckt?',
+        answer:
+          'Normale Gornergrat-Billetts gelten für jeden Zug am gewählten Kalendertag, sind nach der Aktivierung in der Regel nicht erstattbar. Prüfen Sie vor dem Kauf am Schalter den Live-Sichtwert von 1–10 (AM/PM) und die Gipfelwebcams auf dem [Zug-Dashboard](/trains).',
+      },
     ],
   },
   'what-is-the-matterhorn': {

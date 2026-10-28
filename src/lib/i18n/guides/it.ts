@@ -813,4 +813,400 @@ export const itGuides: Record<string, GuideTranslation> = {
       },
     ],
   },
+  'christmas-in-zermatt-matterhorn': {
+    title: 'Natale a Zermatt: magia invernale, chalet accoglienti e vista sul Cervino',
+    shortTitle: 'Guida al Natale a Zermatt',
+    description:
+      'Tutto sul Natale a Zermatt: chalet innevati da fiaba, 89% di cielo limpido a dicembre, fonduta al camino, slitte e impianti aperti.',
+    category: 'Inverno e stagioni',
+    heroStat: {
+      label: 'Cielo limpido a dicembre',
+      value: '89% di limpidezza',
+      detail: 'La più alta probabilità mensile di cima libera di tutto l’anno',
+    },
+    keyTakeaways: [
+      'Dicembre ha l’89% di probabilità statistica di cima libera, la più alta dell’anno a Zermatt, grazie all’aria fredda e secca di alta pressione e all’assenza delle termiche estive.',
+      'Zermatt è senza auto: a Natale i vicoli si percorrono in taxi elettrico, in slitta con campanelle d’ottone, o a piedi sotto le luminarie.',
+      'Le cene della vigilia e di Natale (fonduta svizzera, raclette vallesana e specialità al tartufo nero) si esauriscono mesi prima: prenotate il tavolo a ottobre o novembre.',
+      'Il treno a cremagliera del Gornergrat e le funivie del Piccolo Cervino funzionano 365 giorni l’anno: salire a 3.089 m la mattina di Natale è una tradizione alpina.',
+    ],
+    comparisonTable: {
+      caption: 'Escursioni di Natale e momenti dell’inverno a Zermatt',
+      headers: [
+        'Attività / tradizione',
+        'Luogo / percorso',
+        'Momento migliore',
+        'Perché è magico a Natale',
+      ],
+      rows: [
+        [
+          'Passeggiata della vigilia e vin brulé',
+          'Bahnhofstrasse e Kirchplatz',
+          '17:00–19:30 CET (crepuscolo)',
+          'Albero illuminato, cori presso la chiesa di San Maurizio, caldarroste.',
+        ],
+        [
+          'Panorama invernale del Gornergrat',
+          'Treno a cremagliera da Zermatt (33 min)',
+          '09:00–14:00 CET',
+          'Salita tra pini cembri innevati fino a 3.089 m, vista a 360° su 29 quattromila.',
+        ],
+        [
+          'Passeggiata tra i chalet dello Hinterdorf',
+          'Dietro l’hotel Monte Rosa',
+          'Ora blu (16:30–17:30 CET)',
+          'Fienili in larice di 500 anni (Gädi) sotto una coltre spessa di neve fresca.',
+        ],
+        [
+          'Fonduta al camino',
+          'Stübli e chalet tradizionali di Zermatt',
+          '19:00–22:00 CET',
+          'Formaggi AOP del Vallese fusi con aglio e Fendant, accanto al fuoco.',
+        ],
+        [
+          'Palazzo di ghiaccio e sci',
+          'Piccolo Cervino (3.883 m)',
+          '10:00–14:30 CET',
+          'Le piste più alte d’Europa e gallerie di sculture di ghiaccio a 15 m nel ghiacciaio.',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'why-zermatt-christmas-is-magical',
+        heading: '1. Perché Zermatt è la meta alpina del Natale per eccellenza',
+        image: {
+          src: '/guides/zermatt-winter-chalets.jpg',
+          alt: 'Chalet svizzeri in legno a Zermatt sotto una neve invernale spessa, con il Cervino sullo sfondo',
+          caption: 'Chalet storici in larice scurito dal sole, coperti di neve fresca di dicembre a Zermatt.',
+        },
+        paragraphs: [
+          'Pochi luoghi incarnano lo spirito fiabesco del Natale come Zermatt. In fondo alla valle, sotto la piramide ripida del Cervino (in tedesco Matterhorn, 4.478 m), questo paese senza auto diventa ogni dicembre una palla di neve viva.',
+          'I motori a combustione sono vietati dal 1966. Non c’è rombo di traffico né neve sporca di scarico: solo lo scricchiolio della neve fresca, il ronzio sommesso dei piccoli bus elettrici e il tintinnio delle campanelle d’ottone sulle slitte davanti a hotel storici come il Mont Cervin Palace e il Grand Hotel Zermatterhof.',
+          'Lungo la Bahnhofstrasse e sul Kirchplatz, luci dorate avvolgono gli abeti carichi di neve. Le vetrine espongono ornamenti in legno intagliati a mano, cioccolato artigianale e paioli di rame con vin brulé (Glühwein) e caldarroste (marroni).',
+        ],
+        proTip: {
+          label: 'Segreto locale',
+          text: 'Entrate nello Hinterdorf, subito dietro la Bahnhofstrasse, al crepuscolo (16:45 CET). I vicoli stretti tra i fienili in larice del XVI secolo, sotto la neve pesante, sembrano un dipinto invernale dell’Ottocento.',
+        },
+      },
+      {
+        id: 'december-weather-matterhorn-clarity',
+        heading: '2. Meteo di dicembre: perché Natale ha il cielo più limpido dell’anno',
+        paragraphs: [
+          'Si pensa spesso che l’estate offra il meteo migliore in montagna. Trent’anni di misure alpine svizzere dicono l’opposto. Dicembre è statisticamente il mese più limpido dell’anno a Zermatt, con l’89% di probabilità di cielo sereno sulla cima del Cervino.',
+          'In inverno l’atmosfera sopra le Alpi Pennine è dominata da anticicloni continentali freddi, stabili e secchi. A differenza di luglio e agosto, quando il sole di valle crea termiche (venti anabatici) e cumuli fitti entro le 13:00 CET, l’aria di dicembre resta cristallina tutto il giorno. Alle 10:00 CET come alle 15:00 CET il Cervino è inciso su un cielo indaco.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'L’aria sotto zero tiene la visibilità nitida:',
+            text: 'A dicembre il paese oscilla tra -6 °C e +1 °C, le terrazze di quota (3.089–3.883 m) tra -14 °C e -8 °C. L’aria fredda trattiene poca umidità e la nebbia di vetta sparisce.',
+          },
+          {
+            bold: 'Alpenglow presto (16:30–16:50 CET):',
+            text: 'Il sole tramonta presto a fine dicembre: non serve aspettare la sera tardi per fotografare il rosa e il viola sulla parete est del Cervino.',
+          },
+          {
+            bold: 'Controllate la telemetria con il Föhn:',
+            text: 'Anche in inverno un fronte di Föhn da sud può portare raffiche oltre 45 km/h sul Piccolo Cervino. Ogni mattina guardate il punteggio di visibilità live da 1 a 10 (AM/PM) prima di salire.',
+          },
+        ],
+      },
+      {
+        id: 'cozy-dining-fireside-fondue',
+        heading: '3. Tavola alpina: fonduta al fuoco, raclette e cene di Natale',
+        image: {
+          src: '/guides/zermatt-cozy-fondue-matterhorn-wide.jpg',
+          alt: 'Pentola di fonduta al formaggio svizzero con pane e vino, di fronte al Cervino innevato',
+          caption: 'Niente vale una fonduta vallesana e un bicchiere di Fendant fresco dopo una giornata nella neve.',
+        },
+        paragraphs: [
+          'Dopo una mattina limpida sul Gornergrat o sulle piste verso Cervinia, niente scalda come un caquelon di vera fonduta al formaggio svizzero.',
+          'Gli Stübli di Zermatt, tra cui Ferdinand by Cervo, Saycheese!, Chez Vrony e la Schäferstube, fondono formaggi AOP del Vallese con vino bianco secco, aglio e un goccio di Kirsch. Formaggio caldo sulla patata novella (raclette) accanto a un focolare di pietra, mentre fuori nevica in silenzio: è il comfort del Natale.',
+        ],
+        proTip: {
+          label: 'Strategia per la cena di Natale',
+          text: 'I tavoli della vigilia (24 dicembre) e di Natale (25 dicembre) si esauriscono settimane o mesi prima. Molti ristoranti propongono un menu festivo. Prenotate già a ottobre o novembre.',
+        },
+      },
+      {
+        id: 'christmas-day-mountain-excursions',
+        heading: '4. Escursioni del giorno di Natale: Gornergrat e Glacier Paradise',
+        image: {
+          src: '/guides/zermatt-winter-snow-village.jpg',
+          alt: 'Pendii alpini innevati sopra il paese di Zermatt sotto neve fresca intatta',
+          caption: 'Paesaggio invernale: i pendii sopra Zermatt restano aperti il giorno di Natale per la cremagliera e le camminate.',
+        },
+        paragraphs: [
+          'Chi arriva la prima volta si chiede se le ferrovie di montagna circolino il giorno di Natale. La risposta è sì, senza dubbi: il treno a cremagliera del Gornergrat e le funivie del Matterhorn Glacier Paradise funzionano 365 giorni l’anno, se il tempo lo consente.',
+          'Salire sul treno riscaldato dalla stazione di Zermatt la mattina di Natale è un viaggio che resta. Il convoglio rosso sale tra larici e pini cembri carichi di neve, sbuca sui campi aperti del Riffelberg (2.582 m) e di Rotenboden (2.815 m) e termina sulla terrazza del Gornergrat (3.089 m). Da lì lo sguardo attraversa le lingue gelate dei ghiacciai del Gorner e del Findel verso le pareti nord ed est del Cervino, ricoperte di neve.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Nevica sempre a Zermatt a Natale?',
+        answer:
+          'Zermatt è a 1.608 metri e il comprensorio sale fino a 3.883 metri: uno degli innevamenti naturali più affidabili delle Alpi. Un Natale bianco in paese è praticamente sicuro, e le piste d’alta quota restano interamente innevate per tutto dicembre.',
+      },
+      {
+        question: 'Treni di montagna e impianti sono aperti il giorno di Natale a Zermatt?',
+        answer:
+          'Sì. Gornergrat Bahn, funicolare di Sunnegga e funivie del Matterhorn Glacier Paradise seguono l’orario invernale il 24, 25 e 26 dicembre. La mattina del viaggio controllate il punteggio di visibilità live da 1 a 10 (AM/PM) per essere sicuri che la cima sia libera.',
+      },
+      {
+        question: 'Ristoranti e negozi sono aperti nella settimana di Natale a Zermatt?',
+        answer:
+          'Sì. Dalla settimana di Natale a Capodanno è l’alta stagione festiva. Alimentari e noleggi sci restano aperti, con orari un po’ ridotti la sera del 24 dicembre e il 25 dicembre. Ristoranti e bar lavorano a pieno regime. La prenotazione è indispensabile per la vigilia e per Natale.',
+      },
+      {
+        question: 'Qual è il modo migliore per vedere il Cervino il giorno di Natale?',
+        answer:
+          'Prendete il treno a cremagliera del Gornergrat alle 08:24 o alle 09:00 CET dalla stazione di Zermatt. Sedetevi a destra in salita: la parete est innevata resta nel finestrino, nella luce dorata del mattino, per quasi tutta la corsa.',
+      },
+    ],
+  },
+  'gornergrat-railway-vs-glacier-express': {
+    title:
+      'Ferrovia del Gornergrat contro Glacier Express: i due treni di montagna più iconici della Svizzera',
+    shortTitle: 'Gornergrat contro Glacier Express',
+    description:
+      'Confrontate le due ferrovie leggendarie di Zermatt: la cremagliera fino a 3.089 m e il viaggio panoramico di 8 ore del Glacier Express. Swiss Travel Pass, prenotazione del posto, lato migliore e stato live.',
+    category: 'Gite di un giorno',
+    heroStat: {
+      label: 'Tipo di viaggio',
+      value: '33 min vs 7h 45m',
+      detail: 'Salita verticale in cremagliera (3.089 m) contro 291 km di ferrovia panoramica transalpina',
+    },
+    keyTakeaways: [
+      'La ferrovia del Gornergrat (GGB) è una salita verticale a cremagliera: 33 minuti da Zermatt (1.604 m) fino al crinale a 3.089 m, con la parete est del Cervino in primo piano.',
+      'Il Glacier Express (GEX) è un viaggio panoramico transalpino di 8 ore e 291 chilometri, con 291 ponti e 91 gallerie tra Zermatt e St. Moritz.',
+      'Le regole del Swiss Travel Pass divergono: sul Gornergrat c’è il 50% di sconto e nessuna prenotazione; il Glacier Express è coperto al 100% ma la prenotazione del posto è OBBLIGATORIA (CHF 39–49).',
+      'Non dovete scegliere: i due treni si incontrano uno di fronte all’altro sulla piazza della stazione di Zermatt. Si arriva in Glacier Express e si sale al Gornergrat.',
+      'Prima di prenotare, controllate lo [hub live dei treni panoramici e il confronto biglietti](/trains) per i punteggi meteo in vetta, la disposizione delle carrozze e gli orari.',
+    ],
+    comparisonTable: {
+      caption: 'Gornergrat Bahn vs Glacier Express: caratteristiche e biglietti (2026)',
+      headers: ['Caratteristica', 'Ferrovia del Gornergrat (GGB)', 'Glacier Express (GEX)'],
+      rows: [
+        [
+          'Scopo principale',
+          'Escursione verticale in vetta e punto di vista sul Cervino',
+          'Grande viaggio panoramico transalpino',
+        ],
+        [
+          'Percorso e capolinea',
+          'Zermatt (1.604 m) ↔ vetta del Gornergrat (3.089 m)',
+          'Zermatt (Vallese) ↔ St. Moritz / Davos (Grigioni)',
+        ],
+        [
+          'Durata',
+          '33 minuti per tratta',
+          '7 ore e 45 minuti (intero percorso di 291 km)',
+        ],
+        [
+          'Binario e trazione',
+          'Cremagliera doppia sistema Abt (scartamento metrico, 1.000 mm)',
+          'Aderenza e tratti a cremagliera (Matterhorn Gotthard Bahn / RhB)',
+        ],
+        [
+          'Dislivello / punto più alto',
+          '+1.485 m (punto più alto: vetta a 3.089 m)',
+          'Punto più alto: Passo dell’Oberalp (2.033 m) / punto più basso: Coira (585 m)',
+        ],
+        [
+          'Stagione',
+          '365 giorni l’anno (nessuna chiusura stagionale)',
+          'Inizio dicembre a fine ottobre (manutenzione da novembre a inizio dicembre)',
+        ],
+        [
+          'Swiss Travel Pass',
+          'Sconto del 50% (andata e ritorno CHF 51–66)',
+          'Biglietto gratuito al 100% (prenotazione del posto obbligatoria a parte)',
+        ],
+        [
+          'Prenotazione del posto',
+          'Non serve (salita libera, pass prioritario facoltativo CHF 7)',
+          'OBBLIGATORIA (CHF 39 bassa stagione / CHF 49 piena estate)',
+        ],
+        [
+          'Eurail / Interrail',
+          'Nessuno sconto (biglietto intero)',
+          'Biglietto gratuito al 100% (prenotazione del posto obbligatoria a parte)',
+        ],
+        [
+          'Lato migliore',
+          'Lato destro in salita da Zermatt (vista sul Cervino)',
+          'Lato sinistro in partenza da Zermatt verso Disentis / entrambi i lati nella gola del Reno',
+        ],
+        [
+          'Visibilità del Cervino',
+          'Vista diretta continua per tutta la corsa e in vetta',
+          'Visibile solo in partenza o in arrivo nella valle di Zermatt',
+        ],
+        [
+          'Punti forti',
+          'Riflesso del Riffelsee, ghiacciaio del Gorner, 29 quattromila',
+          'Viadotto della Landwasser, gola del Reno, lago del Passo dell’Oberalp',
+        ],
+      ],
+    },
+    sections: [
+      {
+        id: 'gornergrat-overview',
+        heading: 'Gornergrat Bahn (GGB): la cremagliera a cielo aperto più alta d’Europa',
+        image: {
+          src: '/guides/gornergrat-bahn-cogwheel-train.jpg',
+          alt: 'Treno a cremagliera del Gornergrat in salita sulla rampa alpina verso la vetta, con il Cervino sullo sfondo',
+          caption: 'Il treno del Gornergrat sale tra alpeggi e boschi di larice verso la terrazza panoramica a 3.089 metri.',
+        },
+        paragraphs: [
+          'Aperto nel 1898 come prima ferrovia a cremagliera interamente elettrica della Svizzera, il Gornergrat Bahn (GGB) è un capolavoro di ingegneria. In 33 minuti i convogli cremisi e oro superano 1.485 metri di dislivello, da Zermatt (1.604 m) fino al crinale roccioso del Gornergrat (3.089 m).',
+          'A differenza dei treni panoramici che scivolano nelle valli, il Gornergrat Bahn è una salita verticale pura. Mentre la cremagliera affronta pendenze del 20%, la parete est del Cervino si apre sempre di più. Le fermate intermedie sono Findelbach (su un viadotto di pietra), Riffelalp (2.211 m), Riffelberg (2.582 m) e Rotenboden (2.815 m), inizio della celebre camminata di 10 minuti fino al Riffelsee, dove il Cervino si specchia nell’acqua alpina.',
+          'Al capolinea (3.089 m) si esce direttamente sulla terrazza dello storico 3100 Kulmhotel Gornergrat. Da lì un panorama a 360 gradi comprende il Monte Rosa (4.634 m, la cima più alta della Svizzera), la lingua del ghiacciaio del Gorner e 29 vette sopra i 4.000 metri.',
+          'Per pianificare la salita e la nuvolosità in vetta in tempo reale, aprite la [guida del Gornergrat nell’hub dei treni](/trains#gornergrat).',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Velocità e durata:',
+            text: '33 minuti per tratta su 9,3 km di binario, tutto l’anno, con partenze ogni 24–48 minuti.',
+          },
+          {
+            bold: 'Profilo altimetrico:',
+            text: 'Da 1.604 m a Zermatt a 3.089 m sulla vetta del Gornergrat (+1.485 m di dislivello).',
+          },
+          {
+            bold: 'Salita senza prenotazione:',
+            text: 'Nessuna prenotazione del posto. Passate il codice QR o lo Swiss Pass ai tornelli e salite.',
+          },
+          {
+            bold: 'Fermate per camminare:',
+            text: 'Scendete a Rotenboden per il sentiero del riflesso al Riffelsee, o a Riffelberg per un pranzo alpino di fronte al Cervino.',
+          },
+        ],
+        proTip: {
+          label: 'Lato migliore',
+          text: 'Sedetevi sempre a DESTRA nel senso di salita partendo da Zermatt. I finestrini di destra mostrano la piramide del Cervino in modo continuo, appena il treno supera il limite del bosco.',
+        },
+      },
+      {
+        id: 'glacier-express-overview',
+        heading: 'Glacier Express (GEX): "il treno espresso più lento del mondo"',
+        image: {
+          src: '/guides/glacier-express-panoramic-train.jpg',
+          alt: 'Treno panoramico Glacier Express attraverso le Alpi svizzere, con vetrate a cupola sotto un cielo blu',
+          caption: 'Il Glacier Express scorre tra le Alpi svizzere, con vetrate panoramiche che salgono fino al soffitto.',
+        },
+        paragraphs: [
+          'Se il Gornergrat Bahn è un ascensore verticale verso il cielo alpino, il Glacier Express è l’odissea lenta e orizzontale lungo la dorsale delle Alpi svizzere. Collega Zermatt, nel Vallese, a St. Moritz, in Engadina, e copre 291 chilometri (181 miglia) in circa 7 ore e 45 minuti.',
+          'Lungo il percorso il treno attraversa 291 viadotti, entra in 91 gallerie alpine e sale al Passo dell’Oberalp a 2.033 metri (6.670 piedi), il punto più alto della linea e la sorgente del Reno. Tra i passaggi noti: il viadotto della Landwasser, un ponte di calcare curvo alto 65 metri che si infila dritto in una galleria nella parete, e la gola del Reno (Ruinaulta), spesso chiamata il Grand Canyon svizzero.',
+          'Le carrozze sono panoramiche, con grandi vetri curvi che arrivano al soffitto. Un pranzo di tre portate viene cucinato a bordo e servito al posto, mentre il paesaggio scorre.',
+          'Disposizione dei posti, menu e come prenotare sono nella [guida al percorso e ai posti del Glacier Express](/trains#glacier-express).',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Percorso e durata:',
+            text: '291 km tra Zermatt e St. Moritz, circa 7 ore e 45 minuti.',
+          },
+          {
+            bold: 'Opere di ingegneria:',
+            text: '291 viadotti in pietra e 91 gallerie, comprese le gallerie elicoidali della linea dell’Albula, patrimonio UNESCO.',
+          },
+          {
+            bold: 'Excellence Class:',
+            text: 'Classe di lusso con posto finestrino singolo garantito, concierge dedicato, Glacier Bar privata e menu regionale di cinque portate con abbinamento di vini.',
+          },
+          {
+            bold: 'Chiusura stagionale:',
+            text: 'A differenza del Gornergrat, che circola 365 giorni, il Glacier Express si ferma per manutenzione da fine ottobre a metà dicembre.',
+          },
+        ],
+        proTip: {
+          label: 'Prenotazione del posto obbligatoria',
+          text: 'A differenza dei treni svizzeri ordinari, NON si sale sul Glacier Express senza un posto riservato, nemmeno con uno Swiss Travel Pass di 1ª classe illimitato. La prenotazione apre esattamente 93 giorni prima sul portale ufficiale. Mettete un promemoria: i posti panoramici dei picchi estivi e delle date di sci si esauriscono in poche ore.',
+        },
+      },
+      {
+        id: 'pass-rules-pricing',
+        heading: 'Prezzo del Glacier Express, prenotazione del posto e Swiss Travel Pass',
+        paragraphs: [
+          'Molti pensano che uno Swiss Travel Pass permetta di salire gratis su qualsiasi treno in Svizzera. La rete è integrata, ma il Gornergrat Bahn e il Glacier Express rientrano in tariffe del tutto diverse.',
+          'Conoscere queste regole prima evita supplementi allo sportello e rifiuti all’imbarco.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Gornergrat Bahn con lo Swiss Travel Pass:',
+            text: 'Avete il 50% di sconto sul biglietto adulto standard (il biglietto estivo di andata e ritorno scende da circa CHF 132 a CHF 66; quello invernale da circa CHF 102 a CHF 51). Non è gratis al 100%, perché la linea è classificata come escursione di vetta. Non serve prenotare il posto.',
+          },
+          {
+            bold: 'Gornergrat con la Swiss Half Fare Card:',
+            text: 'Lo stesso sconto del 50% dello Swiss Travel Pass. I bambini dai 6 ai 15 anni con Swiss Family Card viaggiano gratis se accompagnati da un genitore pagante.',
+          },
+          {
+            bold: 'Glacier Express con lo Swiss Travel Pass:',
+            text: 'Il viaggio è COPERTO al 100% dallo Swiss Travel Pass (e da Eurail / Interrail). Dovete però pagare la prenotazione obbligatoria del posto: CHF 39 in bassa stagione (primavera/autunno) o CHF 49 in piena estate e in inverno. Senza la ricevuta della prenotazione l’accesso è rifiutato.',
+          },
+          {
+            bold: 'Supplemento Excellence Class del Glacier Express:',
+            text: 'Serve un biglietto di 1ª classe valido (o uno Swiss Travel Pass di 1ª classe) più un supplemento Excellence Class non scontabile di CHF 470 a persona.',
+          },
+        ],
+        proTip: {
+          label: 'Confronto live di biglietti e pass',
+          text: 'Confrontate tariffe, regole per i bambini e per i cani sulla [pagina di confronto dei treni di montagna svizzeri](/trains).',
+        },
+      },
+      {
+        id: 'which-train-to-choose',
+        heading: 'Quale treno prendere, o come combinare i due',
+        paragraphs: [
+          'Entrambi i treni partono dalla stessa piazza della stazione di Zermatt, uno di fronte all’altro. Si completano. Quale privilegiare dipende dalla durata del soggiorno e da ciò che volete vedere:',
+          '1. Se avete solo uno o due giorni a Zermatt: prendete il Gornergrat Bahn. L’obiettivo è vedere e fotografare il Cervino, camminare fino al riflesso del Riffelsee e arrivare a 3.089 metri. In poco più di mezz’ora il Gornergrat vi mette davanti alla montagna.',
+          '2. Se viaggiate tra la Svizzera orientale e Zermatt: prendete il Glacier Express come trasferimento panoramico. Invece dei regionali attraverso la lunga galleria di base del Lötschberg, la giornata di viaggio diventa l’escursione.',
+          '3. L’itinerario alpino di 48 ore: arrivate a Zermatt con il Glacier Express nel tardo pomeriggio, di fronte alle pareti del Mattertal. Dopo la fonduta in paese, prendete il primo Gornergrat alle 08:00 per la luce dorata sul ghiacciaio del Gorner e sul Cervino.',
+          'Prima di prenotare, guardate i punteggi meteo live e le alternative sul [cruscotto di visibilità del Cervino](/).',
+        ],
+      },
+      {
+        id: 'live-tracking-and-weather',
+        heading: 'Meteo di vetta in diretta, e perché l’orario della corsa conta',
+        paragraphs: [
+          'Una differenza di fondo tra i due viaggi è la dipendenza dal meteo. Il Glacier Express corre soprattutto in valli profonde e su passi. Anche con cielo coperto o pioggia leggera, gole, cascate e pareti di calcare restano spettacolari.',
+          'Il Gornergrat Bahn è invece una salita a cielo aperto fino alla vetta. Se uno strato basso o una nube a bandiera di Föhn da sud avvolge il crinale a 3.089 m, la visibilità dalla terrazza può cadere a zero e nascondere sia il Cervino sia il ghiacciaio del Gorner.',
+          'I biglietti del Gornergrat valgono per qualsiasi treno del giorno scelto. Non comprateli giorni prima senza verificare la vetta. Prima di salire, controllate il [punteggio di visibilità del Gornergrat sul monitoraggio dei treni](/trains): nubi d’alta quota, webcam di vetta e il taglio del vento danno un punteggio da 1 a 10, Go o No-Go.',
+        ],
+        proTip: {
+          label: 'Inversione e mare di nubi',
+          text: 'In tardo autunno e in inverno Zermatt può restare sotto una nebbia fitta (Nebeldecke) mentre il Gornergrat, a 3.089 m, è in cielo blu sopra un mare di nubi. Guardate le webcam d’alta quota prima di concludere che un paese grigio significhi brutto tempo in vetta.',
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: 'Gornergrat Bahn e Glacier Express partono dalla stessa stazione a Zermatt?',
+        answer:
+          'Sì, a circa 50 metri l’uno dall’altro, alla stazione di Zermatt. Il Glacier Express arriva e parte sui binari principali della Matterhorn Gotthard Bahn (MGB) / FFS. Il Gornergrat Bahn ha un proprio edificio storico, subito di fronte, dall’altra parte della piazza.',
+      },
+      {
+        question: 'Il Gornergrat Bahn è gratuito al 100% con lo Swiss Travel Pass?',
+        answer:
+          'No. È classificato come ferrovia di escursione in alta quota: lo Swiss Travel Pass dà il 50% di sconto, non la gratuità. Nel 2026 un biglietto di andata e ritorno per un adulto costa circa CHF 66 in estate e CHF 51 in inverno con il pass.',
+      },
+      {
+        question: 'Posso fare solo un tratto del Glacier Express invece delle 8 ore intere?',
+        answer:
+          'Sì. I tratti brevi più scelti sono Zermatt–Briga (1 h 20), Zermatt–Andermatt (3 h 15) e Coira–St. Moritz sul viadotto della Landwasser (2 h). La prenotazione del posto è obbligatoria su tutti i segmenti.',
+      },
+      {
+        question: 'Quale lato del treno ha la vista migliore sul Gornergrat Bahn?',
+        answer:
+          'Sedetevi sempre a destra salendo da Zermatt al Gornergrat, e a sinistra scendendo. I finestrini di destra guardano il Cervino per quasi tutta la salita di 33 minuti.',
+      },
+      {
+        question: 'Cosa succede se ho un biglietto del Gornergrat e il Cervino è nelle nubi?',
+        answer:
+          'I biglietti standard del Gornergrat Bahn valgono per qualsiasi treno del giorno di calendario scelto, ma di regola non sono rimborsabili una volta attivati. Per evitare la delusione, controllate il punteggio di visibilità live da 1 a 10 (AM/PM) e le webcam di vetta sul [cruscotto dei treni](/trains) prima di comprare allo sportello.',
+      },
+    ],
+  },
 };

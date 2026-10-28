@@ -1,8 +1,10 @@
 import { GuideArticle, GuideFaq, GUIDES } from './guides';
 import { VisibilityApiResponse } from './types';
-import { Locale, LOCALE_METAS } from './i18n/config';
-import { TRAINS_FAQS } from './trains';
-import { SKI_FAQS } from './ski';
+import { getLocalizedHref, isValidLocale, Locale, LOCALE_METAS } from './i18n/config';
+import { getGuidesIndexFaqs, getHomeFaqs, liveVisibilityPrefix } from './i18n/faqs';
+import { getLocalizedGuideArticle } from './i18n/guides';
+import { getSkiFaqs } from './i18n/ski-copy';
+import { getTrainsFaqs } from './i18n/trains-copy';
 import {
   evaluateLakeReflectionConditions,
   getLiveForecastForViewpointPage,
@@ -30,92 +32,22 @@ export function serializeJsonLd(schema: unknown): string {
  * Build Homepage / Dashboard FAQs, enriched with live Gornergrat & Glacier Paradise telemetry
  * when `data` is available so both the visible FAQ accordion and the `FAQPage` JSON-LD stay in sync.
  */
-export function getDashboardFaqs(data?: VisibilityApiResponse): RichFaqItem[] {
-  const gornergrat = data?.viewpoints.gornergrat;
-  const glacier = data?.viewpoints['glacier-paradise'];
-
-  const liveAnswerPrefix =
-    gornergrat && glacier
-      ? `Right now (${data.swissTimeFormatted}), Gornergrat (3,089m East Face) scores ${gornergrat.currentScore}/10 (${gornergrat.currentStatus} — Morning AM: ${gornergrat.today.morning.score}/10, Afternoon PM: ${gornergrat.today.afternoon.score}/10) and Matterhorn Glacier Paradise (3,883m South Face) scores ${glacier.currentScore}/10 (${glacier.currentStatus} — Morning AM: ${glacier.today.morning.score}/10, Afternoon PM: ${glacier.today.afternoon.score}/10). `
-      : '';
-
-  return [
-    {
-      question: 'Is the Matterhorn visible today in Zermatt?',
-      answer: `${liveAnswerPrefix}Our high-altitude telemetry engine updates every 15 minutes across both Gornergrat (3,089m) and Matterhorn Glacier Paradise (3,883m). A visibility index of 8–10/10 indicates crystal-clear, unobstructed views of the 4,478m pyramid; 6–7/10 means partially visible with light ridge or banner clouds; 3–5/10 indicates barely visible conditions; and 1–2/10 means the summit is completely socked in.`,
-      guideHref: '/guides/gornergrat-vs-glacier-paradise',
-      guideLabel: 'Compare Gornergrat vs. Glacier Paradise viewpoints',
-    },
-    {
-      question: 'What is the best time of day to see the Matterhorn clearly?',
-      answer:
-        'The Morning (AM) window between 06:00 and 11:00 CET is statistically clearer than the Afternoon (PM) window (12:00–18:00 CET) 78% of the year. Solar heating of the dark Mattertal valley walls triggers rising thermal updrafts (anabatic winds) by late morning, which condense into cumulus cloud bands around 3,000–4,000 meters after noon. Always target the first cogwheel train or gondola departure.',
-      guideHref: '/guides/best-time-to-see-matterhorn',
-      guideLabel: 'Read the 30-Year Morning vs. Afternoon Climatology Guide',
-    },
-    {
-      question:
-        'Which viewpoint has better Matterhorn visibility: Gornergrat (3,089m) or Matterhorn Glacier Paradise (3,883m)?',
-      answer:
-        'Gornergrat (3,089m) offers the iconic East/Northeast "Toblerone" pyramid silhouette, Riffelsee lake reflections, and a wind-resilient cogwheel train. Matterhorn Glacier Paradise (3,883m) views the broader Southern/Italian face and sits nearly 800 meters higher—making it superior during winter low-cloud valley inversions (<3,200m), though its aerial cableways close earlier during southerly Föhn gales (>50 km/h).',
-      guideHref: '/guides/gornergrat-vs-glacier-paradise',
-      guideLabel: 'Full Gornergrat vs. Glacier Paradise comparison',
-    },
-    {
-      question: 'What are the best months of the year to see the Matterhorn without clouds?',
-      answer:
-        'Based on 30-year Zermatt climatology, December (89%) and January (88%) deliver the highest daily clear-sky probability thanks to cold, stable winter air with minimal thermal convection. For snow-free hiking and alpine lake reflections, September (72%) and October (79%) offer the best balance. June (48%) and July (52%) record the lowest full-day visibility due to afternoon convective cloud buildup.',
-      guideHref: '/guides/best-time-to-see-matterhorn',
-      guideLabel: 'Explore month-by-month visibility probabilities',
-    },
-    {
-      question:
-        'Why does the Matterhorn have a cloud on top even when Zermatt village is sunny?',
-      answer:
-        'The Matterhorn’s isolated 4-sided pyramid (4,478m) acts like an aerodynamic barrier in high-altitude airflow, creating a low-pressure vortex on its downwind (leeward) face. Moist air drawn upward into this vortex cools adiabatically and condenses into a stationary lee-wave "banner cloud" attached to the peak—especially when southerly Föhn winds (150°–210° above 30 km/h) push moisture across the Italian ridge.',
-      guideHref: '/guides/matterhorn-banner-cloud-fohn-wind',
-      guideLabel: 'How banner clouds & Föhn wind scoring work',
-    },
-    {
-      question: 'Where is the live Zermatt webcam of the Matterhorn?',
-      answer:
-        'The homepage plays four Roundshot feeds: Gornergrat (3,089m), Rothorn, Trockener Steg toward Klein Matterhorn, and Zermatt village at Kirchbrücke. Each frame refreshes every 10–15 minutes beside the live visibility score.',
-      guideHref: '/viewpoints/gornergrat',
-      guideLabel: 'Gornergrat webcam and weather',
-    },
-    {
-      question:
-        'Are Gornergrat or Glacier Paradise tickets refundable if the Matterhorn is hidden in clouds?',
-      answer:
-        'No. Zermatt Bergbahnen and the Gornergrat Bahn do not issue refunds for cloud cover or zero summit visibility once a ticket is purchased, and standard daily passes never sell out in advance. Always check our live 1–10 AM/PM Visibility Index and 4 Roundshot webcams on the morning of your excursion before spending CHF 100+ per person.',
-      guideHref: '/guides/zermatt-cloudy-rainy-day-guide',
-      guideLabel: 'What to do in Zermatt on a cloudy or rainy day',
-    },
-  ];
+export function getDashboardFaqs(
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
+): RichFaqItem[] {
+  const prefix = liveVisibilityPrefix(locale, data);
+  return getHomeFaqs(locale).map((faq, index) => ({
+    question: faq.question,
+    answer: index === 0 ? `${prefix}${faq.answer}` : faq.answer,
+    guideHref: faq.guideHref,
+    guideLabel: faq.guideLabel,
+  }));
 }
 
-export const GUIDES_INDEX_FAQS: RichFaqItem[] = [
-  {
-    question: 'Why do standard phone weather apps get Matterhorn visibility wrong?',
-    answer:
-      'Consumer weather apps report conditions for Zermatt village on the valley floor at 1,608 meters. The Matterhorn summit stands at 4,478 meters—nearly 2,900 vertical meters higher—where mid-level cloud decks (3,000m–4,000m) and upper-tropospheric Föhn winds dictate whether the peak is visible.',
-  },
-  {
-    question: 'What visibility score should I wait for before buying a mountain lift pass?',
-    answer:
-      'Wait for a live Morning (AM) or Afternoon (PM) score of 7/10 or higher ("Partially Visible" to "Visible"). When scores sit at 1/10 to 4/10, mid-level clouds block the summit sightline and you should pivot to valley attractions like Zermatlantis or Gorner Gorge.',
-  },
-  {
-    question: 'Can you see the Matterhorn from Zermatt village without buying a lift ticket?',
-    answer:
-      'Yes! Kirchbrücke (the bridge next to the church over the Mattervispa river, a 5-minute walk from Zermatt Bahnhof) and the Mürini/Riedweg overlook (12-minute uphill walk) offer unobstructed, ticket-free views of the classic East and North faces—especially at sunrise.',
-  },
-  {
-    question: 'How many mornings in Zermatt do I need to guarantee seeing the Matterhorn?',
-    answer:
-      'Staying 3 full mornings in Zermatt raises your cumulative probability of catching at least one crystal-clear (≥8/10) viewing window to over 88% in summer (June–August) and 98% in autumn and winter.',
-  },
-];
+export function getGuidesIndexFaqItems(locale: Locale = 'en'): RichFaqItem[] {
+  return getGuidesIndexFaqs(locale);
+}
 
 /**
  * Shared Organization node for publisher / provider references.
@@ -401,7 +333,7 @@ export function buildRootLayoutJsonLd() {
  * `FAQPage`, and `BreadcrumbList` schemas.
  */
 export function buildHomePageJsonLd(data?: VisibilityApiResponse, locale?: Locale) {
-  const faqs = getDashboardFaqs(data);
+  const faqs = getDashboardFaqs(data, locale);
 
   return {
     '@context': 'https://schema.org',
@@ -428,8 +360,13 @@ export function buildHomePageJsonLd(data?: VisibilityApiResponse, locale?: Local
  * Complete Guides Index (`/guides`) JSON-LD `@graph` combining `CollectionPage`,
  * `WeatherForecast`, `FAQPage`, and `BreadcrumbList`.
  */
-export function buildGuidesIndexJsonLd(data?: VisibilityApiResponse) {
-  const pageUrl = `${SITE_URL}/guides`;
+export function buildGuidesIndexJsonLd(
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
+) {
+  const pageUrl =
+    locale === 'en' ? `${SITE_URL}/guides` : `${SITE_URL}/${locale}/guides`;
+  const guidesIndexFaqs = getGuidesIndexFaqItems(locale);
 
   return {
     '@context': 'https://schema.org',
@@ -441,7 +378,7 @@ export function buildGuidesIndexJsonLd(data?: VisibilityApiResponse) {
         description:
           'Data-backed field guides for Zermatt travelers: viewpoint comparisons, 30-year monthly visibility statistics, sunrise photography spots, and banner cloud physics.',
         url: pageUrl,
-        inLanguage: 'en-CH',
+        inLanguage: LOCALE_METAS[locale]?.htmlLang || 'en-CH',
         isPartOf: {
           '@id': `${SITE_URL}/#website`,
         },
@@ -450,13 +387,13 @@ export function buildGuidesIndexJsonLd(data?: VisibilityApiResponse) {
           itemListElement: GUIDES.map((guide, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            url: `${SITE_URL}/guides/${guide.slug}`,
-            name: guide.title,
+            url: `${SITE_URL}${getLocalizedHref(`/guides/${guide.slug}`, locale)}`,
+            name: getLocalizedGuideArticle(guide.slug, locale).title,
           })),
         },
       },
       buildWeatherForecastNode(data),
-      buildFaqPageNode(GUIDES_INDEX_FAQS, pageUrl),
+      buildFaqPageNode(guidesIndexFaqs, pageUrl),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -791,7 +728,7 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
  */
 export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: string = 'en') {
   const pageUrl = locale === 'en' ? `${SITE_URL}/trains` : `${SITE_URL}/${locale}/trains`;
-  const faqs = TRAINS_FAQS.map((f) => ({
+  const faqs = getTrainsFaqs(isValidLocale(locale) ? locale : 'en').map((f) => ({
     question: f.question,
     answer: f.answer,
   }));
@@ -887,7 +824,7 @@ export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: stri
  */
 export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string = 'en') {
   const pageUrl = locale === 'en' ? `${SITE_URL}/ski` : `${SITE_URL}/${locale}/ski`;
-  const faqs = SKI_FAQS.map((f) => ({
+  const faqs = getSkiFaqs(isValidLocale(locale) ? locale : 'en').map((f) => ({
     question: f.question,
     answer: f.answer,
   }));
