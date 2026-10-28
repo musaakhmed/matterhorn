@@ -16,7 +16,7 @@ import {
   Camera,
   TrainFront,
 } from 'lucide-react';
-import { GUIDES } from '@/lib/guides';
+import { getRelatedGuides } from '@/lib/guides';
 import { fetchMatterhornVisibility } from '@/lib/weather';
 import { buildGuideArticleJsonLd, serializeJsonLd } from '@/lib/schema';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
@@ -90,9 +90,9 @@ export default async function GuideArticleView({
     notFound();
   }
 
-  const relatedGuides = GUIDES.filter((g) => g.slug !== guide.slug)
-    .slice(0, 3)
-    .map((g) => getLocalizedGuideArticle(g.slug, locale));
+  const relatedGuides = getRelatedGuides(guide.slug).map((g) =>
+    getLocalizedGuideArticle(g.slug, locale)
+  );
 
   const telemetry = await fetchMatterhornVisibility();
   const jsonLd = buildGuideArticleJsonLd(guide, telemetry, locale);

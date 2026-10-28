@@ -1537,3 +1537,19 @@ export const GUIDES: GuideArticle[] = [
 export function getGuideBySlug(slug: string): GuideArticle | undefined {
   return GUIDES.find((guide) => guide.slug === slug);
 }
+
+/** Same-topic guides first, then the guides that follow this one in the index. */
+export function getRelatedGuides(slug: string, limit = 3): GuideArticle[] {
+  const index = GUIDES.findIndex((guide) => guide.slug === slug);
+  if (index === -1) return [];
+
+  const current = GUIDES[index];
+  const sameCategory = GUIDES.filter(
+    (guide) => guide.slug !== slug && guide.category === current.category
+  );
+  const otherCategories = [...GUIDES.slice(index + 1), ...GUIDES.slice(0, index)].filter(
+    (guide) => guide.category !== current.category
+  );
+
+  return [...sameCategory, ...otherCategories].slice(0, limit);
+}
