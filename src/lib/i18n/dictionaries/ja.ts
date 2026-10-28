@@ -217,7 +217,7 @@ export const ja: Dictionary = {
     trainsPaused: "Glacier Express は運休",
   },
   skiPage: {
-    h1: "今日のツェルマットスキー",
+    h1: "ツェルマット積雪レポート",
     snowEyebrow: "1996–2025",
     snowTitle: "月ごとの平均新雪",
     snowNote: "ツェルマット付近の平均新雪と、氷点下のままの日です。今日の積雪はツェルマット・ベルクバーネンの発表です。",

@@ -217,7 +217,7 @@ export const ko: Dictionary = {
     trainsPaused: "Glacier Express 운휴",
   },
   skiPage: {
-    h1: "오늘 체르마트 스키",
+    h1: "체르마트 적설 리포트",
     snowEyebrow: "1996–2025",
     snowTitle: "월별 평균 신설",
     snowNote: "체르마트 근처의 평균 신설과 영하로 유지된 날입니다. 오늘 적설은 체르마트 베르크바넨 리포트입니다.",

@@ -220,7 +220,7 @@ export const de: Dictionary = {
     trainsPaused: "Glacier Express pausiert",
   },
   skiPage: {
-    h1: "Heute Ski in Zermatt",
+    h1: "Zermatt Schneebericht",
     snowEyebrow: "1996–2025",
     snowTitle: "Typischer Neuschnee nach Monat",
     snowNote: "Mittlerer Neuschnee und Tage unter null bei Zermatt. Die heutige Schneehöhe ist der Bericht der Zermatt Bergbahnen.",

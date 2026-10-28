@@ -217,7 +217,7 @@ export const zhTw: Dictionary = {
     trainsPaused: "冰河列車暫停",
   },
   skiPage: {
-    h1: "今天在策馬特滑雪",
+    h1: "策馬特雪況報告",
     snowEyebrow: "1996–2025",
     snowTitle: "各月典型新雪",
     snowNote: "策馬特附近的平均新雪，以及維持在冰點以下的天數。今天的雪深來自策馬特登山鐵路。",

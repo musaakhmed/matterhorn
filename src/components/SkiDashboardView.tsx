@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowRight,
@@ -30,6 +30,7 @@ import {
   getMountainDining,
   getSkiDashboardUi,
   getSkiFaqs,
+  getSkiSectionJumps,
   getSkiSectors,
 } from '@/lib/i18n/ski-copy';
 import SnowConditions from '@/components/SnowConditions';
@@ -54,6 +55,13 @@ export default function SkiDashboardView({
 }: SkiDashboardViewProps) {
   const { dict } = useTranslation();
   const ui = getSkiDashboardUi(locale);
+  const sectionJumps = getSkiSectionJumps(locale);
+  const [activeSection, setActiveSection] = useState('');
+  const [jumpEdges, setJumpEdges] = useState({ left: false, right: false });
+  const jumpBarRef = useRef<HTMLDivElement>(null);
+  const jumpPlaceholderRef = useRef<HTMLDivElement>(null);
+  const jumpScrollerRef = useRef<HTMLDivElement>(null);
+  const anchorOffsetRef = useRef(148);
   const skiSectors = getSkiSectors(locale);
   const mountainDining = getMountainDining(locale);
   const apresSkiSpots = getApresSkiSpots(locale);
@@ -65,6 +73,137 @@ export default function SkiDashboardView({
       : borderStatus.status === 'STANDBY'
         ? ui.statusStandby
         : ui.statusClosed;
+
+  useEffect(() => {
+    const ids = sectionJumps.items.map((item) => item.id);
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const line = anchorOffsetRef.current;
+      let current = '';
+      for (const id of ids) {
+        const section = document.getElementById(id);
+        if (section && section.getBoundingClientRect().top <= line) current = id;
+      }
+      setActiveSection((previous) => (previous === current ? previous : current));
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [sectionJumps]);
+
+  useEffect(() => {
+    const bar = jumpBarRef.current;
+    const placeholder = jumpPlaceholderRef.current;
+    const scroller = jumpScrollerRef.current;
+    const siteHeader = document.querySelector('header');
+    if (!bar || !placeholder || !scroller || !siteHeader) return;
+
+    let frame = 0;
+
+    const apply = () => {
+      frame = 0;
+      const headerRect = siteHeader.getBoundingClientRect();
+      const pinTop = Math.max(0, headerRect.bottom);
+      const naturalTop = placeholder.getBoundingClientRect().top;
+      const shouldPin = naturalTop <= pinTop + 0.5;
+
+      if (shouldPin) {
+        const place = placeholder.getBoundingClientRect();
+        placeholder.style.height = `${bar.offsetHeight}px`;
+        bar.style.position = 'fixed';
+        bar.style.top = `${pinTop}px`;
+        bar.style.left = `${place.left}px`;
+        bar.style.width = `${place.width}px`;
+        bar.style.zIndex = '40';
+      } else {
+        placeholder.style.height = '0px';
+        bar.style.position = '';
+        bar.style.top = '';
+        bar.style.left = '';
+        bar.style.width = '';
+        bar.style.zIndex = '';
+      }
+
+      const headerStays =
+        window.getComputedStyle(siteHeader).position === 'sticky' &&
+        (window.scrollY > 40
+          ? headerRect.top >= -1
+          : (() => {
+              const scroller = document.scrollingElement;
+              let parent = siteHeader.parentElement;
+              while (parent && parent !== scroller) {
+                if (window.getComputedStyle(parent).overflowY !== 'visible') return false;
+                parent = parent.parentElement;
+              }
+              return true;
+            })());
+      const offset = Math.ceil((headerStays ? headerRect.height : 0) + bar.offsetHeight + 12);
+      anchorOffsetRef.current = offset;
+      document.documentElement.style.setProperty('--ski-anchor-offset', `${offset}px`);
+
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      const left = scroller.scrollLeft > 4;
+      const right = maxScroll - scroller.scrollLeft > 4;
+      setJumpEdges((previous) =>
+        previous.left === left && previous.right === right ? previous : { left, right },
+      );
+    };
+
+    const schedule = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(apply);
+    };
+
+    apply();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    scroller.addEventListener('scroll', schedule, { passive: true });
+    const observer = new ResizeObserver(schedule);
+    observer.observe(siteHeader);
+    observer.observe(bar);
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      scroller.removeEventListener('scroll', schedule);
+      observer.disconnect();
+      document.documentElement.style.removeProperty('--ski-anchor-offset');
+    };
+  }, []);
+
+  useEffect(() => {
+    const scroller = jumpScrollerRef.current;
+    if (!scroller || !activeSection) return;
+    const link = scroller.querySelector<HTMLElement>(`a[href="#${CSS.escape(activeSection)}"]`);
+    if (!link) return;
+    const viewLeft = scroller.scrollLeft;
+    const viewRight = viewLeft + scroller.clientWidth;
+    if (link.offsetLeft < viewLeft || link.offsetLeft + link.offsetWidth > viewRight) {
+      scroller.scrollTo({ left: Math.max(0, link.offsetLeft - 16), behavior: 'auto' });
+    }
+  }, [activeSection]);
+
+  function jumpToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    window.history.pushState(null, '', `#${id}`);
+    setActiveSection(id);
+  }
 
   // Sector selector state
   const [selectedSectorId, setSelectedSectorId] = useState<string>('sunnegga-rothorn');
@@ -157,10 +296,45 @@ export default function SkiDashboardView({
           </div>
         </header>
 
+        <div ref={jumpPlaceholderRef} className="h-0" />
+        <div
+          ref={jumpBarRef}
+          className="z-40 !mt-0 border-b border-slate-200/80 bg-[#f8fafc] py-2 dark:border-slate-800/80 dark:bg-[#0b1120]"
+        >
+          <nav aria-label={sectionJumps.aria} className="relative">
+            <div ref={jumpScrollerRef} className="no-scrollbar flex gap-2 overflow-x-auto">
+              {sectionJumps.items.map((item) => {
+                const isCurrent = activeSection === item.id;
+                return (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    aria-current={isCurrent ? 'true' : undefined}
+                    onClick={(event) => jumpToSection(event, item.id)}
+                    className={`inline-flex h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-3.5 text-sm font-semibold transition-[transform,background-color,border-color,color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 ${
+                      isCurrent
+                        ? 'border-sky-300 bg-sky-50 text-sky-900 dark:border-sky-700 dark:bg-sky-950 dark:text-sky-200'
+                        : 'border-slate-300 bg-white text-slate-800 shadow-2xs dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 [@media(hover:hover)_and_(pointer:fine)]:hover:border-sky-400 [@media(hover:hover)_and_(pointer:fine)]:hover:text-sky-800 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:border-sky-500 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-sky-200'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+            </div>
+            {jumpEdges.left ? (
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#f8fafc] to-transparent dark:from-[#0b1120]" />
+            ) : null}
+            {jumpEdges.right ? (
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#f8fafc] to-transparent dark:from-[#0b1120]" />
+            ) : null}
+          </nav>
+        </div>
 
         <section
+          id="cervinia-link"
           aria-labelledby="border-link-heading"
-          className={`rounded-2xl border p-6 sm:p-8 transition-colors shadow-2xs ${
+          className={`scroll-mt-[var(--ski-anchor-offset,9.25rem)] rounded-2xl border p-6 sm:p-8 transition-colors shadow-2xs ${
             borderStatus.status === 'OPEN'
               ? 'bg-white dark:bg-slate-900 border-emerald-500 dark:border-emerald-500/80'
               : borderStatus.status === 'STANDBY'
@@ -249,7 +423,7 @@ export default function SkiDashboardView({
           </div>
         </section>
 
-        <section id="pass-calculator" aria-labelledby="pass-calc-heading" className="space-y-6">
+        <section id="pass-calculator" aria-labelledby="pass-calc-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 block mb-1">
               {dict.skiPage.passEyebrow}
@@ -440,7 +614,7 @@ export default function SkiDashboardView({
 
         <SnowConditions locale={locale} report={snowReport} forecast={snowForecast} />
 
-        <section aria-labelledby="sectors-heading" className="space-y-6">
+        <section id="sectors" aria-labelledby="sectors-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
               {ui.sectorsEyebrow}
@@ -606,7 +780,7 @@ export default function SkiDashboardView({
           </div>
         </section>
 
-        <section id="ski-webcams" aria-labelledby="ski-webcams-heading" className="space-y-4">
+        <section id="ski-webcams" aria-labelledby="ski-webcams-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-4">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
               {ui.webcamsEyebrow}
@@ -650,7 +824,7 @@ export default function SkiDashboardView({
         </section>
 
         {/* MOUNTAIN DINING & APRÈS-SKI (Editorial Directory) */}
-        <section aria-labelledby="dining-heading" className="space-y-6">
+        <section id="dining" aria-labelledby="dining-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
             <div>
               <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block mb-1">
@@ -784,7 +958,7 @@ export default function SkiDashboardView({
         </section>
 
         {/* ACCORDION FAQ */}
-        <section aria-labelledby="faq-heading" className="space-y-6 max-w-4xl mx-auto pt-4">
+        <section id="faq" aria-labelledby="faq-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-6 max-w-4xl mx-auto pt-4">
           <div className="text-center space-y-2 border-b border-slate-200 dark:border-slate-800 pb-4">
             <span className="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-bold block">
               {ui.faqEyebrow}

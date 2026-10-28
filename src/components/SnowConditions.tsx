@@ -66,7 +66,7 @@ export default function SnowConditions({ locale, report, forecast }: SnowConditi
 
   return (
     <div className="space-y-8 sm:space-y-10">
-      <section aria-labelledby="snow-report-heading" className="space-y-4">
+      <section id="snow-report" aria-labelledby="snow-report-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 block mb-1">
@@ -145,7 +145,7 @@ export default function SnowConditions({ locale, report, forecast }: SnowConditi
         )}
       </section>
 
-      <section aria-labelledby="snow-forecast-heading" className="space-y-4">
+      <section id="snow-forecast" aria-labelledby="snow-forecast-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-4">
         <div className="max-w-3xl border-b border-slate-200 dark:border-slate-800 pb-3">
           <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 block mb-1">
             {copy.forecastEyebrow}
@@ -235,7 +235,7 @@ export default function SnowConditions({ locale, report, forecast }: SnowConditi
         )}
       </section>
 
-      <section aria-labelledby="snow-climate-heading" className="space-y-4">
+      <section id="snow-climate" aria-labelledby="snow-climate-heading" className="scroll-mt-[var(--ski-anchor-offset,9.25rem)] space-y-4">
         <div className="max-w-3xl border-b border-slate-200 dark:border-slate-800 pb-3">
           <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 block mb-1">
             {copy.climateEyebrow}

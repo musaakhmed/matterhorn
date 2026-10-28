@@ -3666,3 +3666,150 @@ export function getLocalizedCrossBorderLink(
 export function getSkiDashboardUi(locale: Locale): SkiDashboardUi {
   return SKI_UI[locale] ?? SKI_UI.en;
 }
+
+const SECTION_JUMPS: Record<Locale, { aria: string; items: { id: string; label: string }[] }> = {
+  en: {
+    aria: 'On this page',
+    items: [
+      { id: 'cervinia-link', label: 'Cervinia' },
+      { id: 'pass-calculator', label: 'Pass' },
+      { id: 'snow-report', label: 'Snow report' },
+      { id: 'snow-forecast', label: '10-day forecast' },
+      { id: 'snow-climate', label: 'By month' },
+      { id: 'sectors', label: 'Sectors' },
+      { id: 'ski-webcams', label: 'Webcams' },
+      { id: 'dining', label: 'Dining' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  de: {
+    aria: 'Auf dieser Seite',
+    items: [
+      { id: 'cervinia-link', label: 'Cervinia' },
+      { id: 'pass-calculator', label: 'Pass' },
+      { id: 'snow-report', label: 'Schneebericht' },
+      { id: 'snow-forecast', label: '10 Tage' },
+      { id: 'snow-climate', label: 'Nach Monat' },
+      { id: 'sectors', label: 'Sektoren' },
+      { id: 'ski-webcams', label: 'Webcams' },
+      { id: 'dining', label: 'Hütten' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  fr: {
+    aria: 'Sur cette page',
+    items: [
+      { id: 'cervinia-link', label: 'Cervinia' },
+      { id: 'pass-calculator', label: 'Forfait' },
+      { id: 'snow-report', label: 'Bulletin neige' },
+      { id: 'snow-forecast', label: '10 jours' },
+      { id: 'snow-climate', label: 'Par mois' },
+      { id: 'sectors', label: 'Secteurs' },
+      { id: 'ski-webcams', label: 'Webcams' },
+      { id: 'dining', label: 'Restaurants' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  it: {
+    aria: 'In questa pagina',
+    items: [
+      { id: 'cervinia-link', label: 'Cervinia' },
+      { id: 'pass-calculator', label: 'Skipass' },
+      { id: 'snow-report', label: 'Bollettino' },
+      { id: 'snow-forecast', label: '10 giorni' },
+      { id: 'snow-climate', label: 'Per mese' },
+      { id: 'sectors', label: 'Settori' },
+      { id: 'ski-webcams', label: 'Webcam' },
+      { id: 'dining', label: 'Rifugi' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  es: {
+    aria: 'En esta página',
+    items: [
+      { id: 'cervinia-link', label: 'Cervinia' },
+      { id: 'pass-calculator', label: 'Forfait' },
+      { id: 'snow-report', label: 'Parte de nieve' },
+      { id: 'snow-forecast', label: '10 días' },
+      { id: 'snow-climate', label: 'Por mes' },
+      { id: 'sectors', label: 'Sectores' },
+      { id: 'ski-webcams', label: 'Cámaras' },
+      { id: 'dining', label: 'Restaurantes' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  pt: {
+    aria: 'Nesta página',
+    items: [
+      { id: 'cervinia-link', label: 'Cervinia' },
+      { id: 'pass-calculator', label: 'Passe' },
+      { id: 'snow-report', label: 'Boletim' },
+      { id: 'snow-forecast', label: '10 dias' },
+      { id: 'snow-climate', label: 'Por mês' },
+      { id: 'sectors', label: 'Setores' },
+      { id: 'ski-webcams', label: 'Câmaras' },
+      { id: 'dining', label: 'Restaurantes' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  ko: {
+    aria: '이 페이지에서',
+    items: [
+      { id: 'cervinia-link', label: '체르비니아' },
+      { id: 'pass-calculator', label: '패스' },
+      { id: 'snow-report', label: '적설' },
+      { id: 'snow-forecast', label: '10일 예보' },
+      { id: 'snow-climate', label: '월별' },
+      { id: 'sectors', label: '구역' },
+      { id: 'ski-webcams', label: '웹캠' },
+      { id: 'dining', label: '식당' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  ja: {
+    aria: 'このページ内',
+    items: [
+      { id: 'cervinia-link', label: 'チェルヴィニア' },
+      { id: 'pass-calculator', label: 'パス' },
+      { id: 'snow-report', label: '積雪' },
+      { id: 'snow-forecast', label: '10日間' },
+      { id: 'snow-climate', label: '月別' },
+      { id: 'sectors', label: 'エリア' },
+      { id: 'ski-webcams', label: 'カメラ' },
+      { id: 'dining', label: 'レストラン' },
+      { id: 'faq', label: 'FAQ' },
+    ],
+  },
+  zh: {
+    aria: '本页章节',
+    items: [
+      { id: 'cervinia-link', label: '切尔维尼亚' },
+      { id: 'pass-calculator', label: '雪票' },
+      { id: 'snow-report', label: '雪情' },
+      { id: 'snow-forecast', label: '10天预报' },
+      { id: 'snow-climate', label: '各月' },
+      { id: 'sectors', label: '雪区' },
+      { id: 'ski-webcams', label: '摄像头' },
+      { id: 'dining', label: '餐厅' },
+      { id: 'faq', label: '问答' },
+    ],
+  },
+  'zh-tw': {
+    aria: '本頁章節',
+    items: [
+      { id: 'cervinia-link', label: '切爾維尼亞' },
+      { id: 'pass-calculator', label: '雪票' },
+      { id: 'snow-report', label: '雪況' },
+      { id: 'snow-forecast', label: '10天預報' },
+      { id: 'snow-climate', label: '各月' },
+      { id: 'sectors', label: '雪區' },
+      { id: 'ski-webcams', label: '攝影機' },
+      { id: 'dining', label: '餐廳' },
+      { id: 'faq', label: '問答' },
+    ],
+  },
+};
+
+export function getSkiSectionJumps(locale: Locale) {
+  return SECTION_JUMPS[locale] ?? SECTION_JUMPS.en;
+}
