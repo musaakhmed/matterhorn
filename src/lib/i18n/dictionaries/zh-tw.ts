@@ -218,9 +218,9 @@ export const zhTw: Dictionary = {
   },
   skiPage: {
     h1: "今天在策馬特滑雪",
-    snowEyebrow: "季節參考",
-    snowTitle: "依海拔的典型積雪",
-    snowNote: "這些雪深是季節參考，不是即時雪況。義大利連接處的山脊風速是即時的。",
+    snowEyebrow: "1996–2025",
+    snowTitle: "各月典型新雪",
+    snowNote: "策馬特附近的平均新雪，以及維持在冰點以下的天數。今天的雪深來自策馬特登山鐵路。",
     passEyebrow: "雪票",
     passTitle: "策馬特滑雪通票計算",
   },

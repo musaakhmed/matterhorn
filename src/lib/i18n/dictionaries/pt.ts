@@ -218,9 +218,9 @@ export const pt: Dictionary = {
   },
   skiPage: {
     h1: "Esquiar em Zermatt hoje",
-    snowEyebrow: "Referência de época",
-    snowTitle: "Neve típica por altitude",
-    snowNote: "Estas alturas são um guia de época, não um boletim de neve em direto. O vento da crista na ligação com Itália é em direto.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "Neve fresca habitual por mês",
+    snowNote: "Neve fresca média e dias abaixo de zero perto de Zermatt. A altura de hoje é o boletim das Zermatt Bergbahnen.",
     passEyebrow: "Passes",
     passTitle: "Calculadora do passe de esqui de Zermatt",
   },

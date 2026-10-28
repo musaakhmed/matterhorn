@@ -221,9 +221,9 @@ export const es: Dictionary = {
   },
   skiPage: {
     h1: "Esquiar en Zermatt hoy",
-    snowEyebrow: "Referencia de temporada",
-    snowTitle: "Nieve habitual por altitud",
-    snowNote: "Estos espesores son una guía de temporada, no un parte de nieve en directo. El viento de cresta del enlace con Italia sí es en directo.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "Nieve reciente habitual por mes",
+    snowNote: "Nieve reciente media y días bajo cero cerca de Zermatt. El espesor de hoy es el parte de Zermatt Bergbahnen.",
     passEyebrow: "Forfaits",
     passTitle: "Calculadora del forfait de Zermatt",
   },

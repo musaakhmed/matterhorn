@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import SkiDashboardView from '@/components/SkiDashboardView';
 import { fetchMatterhornVisibility } from '@/lib/weather';
+import { fetchResortSnowReport, fetchSnowForecast } from '@/lib/snow';
 import { buildSkiPageJsonLd, serializeJsonLd } from '@/lib/schema';
 import {
   LOCALES,
@@ -85,7 +86,11 @@ export default async function LocalizedSkiPage({
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
 
-  const telemetry = await fetchMatterhornVisibility();
+  const [telemetry, snowReport, snowForecast] = await Promise.all([
+    fetchMatterhornVisibility(),
+    fetchResortSnowReport(),
+    fetchSnowForecast(),
+  ]);
   const jsonLd = buildSkiPageJsonLd(telemetry, locale);
 
   return (
@@ -94,7 +99,12 @@ export default async function LocalizedSkiPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <SkiDashboardView initialData={telemetry} locale={locale as Locale} />
+      <SkiDashboardView
+        initialData={telemetry}
+        locale={locale as Locale}
+        snowReport={snowReport}
+        snowForecast={snowForecast}
+      />
     </>
   );
 }

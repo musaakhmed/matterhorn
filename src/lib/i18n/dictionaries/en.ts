@@ -221,9 +221,9 @@ export const en: Dictionary = {
   },
   skiPage: {
     h1: "Ski Zermatt today",
-    snowEyebrow: "Seasonal reference",
-    snowTitle: "Typical snow by elevation",
-    snowNote: "These depths are a seasonal guide, not a live snow report. The crest wind next to the Italy link is live.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "Typical new snow by month",
+    snowNote: "Average new snow and days that stay below freezing near Zermatt. Today's depth is the Zermatt Bergbahnen report.",
     passEyebrow: "Tickets",
     passTitle: "Zermatt ski pass calculator",
   },

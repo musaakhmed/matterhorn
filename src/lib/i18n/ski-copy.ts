@@ -7,7 +7,6 @@ import {
   SKI_SECTORS,
   calculateSkiPassEstimate,
   evaluateCrossBorderLink,
-  getSnowAltitudeTiers,
   type ApresSkiSpot,
   type MountainDiningSpot,
   type SkiFaq,
@@ -2144,243 +2143,6 @@ const PASS_RUNTIME: Record<NonEn, { passName: PhraseMap; recommendation: PhraseM
   },
 };
 
-const SNOW_RUNTIME: Record<NonEn, { label: PhraseMap; terrain: PhraseMap; conditionStatus: PhraseMap; surfaceQuality: PhraseMap }> = {
-  de: {
-    label: {
-      'Zermatt Village & Valley Floor': 'Dorf Zermatt & Talboden',
-      'Mid-Mountain (Sunnegga & Riffelberg)': 'Mittlere Lage (Sunnegga & Riffelberg)',
-      'Glacier Crest (Matterhorn Glacier Paradise)': 'Gletschergrat (Matterhorn Glacier Paradise)',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        'Talabfahrten (Furi ins Dorf #50), Anfänger, Ski-in bis zur Unterkunft',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        'Breite Pisten, Waldgrenze, Gourmethütten Findeln, Gornergrat Bahn',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        'Theodulgletscher, Plateau Rosa, italienischer Grenzübergang, Snowpark',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': 'Präparierter Pulver / kompakt',
-      'Powder & Crisp Groomers': 'Pulver und griffige Pisten',
-      'Wind-Affected / Blustery': 'Windbeeinflusst / böig',
-      'Pure Alpine Dry Powder': 'Trockener hochalpiner Pulverschnee',
-    },
-    surfaceQuality: {
-      'Well Groomed': 'Gut präpariert',
-      'Optimal Winter Cruising': 'Optimales Wintercruisen',
-      'Glacial Hardpack & Wind-buffed Powder': 'Gletscherharsch und windgepresster Pulver',
-    },
-  },
-  es: {
-    label: {
-      'Zermatt Village & Valley Floor': 'Pueblo de Zermatt y fondo de valle',
-      'Mid-Mountain (Sunnegga & Riffelberg)': 'Media montaña (Sunnegga y Riffelberg)',
-      'Glacier Crest (Matterhorn Glacier Paradise)': 'Cresta del glaciar (Matterhorn Glacier Paradise)',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        'Bajadas de valle (Furi al pueblo #50), principiantes, acceso esquiando al alojamiento',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        'Pistas anchas, límite del bosque, refugios gourmet de Findeln, tren del Gornergrat',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        'Glaciar Theodul, Plateau Rosa, paso fronterizo italiano, snowpark',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': 'Nieve pisada / compacta',
-      'Powder & Crisp Groomers': 'Polvo y pistas pisadas con agarre',
-      'Wind-Affected / Blustery': 'Afectada por el viento / racheada',
-      'Pure Alpine Dry Powder': 'Polvo seco de alta montaña',
-    },
-    surfaceQuality: {
-      'Well Groomed': 'Bien pisada',
-      'Optimal Winter Cruising': 'Crucero de invierno óptimo',
-      'Glacial Hardpack & Wind-buffed Powder': 'Nieve dura de glaciar y polvo prensado por el viento',
-    },
-  },
-  fr: {
-    label: {
-      'Zermatt Village & Valley Floor': 'Village de Zermatt et fond de vallée',
-      'Mid-Mountain (Sunnegga & Riffelberg)': 'Mi-montagne (Sunnegga et Riffelberg)',
-      'Glacier Crest (Matterhorn Glacier Paradise)': 'Crête glaciaire (Matterhorn Glacier Paradise)',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        'Pistes de vallée (Furi vers le village #50), débutants, retour à skis',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        'Larges pistes, limite forestière, chalets gourmet de Findeln, train du Gornergrat',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        'Glacier du Théodule, Plateau Rosa, passage de la frontière italienne, snowpark',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': 'Poudre damée / compacte',
-      'Powder & Crisp Groomers': 'Poudre et pistes damées accrocheuses',
-      'Wind-Affected / Blustery': 'Marquée par le vent / rafales',
-      'Pure Alpine Dry Powder': 'Poudre sèche de haute altitude',
-    },
-    surfaceQuality: {
-      'Well Groomed': 'Bien damée',
-      'Optimal Winter Cruising': 'Croisière d’hiver optimale',
-      'Glacial Hardpack & Wind-buffed Powder': 'Neige dure de glacier et poudre tassée par le vent',
-    },
-  },
-  it: {
-    label: {
-      'Zermatt Village & Valley Floor': 'Paese di Zermatt e fondovalle',
-      'Mid-Mountain (Sunnegga & Riffelberg)': 'Media montagna (Sunnegga e Riffelberg)',
-      'Glacier Crest (Matterhorn Glacier Paradise)': 'Cresta del ghiacciaio (Matterhorn Glacier Paradise)',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        'Discese di valle (Furi verso il paese #50), principianti, rientro con gli sci',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        'Piste larghe, limite del bosco, baite gourmet di Findeln, treno del Gornergrat',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        'Ghiacciaio del Teodulo, Plateau Rosa, valico italiano, snowpark',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': 'Polvere battuta / compatta',
-      'Powder & Crisp Groomers': 'Polvere e piste battute croccanti',
-      'Wind-Affected / Blustery': 'Segnata dal vento / raffiche',
-      'Pure Alpine Dry Powder': 'Polvere asciutta d’alta quota',
-    },
-    surfaceQuality: {
-      'Well Groomed': 'Ben battuta',
-      'Optimal Winter Cruising': 'Crociera invernale ottimale',
-      'Glacial Hardpack & Wind-buffed Powder': 'Neve dura di ghiacciaio e polvere pressata dal vento',
-    },
-  },
-  pt: {
-    label: {
-      'Zermatt Village & Valley Floor': 'Aldeia de Zermatt e fundo do vale',
-      'Mid-Mountain (Sunnegga & Riffelberg)': 'Meia encosta (Sunnegga e Riffelberg)',
-      'Glacier Crest (Matterhorn Glacier Paradise)': 'Crista do glaciar (Matterhorn Glacier Paradise)',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        'Descidas de vale (Furi até à aldeia #50), iniciação, regresso em esqui',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        'Pistas largas, linha de árvores, chalés gourmet de Findeln, comboio do Gornergrat',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        'Glaciar Theodul, Plateau Rosa, passagem da fronteira italiana, snowpark',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': 'Pó batido / compacto',
-      'Powder & Crisp Groomers': 'Pó e pistas batidas com aderência',
-      'Wind-Affected / Blustery': 'Marcada pelo vento / rajadas',
-      'Pure Alpine Dry Powder': 'Pó seco de alta montanha',
-    },
-    surfaceQuality: {
-      'Well Groomed': 'Bem batida',
-      'Optimal Winter Cruising': 'Cruzeiro de inverno ótimo',
-      'Glacial Hardpack & Wind-buffed Powder': 'Neve dura de glaciar e pó compactado pelo vento',
-    },
-  },
-  ko: {
-    label: {
-      'Zermatt Village & Valley Floor': '체르마트 마을과 계곡 바닥',
-      'Mid-Mountain (Sunnegga & Riffelberg)': '중산간 (Sunnegga & Riffelberg)',
-      'Glacier Crest (Matterhorn Glacier Paradise)': '빙하 능선 (Matterhorn Glacier Paradise)',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        '계곡 슬로프 (Furi에서 마을 #50), 입문, 숙소까지 스키 인',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        '넓은 슬로프, 수목한계, 핀델른 미식 산장, Gornergrat 열차',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        '테오둘 빙하, Plateau Rosa, 이탈리아 국경, 스노파크',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': '다져진 파우더 / 콤팩트',
-      'Powder & Crisp Groomers': '파우더와 그립 좋은 정설',
-      'Wind-Affected / Blustery': '바람 영향 / 강풍',
-      'Pure Alpine Dry Powder': '건조한 고산 파우더',
-    },
-    surfaceQuality: {
-      'Well Groomed': '정설 양호',
-      'Optimal Winter Cruising': '최적의 겨울 크루징',
-      'Glacial Hardpack & Wind-buffed Powder': '빙하 하드팩과 바람에 다져진 파우더',
-    },
-  },
-  ja: {
-    label: {
-      'Zermatt Village & Valley Floor': 'ツェルマットの村と谷底',
-      'Mid-Mountain (Sunnegga & Riffelberg)': '中腹（Sunnegga と Riffelberg）',
-      'Glacier Crest (Matterhorn Glacier Paradise)': '氷河の稜線（Matterhorn Glacier Paradise）',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        '谷のコース（Furi から村 #50）、初心者、宿までのスキーイン',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        '広いコース、森林限界、Findeln のグルメヒュッテ、Gornergrat 鉄道',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        'テオドゥル氷河、Plateau Rosa、イタリア国境、スノーパーク',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': '圧雪パウダー／コンパクト',
-      'Powder & Crisp Groomers': 'パウダーとグリップのよい圧雪',
-      'Wind-Affected / Blustery': '風の影響／突風',
-      'Pure Alpine Dry Powder': '乾いた高山パウダー',
-    },
-    surfaceQuality: {
-      'Well Groomed': '圧雪良好',
-      'Optimal Winter Cruising': '冬のクルージングに最適',
-      'Glacial Hardpack & Wind-buffed Powder': '氷河のハードパックと風で締まったパウダー',
-    },
-  },
-  zh: {
-    label: {
-      'Zermatt Village & Valley Floor': '采尔马特村与谷底',
-      'Mid-Mountain (Sunnegga & Riffelberg)': '山腰（Sunnegga 与 Riffelberg）',
-      'Glacier Crest (Matterhorn Glacier Paradise)': '冰川山脊（Matterhorn Glacier Paradise）',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        '山谷雪道（Furi 到村子 #50）、初学者、滑回住所',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        '宽阔雪道、林木线、芬德尔恩美食木屋、戈尔内格拉特列车',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        '特奥杜尔冰川、Plateau Rosa、意大利边境、雪上公园',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': '压实粉雪 / 密实',
-      'Powder & Crisp Groomers': '粉雪与抓地良好的压雪道',
-      'Wind-Affected / Blustery': '受风影响 / 阵风',
-      'Pure Alpine Dry Powder': '干燥的高山粉雪',
-    },
-    surfaceQuality: {
-      'Well Groomed': '压雪良好',
-      'Optimal Winter Cruising': '冬季巡航最佳',
-      'Glacial Hardpack & Wind-buffed Powder': '冰川硬雪与风压粉雪',
-    },
-  },
-  'zh-tw': {
-    label: {
-      'Zermatt Village & Valley Floor': '策馬特村子與谷底',
-      'Mid-Mountain (Sunnegga & Riffelberg)': '山腰（Sunnegga 與 Riffelberg）',
-      'Glacier Crest (Matterhorn Glacier Paradise)': '冰川地脊（Matterhorn Glacier Paradise）',
-    },
-    terrain: {
-      'Valley runs (Furi to Village #50), beginners, ski-in home trails':
-        '山谷雪道（Furi 到村子 #50）、初學、滑回住宿',
-      'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway':
-        '寬闊雪道、林木線、芬德爾恩美食木屋、戈爾內格拉特列車',
-      'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark':
-        '特奧杜爾冰川、Plateau Rosa、義大利邊境、雪上公園',
-    },
-    conditionStatus: {
-      'Packed Powder / Compact': '壓實粉雪／密實',
-      'Powder & Crisp Groomers': '粉雪與抓地好的壓雪道',
-      'Wind-Affected / Blustery': '受風影響／陣風',
-      'Pure Alpine Dry Powder': '乾燥的高山粉雪',
-    },
-    surfaceQuality: {
-      'Well Groomed': '壓雪良好',
-      'Optimal Winter Cruising': '冬季巡航正合適',
-      'Glacial Hardpack & Wind-buffed Powder': '冰川硬雪與被風壓實的粉雪',
-    },
-  },
-};
-
 const BORDER_RUNTIME: Record<NonEn, { title: PhraseMap; reason: BorderReason; lastLift: PhraseMap }> = {
   de: {
     title: {
@@ -2676,7 +2438,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'Ski & Snow Intelligence (Zermatt & Cervinia)',
     heroBadge: 'Matterhorn Ski Paradise • 360 km International Domain',
     heroLead:
-      'See whether the link to Cervinia is open, what the crest wind is doing, and what a pass costs. Snow depths further down are a seasonal guide.',
+      'See whether the link to Cervinia is open, what the crest wind is doing, and whether snow is on the way. Depths are the Zermatt Bergbahnen report. The 10-day forecast and the monthly averages are below.',
     statusOpen: 'OPEN',
     statusStandby: 'STANDBY',
     statusClosed: 'CLOSED',
@@ -2787,7 +2549,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'Ski- und Schneelage (Zermatt & Cervinia)',
     heroBadge: 'Matterhorn Ski Paradise • 360 km internationales Gebiet',
     heroLead:
-      'Sehen Sie, ob die Verbindung nach Cervinia offen ist, was der Wind am Grat macht und was ein Pass kostet. Die Schneehöhen weiter unten sind eine saisonale Orientierung.',
+      'Sehen Sie, ob die Verbindung nach Cervinia offen ist, was der Wind am Grat macht und ob Schnee kommt. Die Höhen sind der Bericht der Zermatt Bergbahnen. Darunter liegen die 10-Tage-Prognose und die Monatsmittel.',
     statusOpen: 'OFFEN',
     statusStandby: 'BEREIT',
     statusClosed: 'GESCHLOSSEN',
@@ -2898,7 +2660,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'Esquí y nieve (Zermatt y Cervinia)',
     heroBadge: 'Matterhorn Ski Paradise • dominio internacional de 360 km',
     heroLead:
-      'Vea si el enlace con Cervinia está abierto, qué hace el viento de cresta y cuánto cuesta un forfait. Los espesores más abajo son una guía de temporada.',
+      'Vea si el enlace con Cervinia está abierto, qué hace el viento de cresta y si llega nieve. Los espesores son el parte de Zermatt Bergbahnen. Abajo están la previsión de 10 días y las medias mensuales.',
     statusOpen: 'ABIERTO',
     statusStandby: 'EN ESPERA',
     statusClosed: 'CERRADO',
@@ -3009,7 +2771,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'Ski et neige (Zermatt et Cervinia)',
     heroBadge: 'Matterhorn Ski Paradise • domaine international de 360 km',
     heroLead:
-      'Voyez si la liaison vers Cervinia est ouverte, ce que fait le vent de crête, et ce que coûte un forfait. Les hauteurs de neige plus bas sont un repère de saison.',
+      'Voyez si la liaison vers Cervinia est ouverte, ce que fait le vent de crête, et si la neige arrive. Les hauteurs viennent du bulletin des Zermatt Bergbahnen. La prévision à 10 jours et les moyennes mensuelles sont plus bas.',
     statusOpen: 'OUVERT',
     statusStandby: 'VEILLE',
     statusClosed: 'FERMÉ',
@@ -3120,7 +2882,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'Sci e neve (Zermatt e Cervinia)',
     heroBadge: 'Matterhorn Ski Paradise • comprensorio internazionale di 360 km',
     heroLead:
-      'Veda se il collegamento con Cervinia è aperto, cosa fa il vento di cresta e quanto costa uno skipass. Gli spessori più in basso sono una guida di stagione.',
+      'Veda se il collegamento con Cervinia è aperto, cosa fa il vento di cresta e se arriva neve. Gli spessori sono il bollettino delle Zermatt Bergbahnen. Sotto ci sono la previsione a 10 giorni e le medie mensili.',
     statusOpen: 'APERTO',
     statusStandby: 'ALLERTA',
     statusClosed: 'CHIUSO',
@@ -3231,7 +2993,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'Esqui e neve (Zermatt e Cervinia)',
     heroBadge: 'Matterhorn Ski Paradise • domínio internacional de 360 km',
     heroLead:
-      'Veja se a ligação a Cervinia está aberta, o que faz o vento da crista e quanto custa um passe. As alturas de neve mais abaixo são um guia de época.',
+      'Veja se a ligação a Cervinia está aberta, o que faz o vento da crista e se vem neve. As alturas são o boletim das Zermatt Bergbahnen. Abaixo estão a previsão de 10 dias e as médias mensais.',
     statusOpen: 'ABERTO',
     statusStandby: 'EM ESPERA',
     statusClosed: 'FECHADO',
@@ -3342,7 +3104,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: '스키와 적설 (체르마트 & 체르비니아)',
     heroBadge: 'Matterhorn Ski Paradise • 국제 스키 구역 360 km',
     heroLead:
-      '체르비니아 연결이 열렸는지, 능선 바람이 어떤지, 패스가 얼마인지 확인하세요. 아래쪽 적설은 계절 안내입니다.',
+      '체르비니아 연결이 열렸는지, 능선 바람이 어떤지, 눈이 오는지 확인하세요. 적설은 체르마트 베르크바넨 리포트입니다. 아래에는 10일 예보와 월평균이 있습니다.',
     statusOpen: '운행',
     statusStandby: '대기',
     statusClosed: '폐쇄',
@@ -3453,7 +3215,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     breadcrumbCurrent: 'スキーと雪（ツェルマットとチェルヴィニア）',
     heroBadge: 'Matterhorn Ski Paradise • 国際スキーエリア 360 km',
     heroLead:
-      'チェルヴィニアへの連絡が開いているか、稜線の風、パスの値段を確認できます。下の積雪は季節の目安です。',
+      'チェルヴィニアへの連絡、稜線の風、雪が来るかを確認できます。積雪はツェルマット・ベルクバーネンの発表です。その下に10日間予報と月平均があります。',
     statusOpen: '開通',
     statusStandby: '注意',
     statusClosed: '閉鎖',
@@ -3563,7 +3325,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     home: '首页',
     breadcrumbCurrent: '滑雪与积雪（采尔马特与切尔维尼亚）',
     heroBadge: 'Matterhorn Ski Paradise • 360 公里国际雪区',
-    heroLead: '查看通往切尔维尼亚的连接是否开放、山脊风速如何，以及通票价格。较低处的雪深是季节参考。',
+    heroLead: '查看通往切尔维尼亚的连接是否开放、山脊风速如何，以及会不会下雪。雪深来自采尔马特登山铁路的报告。下面是 10 天预报和各月平均。',
     statusOpen: '开放',
     statusStandby: '待命',
     statusClosed: '关闭',
@@ -3671,7 +3433,7 @@ const SKI_UI: Record<Locale, SkiDashboardUi> = {
     home: '首頁',
     breadcrumbCurrent: '滑雪與積雪（策馬特與切爾維尼亞）',
     heroBadge: 'Matterhorn Ski Paradise • 360 公里國際雪區',
-    heroLead: '看看通往切爾維尼亞的聯絡開了沒有、地脊的風怎麼樣，以及通票要多少錢。較低處的雪深是季節參考。',
+    heroLead: '看看通往切爾維尼亞的聯絡開了沒有、地脊的風怎麼樣，以及會不會下雪。雪深來自策馬特登山鐵路的報告。下面是 10 天預報和各月平均。',
     statusOpen: '開放',
     statusStandby: '待命',
     statusClosed: '關閉',
@@ -3883,23 +3645,6 @@ export function getLocalizedSkiPassEstimate(
     recommendation: lookup(pack.recommendation, result.recommendation),
     savingsTip: lookup(pack.savingsTip, result.savingsTip),
   };
-}
-
-export function getLocalizedSnowAltitudeTiers(
-  data: Parameters<typeof getSnowAltitudeTiers>[0],
-  locale: Locale,
-): ReturnType<typeof getSnowAltitudeTiers> {
-  const tiers = getSnowAltitudeTiers(data);
-  if (locale === 'en') return tiers;
-  const pack = SNOW_RUNTIME[locale];
-  if (!pack) return tiers;
-  return tiers.map((tier) => ({
-    ...tier,
-    label: lookup(pack.label, tier.label),
-    terrain: lookup(pack.terrain, tier.terrain),
-    conditionStatus: lookup(pack.conditionStatus, tier.conditionStatus),
-    surfaceQuality: lookup(pack.surfaceQuality, tier.surfaceQuality),
-  }));
 }
 
 export function getLocalizedCrossBorderLink(

@@ -1,0 +1,243 @@
+{
+  "source": "Open-Meteo archive, ERA5-Land, statistically adjusted to elevation near Zermatt (45.98°N, 7.75°E)",
+  "periodStart": "1996-01-01",
+  "periodEnd": "2025-12-31",
+  "periodLabel": "1996–2025",
+  "metric": "Mean monthly new snow, and the share of days whose high stays at or below 0°C",
+  "bands": [
+    {
+      "id": "village",
+      "elevationM": 1620,
+      "months": [
+        {
+          "month": 1,
+          "meanSnowfallCm": 52,
+          "meanTempC": -4.1,
+          "daysStayFrozenPct": 63
+        },
+        {
+          "month": 2,
+          "meanSnowfallCm": 43,
+          "meanTempC": -3.1,
+          "daysStayFrozenPct": 43
+        },
+        {
+          "month": 3,
+          "meanSnowfallCm": 36,
+          "meanTempC": -0.5,
+          "daysStayFrozenPct": 22
+        },
+        {
+          "month": 4,
+          "meanSnowfallCm": 12,
+          "meanTempC": 3,
+          "daysStayFrozenPct": 5
+        },
+        {
+          "month": 5,
+          "meanSnowfallCm": 1,
+          "meanTempC": 7.6,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 6,
+          "meanSnowfallCm": 0,
+          "meanTempC": 12.6,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 7,
+          "meanSnowfallCm": 0,
+          "meanTempC": 15,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 8,
+          "meanSnowfallCm": 0,
+          "meanTempC": 14.8,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 9,
+          "meanSnowfallCm": 0,
+          "meanTempC": 11.1,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 10,
+          "meanSnowfallCm": 3,
+          "meanTempC": 6.7,
+          "daysStayFrozenPct": 1
+        },
+        {
+          "month": 11,
+          "meanSnowfallCm": 27,
+          "meanTempC": 0.4,
+          "daysStayFrozenPct": 21
+        },
+        {
+          "month": 12,
+          "meanSnowfallCm": 48,
+          "meanTempC": -3.1,
+          "daysStayFrozenPct": 46
+        }
+      ]
+    },
+    {
+      "id": "mid",
+      "elevationM": 2580,
+      "months": [
+        {
+          "month": 1,
+          "meanSnowfallCm": 68,
+          "meanTempC": -10.3,
+          "daysStayFrozenPct": 98
+        },
+        {
+          "month": 2,
+          "meanSnowfallCm": 55,
+          "meanTempC": -9.4,
+          "daysStayFrozenPct": 91
+        },
+        {
+          "month": 3,
+          "meanSnowfallCm": 69,
+          "meanTempC": -6.7,
+          "daysStayFrozenPct": 77
+        },
+        {
+          "month": 4,
+          "meanSnowfallCm": 79,
+          "meanTempC": -3.4,
+          "daysStayFrozenPct": 51
+        },
+        {
+          "month": 5,
+          "meanSnowfallCm": 48,
+          "meanTempC": 1.2,
+          "daysStayFrozenPct": 11
+        },
+        {
+          "month": 6,
+          "meanSnowfallCm": 3,
+          "meanTempC": 6.1,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 7,
+          "meanSnowfallCm": 0,
+          "meanTempC": 8.4,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 8,
+          "meanSnowfallCm": 1,
+          "meanTempC": 8.2,
+          "daysStayFrozenPct": 0
+        },
+        {
+          "month": 9,
+          "meanSnowfallCm": 5,
+          "meanTempC": 4.6,
+          "daysStayFrozenPct": 2
+        },
+        {
+          "month": 10,
+          "meanSnowfallCm": 35,
+          "meanTempC": 0.4,
+          "daysStayFrozenPct": 15
+        },
+        {
+          "month": 11,
+          "meanSnowfallCm": 100,
+          "meanTempC": -5.8,
+          "daysStayFrozenPct": 74
+        },
+        {
+          "month": 12,
+          "meanSnowfallCm": 74,
+          "meanTempC": -9.4,
+          "daysStayFrozenPct": 95
+        }
+      ]
+    },
+    {
+      "id": "glacier",
+      "elevationM": 3883,
+      "months": [
+        {
+          "month": 1,
+          "meanSnowfallCm": 71,
+          "meanTempC": -19.1,
+          "daysStayFrozenPct": 100
+        },
+        {
+          "month": 2,
+          "meanSnowfallCm": 56,
+          "meanTempC": -18.1,
+          "daysStayFrozenPct": 100
+        },
+        {
+          "month": 3,
+          "meanSnowfallCm": 71,
+          "meanTempC": -15.5,
+          "daysStayFrozenPct": 100
+        },
+        {
+          "month": 4,
+          "meanSnowfallCm": 89,
+          "meanTempC": -12.2,
+          "daysStayFrozenPct": 100
+        },
+        {
+          "month": 5,
+          "meanSnowfallCm": 85,
+          "meanTempC": -7.6,
+          "daysStayFrozenPct": 91
+        },
+        {
+          "month": 6,
+          "meanSnowfallCm": 19,
+          "meanTempC": -2.9,
+          "daysStayFrozenPct": 44
+        },
+        {
+          "month": 7,
+          "meanSnowfallCm": 7,
+          "meanTempC": -0.7,
+          "daysStayFrozenPct": 15
+        },
+        {
+          "month": 8,
+          "meanSnowfallCm": 9,
+          "meanTempC": -0.8,
+          "daysStayFrozenPct": 16
+        },
+        {
+          "month": 9,
+          "meanSnowfallCm": 22,
+          "meanTempC": -4.2,
+          "daysStayFrozenPct": 50
+        },
+        {
+          "month": 10,
+          "meanSnowfallCm": 69,
+          "meanTempC": -8.1,
+          "daysStayFrozenPct": 86
+        },
+        {
+          "month": 11,
+          "meanSnowfallCm": 109,
+          "meanTempC": -14.4,
+          "daysStayFrozenPct": 100
+        },
+        {
+          "month": 12,
+          "meanSnowfallCm": 78,
+          "meanTempC": -18.1,
+          "daysStayFrozenPct": 100
+        }
+      ]
+    }
+  ]
+}

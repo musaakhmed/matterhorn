@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { getAlternateUrls } from '@/lib/i18n/config';
 import { fetchMatterhornVisibility } from '@/lib/weather';
+import { fetchResortSnowReport, fetchSnowForecast } from '@/lib/snow';
 import { buildSkiPageJsonLd, serializeJsonLd } from '@/lib/schema';
 import SkiDashboardView from '@/components/SkiDashboardView';
 
@@ -10,7 +11,7 @@ export const revalidate = 900; // Revalidate every 15 minutes
 export const metadata: Metadata = {
   title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
   description:
-    'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and whether you can ski to Cervinia today.',
+    'Zermatt snow report from Zermatt Bergbahnen, a 10-day snowfall and freezing-level forecast, and average new snow by month since 1996.',
   alternates: getAlternateUrls('/ski'),
   keywords: [
     'Zermatt ski',
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
     description:
-      'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and the Cervinia border link.',
+      'Zermatt snow report, 10-day new snow and freezing level, 30-year snowfall by elevation, and the Cervinia link.',
     url: 'https://isthematterhornvisible.com/ski',
     siteName: 'Is The Matterhorn Visible?',
     locale: 'en_CH',
@@ -62,13 +63,17 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
     description:
-      'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and the Cervinia border link.',
+      'Zermatt snow report, 10-day new snow and freezing level, 30-year snowfall by elevation, and the Cervinia link.',
     images: ['/guides/gornergrat-vs-glacier-paradise.jpg'],
   },
 };
 
 export default async function SkiPage() {
-  const telemetry = await fetchMatterhornVisibility();
+  const [telemetry, snowReport, snowForecast] = await Promise.all([
+    fetchMatterhornVisibility(),
+    fetchResortSnowReport(),
+    fetchSnowForecast(),
+  ]);
   const jsonLd = buildSkiPageJsonLd(telemetry);
 
   return (
@@ -77,7 +82,12 @@ export default async function SkiPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <SkiDashboardView initialData={telemetry} locale="en" />
+      <SkiDashboardView
+        initialData={telemetry}
+        locale="en"
+        snowReport={snowReport}
+        snowForecast={snowForecast}
+      />
     </>
   );
 }

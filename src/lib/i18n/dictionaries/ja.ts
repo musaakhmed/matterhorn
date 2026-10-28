@@ -218,9 +218,9 @@ export const ja: Dictionary = {
   },
   skiPage: {
     h1: "今日のツェルマットスキー",
-    snowEyebrow: "季節の目安",
-    snowTitle: "標高ごとの典型的な積雪",
-    snowNote: "この積雪は季節の目安で、ライブの積雪情報ではありません。イタリア連絡の稜線の風はライブです。",
+    snowEyebrow: "1996–2025",
+    snowTitle: "月ごとの平均新雪",
+    snowNote: "ツェルマット付近の平均新雪と、氷点下のままの日です。今日の積雪はツェルマット・ベルクバーネンの発表です。",
     passEyebrow: "チケット",
     passTitle: "ツェルマットのスキーパス計算",
   },

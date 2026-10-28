@@ -72,10 +72,10 @@ const SEO: Record<Locale, SeoChrome> = {
     ski: {
       title: 'Zermatt Ski Report & Conditions | Lifts, Season & Cervinia',
       description:
-        'Zermatt ski report and conditions: snow by elevation, lift status, ski season, and whether you can ski to Cervinia today.',
+        'Zermatt snow report from Zermatt Bergbahnen, a 10-day snowfall and freezing-level forecast, and average new snow by month since 1996.',
       jsonName: 'Zermatt Ski Report & Matterhorn Ski Paradise',
       jsonDescription:
-        'Zermatt and Cervinia ski conditions: snow by elevation, the Italy border link, lift status, and pass prices.',
+        'Zermatt snow report, 10-day new snow and freezing level, 30-year snowfall by elevation, and the Cervinia link.',
     },
     widget: {
       title: 'Matterhorn Live Widget | Free Embed for Websites',
@@ -115,12 +115,12 @@ const SEO: Record<Locale, SeoChrome> = {
         'Gornergrat Bahn und Glacier Express: Swiss Travel Pass, Sitzplatzreservierung, Fahrplan und der Live-Sichtwert am Gornergrat.',
     },
     ski: {
-      title: 'Zermatt Ski-Report & Wetter | Lifte, Saison & Cervinia',
+      title: 'Zermatt Schneebericht | 10-Tage-Prognose & Cervinia',
       description:
-        'Zermatt Ski-Report: Schnee nach Höhe, Lifte, Saison und ob die Piste nach Cervinia heute offen ist.',
-      jsonName: 'Zermatt Ski-Report & Matterhorn Ski Paradise',
+        'Schneebericht der Zermatt Bergbahnen, Neuschnee und Frostgrenze für 10 Tage, und mittlerer Neuschnee nach Monat seit 1996.',
+      jsonName: 'Zermatt Schneebericht & Matterhorn Ski Paradise',
       jsonDescription:
-        'Skibedingungen Zermatt und Cervinia: Schnee nach Höhe, Grenze nach Italien, Lifte und Skipässe.',
+        'Schneebericht Zermatt, 10-Tage-Neuschnee und Frostgrenze, Neuschnee nach Monat seit 1996, und die Verbindung nach Cervinia.',
     },
     widget: {
       title: 'Matterhorn Live-Widget | Kostenlos einbetten',
@@ -160,12 +160,12 @@ const SEO: Record<Locale, SeoChrome> = {
         'Gornergrat Bahn et Glacier Express : Swiss Travel Pass, réservation de siège, horaires et score de visibilité en direct.',
     },
     ski: {
-      title: 'Conditions ski Zermatt | Remontées, saison et météo',
+      title: 'Bulletin neige Zermatt | Prévision 10 jours et Cervinia',
       description:
-        'Bulletin ski de Zermatt : neige, remontées, saison et météo pour skier jusqu’à Cervinia.',
-      jsonName: 'Bulletin ski de Zermatt et Matterhorn Ski Paradise',
+        'Bulletin d’enneigement des Zermatt Bergbahnen, neige fraîche et limite du gel sur 10 jours, et moyenne mensuelle depuis 1996.',
+      jsonName: 'Bulletin neige de Zermatt et Matterhorn Ski Paradise',
       jsonDescription:
-        'Conditions à Zermatt et Cervinia : neige par altitude, liaison vers l’Italie, remontées et forfaits.',
+        'Bulletin neige de Zermatt, prévision à 10 jours, neige fraîche moyenne par mois depuis 1996, et la liaison vers Cervinia.',
     },
     widget: {
       title: 'Widget Cervin en direct | Intégration gratuite',
@@ -205,12 +205,12 @@ const SEO: Record<Locale, SeoChrome> = {
         'Gornergrat Bahn e Glacier Express: Swiss Travel Pass, prenotazione del posto, orari e punteggio di visibilità in diretta.',
     },
     ski: {
-      title: 'Report sci Zermatt | Impianti, stagione e meteo',
+      title: 'Bollettino neve Zermatt | Previsioni 10 giorni e Cervinia',
       description:
-        'Report sci di Zermatt: neve, impianti, stagione e meteo per sciare fino a Cervinia.',
-      jsonName: 'Report sci di Zermatt e Matterhorn Ski Paradise',
+        'Bollettino neve delle Zermatt Bergbahnen, neve fresca e limite del gelo per 10 giorni, e media mensile dal 1996.',
+      jsonName: 'Bollettino neve di Zermatt e Matterhorn Ski Paradise',
       jsonDescription:
-        'Condizioni a Zermatt e Cervinia: neve per quota, collegamento con l’Italia, impianti e skipass.',
+        'Bollettino neve di Zermatt, previsione a 10 giorni, neve fresca media per mese dal 1996, e il collegamento con Cervinia.',
     },
     widget: {
       title: 'Widget Cervino in diretta | Incorporazione gratuita',
@@ -252,10 +252,10 @@ const SEO: Record<Locale, SeoChrome> = {
     ski: {
       title: 'Parte de nieve de Zermatt | Remontes, temporada y Cervinia',
       description:
-        'Parte de nieve de Zermatt: nieve por altitud, remontes, temporada y si hoy se puede esquiar hasta Cervinia.',
+        'Parte de nieve de Zermatt Bergbahnen, previsión de nieve y cota de congelación a 10 días, y media mensual desde 1996.',
       jsonName: 'Parte de nieve de Zermatt y Matterhorn Ski Paradise',
       jsonDescription:
-        'Condiciones en Zermatt y Cervinia: nieve por altitud, enlace con Italia, remontes y forfaits.',
+        'Parte de nieve de Zermatt, previsión a 10 días, nieve reciente media por mes desde 1996 y el enlace con Cervinia.',
     },
     widget: {
       title: 'Widget del Cervino en directo | Inserción gratuita',
@@ -297,7 +297,7 @@ const SEO: Record<Locale, SeoChrome> = {
     ski: {
       title: 'Relatório de esqui em Zermatt | Teleféricos, época e Cervinia',
       description:
-        'Relatório de esqui em Zermatt: neve por altitude, teleféricos, época e se hoje dá para esquiar até Cervinia.',
+        'Boletim de neve das Zermatt Bergbahnen, neve fresca e cota de congelação a 10 dias, e média mensal desde 1996.',
       jsonName: 'Relatório de esqui em Zermatt e Matterhorn Ski Paradise',
       jsonDescription:
         'Condições em Zermatt e Cervinia: neve por altitude, ligação a Itália, teleféricos e passes.',
@@ -336,7 +336,7 @@ const SEO: Record<Locale, SeoChrome> = {
     },
     ski: {
       title: '策马特滑雪报告 | 缆车、雪季与切尔维尼亚',
-      description: '策马特滑雪报告：各海拔雪况、缆车、雪季，以及今天能否滑到切尔维尼亚。',
+      description: '采尔马特登山铁路的雪情、10 天新雪和冻结高度，以及 1996 年以来的月平均新雪。',
       jsonName: '策马特滑雪报告与马特洪峰滑雪天堂',
       jsonDescription: '策马特和切尔维尼亚的雪况：各海拔积雪、通往意大利的连接、缆车和雪票。',
     },
@@ -372,7 +372,7 @@ const SEO: Record<Locale, SeoChrome> = {
     },
     ski: {
       title: '策馬特滑雪報告 | 纜車、雪季與切爾維尼亞',
-      description: '策馬特滑雪報告：各海拔雪況、纜車、雪季，以及今天能否滑到切爾維尼亞。',
+      description: '策馬特登山鐵路的雪況、10 天新雪和凍結高度，以及 1996 年以來的月平均新雪。',
       jsonName: '策馬特滑雪報告與馬特洪峰滑雪天堂',
       jsonDescription: '策馬特和切爾維尼亞的雪況：各海拔積雪、通往義大利的連接、纜車和雪票。',
     },
@@ -413,7 +413,7 @@ const SEO: Record<Locale, SeoChrome> = {
     ski: {
       title: 'ツェルマットスキー情報 | リフト、シーズン、チェルヴィニア',
       description:
-        'ツェルマットのスキー情報：標高ごとの雪、リフト、シーズン、今日チェルヴィニアまで滑れるか。',
+        'ツェルマット・ベルクバーネンの積雪、10日間の新雪と凍結高度、1996年からの月平均新雪。',
       jsonName: 'ツェルマットスキー情報とマッターホルンスキーパラダイス',
       jsonDescription: 'ツェルマットとチェルヴィニアの雪況：標高ごとの雪、イタリア側への連絡、リフト、リフト券。',
     },
@@ -452,7 +452,7 @@ const SEO: Record<Locale, SeoChrome> = {
     },
     ski: {
       title: '체르마트 스키 리포트 | 리프트, 시즌, 체르비니아',
-      description: '체르마트 스키 리포트: 고도별 눈, 리프트, 시즌, 오늘 체르비니아까지 스키를 탈 수 있는지.',
+      description: '체르마트 베르크바넨 적설, 10일 신설과 동결 고도, 1996년 이후 월평균 신설.',
       jsonName: '체르마트 스키 리포트와 마터호른 스키 파라다이스',
       jsonDescription: '체르마트와 체르비니아 설질: 고도별 눈, 이탈리아 연결, 리프트, 리프트권.',
     },

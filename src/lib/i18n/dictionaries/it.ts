@@ -221,9 +221,9 @@ export const it: Dictionary = {
   },
   skiPage: {
     h1: "Sci a Zermatt oggi",
-    snowEyebrow: "Riferimento di stagione",
-    snowTitle: "Neve tipica per quota",
-    snowNote: "Questi spessori sono una guida di stagione, non un bollettino neve in diretta. Il vento di cresta del collegamento con l’Italia è in diretta.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "Neve fresca tipica per mese",
+    snowNote: "Neve fresca media e giorni sotto zero vicino a Zermatt. Lo spessore di oggi è il bollettino delle Zermatt Bergbahnen.",
     passEyebrow: "Skipass",
     passTitle: "Calcolo skipass di Zermatt",
   },

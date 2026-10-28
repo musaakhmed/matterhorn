@@ -221,9 +221,9 @@ export const de: Dictionary = {
   },
   skiPage: {
     h1: "Heute Ski in Zermatt",
-    snowEyebrow: "Saisonale Orientierung",
-    snowTitle: "Typische Schneehöhe nach Lage",
-    snowNote: "Diese Höhen sind ein Saisonwert, kein Live-Schneebericht. Der Wind an der Italien-Verbindung ist live.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "Typischer Neuschnee nach Monat",
+    snowNote: "Mittlerer Neuschnee und Tage unter null bei Zermatt. Die heutige Schneehöhe ist der Bericht der Zermatt Bergbahnen.",
     passEyebrow: "Tickets",
     passTitle: "Skipass-Rechner für Zermatt",
   },

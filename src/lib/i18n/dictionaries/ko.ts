@@ -218,9 +218,9 @@ export const ko: Dictionary = {
   },
   skiPage: {
     h1: "오늘 체르마트 스키",
-    snowEyebrow: "계절 참고",
-    snowTitle: "고도별 일반적인 적설",
-    snowNote: "이 적설은 계절 안내이며 실시간 적설 정보가 아닙니다. 이탈리아 연결 구간의 능선 바람은 실시간입니다.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "월별 평균 신설",
+    snowNote: "체르마트 근처의 평균 신설과 영하로 유지된 날입니다. 오늘 적설은 체르마트 베르크바넨 리포트입니다.",
     passEyebrow: "리프트권",
     passTitle: "체르마트 스키 패스 계산기",
   },

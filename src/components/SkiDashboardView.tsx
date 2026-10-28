@@ -27,12 +27,13 @@ import {
   getApresSkiSpots,
   getLocalizedCrossBorderLink,
   getLocalizedSkiPassEstimate,
-  getLocalizedSnowAltitudeTiers,
   getMountainDining,
   getSkiDashboardUi,
   getSkiFaqs,
   getSkiSectors,
 } from '@/lib/i18n/ski-copy';
+import SnowConditions from '@/components/SnowConditions';
+import type { ResortSnowReport, SnowForecast } from '@/lib/snow-data';
 import Header from '@/components/Header';
 import LiveWebcam from '@/components/LiveWebcam';
 import Footer from '@/components/Footer';
@@ -41,11 +42,15 @@ import SkiScene from '@/components/scenes/SkiScene';
 interface SkiDashboardViewProps {
   initialData?: VisibilityApiResponse;
   locale?: Locale;
+  snowReport?: ResortSnowReport | null;
+  snowForecast?: SnowForecast | null;
 }
 
 export default function SkiDashboardView({
   initialData,
   locale = 'en',
+  snowReport = null,
+  snowForecast = null,
 }: SkiDashboardViewProps) {
   const { dict } = useTranslation();
   const ui = getSkiDashboardUi(locale);
@@ -54,7 +59,6 @@ export default function SkiDashboardView({
   const apresSkiSpots = getApresSkiSpots(locale);
   const skiFaqs = getSkiFaqs(locale);
   const borderStatus = getLocalizedCrossBorderLink(initialData, locale);
-  const snowTiers = getLocalizedSnowAltitudeTiers(initialData, locale);
   const borderStatusLabel =
     borderStatus.status === 'OPEN'
       ? ui.statusOpen
@@ -434,75 +438,7 @@ export default function SkiDashboardView({
           </p>
         </section>
 
-        <section aria-labelledby="snow-elevation-heading" className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 block mb-1">
-                {dict.skiPage.snowEyebrow}
-              </span>
-              <h2 id="snow-elevation-heading" className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white">
-                {dict.skiPage.snowTitle}
-              </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 max-w-3xl leading-relaxed">
-                {dict.skiPage.snowNote}
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {snowTiers.map((tier) => (
-              <div
-                key={tier.altitude}
-                className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-2xs flex flex-col justify-between hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
-              >
-                <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700">
-                      {tier.altitude}
-                    </span>
-                    <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
-                      {tier.tempEstimatedC > 0 ? `+${tier.tempEstimatedC}°C` : `${tier.tempEstimatedC}°C`}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold text-slate-950 dark:text-white mt-3.5">
-                    {tier.label}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">
-                    {tier.terrain}
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3 my-5 py-3.5 border-y border-slate-100 dark:border-slate-800">
-                    <div>
-                      <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold block">
-                        {ui.totalBase}
-                      </span>
-                      <p className="text-3xl font-mono font-extrabold text-slate-950 dark:text-white mt-1">
-                        {tier.snowDepthCm} <span className="text-xs font-sans font-normal text-slate-500">cm</span>
-                      </p>
-                    </div>
-                    <div>
-                      <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold block">
-                        {ui.fresh24h}
-                      </span>
-                      <p className="text-3xl font-mono font-extrabold text-sky-600 dark:text-sky-400 mt-1">
-                        +{tier.fresh24hCm} <span className="text-xs font-sans font-normal text-slate-500">cm</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-xs pt-1">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">{ui.condition}</span>
-                  <span className="font-semibold text-slate-950 dark:text-slate-200 font-mono">
-                    {tier.surfaceQuality}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <SnowConditions locale={locale} report={snowReport} forecast={snowForecast} />
 
         <section aria-labelledby="sectors-heading" className="space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-3">

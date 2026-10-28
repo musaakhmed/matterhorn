@@ -441,50 +441,6 @@ export function calculateSkiPassEstimate(params: {
 }
 
 /**
- * Computes live multi-altitude snow & condition tiers using telemetry.
- */
-export function getSnowAltitudeTiers(data?: VisibilityApiResponse) {
-  const glacier = data?.viewpoints['glacier-paradise'];
-  const gornergrat = data?.viewpoints.gornergrat;
-
-  const glacierWind = glacier?.metrics.windSpeedKmh ?? 32;
-  const isHighWind = glacierWind > 55;
-
-  return [
-    {
-      altitude: '1,620 m',
-      label: 'Zermatt Village & Valley Floor',
-      terrain: 'Valley runs (Furi to Village #50), beginners, ski-in home trails',
-      snowDepthCm: 45,
-      fresh24hCm: 5,
-      tempEstimatedC: 2,
-      conditionStatus: 'Packed Powder / Compact',
-      surfaceQuality: 'Well Groomed',
-    },
-    {
-      altitude: '2,580 m',
-      label: 'Mid-Mountain (Sunnegga & Riffelberg)',
-      terrain: 'Wide motorways, tree line, Findeln gourmet huts, Gornergrat railway',
-      snowDepthCm: 140,
-      fresh24hCm: 12,
-      tempEstimatedC: -3,
-      conditionStatus: 'Powder & Crisp Groomers',
-      surfaceQuality: 'Optimal Winter Cruising',
-    },
-    {
-      altitude: '3,883 m',
-      label: 'Glacier Crest (Matterhorn Glacier Paradise)',
-      terrain: 'Theodul Glacier, Plateau Rosa, Italian border crossing, snowpark',
-      snowDepthCm: 260,
-      fresh24hCm: 25,
-      tempEstimatedC: -9,
-      conditionStatus: isHighWind ? 'Wind-Affected / Blustery' : 'Pure Alpine Dry Powder',
-      surfaceQuality: 'Glacial Hardpack & Wind-buffed Powder',
-    },
-  ];
-}
-
-/**
  * Evaluates live cross-border link status between Switzerland and Italy.
  */
 export function evaluateCrossBorderLink(data?: VisibilityApiResponse): {

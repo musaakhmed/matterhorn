@@ -218,9 +218,9 @@ export const zh: Dictionary = {
   },
   skiPage: {
     h1: "今天在采尔马特滑雪",
-    snowEyebrow: "季节参考",
-    snowTitle: "按海拔的典型积雪",
-    snowNote: "这些雪深是季节参考，不是实时雪况。意大利连接处的山脊风速是实时的。",
+    snowEyebrow: "1996–2025",
+    snowTitle: "各月典型新雪",
+    snowNote: "采尔马特附近的平均新雪，以及维持在冰点以下的天数。今天的雪深来自采尔马特登山铁路。",
     passEyebrow: "雪票",
     passTitle: "采尔马特滑雪通票计算",
   },

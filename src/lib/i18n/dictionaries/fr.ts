@@ -221,9 +221,9 @@ export const fr: Dictionary = {
   },
   skiPage: {
     h1: "Skier à Zermatt aujourd’hui",
-    snowEyebrow: "Repère de saison",
-    snowTitle: "Neige habituelle selon l’altitude",
-    snowNote: "Ces hauteurs sont un repère de saison, pas un bulletin de neige en direct. Le vent de crête de la liaison vers l'Italie est en direct.",
+    snowEyebrow: "1996–2025",
+    snowTitle: "Neige fraîche habituelle par mois",
+    snowNote: "Neige fraîche moyenne et jours sous le gel près de Zermatt. La hauteur du jour est le bulletin des Zermatt Bergbahnen.",
     passEyebrow: "Forfaits",
     passTitle: "Calculateur de forfait ski à Zermatt",
   },
