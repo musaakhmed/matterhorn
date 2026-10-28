@@ -71,7 +71,7 @@ const STATUS: Record<Locale, Record<VisibilityStatus, string>> = {
   },
 };
 
-function statusLabel(locale: Locale, status: string): string {
+export function visibilityStatusLabel(locale: Locale, status: string): string {
   const table = STATUS[locale] ?? STATUS.en;
   return table[status as VisibilityStatus] ?? status;
 }
@@ -87,11 +87,11 @@ export function liveVisibilityPrefix(
 
   const time = data.swissTimeFormatted;
   const g = gornergrat.currentScore;
-  const gs = statusLabel(locale, gornergrat.currentStatus);
+  const gs = visibilityStatusLabel(locale, gornergrat.currentStatus);
   const gam = gornergrat.today.morning.score;
   const gpm = gornergrat.today.afternoon.score;
   const c = glacier.currentScore;
-  const cs = statusLabel(locale, glacier.currentStatus);
+  const cs = visibilityStatusLabel(locale, glacier.currentStatus);
   const cam = glacier.today.morning.score;
   const cpm = glacier.today.afternoon.score;
 

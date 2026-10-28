@@ -1,12 +1,13 @@
 import { GuideArticle, GuideFaq, GUIDES } from './guides';
 import { VisibilityApiResponse } from './types';
-import { getLocalizedHref, isValidLocale, Locale, LOCALE_METAS } from './i18n/config';
+import { getLocalizedHref, isValidLocale, Locale } from './i18n/config';
+import { getSeo, getWidgetFaqs, schemaLanguage, viewpointLivePrefix } from './i18n/seo';
+import { getLocalizedViewpointPage } from './i18n/viewpoints';
 import { getGuidesIndexFaqs, getHomeFaqs, liveVisibilityPrefix } from './i18n/faqs';
 import { getLocalizedGuideArticle } from './i18n/guides';
 import { getSkiFaqs } from './i18n/ski-copy';
 import { getTrainsFaqs } from './i18n/trains-copy';
 import {
-  evaluateLakeReflectionConditions,
   getLiveForecastForViewpointPage,
   VIEWPOINT_PAGES,
   ViewpointPageConfig,
@@ -73,7 +74,10 @@ export function buildOrganizationNode() {
  * Build the `WeatherForecast` JSON-LD node with live 10-day AM/PM telemetry for
  * Gornergrat (3,089m) and Matterhorn Glacier Paradise (3,883m).
  */
-export function buildWeatherForecastNode(data?: VisibilityApiResponse) {
+export function buildWeatherForecastNode(
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
+) {
   const nowIso = data?.updatedAt || new Date().toISOString();
   const gornergrat = data?.viewpoints.gornergrat;
   const glacier = data?.viewpoints['glacier-paradise'];
@@ -194,8 +198,8 @@ export function buildWeatherForecastNode(data?: VisibilityApiResponse) {
     '@id': `${SITE_URL}/#weather-forecast`,
     name: 'Matterhorn 10-Day AM/PM Visibility Forecast (Gornergrat & Glacier Paradise)',
     alternateName: 'Zermatt Matterhorn Summit (4,478m) Live Visibility Index',
-    url: SITE_URL,
-    inLanguage: 'en-CH',
+    url: locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`,
+    inLanguage: schemaLanguage(locale),
     dateIssued: nowIso,
     datePublished: nowIso,
     dateModified: nowIso,
@@ -332,23 +336,25 @@ export function buildRootLayoutJsonLd() {
  * Complete Homepage (`/`) JSON-LD `@graph` combining live `WeatherForecast`,
  * `FAQPage`, and `BreadcrumbList` schemas.
  */
-export function buildHomePageJsonLd(data?: VisibilityApiResponse, locale?: Locale) {
+export function buildHomePageJsonLd(data?: VisibilityApiResponse, locale: Locale = 'en') {
   const faqs = getDashboardFaqs(data, locale);
+  const pageUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
+  const lang = schemaLanguage(locale);
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      buildWeatherForecastNode(data),
-      buildFaqPageNode(faqs, SITE_URL),
+      buildWeatherForecastNode(data, locale),
+      buildFaqPageNode(faqs, pageUrl, lang),
       {
         '@type': 'BreadcrumbList',
-        '@id': `${SITE_URL}/#breadcrumb`,
+        '@id': `${pageUrl}/#breadcrumb`,
         itemListElement: [
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Matterhorn Visibility Dashboard',
-            item: SITE_URL,
+            name: getSeo(locale).dashboard,
+            item: pageUrl,
           },
         ],
       },
@@ -367,6 +373,9 @@ export function buildGuidesIndexJsonLd(
   const pageUrl =
     locale === 'en' ? `${SITE_URL}/guides` : `${SITE_URL}/${locale}/guides`;
   const guidesIndexFaqs = getGuidesIndexFaqItems(locale);
+  const seo = getSeo(locale);
+  const lang = schemaLanguage(locale);
+  const homeUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     '@context': 'https://schema.org',
@@ -374,11 +383,10 @@ export function buildGuidesIndexJsonLd(
       {
         '@type': 'CollectionPage',
         '@id': `${pageUrl}#collection`,
-        name: 'Matterhorn Alpine Field Guides & Weather Climatology',
-        description:
-          'Data-backed field guides for Zermatt travelers: viewpoint comparisons, 30-year monthly visibility statistics, sunrise photography spots, and banner cloud physics.',
+        name: seo.guidesPage.jsonName,
+        description: seo.guidesPage.jsonDescription,
         url: pageUrl,
-        inLanguage: LOCALE_METAS[locale]?.htmlLang || 'en-CH',
+        inLanguage: lang,
         isPartOf: {
           '@id': `${SITE_URL}/#website`,
         },
@@ -392,8 +400,8 @@ export function buildGuidesIndexJsonLd(
           })),
         },
       },
-      buildWeatherForecastNode(data),
-      buildFaqPageNode(guidesIndexFaqs, pageUrl),
+      buildWeatherForecastNode(data, locale),
+      buildFaqPageNode(guidesIndexFaqs, pageUrl, lang),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -401,13 +409,13 @@ export function buildGuidesIndexJsonLd(
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: seo.dashboard,
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Alpine Field Guides',
+            name: seo.guides,
             item: pageUrl,
           },
         ],
@@ -422,9 +430,13 @@ export function buildGuidesIndexJsonLd(
  */
 export function buildGuideArticleJsonLd(
   guide: GuideArticle,
-  data?: VisibilityApiResponse
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
 ) {
-  const pageUrl = `${SITE_URL}/guides/${guide.slug}`;
+  const pageUrl = `${SITE_URL}${getLocalizedHref(`/guides/${guide.slug}`, locale)}`;
+  const seo = getSeo(locale);
+  const lang = schemaLanguage(locale);
+  const homeUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     '@context': 'https://schema.org',
@@ -436,7 +448,7 @@ export function buildGuideArticleJsonLd(
         description: guide.description,
         datePublished: guide.publishedAt,
         dateModified: guide.updatedAt,
-        inLanguage: 'en-CH',
+        inLanguage: lang,
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },
@@ -448,8 +460,8 @@ export function buildGuideArticleJsonLd(
           '@id': `${SITE_URL}/#weather-forecast`,
         },
       },
-      buildWeatherForecastNode(data),
-      buildFaqPageNode(guide.faqs, pageUrl),
+      buildWeatherForecastNode(data, locale),
+      buildFaqPageNode(guide.faqs, pageUrl, lang),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -457,14 +469,14 @@ export function buildGuideArticleJsonLd(
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: seo.dashboard,
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Alpine Field Guides',
-            item: `${SITE_URL}/guides`,
+            name: seo.guides,
+            item: `${SITE_URL}${getLocalizedHref('/guides', locale)}`,
           },
           {
             '@type': 'ListItem',
@@ -484,35 +496,29 @@ export function buildGuideArticleJsonLd(
  */
 export function getViewpointPageFaqs(
   page: ViewpointPageConfig,
-  data?: VisibilityApiResponse
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
 ): RichFaqItem[] {
   if (!data) {
     return page.faqs;
   }
 
   const forecast = getLiveForecastForViewpointPage(page, data);
-  const reflection =
-    page.slug === 'riffelsee'
-      ? evaluateLakeReflectionConditions(forecast)
-      : null;
+  const prefix = viewpointLivePrefix(
+    locale,
+    data.swissTimeFormatted,
+    page.shortName,
+    forecast.currentScore,
+    forecast.currentStatus,
+    forecast.today.morning.score,
+    forecast.today.afternoon.score
+  );
 
   return page.faqs.map((faq, idx) => {
     if (idx !== 0) return faq;
-
-    if (page.slug === 'riffelsee' && reflection) {
-      return {
-        ...faq,
-        answer: `Right now (${data.swissTimeFormatted}), Riffelsee & Stellisee reflection status is "${reflection.overallVerdict}" — East-Face Visibility is ${forecast.currentScore}/10 (${forecast.currentStatus}; AM: ${forecast.today.morning.score}/10, PM: ${forecast.today.afternoon.score}/10) with surface wind at ${forecast.metrics.windSpeedKmh} km/h ${forecast.metrics.windCardinal}. ${faq.answer}`,
-        guideHref: '/guides/best-matterhorn-photo-viewpoints',
-        guideLabel: 'Read our complete Zermatt Photo & Mirror Lake Guide',
-      };
-    }
-
     return {
       ...faq,
-      answer: `Right now (${data.swissTimeFormatted}), ${page.shortName} scores ${forecast.currentScore}/10 (${forecast.currentStatus} — Morning AM: ${forecast.today.morning.score}/10, Afternoon PM: ${forecast.today.afternoon.score}/10, Mid-Cloud: ${forecast.metrics.cloudCoverMid}%, Visibility: ${forecast.metrics.visibilityKm} km). ${faq.answer}`,
-      guideHref: '/guides/gornergrat-vs-glacier-paradise',
-      guideLabel: 'Compare Gornergrat vs. Glacier Paradise viewpoints',
+      answer: `${prefix}${faq.answer}`,
     };
   });
 }
@@ -520,8 +526,15 @@ export function getViewpointPageFaqs(
 /**
  * Complete Viewpoints Index (`/viewpoints`) JSON-LD `@graph`.
  */
-export function buildViewpointsIndexJsonLd(data?: VisibilityApiResponse) {
-  const pageUrl = `${SITE_URL}/viewpoints`;
+export function buildViewpointsIndexJsonLd(
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
+) {
+  const pageUrl =
+    locale === 'en' ? `${SITE_URL}/viewpoints` : `${SITE_URL}/${locale}/viewpoints`;
+  const seo = getSeo(locale);
+  const lang = schemaLanguage(locale);
+  const homeUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     '@context': 'https://schema.org',
@@ -529,11 +542,10 @@ export function buildViewpointsIndexJsonLd(data?: VisibilityApiResponse) {
       {
         '@type': 'CollectionPage',
         '@id': `${pageUrl}#collection`,
-        name: 'Matterhorn Viewpoints Live Visibility & Conditions (Gornergrat, Glacier Paradise & Riffelsee)',
-        description:
-          'Compare live 1–10 visibility scores, 10-day AM/PM forecasts, wind speeds, and lake reflection conditions across Zermatt’s top Matterhorn viewpoints.',
+        name: seo.viewpointsPage.jsonName,
+        description: seo.viewpointsPage.jsonDescription,
         url: pageUrl,
-        inLanguage: 'en-CH',
+        inLanguage: lang,
         isPartOf: {
           '@id': `${SITE_URL}/#website`,
         },
@@ -542,12 +554,12 @@ export function buildViewpointsIndexJsonLd(data?: VisibilityApiResponse) {
           itemListElement: VIEWPOINT_PAGES.map((vp, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            url: `${SITE_URL}/viewpoints/${vp.slug}`,
-            name: vp.title,
+            url: `${SITE_URL}${getLocalizedHref(`/viewpoints/${vp.slug}`, locale)}`,
+            name: getLocalizedViewpointPage(vp.slug, locale).title,
           })),
         },
       },
-      buildWeatherForecastNode(data),
+      buildWeatherForecastNode(data, locale),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -555,13 +567,13 @@ export function buildViewpointsIndexJsonLd(data?: VisibilityApiResponse) {
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: seo.dashboard,
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Matterhorn Viewpoints',
+            name: seo.viewpoints,
             item: pageUrl,
           },
         ],
@@ -576,10 +588,14 @@ export function buildViewpointsIndexJsonLd(data?: VisibilityApiResponse) {
  */
 export function buildViewpointPageJsonLd(
   page: ViewpointPageConfig,
-  data?: VisibilityApiResponse
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
 ) {
-  const pageUrl = `${SITE_URL}/viewpoints/${page.slug}`;
-  const faqs = getViewpointPageFaqs(page, data);
+  const pageUrl = `${SITE_URL}${getLocalizedHref(`/viewpoints/${page.slug}`, locale)}`;
+  const faqs = getViewpointPageFaqs(page, data, locale);
+  const seo = getSeo(locale);
+  const lang = schemaLanguage(locale);
+  const homeUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     '@context': 'https://schema.org',
@@ -590,7 +606,7 @@ export function buildViewpointPageJsonLd(
         name: page.name,
         description: page.description,
         url: pageUrl,
-        inLanguage: 'en-CH',
+        inLanguage: lang,
         isAccessibleForFree: false,
         publicAccess: true,
         touristType: [
@@ -611,8 +627,8 @@ export function buildViewpointPageJsonLd(
           addressCountry: 'CH',
         },
       },
-      buildWeatherForecastNode(data),
-      buildFaqPageNode(faqs, pageUrl),
+      buildWeatherForecastNode(data, locale),
+      buildFaqPageNode(faqs, pageUrl, lang),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -620,14 +636,14 @@ export function buildViewpointPageJsonLd(
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: seo.dashboard,
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Matterhorn Viewpoints',
-            item: `${SITE_URL}/viewpoints`,
+            name: seo.viewpoints,
+            item: `${SITE_URL}${getLocalizedHref('/viewpoints', locale)}`,
           },
           {
             '@type': 'ListItem',
@@ -641,39 +657,20 @@ export function buildViewpointPageJsonLd(
   };
 }
 
-export const WIDGET_PAGE_FAQS: RichFaqItem[] = [
-  {
-    question:
-      'Is the Matterhorn Live Visibility Widget free for Zermatt hotels, chalets, and tourism websites?',
-    answer:
-      'Yes. Our live 1–10 Matterhorn Visibility Widget, auto-resizing JavaScript embed, universal iframe, and dynamic SVG status badges are 100% free for Zermatt hotels, alpine chalets, mountain guide agencies, ski schools, and travel bloggers to publish with attribution.',
-  },
-  {
-    question:
-      'How often does the embedded hotel widget update its Matterhorn visibility score?',
-    answer:
-      'The widget updates automatically every 15 minutes using high-altitude Open-Meteo cloud layer telemetry (2,000m–6,000m), horizontal summit visibility, and southerly Föhn wind diagnostics across both Gornergrat (3,089m East) and Matterhorn Glacier Paradise (3,883m South).',
-  },
-  {
-    question:
-      'Can we display the Matterhorn widget in German (DE) or French (FR) for our hotel guests?',
-    answer:
-      'Yes. The widget natively supports English (lang="en"), German (lang="de"), and French (lang="fr"), automatically translating all visibility verdicts, Morning/Afternoon periods, and atmospheric metrics for international guests in Valais.',
-  },
-  {
-    question:
-      'Does the widget use tracking cookies or slow down our hotel website?',
-    answer:
-      'No. The widget sets zero cookies, collects zero personal guest data (100% GDPR and Swiss FADP compliant), and is edge-cached with 15-minute Incremental Static Regeneration (ISR) so it loads instantaneously without impacting your Core Web Vitals.',
-  },
-];
+export const WIDGET_PAGE_FAQS: RichFaqItem[] = getWidgetFaqs('en');
 
 /**
  * Complete Partner Widget Studio (`/widget`) JSON-LD `@graph` combining
  * `SoftwareApplication`, `WeatherForecast`, `FAQPage`, and `BreadcrumbList`.
  */
-export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
-  const pageUrl = `${SITE_URL}/widget`;
+export function buildWidgetPageJsonLd(
+  data?: VisibilityApiResponse,
+  locale: Locale = 'en'
+) {
+  const pageUrl = locale === 'en' ? `${SITE_URL}/widget` : `${SITE_URL}/${locale}/widget`;
+  const seo = getSeo(locale);
+  const lang = schemaLanguage(locale);
+  const homeUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     '@context': 'https://schema.org',
@@ -681,13 +678,12 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
       {
         '@type': 'SoftwareApplication',
         '@id': `${pageUrl}#widget-app`,
-        name: 'Matterhorn Live Visibility Status Widget for Hotels & Websites',
+        name: seo.widget.jsonName,
         applicationCategory: 'WeatherApplication',
         operatingSystem: 'Web, WordPress, Webflow, Squarespace, Wix, HTML, Email',
         url: pageUrl,
-        inLanguage: ['en-CH', 'de-CH', 'fr-CH'],
-        description:
-          'Free embeddable live 1–10 Matterhorn visibility widget for Zermatt hotels, chalets, lobby screens, and travel portals. Displays real-time Gornergrat (3,089m) and Glacier Paradise (3,883m) AM/PM scores.',
+        inLanguage: lang,
+        description: seo.widget.jsonDescription,
         offers: {
           '@type': 'Offer',
           price: '0',
@@ -697,8 +693,8 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
           '@id': `${SITE_URL}/#organization`,
         },
       },
-      buildWeatherForecastNode(data),
-      buildFaqPageNode(WIDGET_PAGE_FAQS, pageUrl),
+      buildWeatherForecastNode(data, locale),
+      buildFaqPageNode(getWidgetFaqs(locale), pageUrl, lang),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -706,13 +702,13 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: seo.dashboard,
+            item: homeUrl,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Hotel & Partner Live Widget',
+            name: seo.widget.title,
             item: pageUrl,
           },
         ],
@@ -728,12 +724,14 @@ export function buildWidgetPageJsonLd(data?: VisibilityApiResponse) {
  */
 export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: string = 'en') {
   const pageUrl = locale === 'en' ? `${SITE_URL}/trains` : `${SITE_URL}/${locale}/trains`;
-  const faqs = getTrainsFaqs(isValidLocale(locale) ? locale : 'en').map((f) => ({
+  const trainLocale: Locale = isValidLocale(locale) ? locale : 'en';
+  const trainSeo = getSeo(trainLocale);
+  const faqs = getTrainsFaqs(trainLocale).map((f) => ({
     question: f.question,
     answer: f.answer,
   }));
 
-  const inLanguage = LOCALE_METAS[locale as Locale]?.htmlLang || 'en-CH';
+  const inLanguage = schemaLanguage(trainLocale);
 
   return {
     '@context': 'https://schema.org',
@@ -741,9 +739,8 @@ export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: stri
       {
         '@type': 'WebPage',
         '@id': `${pageUrl}#webpage`,
-        name: 'Gornergrat Railway & Glacier Express: Scenic Swiss Trains Guide, Tickets & Live Conditions',
-        description:
-          'Complete 2026 travel guide to the Gornergrat Bahn and Glacier Express. Compare Swiss Travel Pass discounts, seat reservations, live summit visibility scores, timetables, and panoramic routes.',
+        name: trainSeo.trains.jsonName,
+        description: trainSeo.trains.jsonDescription,
         url: pageUrl,
         inLanguage,
         isPartOf: {
@@ -794,8 +791,8 @@ export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: stri
           ],
         },
       },
-      buildWeatherForecastNode(data),
-      buildFaqPageNode(faqs, pageUrl),
+      buildWeatherForecastNode(data, trainLocale),
+      buildFaqPageNode(faqs, pageUrl, inLanguage),
       {
         '@type': 'BreadcrumbList',
         '@id': `${pageUrl}#breadcrumb`,
@@ -803,13 +800,13 @@ export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: stri
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: trainSeo.dashboard,
+            item: trainLocale === 'en' ? SITE_URL : `${SITE_URL}/${trainLocale}`,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Scenic Trains (Gornergrat & Glacier Express)',
+            name: trainSeo.trains.title,
             item: pageUrl,
           },
         ],
@@ -824,12 +821,14 @@ export function buildTrainsPageJsonLd(data?: VisibilityApiResponse, locale: stri
  */
 export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string = 'en') {
   const pageUrl = locale === 'en' ? `${SITE_URL}/ski` : `${SITE_URL}/${locale}/ski`;
-  const faqs = getSkiFaqs(isValidLocale(locale) ? locale : 'en').map((f) => ({
+  const skiLocale: Locale = isValidLocale(locale) ? locale : 'en';
+  const skiSeo = getSeo(skiLocale);
+  const faqs = getSkiFaqs(skiLocale).map((f) => ({
     question: f.question,
     answer: f.answer,
   }));
 
-  const inLanguage = LOCALE_METAS[locale as Locale]?.htmlLang || 'en-CH';
+  const inLanguage = schemaLanguage(skiLocale);
 
   return {
     '@context': 'https://schema.org',
@@ -837,9 +836,8 @@ export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string 
       {
         '@type': 'WebPage',
         '@id': `${pageUrl}#webpage`,
-        name: 'Zermatt Ski Resort & Matterhorn Ski Paradise: Live Snow, Lifts, Cervinia Link & 2026 Passes',
-        description:
-          'Live ski conditions for Zermatt & Cervinia: snow depth at 3 elevations, real-time Italy border link status, 2026 dynamic ski pass pricing, Ikon Pass guide, and mountain restaurant radar.',
+        name: skiSeo.ski.jsonName,
+        description: skiSeo.ski.jsonDescription,
         url: pageUrl,
         inLanguage,
         isPartOf: {
@@ -905,7 +903,7 @@ export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string 
           },
         ],
       },
-      buildWeatherForecastNode(data),
+      buildWeatherForecastNode(data, skiLocale),
       buildFaqPageNode(faqs, pageUrl, inLanguage),
       {
         '@type': 'BreadcrumbList',
@@ -914,13 +912,13 @@ export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string 
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Live Dashboard',
-            item: SITE_URL,
+            name: skiSeo.dashboard,
+            item: skiLocale === 'en' ? SITE_URL : `${SITE_URL}/${skiLocale}`,
           },
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Skiing in Zermatt & Matterhorn Ski Paradise',
+            name: skiSeo.ski.title,
             item: pageUrl,
           },
         ],

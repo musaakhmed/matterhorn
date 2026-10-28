@@ -6,6 +6,7 @@ import { fetchMatterhornVisibility } from '@/lib/weather';
 import { buildHomePageJsonLd, serializeJsonLd } from '@/lib/schema';
 import { LOCALES, Locale, isValidLocale, DEFAULT_LOCALE, getAlternateUrls } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
 
@@ -32,6 +33,7 @@ export async function generateMetadata({
       description: dict.seo.ogDescription,
       url: locale === DEFAULT_LOCALE ? 'https://isthematterhornvisible.com' : `https://isthematterhornvisible.com/${locale}`,
       siteName: dict.common.siteName,
+      locale: openGraphLocale(locale),
       images: [
         {
           url: '/opengraph-image',

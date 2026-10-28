@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import GuidesIndexView from '@/components/GuidesIndexView';
 import { LOCALES, DEFAULT_LOCALE, isValidLocale, getAlternateUrls, Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { getSeo, openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
 
@@ -20,8 +21,9 @@ export async function generateMetadata({
   if (!isValidLocale(rawLocale)) return {};
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
-  const title = `${dict.common.guides} - Zermatt & Matterhorn Field Guides`;
-  const description = dict.guidesPromo.desc;
+  const seo = getSeo(locale);
+  const title = seo.guidesPage.title;
+  const description = seo.guidesPage.description;
 
   return {
     title,
@@ -32,6 +34,7 @@ export async function generateMetadata({
       description,
       url: `https://isthematterhornvisible.com/${locale}/guides`,
       siteName: dict.common.siteName,
+      locale: openGraphLocale(locale),
       type: 'website',
     },
   };

@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next';
+import { headers } from 'next/headers';
 import { buildRootLayoutJsonLd, serializeJsonLd } from '@/lib/schema';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { I18nProvider } from '@/lib/i18n/context';
-import { getAlternateUrls } from '@/lib/i18n/config';
+import { getAlternateUrls, isValidLocale, LOCALE_METAS } from '@/lib/i18n/config';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -92,80 +93,20 @@ export const metadata: Metadata = {
   },
 };
 
-const rootJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    ...buildRootLayoutJsonLd()['@graph'],
-    {
-      '@type': 'WeatherForecast',
-      name: 'Matterhorn Summit Live 1–10 Visibility Forecast',
-      description:
-        'Live Matterhorn visibility score in Zermatt (4,478m). Real-time summit telemetry, Gornergrat webcams, and 10-day high-altitude alpine forecasts.',
-      url: 'https://isthematterhornvisible.com',
-      spatialCoverage: {
-        '@type': 'Place',
-        name: 'Matterhorn Summit',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Zermatt',
-          addressRegion: 'Valais',
-          addressCountry: 'CH',
-        },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 45.9765,
-          longitude: 7.7491,
-          elevation: '4478m',
-        },
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Can you see the Matterhorn from Zermatt today?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Check our live 1–10 Matterhorn Visibility Score updated every 15 minutes using high-altitude Open-Meteo cloud layer telemetry (2,000m–6,000m) and live Gornergrat & Klein Matterhorn webcams. A score of 8–10 indicates crystal-clear views of the 4,478m summit pyramid.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What is the best time of day to see the Matterhorn?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Early morning (06:00–11:00 CET) is statistically the clearest viewing window 78% of the year. Afternoon solar heating of the Mattertal valley walls triggers rising thermal updrafts (anabatic winds) that frequently form cumulus banner clouds around the summit after noon.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Which viewpoint is better: Gornergrat or Klein Matterhorn?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Gornergrat (3,089m) offers the iconic East/Northeast "Toblerone" pyramid profile and Riffelsee mirror lake reflections via cogwheel train. Klein Matterhorn / Matterhorn Glacier Paradise (3,883m) sits nearly 800m higher overlooking the Southern face, making it ideal for rising above low valley fog inversions.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Where is the live Zermatt webcam of the Matterhorn?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'The homepage plays four Roundshot feeds: Gornergrat (3,089m), Rothorn, Trockener Steg toward Klein Matterhorn, and Zermatt village at Kirchbrücke. Each frame refreshes every 10–15 minutes beside the live visibility score.',
-          },
-        },
-      ],
-    },
-  ],
-};
+const rootJsonLd = buildRootLayoutJsonLd();
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerStore = await headers();
+  const requested = headerStore.get('x-locale');
+  const htmlLang =
+    requested && isValidLocale(requested) ? LOCALE_METAS[requested].htmlLang : 'en';
+
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang={htmlLang} className="h-full antialiased" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

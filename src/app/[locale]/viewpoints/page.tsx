@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import ViewpointsIndexView from '@/components/ViewpointsIndexView';
 import { LOCALES, DEFAULT_LOCALE, isValidLocale, getAlternateUrls, Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { getSeo, openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
 
@@ -20,9 +21,9 @@ export async function generateMetadata({
   if (!isValidLocale(rawLocale)) return {};
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
-  const title = `${dict.common.allViewpoints} - Matterhorn Live Visibility | Zermatt Cams`;
-  const description =
-    'Compare live Matterhorn visibility scores across Gornergrat (3,089m), Klein Matterhorn, and Riffelsee before buying mountain lift tickets.';
+  const seo = getSeo(locale);
+  const title = seo.viewpointsPage.title;
+  const description = seo.viewpointsPage.description;
 
   return {
     title,
@@ -33,6 +34,7 @@ export async function generateMetadata({
       description,
       url: `https://isthematterhornvisible.com/${locale}/viewpoints`,
       siteName: dict.common.siteName,
+      locale: openGraphLocale(locale),
       type: 'website',
     },
   };

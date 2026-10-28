@@ -11,6 +11,8 @@ import {
   getAlternateUrls,
   Locale,
 } from '@/lib/i18n/config';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { getSeo, openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
 
@@ -25,12 +27,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
+  const typed = locale as Locale;
+  const seo = getSeo(typed);
+  const dict = getDictionary(typed);
 
   return {
-    title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
-    description:
-      'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
-    alternates: getAlternateUrls('/trains', locale as Locale),
+    title: seo.trains.title,
+    description: seo.trains.description,
+    alternates: getAlternateUrls('/trains', typed),
     keywords: [
       'Gornergrat Bahn',
       'Gornergrat Railway',
@@ -49,11 +53,11 @@ export async function generateMetadata({
       'Riffelsee train stop',
     ],
     openGraph: {
-      title: 'Gornergrat Timetable & Tickets | Glacier Express Price',
-      description:
-        'Gornergrat timetable and tickets, plus Glacier Express price, seat reservation, and the Zermatt route.',
+      title: seo.trains.title,
+      description: seo.trains.description,
       url: `https://isthematterhornvisible.com/${locale}/trains`,
-      siteName: 'Is The Matterhorn Visible?',
+      siteName: dict.common.siteName,
+      locale: openGraphLocale(typed),
       type: 'article',
       images: [
         {

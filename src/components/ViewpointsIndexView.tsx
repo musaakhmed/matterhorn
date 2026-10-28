@@ -56,7 +56,7 @@ export default async function ViewpointsIndexView({
   locale?: Locale;
 } = {}) {
   const telemetry = await fetchMatterhornVisibility();
-  const jsonLd = buildViewpointsIndexJsonLd(telemetry);
+  const jsonLd = buildViewpointsIndexJsonLd(telemetry, locale);
   const reflectionStatus = evaluateLakeReflectionConditions(
     telemetry.viewpoints.gornergrat
   );

@@ -20,9 +20,9 @@ import { fetchMatterhornVisibility } from '@/lib/weather';
 import {
   buildWidgetPageJsonLd,
   serializeJsonLd,
-  WIDGET_PAGE_FAQS,
 } from '@/lib/schema';
-import { getAlternateUrls } from '@/lib/i18n/config';
+import { getAlternateUrls, Locale } from '@/lib/i18n/config';
+import { getWidgetFaqs } from '@/lib/i18n/seo';
 import LiveVisibilityBanner from '@/components/LiveVisibilityBanner';
 import WidgetBuilderClient from '@/components/WidgetBuilderClient';
 import FaqSection from '@/components/FaqSection';
@@ -35,7 +35,7 @@ export const revalidate = 900; // Refresh live telemetry every 15 minutes
 export const metadata: Metadata = {
   title: 'Matterhorn Live Widget | Free Embed for Websites',
   description:
-    'Embed a live 1–10 Matterhorn summit visibility widget on your Zermatt website. Auto-updates every 15 min with Gornergrat telemetry in EN/DE/FR.',
+    'Embed a live 1–10 Matterhorn summit visibility widget on your Zermatt website. It updates every 15 minutes for every live language.',
   keywords: [
     'matterhorn visibility widget',
     'zermatt hotel weather widget',
@@ -79,9 +79,9 @@ const HOSPITALITY_USE_CASES = [
   {
     icon: Mountain,
     badge: 'Guides, Ski Schools & Blogs',
-    title: 'Multilingual (EN / DE / FR) Telemetry',
+    title: 'Every Live Language',
     description:
-      'Serving international guests in Valais? Switch the widget to German (DE) or French (FR) with a single attribute to display localized AM/PM visibility verdicts and 3-day horizon trends.',
+      'Switch the widget language with a single attribute. English, German, French, Italian, Spanish, Portuguese, Japanese, Korean, and both Chinese scripts each get localized AM/PM verdicts.',
   },
 ];
 
@@ -104,9 +104,14 @@ const CMS_PLATFORMS = [
   },
 ];
 
-export default async function PartnerWidgetPage() {
+export default async function PartnerWidgetPage({
+  locale = 'en',
+}: {
+  locale?: Locale;
+} = {}) {
   const telemetry = await fetchMatterhornVisibility();
-  const jsonLd = buildWidgetPageJsonLd(telemetry);
+  const jsonLd = buildWidgetPageJsonLd(telemetry, locale);
+  const faqs = getWidgetFaqs(locale);
 
   return (
     <>
@@ -299,7 +304,7 @@ export default async function PartnerWidgetPage() {
         <FaqSection
           title="Hotel & Partner Widget FAQs"
           subtitle="Everything webmasters and hoteliers need to know about embedding live Matterhorn telemetry"
-          faqs={WIDGET_PAGE_FAQS}
+          faqs={faqs}
           groupName="widget-partner-faq"
           badgeLabel="FAQPage Schema • Zero-Cookie Partner Embed"
         />

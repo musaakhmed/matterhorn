@@ -91,8 +91,8 @@ export default async function ViewpointDetailView({
       ? evaluateLakeReflectionConditions(activeForecast)
       : null;
 
-  const enrichedFaqs = getViewpointPageFaqs(page, telemetry);
-  const jsonLd = buildViewpointPageJsonLd(page, telemetry);
+  const enrichedFaqs = getViewpointPageFaqs(page, telemetry, locale);
+  const jsonLd = buildViewpointPageJsonLd(page, telemetry, locale);
 
   const otherViewpoints = VIEWPOINT_PAGES.filter(
     (vp) => vp.slug !== page.slug

@@ -5,6 +5,8 @@ import ViewpointDetailView from '@/components/ViewpointDetailView';
 import { LOCALES, DEFAULT_LOCALE, isValidLocale, getAlternateUrls, Locale } from '@/lib/i18n/config';
 import { VIEWPOINT_PAGES, ViewpointPageSlug } from '@/lib/viewpoints';
 import { getLocalizedViewpointPage } from '@/lib/i18n/viewpoints';
+import { getDictionary } from '@/lib/i18n/dictionaries';
+import { openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
 
@@ -25,16 +27,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) return {};
-  const page = getLocalizedViewpointPage(slug as ViewpointPageSlug, locale as Locale);
+  const typed = locale as Locale;
+  const page = getLocalizedViewpointPage(slug as ViewpointPageSlug, typed);
+  const dict = getDictionary(typed);
 
   return {
-    title: `${page.title} | Is The Matterhorn Visible?`,
+    title: `${page.title} | ${dict.common.siteName}`,
     description: page.description,
-    alternates: getAlternateUrls(`/viewpoints/${slug}`, locale as Locale),
+    alternates: getAlternateUrls(`/viewpoints/${slug}`, typed),
     openGraph: {
       title: page.title,
       description: page.description,
       url: `https://isthematterhornvisible.com/${locale}/viewpoints/${slug}`,
+      siteName: dict.common.siteName,
+      locale: openGraphLocale(typed),
     },
   };
 }

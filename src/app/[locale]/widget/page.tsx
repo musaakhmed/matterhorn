@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import WidgetPage from '@/app/widget/page';
 import { LOCALES, DEFAULT_LOCALE, isValidLocale, getAlternateUrls, Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { getSeo, openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
 
@@ -20,8 +21,9 @@ export async function generateMetadata({
   if (!isValidLocale(rawLocale)) return {};
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
-  const title = `${dict.common.widgetApi} - Live Matterhorn Visibility Widget`;
-  const description = dict.widgetPromo.desc;
+  const seo = getSeo(locale);
+  const title = seo.widget.title;
+  const description = seo.widget.description;
 
   return {
     title,
@@ -32,6 +34,7 @@ export async function generateMetadata({
       description,
       url: `https://isthematterhornvisible.com/${locale}/widget`,
       siteName: dict.common.siteName,
+      locale: openGraphLocale(locale),
       type: 'website',
     },
   };
@@ -44,5 +47,5 @@ export default async function LocalizedWidgetPage({
 }) {
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
-  return <WidgetPage />;
+  return <WidgetPage locale={locale} />;
 }

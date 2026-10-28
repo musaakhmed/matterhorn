@@ -95,7 +95,7 @@ export default async function GuideArticleView({
     .map((g) => getLocalizedGuideArticle(g.slug, locale));
 
   const telemetry = await fetchMatterhornVisibility();
-  const jsonLd = buildGuideArticleJsonLd(guide, telemetry);
+  const jsonLd = buildGuideArticleJsonLd(guide, telemetry, locale);
 
   return (
     <>

@@ -23,7 +23,13 @@ export function proxy(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  const requestHeaders = new Headers(request.headers);
+  const firstSegment = pathname.split('/')[1] ?? '';
+  requestHeaders.set('x-locale', isValidLocale(firstSegment) ? firstSegment : 'en');
+
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  });
 }
 
 export const config = {
