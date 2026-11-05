@@ -14,12 +14,8 @@ const consolidatedGuides = [
     destination: "/guides/zurich-geneva-to-zermatt-day-trip",
   },
   {
-    source: "/guides/glacier-express",
-    destination: "/trains",
-  },
-  {
-    source: "/guides/gornergrat-railway-vs-glacier-express",
-    destination: "/trains",
+    source: "/guides/christmas-in-zermatt",
+    destination: "/guides/christmas-in-zermatt-matterhorn",
   },
 ] as const;
 
@@ -38,10 +34,7 @@ const nextConfig: NextConfig = {
       ...localePrefixes.flatMap((locale) =>
         consolidatedGuides.map((redirect) => ({
           source: `/${locale}${redirect.source}`,
-          destination:
-            redirect.destination === "/trains"
-              ? `/${locale}/trains`
-              : `/${locale}${redirect.destination}`,
+          destination: `/${locale}${redirect.destination}`,
           permanent: true,
         }))
       ),

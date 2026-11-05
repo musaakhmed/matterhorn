@@ -746,10 +746,10 @@ export const GUIDES: GuideArticle[] = [
       detail: 'Highest monthly clear-sky summit probability of the entire year',
     },
     keyTakeaways: [
-      'December boasts an 89% statistical clear-sky summit probability—the highest of any month in Zermatt—due to cold, dry high-pressure air and zero summer thermal updrafts.',
+      'December boasts an 89% statistical clear-sky summit probability—the highest of any month in Zermatt—due to cold, dry high-pressure air and zero summer thermal updrafts. Verify today’s summit clarity on our [live Matterhorn visibility tracker](/) and [real-time Zermatt webcams](/#webcams).',
       'Zermatt is strictly car-free; at Christmas, quiet cobblestone lanes are navigated by electric taxis, horse-drawn sleighs with brass bells, and walking under glowing street illuminations.',
       'Christmas Eve and Christmas Day dinners (traditional Swiss cheese fondue, Valais raclette, and black-truffle specialties) book out months ahead—secure table reservations by October/November.',
-      'The Gornergrat cogwheel train and Klein Matterhorn cable cars operate 365 days a year, making a Christmas morning summit ascent to 3,089m an unforgettable alpine tradition.',
+      'The [Gornergrat cogwheel train](/viewpoints/gornergrat) and [Klein Matterhorn cable cars](/viewpoints/glacier-paradise) operate 365 days a year, making a Christmas morning summit ascent to 3,089m an unforgettable alpine tradition.',
     ],
     comparisonTable: {
       caption: 'Zermatt Christmas Excursions & Winter Highlights Quick Reference',
@@ -829,7 +829,7 @@ export const GUIDES: GuideArticle[] = [
           },
           {
             bold: 'Check Live Telemetry for Föhn Gales:',
-            text: 'Even in winter, periodic southerly Föhn wind fronts can bring high-altitude wind gusts over 45 km/h across Klein Matterhorn. Check our live 1–10 AM/PM Visibility Score each morning before boarding the lifts.',
+            text: 'Even in winter, periodic southerly Föhn wind fronts can bring high-altitude wind gusts over 45 km/h across Klein Matterhorn. Check our [live 1–10 AM/PM Visibility Score](/) and [summit webcams](/#webcams) each morning before boarding the lifts.',
           },
         ],
       },
@@ -873,7 +873,7 @@ export const GUIDES: GuideArticle[] = [
       {
         question: 'Are mountain trains and ski lifts open on Christmas Day in Zermatt?',
         answer:
-          'Yes! The Gornergrat Bahn, Sunnegga funicular, and Matterhorn Glacier Paradise cableways operate on their standard winter schedules on December 24, 25, and 26. Always check our live 1–10 AM/PM Visibility Score on the morning of travel to ensure summit clarity.',
+          'Yes! The Gornergrat Bahn, Sunnegga funicular, and Matterhorn Glacier Paradise cableways operate on their standard winter schedules on December 24, 25, and 26. Always check our [live 1–10 AM/PM Visibility Score](/) and [live Zermatt webcams](/#webcams) on the morning of travel to ensure summit clarity.',
       },
       {
         question: 'Are restaurants and shops open during Christmas week in Zermatt?',
@@ -890,12 +890,12 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: 'gornergrat-railway-vs-glacier-express',
     title:
-      'Gornergrat Railway vs. Glacier Express: Comparing Switzerland’s Most Iconic Mountain Trains',
+      'Gornergrat vs Glacier Express: Which Should You Take? (Full Comparison)',
     shortTitle: 'Gornergrat vs. Glacier Express',
     seoTitle:
-      'Gornergrat Railway vs. Glacier Express (2026 Comparison) | Tickets, Passes & Views',
+      'Gornergrat vs Glacier Express: Which Should You Take? (Full Comparison)',
     description:
-      'Compare Zermatt’s two legendary railways: the Gornergrat 3,089m cogwheel mountain ascent vs. the Glacier Express 8-hour panoramic trans-alpine journey. Complete with Swiss Travel Pass rules, seat reservation fees, best side to sit, and live status.',
+      'Gornergrat vs Glacier Express: 33-minute Matterhorn summit climb (3,089m) or 8-hour panoramic Alps train? Compare prices, Swiss Travel Pass rules & views.',
     category: 'Day Trips',
     publishedAt: '2026-11-05',
     updatedAt: '2026-11-05',
@@ -1405,6 +1405,7 @@ export const GUIDES: GuideArticle[] = [
       'The reservation is CHF 39 in the low season and CHF 49 in peak summer. It opens 93 days ahead.',
       'Excellence Class adds CHF 470 to a 1st class ticket. There are 20 seats.',
       'The Bernina Express is the same railway company in a different valley. It does not go to Zermatt.',
+      'Before boarding at Zermatt, check our [live Matterhorn visibility tracker](/) and [live Zermatt webcams](/#webcams) to see if the summit is clear.',
     ],
     sections: [
       {
@@ -1443,8 +1444,8 @@ export const GUIDES: GuideArticle[] = [
         id: 'today',
         heading: 'Is it worth boarding today?',
         paragraphs: [
-          'The [trains page](/trains) shows whether the Glacier Express is on its seasonal schedule or in the autumn pause, plus the live Gornergrat score. A high score means the Matterhorn is clear at the Zermatt end. It does not change the Oberalp weather in the middle of the route.',
-          'The Gornergrat railway is a different train: a 33-minute cogwheel from Zermatt to 3,089 m, with no mandatory reservation. Compare the two on the [Gornergrat and Glacier Express page](/trains).',
+          'The [trains page](/trains) shows whether the Glacier Express is on its seasonal schedule or in the autumn pause, while our [live Matterhorn visibility tracker](/) and [real-time Zermatt webcams](/#webcams) show today’s 1–10 score at the Zermatt end. A high score means the Matterhorn is clear when you depart or arrive in Zermatt, though it does not change the Oberalp Pass weather in the middle of the route.',
+          'The Gornergrat railway is a different train: a 33-minute cogwheel from Zermatt to 3,089 m, with no mandatory reservation. Compare the two in our [Gornergrat vs Glacier Express full comparison](/guides/gornergrat-railway-vs-glacier-express) or check live summit conditions on the [Gornergrat viewpoint webcam page](/viewpoints/gornergrat).',
         ],
       },
     ],
@@ -1533,11 +1534,8 @@ export const GUIDES: GuideArticle[] = [
   },
 ];
 
-/** These intents live on /trains. The guide URLs 308 there and stay out of the index. */
-export const TRAINS_CANONICAL_SLUGS = [
-  'glacier-express',
-  'gornergrat-railway-vs-glacier-express',
-] as const;
+/** Guide slugs kept out of the public index when consolidated elsewhere. */
+export const TRAINS_CANONICAL_SLUGS: readonly string[] = [];
 
 export function publicGuides(): GuideArticle[] {
   return GUIDES.filter(

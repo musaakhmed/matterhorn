@@ -745,8 +745,8 @@ export const itGuides: Record<string, GuideTranslation> = {
         id: 'today',
         heading: 'Conviene salire oggi?',
         paragraphs: [
-          'La [pagina dei treni](/trains) dice se il Glacier Express segue l’orario di stagione o è in pausa autunnale, più il punteggio del Gornergrat. Un punteggio alto significa Cervino libero a Zermatt. Non descrive il tempo all’Oberalp.',
-          'Il Gornergrat è un altro treno: 33 minuti di cremagliera fino a 3.089 m, senza prenotazione obbligatoria. Il confronto è nella [guida Gornergrat contro Glacier Express](/trains).',
+          'La [pagina dei treni](/trains) dice se il Glacier Express segue l’orario di stagione o è in pausa autunnale, mentre il nostro [tracker live del Cervino](/) e le [webcam in tempo reale di Zermatt](/#webcams) mostrano il punteggio da 1 a 10. Un punteggio alto significa Cervino libero a Zermatt. Non descrive il tempo all’Oberalp.',
+          'Il Gornergrat è un altro treno: 33 minuti di cremagliera fino a 3.089 m, senza prenotazione obbligatoria. Il confronto completo è nella [guida Gornergrat vs Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
         ],
       },
     ],
@@ -825,10 +825,10 @@ export const itGuides: Record<string, GuideTranslation> = {
       detail: 'La più alta probabilità mensile di cima libera di tutto l’anno',
     },
     keyTakeaways: [
-      'Dicembre ha l’89% di probabilità statistica di cima libera, la più alta dell’anno a Zermatt, grazie all’aria fredda e secca di alta pressione e all’assenza delle termiche estive.',
+      'Dicembre ha l’89% di probabilità statistica di cima libera, la più alta dell’anno a Zermatt, grazie all’aria fredda e secca di alta pressione. Verifica il meteo di oggi sul [tracker live della visibilità del Cervino](/) e sulle [webcam live di Zermatt](/#webcams).',
       'Zermatt è senza auto: a Natale i vicoli si percorrono in taxi elettrico, in slitta con campanelle d’ottone, o a piedi sotto le luminarie.',
       'Le cene della vigilia e di Natale (fonduta svizzera, raclette vallesana e specialità al tartufo nero) si esauriscono mesi prima: prenotate il tavolo a ottobre o novembre.',
-      'Il treno a cremagliera del Gornergrat e le funivie del Piccolo Cervino funzionano 365 giorni l’anno: salire a 3.089 m la mattina di Natale è una tradizione alpina.',
+      'Il [treno a cremagliera del Gornergrat](/viewpoints/gornergrat) e le [funivie del Piccolo Cervino (Glacier Paradise)](/viewpoints/glacier-paradise) funzionano 365 giorni l’anno: salire a 3.089 m la mattina di Natale è una tradizione alpina.',
     ],
     comparisonTable: {
       caption: 'Escursioni di Natale e momenti dell’inverno a Zermatt',
@@ -883,7 +883,7 @@ export const itGuides: Record<string, GuideTranslation> = {
         paragraphs: [
           'Pochi luoghi incarnano lo spirito fiabesco del Natale come Zermatt. In fondo alla valle, sotto la piramide ripida del Cervino (in tedesco Matterhorn, 4.478 m), questo paese senza auto diventa ogni dicembre una palla di neve viva.',
           'I motori a combustione sono vietati dal 1966. Non c’è rombo di traffico né neve sporca di scarico: solo lo scricchiolio della neve fresca, il ronzio sommesso dei piccoli bus elettrici e il tintinnio delle campanelle d’ottone sulle slitte davanti a hotel storici come il Mont Cervin Palace e il Grand Hotel Zermatterhof.',
-          'Lungo la Bahnhofstrasse e sul Kirchplatz, luci dorate avvolgono gli abeti carichi di neve. Le vetrine espongono ornamenti in legno intagliati a mano, cioccolato artigianale e paioli di rame con vin brulé (Glühwein) e caldarroste (marroni).',
+          'Lungo la Bahnhofstrasse e sul Kirchplatz, luci dorate avvolgono gli abeti carichi di neve. Le vetrine espongono ornamenti in legno intagliati a mano, cioccolato artigianale e paioli di rame con vin brulé (Glühwein) e caldarroste (marroni). Dal ponte Kirchbrücke nel [punto panoramico del paese di Zermatt](/viewpoints/zermatt-village) puoi ammirare la parete est illuminata o controllare prima le [webcam live di Zermatt](/#webcams).',
         ],
         proTip: {
           label: 'Segreto locale',
@@ -894,8 +894,8 @@ export const itGuides: Record<string, GuideTranslation> = {
         id: 'december-weather-matterhorn-clarity',
         heading: '2. Meteo di dicembre: perché Natale ha il cielo più limpido dell’anno',
         paragraphs: [
-          'Si pensa spesso che l’estate offra il meteo migliore in montagna. Trent’anni di misure alpine svizzere dicono l’opposto. Dicembre è statisticamente il mese più limpido dell’anno a Zermatt, con l’89% di probabilità di cielo sereno sulla cima del Cervino.',
-          'In inverno l’atmosfera sopra le Alpi Pennine è dominata da anticicloni continentali freddi, stabili e secchi. A differenza di luglio e agosto, quando il sole di valle crea termiche (venti anabatici) e cumuli fitti entro le 13:00 CET, l’aria di dicembre resta cristallina tutto il giorno. Alle 10:00 CET come alle 15:00 CET il Cervino è inciso su un cielo indaco.',
+          'Si pensa spesso che l’estate offra il meteo migliore in montagna. Trent’anni di misure alpine svizzere dicono l’opposto. Dicembre è statisticamente il mese più limpido dell’anno a Zermatt, con l’89% di probabilità di cielo sereno sulla cima del Cervino (vedi anche la guida al [meteo di Zermatt a dicembre](/guides/zermatt-weather-december)).',
+          'In inverno l’atmosfera sopra le Alpi Pennine è dominata da anticicloni continentali freddi, stabili e secchi. A differenza di luglio e agosto, quando il sole di valle crea termiche (venti anabatici) e cumuli fitti entro le 13:00 CET, l’aria di dicembre resta cristallina tutto il giorno. Alle 10:00 CET come alle 15:00 CET il Cervino è inciso su un cielo indaco, come puoi verificare in ogni momento sul nostro [tracker live della visibilità del Cervino](/) e sulle [webcam ad alta quota](/#webcams).',
         ],
         bulletPoints: [
           {
@@ -908,7 +908,7 @@ export const itGuides: Record<string, GuideTranslation> = {
           },
           {
             bold: 'Controllate la telemetria con il Föhn:',
-            text: 'Anche in inverno un fronte di Föhn da sud può portare raffiche oltre 45 km/h sul Piccolo Cervino. Ogni mattina guardate il punteggio di visibilità live da 1 a 10 (AM/PM) prima di salire.',
+            text: 'Anche in inverno un fronte di Föhn da sud può portare raffiche oltre 45 km/h sul Piccolo Cervino. Ogni mattina guardate il [punteggio di visibilità live da 1 a 10 (AM/PM)](/) e le [webcam in diretta](/#webcams) prima di salire.',
           },
         ],
       },
@@ -921,7 +921,7 @@ export const itGuides: Record<string, GuideTranslation> = {
           caption: 'Niente vale una fonduta vallesana e un bicchiere di Fendant fresco dopo una giornata nella neve.',
         },
         paragraphs: [
-          'Dopo una mattina limpida sul Gornergrat o sulle piste verso Cervinia, niente scalda come un caquelon di vera fonduta al formaggio svizzero.',
+          'Dopo una mattina limpida sul Gornergrat o sulle piste del [comprensorio sciistico Zermatt–Cervinia](/ski), niente scalda come un caquelon di vera fonduta al formaggio svizzero.',
           'Gli Stübli di Zermatt, tra cui Ferdinand by Cervo, Saycheese!, Chez Vrony e la Schäferstube, fondono formaggi AOP del Vallese con vino bianco secco, aglio e un goccio di Kirsch. Formaggio caldo sulla patata novella (raclette) accanto a un focolare di pietra, mentre fuori nevica in silenzio: è il comfort del Natale.',
         ],
         proTip: {
@@ -938,9 +938,13 @@ export const itGuides: Record<string, GuideTranslation> = {
           caption: 'Paesaggio invernale: i pendii sopra Zermatt restano aperti il giorno di Natale per la cremagliera e le camminate.',
         },
         paragraphs: [
-          'Chi arriva la prima volta si chiede se le ferrovie di montagna circolino il giorno di Natale. La risposta è sì, senza dubbi: il treno a cremagliera del Gornergrat e le funivie del Matterhorn Glacier Paradise funzionano 365 giorni l’anno, se il tempo lo consente.',
-          'Salire sul treno riscaldato dalla stazione di Zermatt la mattina di Natale è un viaggio che resta. Il convoglio rosso sale tra larici e pini cembri carichi di neve, sbuca sui campi aperti del Riffelberg (2.582 m) e di Rotenboden (2.815 m) e termina sulla terrazza del Gornergrat (3.089 m). Da lì lo sguardo attraversa le lingue gelate dei ghiacciai del Gorner e del Findel verso le pareti nord ed est del Cervino, ricoperte di neve.',
+          'Chi arriva la prima volta si chiede se le ferrovie di montagna circolino il giorno di Natale. La risposta è sì, senza dubbi: il [treno a cremagliera del Gornergrat](/viewpoints/gornergrat) e le funivie del [Matterhorn Glacier Paradise](/viewpoints/glacier-paradise) funzionano 365 giorni l’anno, se il tempo lo consente.',
+          'Salire sul treno riscaldato dalla stazione di Zermatt la mattina di Natale è un viaggio che resta. Il convoglio rosso sale tra larici e pini cembri carichi di neve, sbuca sui campi aperti del Riffelberg (2.582 m) e di Rotenboden (2.815 m) e termina sulla terrazza del Gornergrat (3.089 m). Da lì lo sguardo attraversa le lingue gelate dei ghiacciai del Gorner e del Findel verso le pareti nord ed est del Cervino, ricoperte di neve. Confronta orari e pass sulla [pagina dei treni di montagna](/trains) o nella [guida Gornergrat vs Glacier Express](/guides/gornergrat-railway-vs-glacier-express).',
         ],
+        proTip: {
+          label: 'Controllo webcam la mattina di Natale',
+          text: 'Prima di acquistare il biglietto in stazione il 24 o 25 dicembre, apri il [tracker live della visibilità](/) e le [4 webcam live di Zermatt](/#webcams) per verificare che la vetta a 3.089 m sia sopra eventuali nubi basse.',
+        },
       },
     ],
     faqs: [
@@ -952,7 +956,7 @@ export const itGuides: Record<string, GuideTranslation> = {
       {
         question: 'Treni di montagna e impianti sono aperti il giorno di Natale a Zermatt?',
         answer:
-          'Sì. Gornergrat Bahn, funicolare di Sunnegga e funivie del Matterhorn Glacier Paradise seguono l’orario invernale il 24, 25 e 26 dicembre. La mattina del viaggio controllate il punteggio di visibilità live da 1 a 10 (AM/PM) per essere sicuri che la cima sia libera.',
+          'Sì. Gornergrat Bahn, funicolare di Sunnegga e funivie del Matterhorn Glacier Paradise seguono l’orario invernale il 24, 25 e 26 dicembre. La mattina del viaggio controllate il [punteggio di visibilità live da 1 a 10 (AM/PM)](/) e le [webcam in tempo reale di Zermatt](/#webcams) per essere sicuri che la cima sia libera.',
       },
       {
         question: 'Ristoranti e negozi sono aperti nella settimana di Natale a Zermatt?',
@@ -962,16 +966,18 @@ export const itGuides: Record<string, GuideTranslation> = {
       {
         question: 'Qual è il modo migliore per vedere il Cervino il giorno di Natale?',
         answer:
-          'Prendete il treno a cremagliera del Gornergrat alle 08:24 o alle 09:00 CET dalla stazione di Zermatt. Sedetevi a destra in salita: la parete est innevata resta nel finestrino, nella luce dorata del mattino, per quasi tutta la corsa.',
+          'Prendete il [treno a cremagliera del Gornergrat](/viewpoints/gornergrat) alle 08:24 o alle 09:00 CET dalla stazione di Zermatt dopo aver controllato il [tracker live](/) e le [webcam in vetta](/#webcams). Sedetevi a destra in salita: la parete est innevata resta nel finestrino, nella luce dorata del mattino, per quasi tutta la corsa.',
       },
     ],
   },
   'gornergrat-railway-vs-glacier-express': {
     title:
-      'Ferrovia del Gornergrat contro Glacier Express: i due treni di montagna più iconici della Svizzera',
+      'Gornergrat vs Glacier Express: quale treno scegliere? (Confronto completo)',
     shortTitle: 'Gornergrat contro Glacier Express',
+    seoTitle:
+      'Gornergrat vs Glacier Express: quale treno scegliere? (Confronto)',
     description:
-      'Confrontate le due ferrovie leggendarie di Zermatt: la cremagliera fino a 3.089 m e il viaggio panoramico di 8 ore del Glacier Express. Swiss Travel Pass, prenotazione del posto, lato migliore e stato live.',
+      'Gornergrat vs Glacier Express: 33 min di cremagliera verso il Cervino (3.089 m) o 8 ore di treno panoramico nelle Alpi? Prezzi, Swiss Travel Pass e vista.',
     category: 'Gite di un giorno',
     heroStat: {
       label: 'Tipo di viaggio',

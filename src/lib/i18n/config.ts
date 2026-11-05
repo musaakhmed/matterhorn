@@ -154,14 +154,17 @@ export function stripLocaleFromPath(pathname: string): {
  * - Non-default locales prefix the path: e.g. '/fr', '/de/viewpoints', '/ja'
  */
 export function getLocalizedHref(path: string, locale: Locale): string {
-  const { pathWithoutLocale } = stripLocaleFromPath(path);
+  const hashIndex = path.indexOf('#');
+  const rawPath = hashIndex >= 0 ? path.slice(0, hashIndex) || '/' : path;
+  const hash = hashIndex >= 0 ? path.slice(hashIndex) : '';
+  const { pathWithoutLocale } = stripLocaleFromPath(rawPath);
   const cleanPath = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
 
   if (locale === DEFAULT_LOCALE) {
-    return cleanPath || '/';
+    return `${cleanPath || '/'}${hash}`;
   }
 
-  return `/${locale}${cleanPath}`;
+  return `/${locale}${cleanPath}${hash}`;
 }
 
 /**

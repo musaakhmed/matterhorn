@@ -30,13 +30,17 @@ export async function generateMetadata({
   const typed = locale as Locale;
   const guide = getLocalizedGuideArticle(slug, typed);
   const dict = getDictionary(typed);
+  const metaTitle =
+    guide.seoTitle && guide.seoTitle !== guide.title
+      ? guide.seoTitle
+      : `${guide.title} | ${dict.common.siteName}`;
 
   return {
-    title: `${guide.title} | ${dict.common.siteName}`,
+    title: metaTitle,
     description: guide.description,
     alternates: getAlternateUrls(`/guides/${slug}`, typed),
     openGraph: {
-      title: guide.title,
+      title: guide.seoTitle || guide.title,
       description: guide.description,
       url: `https://isthematterhornvisible.com/${locale}/guides/${slug}`,
       siteName: dict.common.siteName,
@@ -52,7 +56,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: guide.title,
+      title: guide.seoTitle || guide.title,
       description: guide.description,
       images: [guide.coverImage.src],
     },

@@ -691,10 +691,12 @@ export const deGuides: Record<string, GuideTranslation> = {
   },
   'gornergrat-railway-vs-glacier-express': {
     title:
-      'Gornergrat Bahn vs. Glacier Express: Die zwei berühmtesten Züge der Schweiz im Vergleich',
+      'Gornergrat vs. Glacier Express: Welchen Zug sollten Sie nehmen? (Vollständiger Vergleich)',
     shortTitle: 'Gornergrat vs. Glacier Express',
+    seoTitle:
+      'Gornergrat vs. Glacier Express: Welchen Zug nehmen? (Vergleich)',
     description:
-      'Vergleich der zwei legendären Bahnen in Zermatt: 33 Min. Steilfahrt auf 3.089 m mit Matterhorn-Blick vs. 8 Stunden Panoramazug quer durch die Alpen. Inklusive Swiss Travel Pass Rabatte, Sitzplatzreservierung & Live-Status.',
+      'Gornergrat vs. Glacier Express: 33 Min. Zahnradbahn zum Matterhorn (3.089 m) oder 8 Std. Panoramazug durch die Alpen? Preise, Swiss Travel Pass & Sicht.',
     category: 'Tagesausflüge',
     heroStat: {
       label: 'Fahrten-Vergleich',
@@ -1103,6 +1105,7 @@ export const deGuides: Record<string, GuideTranslation> = {
       'Die Reservierung kostet CHF 39 in der Nebensaison und CHF 49 im Hochsommer. Sie öffnet 93 Tage im Voraus.',
       'Excellence Class kostet CHF 470 zusätzlich zur 1. Klasse. Es gibt 20 Plätze.',
       'Der Bernina Express ist dieselbe Bahngesellschaft in einem anderen Tal. Er fährt nicht nach Zermatt.',
+      'Prüfen Sie vor der Abfahrt oder Ankunft in Zermatt den [Live-Matterhorn-Tracker](/) und die [Live-Webcams in Zermatt](/#webcams) für die aktuelle Gipfelsicht.',
     ],
     sections: [
       {
@@ -1126,7 +1129,7 @@ export const deGuides: Record<string, GuideTranslation> = {
         heading: 'Route von Zermatt nach St. Moritz',
         paragraphs: [
           'Die ganze Fahrt dauert etwa acht Stunden von Zermatt (1.604 m) nach St. Moritz (1.775 m), über den Oberalppass auf 2.033 m. Einzelne Züge fahren Richtung Davos. Rheinschlucht und Landwasserviadukt bei Filisur sind die bekannten Abschnitte.',
-          'Ab Zürich oder Genf steigt man in Visp in die Matterhorn Gotthard Bahn nach Zermatt um und steigt dort in den Glacier Express. Kürzere Abschnitte wie Zermatt–Brig oder Zermatt–Andermatt brauchen ebenfalls eine Reservierung.',
+          'Ab Zürich oder Genf steigt man in Visp in die Matterhorn Gotthard Bahn nach Zermatt um und steigt dort in den Glacier Express. Kürzere Abschnitte wie Zermatt–Brig oder Zermatt–Andermatt brauchen ebenfalls eine Reservierung. Am Zermatter Ende zeigt der [Aussichtspunkt Zermatt Dorf](/viewpoints/zermatt-village), ob die Ostwand im Tal frei ist.',
         ],
       },
       {
@@ -1141,9 +1144,13 @@ export const deGuides: Record<string, GuideTranslation> = {
         id: 'today',
         heading: 'Lohnt die Fahrt heute?',
         paragraphs: [
-          'Die [Zugseite](/trains) zeigt, ob der Glacier Express nach Fahrplan fährt oder in der Herbstpause ist, plus den Live-Score am Gornergrat. Ein hoher Score bedeutet freie Sicht am Zermatter Ende. Er sagt nichts über das Wetter am Oberalp.',
-          'Die Gornergratbahn ist ein anderer Zug: 33 Minuten Zahnradbahn auf 3.089 m, ohne Pflichtreservierung. Der Vergleich steht im [Guide Gornergrat gegen Glacier Express](/trains).',
+          'Die [Zugseite](/trains) zeigt, ob der Glacier Express nach Fahrplan fährt oder in der Herbstpause ist, während unser [Live-Matterhorn-Tracker](/) und die [Live-Webcams in Zermatt](/#webcams) den aktuellen Sichtwert von 1–10 liefern. Ein hoher Score bedeutet freie Sicht auf das Matterhorn am Zermatter Ende. Er sagt nichts über das Wetter am Oberalp.',
+          'Die Gornergratbahn ist ein anderer Zug: 33 Minuten Zahnradbahn auf 3.089 m, ohne Pflichtreservierung. Der direkte Vergleich steht im [Guide Gornergrat vs. Glacier Express](/guides/gornergrat-railway-vs-glacier-express), die aktuelle Gipfelkamera auf der [Gornergrat-Webcam-Seite](/viewpoints/gornergrat).',
         ],
+        proTip: {
+          label: 'Live-Check vor dem Einstieg',
+          text: 'Blicken Sie vor dem Ticketkauf in Zermatt kurz in den [Live-Sichtbarkeits-Tracker](/) und die [4 Zermatter Live-Webcams](/#webcams), um zu sehen, ob die Matterhorn-Pyramide wolkenfrei ist.',
+        },
       },
     ],
     faqs: [
@@ -1157,7 +1164,7 @@ export const deGuides: Record<string, GuideTranslation> = {
       },
       {
         question: 'Welche Route fährt der Glacier Express?',
-        answer: 'Zermatt nach St. Moritz in etwa acht Stunden, über Visp, Brig, Andermatt und den Oberalppass, einzelne Züge Richtung Davos. Der Bernina Express ist eine eigene Linie von St. Moritz nach Tirano.',
+        answer: 'Zermatt nach St. Moritz in etwa acht Stunden, über Visp, Brig, Andermatt und den Oberalppass, einzelne Züge Richtung Davos. Der Bernina Express ist eine eigene Linie von St. Moritz nach Tirano. Prüfen Sie für den Start oder die Ankunft in Zermatt unseren [Live-Tracker](/) und die [Zermatt-Webcams](/#webcams).',
       },
     ],
   },

@@ -171,6 +171,51 @@ export default async function GuideArticleView({
               {guide.heroStat.detail}
             </span>
           </div>
+
+          {/* Direct Internal Links to Live Tracker & Webcams */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+            <div className="flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+              <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              <span className="font-bold text-slate-800 dark:text-slate-200">
+                {locale === 'de'
+                  ? `Heute live: Ostwand ${telemetry.viewpoints.gornergrat.currentScore}/10 · Südseite ${telemetry.viewpoints['glacier-paradise'].currentScore}/10`
+                  : locale === 'it'
+                    ? `Live oggi: Parete Est ${telemetry.viewpoints.gornergrat.currentScore}/10 · Lato Sud ${telemetry.viewpoints['glacier-paradise'].currentScore}/10`
+                    : `Live Today: East Face ${telemetry.viewpoints.gornergrat.currentScore}/10 · South Crest ${telemetry.viewpoints['glacier-paradise'].currentScore}/10`}
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href={getLocalizedHref('/', locale)}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 px-3.5 py-2 text-xs font-bold text-white shadow-2xs transition-colors"
+              >
+                <Activity className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>
+                  {locale === 'de'
+                    ? 'Live-Tracker öffnen'
+                    : locale === 'it'
+                      ? 'Apri Tracker Live'
+                      : 'Open Live Tracker'}
+                </span>
+              </Link>
+              <Link
+                href={getLocalizedHref('/#webcams', locale)}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-sky-300 dark:hover:border-sky-600 px-3.5 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 transition-colors"
+              >
+                <Camera className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" aria-hidden="true" />
+                <span>
+                  {locale === 'de'
+                    ? 'Live-Webcams ansehen'
+                    : locale === 'it'
+                      ? 'Guarda le Webcam Live'
+                      : 'Check Live Webcams'}
+                </span>
+              </Link>
+            </div>
+          </div>
         </header>
 
         {/* Featured Field Guide Photograph */}
@@ -447,37 +492,76 @@ export default async function GuideArticleView({
         </section>
 
         {/* Live Telemetry / Trains Conversion Banner */}
-        {guide.slug === 'gornergrat-railway-vs-glacier-express' ? (
+        {guide.slug === 'gornergrat-railway-vs-glacier-express' || guide.slug === 'glacier-express' ? (
           <section className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-gradient-to-r from-sky-900 via-slate-900 to-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-white p-6 sm:p-8 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
               <div className="space-y-1.5 max-w-xl">
                 <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
                   <TrainFront className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />
-                  <span>Interactive Swiss Trains Hub</span>
+                  <span>
+                    {locale === 'de'
+                      ? 'Schweizer Bergbahnen & Live-Wetter'
+                      : locale === 'it'
+                        ? 'Treni Panoramici e Meteo Live'
+                        : 'Interactive Swiss Trains Hub'}
+                  </span>
                 </div>
                 <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-balance">
-                  Live Gornergrat Summit Visibility &amp; Glacier Express Passes
+                  {locale === 'de'
+                    ? 'Live-Sicht am Gornergrat, Zermatt-Webcams & Glacier Express Tarife'
+                    : locale === 'it'
+                      ? 'Visibilità Live sul Gornergrat, Webcam di Zermatt e Pass Glacier Express'
+                      : 'Live Gornergrat Summit Visibility & Glacier Express Passes'}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  Compare 2026 fares, Swiss Travel Pass savings, real-time 3,089m summit webcams, and seat reservation requirements.
+                  {locale === 'de'
+                    ? 'Vergleichen Sie Ticketpreise 2026, Swiss Travel Pass Rabatte, den Echtzeit-Sichtwert (1–10) und 4 Live-Webcams in Zermatt.'
+                    : locale === 'it'
+                      ? 'Confronta tariffe 2026, sconti Swiss Travel Pass, punteggio di visibilità in tempo reale (1–10) e 4 webcam live a Zermatt.'
+                      : 'Compare 2026 fares, Swiss Travel Pass savings, real-time 3,089m summit webcams, and seat reservation requirements.'}
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 shrink-0">
                 <Link
-                  href={getLocalizedHref('/trains', locale)}
+                  href={getLocalizedHref('/', locale)}
                   className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-sm transition-colors"
                 >
-                  <TrainFront className="w-4 h-4" aria-hidden="true" />
-                  <span>Open Trains Hub</span>
+                  <Activity className="w-4 h-4" aria-hidden="true" />
+                  <span>
+                    {locale === 'de'
+                      ? 'Live-Tracker'
+                      : locale === 'it'
+                        ? 'Tracker Live'
+                        : 'Live Tracker'}
+                  </span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href={getLocalizedHref('/', locale)}
+                  href={getLocalizedHref('/#webcams', locale)}
                   className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm transition-colors border border-white/20"
                 >
-                  <Activity className="w-4 h-4 text-emerald-400" aria-hidden="true" />
-                  <span>Live Weather</span>
+                  <Camera className="w-4 h-4 text-sky-300" aria-hidden="true" />
+                  <span>
+                    {locale === 'de'
+                      ? 'Live-Webcams'
+                      : locale === 'it'
+                        ? 'Webcam Live'
+                        : 'Live Webcams'}
+                  </span>
+                </Link>
+                <Link
+                  href={getLocalizedHref('/trains', locale)}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm transition-colors border border-white/20"
+                >
+                  <TrainFront className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                  <span>
+                    {locale === 'de'
+                      ? 'Zug-Hub'
+                      : locale === 'it'
+                        ? 'Hub Treni'
+                        : 'Trains Hub'}
+                  </span>
                 </Link>
               </div>
             </div>
@@ -488,23 +572,58 @@ export default async function GuideArticleView({
               <div className="space-y-1.5 max-w-xl">
                 <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-300">
                   <Activity className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />
-                  <span>Check Before You Buy Tickets</span>
+                  <span>
+                    {locale === 'de'
+                      ? 'Vor dem Ticketkauf prüfen'
+                      : locale === 'it'
+                        ? 'Controlla Prima di Salire'
+                        : 'Check Before You Buy Tickets'}
+                  </span>
                 </div>
                 <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-balance">
-                  Compare Gornergrat &amp; Glacier Paradise Live Visibility Now
+                  {locale === 'de'
+                    ? 'Gornergrat & Glacier Paradise Live-Sicht und Webcams prüfen'
+                    : locale === 'it'
+                      ? 'Confronta Ora la Visibilità Live di Gornergrat e Glacier Paradise'
+                      : 'Compare Gornergrat & Glacier Paradise Live Visibility Now'}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  View our real-time 1–10 AM/PM visibility index, 10-day forecast horizon, and 4 live Zermatt Roundshot webcams.
+                  {locale === 'de'
+                    ? 'Echtzeit-Sichtindex (1–10 AM/PM), 10-Tage-Prognose und 4 Live-Webcams in Zermatt.'
+                    : locale === 'it'
+                      ? 'Indice di visibilità in tempo reale da 1 a 10 (AM/PM), previsioni a 10 giorni e 4 webcam live Roundshot a Zermatt.'
+                      : 'View our real-time 1–10 AM/PM visibility index, 10-day forecast horizon, and 4 live Zermatt Roundshot webcams.'}
                 </p>
               </div>
 
-              <Link
-                href={getLocalizedHref('/', locale)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-sm transition-colors shrink-0"
-              >
-                <span>Open Live Dashboard</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                <Link
+                  href={getLocalizedHref('/', locale)}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-sm transition-colors"
+                >
+                  <span>
+                    {locale === 'de'
+                      ? 'Live-Tracker öffnen'
+                      : locale === 'it'
+                        ? 'Apri Tracker Live'
+                        : 'Open Live Dashboard'}
+                  </span>
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+                <Link
+                  href={getLocalizedHref('/#webcams', locale)}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm transition-colors border border-white/20"
+                >
+                  <Camera className="w-4 h-4 text-sky-300" aria-hidden="true" />
+                  <span>
+                    {locale === 'de'
+                      ? 'Live-Webcams'
+                      : locale === 'it'
+                        ? 'Webcam Live'
+                        : 'Live Webcams'}
+                  </span>
+                </Link>
+              </div>
             </div>
           </section>
         )}

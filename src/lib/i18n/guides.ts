@@ -20,6 +20,7 @@ import { ptGuides } from './guides/pt';
 export interface GuideTranslation {
   title?: string;
   shortTitle?: string;
+  seoTitle?: string;
   description?: string;
   category?: string;
   heroStat?: { label: string; value: string; detail: string };
@@ -58,6 +59,7 @@ export function getLocalizedGuideArticle(
     ...base,
     title: translation.title || base.title,
     shortTitle: translation.shortTitle || base.shortTitle,
+    seoTitle: translation.seoTitle || translation.title || base.seoTitle,
     description: translation.description || base.description,
     category: (translation.category as GuideCategory) || base.category,
     heroStat: translation.heroStat || base.heroStat,
