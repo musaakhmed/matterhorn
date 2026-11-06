@@ -250,87 +250,96 @@ export default function HeroStatus({ data, photo, queryHeading = false }: HeroSt
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
         {/* Gauge is supporting. On small screens the sentence comes first. */}
-        <div className="order-2 lg:order-1 lg:col-span-5 xl:col-span-4 min-w-0">
+        <div className="order-2 lg:order-1 lg:col-span-5 min-w-0">
           <FramedPhoto
             photo={photo}
             preload
-            sizes="(max-width: 1024px) 100vw, 380px"
-            aspectClass="aspect-[4/3] lg:aspect-[5/4]"
+            sizes="(max-width: 1024px) 100vw, 460px"
+            aspectClass="aspect-[16/10]"
           >
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 py-5">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,23,42,0.42),transparent_62%)]" />
-              <div className="relative w-40 h-40 sm:w-44 sm:h-44 flex items-center justify-center bg-white/95 dark:bg-slate-900/95 rounded-full shadow-inner border border-slate-200/80 dark:border-slate-800">
-            <svg
-              className="w-full h-full -rotate-90 transform"
-              viewBox="0 0 160 160"
-              role="img"
-              aria-label={`Visibility Index ${data.currentScore} out of 10`}
-            >
-              <circle
-                cx="80"
-                cy="80"
-                r={radius}
-                fill="transparent"
-                stroke="currentColor"
-                className="text-slate-200/80 dark:text-slate-800"
-                strokeWidth="9"
-              />
-              <circle
-                cx="80"
-                cy="80"
-                r={radius}
-                fill="transparent"
-                stroke={style.ringStroke}
-                strokeWidth="9"
-                strokeLinecap="round"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                className="transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
-              />
-            </svg>
+            <div className="border-t border-slate-200/80 bg-white/95 p-4 sm:p-5 dark:border-slate-800 dark:bg-slate-900/95">
+              <div className="flex items-center gap-4">
+                <div className="relative w-32 h-32 sm:w-36 sm:h-36 shrink-0 flex items-center justify-center rounded-full bg-slate-50/90 dark:bg-slate-950/80 shadow-inner border border-slate-200/80 dark:border-slate-800">
+                  <svg
+                    className="w-full h-full -rotate-90 transform"
+                    viewBox="0 0 160 160"
+                    role="img"
+                    aria-label={`Visibility Index ${data.currentScore} out of 10`}
+                  >
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r={radius}
+                      fill="transparent"
+                      stroke="currentColor"
+                      className="text-slate-200/80 dark:text-slate-800"
+                      strokeWidth="9"
+                    />
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r={radius}
+                      fill="transparent"
+                      stroke={style.ringStroke}
+                      strokeWidth="9"
+                      strokeLinecap="round"
+                      strokeDasharray={circumference}
+                      strokeDashoffset={strokeDashoffset}
+                      className="transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                    />
+                  </svg>
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
-              <div className="mb-1">
-                <VisibilityIcon
-                  badgeColor={data.currentBadgeColor}
-                  size="md"
-                  decorative={true}
-                  preload={true}
-                  className="shadow-2xs ring-2 ring-white dark:ring-slate-800"
-                />
-              </div>
-              <div className="flex items-baseline justify-center gap-0.5 leading-none">
-                <span
-                  className={`text-4xl sm:text-[46px] font-extrabold tracking-tight font-mono leading-none ${style.scoreText}`}
-                >
-                  {data.currentScore}
-                </span>
-                <span className="text-sm sm:text-base font-bold text-slate-400 dark:text-slate-500 leading-none">
-                  /10
-                </span>
-              </div>
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold">
-                {data.activePeriod} {dict.hero.visibilityIndex}
-              </span>
-            </div>
-          </div>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-center">
+                    <div className="mb-0.5">
+                      <VisibilityIcon
+                        badgeColor={data.currentBadgeColor}
+                        size="sm"
+                        decorative={true}
+                        preload={true}
+                        className="shadow-2xs ring-2 ring-white dark:ring-slate-800"
+                      />
+                    </div>
+                    <div className="flex items-baseline justify-center gap-0.5 leading-none">
+                      <span
+                        className={`text-3xl sm:text-4xl font-extrabold tracking-tight font-mono leading-none ${style.scoreText}`}
+                      >
+                        {data.currentScore}
+                      </span>
+                      <span className="text-xs sm:text-sm font-bold text-slate-400 dark:text-slate-500 leading-none">
+                        /10
+                      </span>
+                    </div>
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold leading-none">
+                      {data.activePeriod} {dict.hero.visibilityIndex}
+                    </span>
+                  </div>
+                </div>
 
-              <div
-                className={`relative mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs font-bold tracking-wide uppercase shadow-2xs`}
-              >
-                <StatusGlyph badgeColor={data.currentBadgeColor} />
-                <span>{currentStatusLabel}</span>
-              </div>
+                <div className="min-w-0 flex-1 flex flex-col items-start justify-center gap-2 text-left">
+                  <div
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border ${style.pillBg} ${style.pillBorder} ${style.pillText} text-xs font-bold tracking-wide uppercase shadow-2xs`}
+                  >
+                    <StatusGlyph badgeColor={data.currentBadgeColor} />
+                    <span>{currentStatusLabel}</span>
+                  </div>
 
-              <span className="relative mt-2 inline-flex max-w-[16rem] items-center rounded-full bg-white/95 px-2.5 py-1 text-center text-xs font-semibold text-slate-800 shadow-2xs dark:bg-slate-950/90 dark:text-slate-100">
-                {vpLabel.name}
-              </span>
+                  <p className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white leading-snug">
+                    {vpLabel.name}
+                  </p>
+
+                  <p className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                    {data.activePeriod === 'AM'
+                      ? `${dict.hero.morningLabel} • ${data.today.morning.timeRangeLabel}`
+                      : `${dict.hero.afternoonLabel} • ${data.today.afternoon.timeRangeLabel}`}
+                  </p>
+                </div>
+              </div>
             </div>
           </FramedPhoto>
         </div>
 
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}
-        <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-8 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
+        <div className="order-1 lg:order-2 lg:col-span-7 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
           <div className="space-y-2">
             <p className="text-sm text-slate-600 dark:text-slate-400">{dict.common.siteTagline}</p>
             {queryHeading ? (

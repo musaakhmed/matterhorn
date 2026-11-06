@@ -38,8 +38,8 @@ export default function FramedPhoto({
           className={`object-cover ${interactive ? 'place-photo' : ''}`}
           style={{ objectPosition: photo.objectPosition }}
         />
-        {children}
       </div>
+      {children}
       <figcaption className="relative z-10 border-t border-slate-200/80 bg-white/95 px-3 py-2 text-xs leading-relaxed text-slate-600 dark:border-slate-800 dark:bg-slate-900/95 dark:text-slate-300">
         <a
           href={photo.creditHref}
