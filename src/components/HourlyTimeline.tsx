@@ -10,7 +10,6 @@ import {
   Cloud,
 } from 'lucide-react';
 import { BadgeColor, DayForecast, ScoreBlock } from '@/lib/types';
-import VisibilityIcon from './VisibilityIcon';
 import { useTranslation } from '@/lib/i18n/context';
 
 interface HourlyTimelineProps {
@@ -200,9 +199,12 @@ export default function HourlyTimeline({
                       </span>
                     )}
                   </div>
-                  <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
+                  <time
+                    dateTime={day.dateIso}
+                    className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400"
+                  >
                     {day.dateFormatted}
-                  </span>
+                  </time>
                 </div>
 
                 <div className="text-right">
@@ -224,6 +226,43 @@ export default function HourlyTimeline({
           );
         })}
       </div>
+
+      {/* Semantic 10-Day Forecast Table for Screen Readers & AI / Markdown Extractors */}
+      <table className="sr-only">
+        <caption>
+          {dict.timeline.title} — {viewpointLabel}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Day</th>
+            <th scope="col">{dict.timeline.peakCol}</th>
+            <th scope="col">{dict.hero.morningLabel} (06:00–12:00 CET)</th>
+            <th scope="col">{dict.hero.afternoonLabel} (12:00–18:00 CET)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {days.map((day) => {
+            const dayIndex = new Date(day.dateIso + 'T12:00:00Z').getUTCDay();
+            const localizedDayName = dict.timeline.daysOfWeek?.[dayIndex] || day.dayOfWeek;
+            return (
+              <tr key={day.dateIso}>
+                <th scope="row">
+                  <time dateTime={day.dateIso}>{day.dateFormatted}</time>
+                </th>
+                <td>{localizedDayName}</td>
+                <td>{day.dailyPeakScore}/10</td>
+                <td>
+                  {day.morning.score}/10 ({day.morning.status}, Mid-Cloud {day.morning.metrics.cloudCoverMid}%, Vis {day.morning.metrics.visibilityKm} km)
+                </td>
+                <td>
+                  {day.afternoon.score}/10 ({day.afternoon.status}, Mid-Cloud {day.afternoon.metrics.cloudCoverMid}%, Vis {day.afternoon.metrics.visibilityKm} km)
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
 
       {/* Scale Legend Footer */}
       <div className="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-400">

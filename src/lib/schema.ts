@@ -37,6 +37,17 @@ export function serializeJsonLd(schema: unknown): string {
 }
 
 /**
+ * Strip inline Markdown link syntax `[label](href)` to plain `label` text
+ * so structured data (`FAQPage` answers, `/llms-full.txt`) never leaks raw relative paths.
+ */
+export function stripMarkdownLinks(text: string): string {
+  if (!text || !text.includes('[') || !text.includes('](')) {
+    return text;
+  }
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1');
+}
+
+/**
  * Build Homepage / Dashboard FAQs, enriched with live Gornergrat & Glacier Paradise telemetry
  * when `data` is available so both the visible FAQ accordion and the `FAQPage` JSON-LD stay in sync.
  */
@@ -290,7 +301,7 @@ export function buildFaqPageNode(
       name: faq.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.answer,
+        text: stripMarkdownLinks(faq.answer),
       },
     })),
   };
@@ -487,6 +498,9 @@ export function buildGuideArticleJsonLd(
         dateModified: guide.updatedAt,
         image: `${SITE_URL}${guide.coverImage.src}`,
         inLanguage: lang,
+        author: {
+          '@id': `${SITE_URL}/#organization`,
+        },
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },
@@ -497,6 +511,27 @@ export function buildGuideArticleJsonLd(
         about: {
           '@id': weatherForecastId(locale),
         },
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          cssSelector: ['h1', '[aria-label="Key Takeaways"]'],
+        },
+        isBasedOn: [
+          {
+            '@type': 'Dataset',
+            name: 'Open-Meteo High-Altitude Alpine Weather Forecast API (3,089m & 3,883m)',
+            url: 'https://open-meteo.com/',
+          },
+          {
+            '@type': 'Dataset',
+            name: 'MeteoSwiss 30-Year Zermatt Climatology & Sunshine Normals',
+            url: 'https://www.meteoswiss.admin.ch/',
+          },
+          {
+            '@type': 'WebSite',
+            name: 'Zermatt Bergbahnen & Gornergrat Roundshot Live Webcams',
+            url: 'https://zermatt.roundshot.com/',
+          },
+        ],
       },
       buildWeatherForecastNode(data, locale),
       buildFaqPageNode(guide.faqs, pageUrl, lang),
@@ -562,7 +597,24 @@ export function buildStaticGuideJsonLd(input: {
         : {}),
       inLanguage: 'en-CH',
       mainEntityOfPage: pageUrl,
+      author: { '@id': `${SITE_URL}/#organization` },
       publisher: { '@id': `${SITE_URL}/#organization` },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['h1', 'h2'],
+      },
+      isBasedOn: [
+        {
+          '@type': 'Dataset',
+          name: 'Open-Meteo High-Altitude Alpine Weather Forecast API (3,089m & 3,883m)',
+          url: 'https://open-meteo.com/',
+        },
+        {
+          '@type': 'Dataset',
+          name: 'MeteoSwiss 30-Year Zermatt Climatology & Sunshine Normals',
+          url: 'https://www.meteoswiss.admin.ch/',
+        },
+      ],
       about: {
         '@type': 'Mountain',
         name: 'Matterhorn',

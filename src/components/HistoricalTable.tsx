@@ -64,7 +64,10 @@ export default function HistoricalTable() {
         <div>
           <div className="flex items-center gap-2">
             <BarChart3 className="w-4 h-4 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h3
+              id="historical-table-heading"
+              className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight"
+            >
               {dict.historical.title}
             </h3>
           </div>
@@ -128,14 +131,19 @@ export default function HistoricalTable() {
       </div>
 
       {/* Authoritative 12-Month Statistical Table / Grid */}
-      <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+      <div
+        tabIndex={0}
+        role="region"
+        aria-labelledby="historical-table-heading"
+        className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+      >
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-100/90 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
-              <th className="py-3 px-4">{dict.historical.monthCol}</th>
-              <th className="py-3 px-4">{dict.historical.clarityCol}</th>
-              <th className="py-3 px-4 hidden sm:table-cell">Distribution</th>
-              <th className="py-3 px-4">{dict.historical.seasonCol}</th>
+              <th scope="col" className="py-3 px-4">{dict.historical.monthCol}</th>
+              <th scope="col" className="py-3 px-4">{dict.historical.clarityCol}</th>
+              <th scope="col" className="py-3 px-4 hidden sm:table-cell">Distribution</th>
+              <th scope="col" className="py-3 px-4">{dict.historical.seasonCol}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800 text-xs sm:text-sm">
@@ -148,9 +156,9 @@ export default function HistoricalTable() {
                   key={item.monthShort}
                   className="hover:bg-slate-50/90 dark:hover:bg-slate-800/50 transition-colors"
                 >
-                  <td className="py-2.5 px-4 font-bold text-slate-900 dark:text-white">
+                  <th scope="row" className="py-2.5 px-4 font-bold text-slate-900 dark:text-white">
                     {monthName}
-                  </td>
+                  </th>
                   <td className="py-2.5 px-4 font-mono font-extrabold">
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-md border ${style.badge}`}

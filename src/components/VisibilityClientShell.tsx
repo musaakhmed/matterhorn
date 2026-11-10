@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import Header from './Header';
 import ViewpointSwitcher, { ViewpointPlace } from './ViewpointSwitcher';
@@ -42,6 +41,9 @@ export default function VisibilityClientShell({
   );
 
   const activeData = initialData.viewpoints[activeViewpointId];
+  const inactiveViewpointId: ViewpointId =
+    activeViewpointId === 'gornergrat' ? 'glacier-paradise' : 'gornergrat';
+  const inactiveData = initialData.viewpoints[inactiveViewpointId];
   const dashboardFaqs = getDashboardFaqs(initialData, locale);
   const borderStatus = evaluateCrossBorderLink(initialData);
   const trainsLive = getTrainsLiveStatus(initialData);
@@ -183,6 +185,71 @@ export default function VisibilityClientShell({
           banner={activeData.banner}
           viewpointLabel={activeData.viewpoint.shortLabel}
         />
+
+        {/* Server-rendered telemetry for the secondary viewpoint so AI / Markdown extractors read both viewpoints without clicking client tabs */}
+        <section
+          aria-label={`${inactiveData.viewpoint.name} Live Telemetry & 10-Day Forecast`}
+          className="sr-only"
+        >
+          <h2>
+            {inactiveData.viewpoint.name} ({inactiveData.viewpoint.elevation}) — Live Matterhorn Visibility:{' '}
+            {inactiveData.currentScore}/10 ({inactiveData.currentStatus})
+          </h2>
+          <p>
+            Updated <time dateTime={initialData.updatedAt}>{initialData.swissTimeFormatted}</time>.{' '}
+            {inactiveData.verdictSummary} {inactiveData.guideAdvice}
+          </p>
+          <dl>
+            <dt>Morning (AM 06:00–12:00 CET)</dt>
+            <dd>
+              {inactiveData.today.morning.score}/10 ({inactiveData.today.morning.status}, Mid-Cloud{' '}
+              {inactiveData.today.morning.metrics.cloudCoverMid}%, Visibility{' '}
+              {inactiveData.today.morning.metrics.visibilityKm} km)
+            </dd>
+            <dt>Afternoon (PM 12:00–18:00 CET)</dt>
+            <dd>
+              {inactiveData.today.afternoon.score}/10 ({inactiveData.today.afternoon.status}, Mid-Cloud{' '}
+              {inactiveData.today.afternoon.metrics.cloudCoverMid}%, Visibility{' '}
+              {inactiveData.today.afternoon.metrics.visibilityKm} km)
+            </dd>
+            <dt>Atmospheric Diagnostics ({inactiveData.viewpoint.shortLabel})</dt>
+            <dd>
+              Mid-Level Cloud (2,000–6,000 m): {inactiveData.metrics.cloudCoverMid}%, Low Valley Fog (&lt;2,000 m):{' '}
+              {inactiveData.metrics.cloudCoverLow}%, High Cirrus: {inactiveData.metrics.cloudCoverHigh}%, Horizontal
+              Visibility: {inactiveData.metrics.visibilityKm} km, Summit Wind: {inactiveData.metrics.windSpeedKmh} km/h{' '}
+              {inactiveData.metrics.windCardinal}.
+            </dd>
+          </dl>
+          <table>
+            <caption>10-Day Matterhorn Visibility Forecast — {inactiveData.viewpoint.name}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Day</th>
+                <th scope="col">Peak</th>
+                <th scope="col">Morning (AM 06:00–12:00)</th>
+                <th scope="col">Afternoon (PM 12:00–18:00)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {inactiveData.days.map((day) => (
+                <tr key={day.dateIso}>
+                  <th scope="row">
+                    <time dateTime={day.dateIso}>{day.dateFormatted}</time>
+                  </th>
+                  <td>{day.dayOfWeek}</td>
+                  <td>{day.dailyPeakScore}/10</td>
+                  <td>
+                    {day.morning.score}/10 ({day.morning.status}, Mid-Cloud {day.morning.metrics.cloudCoverMid}%)
+                  </td>
+                  <td>
+                    {day.afternoon.score}/10 ({day.afternoon.status}, Mid-Cloud {day.afternoon.metrics.cloudCoverMid}%)
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
 
         <HowThisScoreWorks>
         <section

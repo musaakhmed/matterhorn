@@ -144,7 +144,9 @@ export default async function GuideArticleView({
                 <span>{guide.readingTimeMinutes} min read</span>
               </span>
               <span>•</span>
-              <span>Updated {guide.updatedAt}</span>
+              <span>
+                Updated <time dateTime={guide.updatedAt}>{guide.updatedAt}</time>
+              </span>
             </div>
           </div>
 
@@ -274,19 +276,27 @@ export default async function GuideArticleView({
         {/* Optional Comparison Table */}
         {guide.comparisonTable && (
           <section
-            aria-label={guide.comparisonTable.caption}
+            aria-labelledby="guide-comparison-table-caption"
             className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 sm:p-6 shadow-xs space-y-4"
           >
-            <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h2
+              id="guide-comparison-table-caption"
+              className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight"
+            >
               {guide.comparisonTable.caption}
             </h2>
 
-            <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+            <div
+              tabIndex={0}
+              role="region"
+              aria-labelledby="guide-comparison-table-caption"
+              className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            >
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
                     {guide.comparisonTable.headers.map((header) => (
-                      <th key={header} className="py-3 px-4">
+                      <th key={header} scope="col" className="py-3 px-4">
                         {header}
                       </th>
                     ))}
@@ -298,18 +308,24 @@ export default async function GuideArticleView({
                       key={rowIdx}
                       className="hover:bg-slate-50/90 dark:hover:bg-slate-800/60 transition-colors"
                     >
-                      {row.map((cell, cellIdx) => (
-                        <td
-                          key={cellIdx}
-                          className={`py-3 px-4 leading-relaxed ${
-                            cellIdx === 0
-                              ? 'font-bold text-slate-900 dark:text-white whitespace-nowrap'
-                              : 'text-slate-700 dark:text-slate-300'
-                          }`}
-                        >
-                          {cell}
-                        </td>
-                      ))}
+                      {row.map((cell, cellIdx) =>
+                        cellIdx === 0 ? (
+                          <th
+                            key={cellIdx}
+                            scope="row"
+                            className="py-3 px-4 leading-relaxed font-bold text-slate-900 dark:text-white whitespace-nowrap"
+                          >
+                            {cell}
+                          </th>
+                        ) : (
+                          <td
+                            key={cellIdx}
+                            className="py-3 px-4 leading-relaxed text-slate-700 dark:text-slate-300"
+                          >
+                            {cell}
+                          </td>
+                        )
+                      )}
                     </tr>
                   ))}
                 </tbody>

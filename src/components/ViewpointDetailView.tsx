@@ -18,7 +18,6 @@ import {
   Snowflake,
   ArrowRight,
   ArrowUpRight,
-  Activity,
 } from 'lucide-react';
 import {
   evaluateLakeReflectionConditions,
@@ -232,7 +231,10 @@ export default async function ViewpointDetailView({
                 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400"
                 aria-hidden="true"
               />
-              <span>Live Zermatt Update: {telemetry.swissTimeFormatted}</span>
+              <span>
+                Live Zermatt Update:{' '}
+                <time dateTime={telemetry.updatedAt}>{telemetry.swissTimeFormatted}</time>
+              </span>
             </div>
           </div>
 
@@ -246,24 +248,26 @@ export default async function ViewpointDetailView({
           </div>
 
           {/* 4 Quick-Fact Telemetry Specs Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             {page.quickFacts.map((fact) => (
               <div
                 key={fact.label}
                 className="rounded-2xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-800 p-4 space-y-1"
               >
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+                <dt className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                   {fact.label}
-                </span>
-                <span className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white block">
-                  {fact.value}
-                </span>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug">
-                  {fact.detail}
-                </p>
+                </dt>
+                <dd className="space-y-1">
+                  <span className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white block">
+                    {fact.value}
+                  </span>
+                  <span className="text-xs text-slate-600 dark:text-slate-400 leading-snug block">
+                    {fact.detail}
+                  </span>
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
 
         </header>
 
@@ -442,19 +446,27 @@ export default async function ViewpointDetailView({
 
         {/* Viewpoint Comparison / Route Table */}
         <section
-          aria-label={page.comparisonTable.caption}
+          aria-labelledby="viewpoint-comparison-table-caption"
           className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/90 p-5 sm:p-6 shadow-xs space-y-4"
         >
-          <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2
+            id="viewpoint-comparison-table-caption"
+            className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight"
+          >
             {page.comparisonTable.caption}
           </h2>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+          <div
+            tabIndex={0}
+            role="region"
+            aria-labelledby="viewpoint-comparison-table-caption"
+            className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+          >
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
                   {page.comparisonTable.headers.map((header) => (
-                    <th key={header} className="py-3 px-4">
+                    <th key={header} scope="col" className="py-3 px-4">
                       {header}
                     </th>
                   ))}
@@ -466,18 +478,24 @@ export default async function ViewpointDetailView({
                     key={rowIdx}
                     className="hover:bg-slate-50/90 dark:hover:bg-slate-800/60 transition-colors"
                   >
-                    {row.map((cell, cellIdx) => (
-                      <td
-                        key={cellIdx}
-                        className={`py-3 px-4 leading-relaxed ${
-                          cellIdx === 0
-                            ? 'font-bold text-slate-900 dark:text-white whitespace-nowrap'
-                            : 'text-slate-700 dark:text-slate-300'
-                        }`}
-                      >
-                        {cell}
-                      </td>
-                    ))}
+                    {row.map((cell, cellIdx) =>
+                      cellIdx === 0 ? (
+                        <th
+                          key={cellIdx}
+                          scope="row"
+                          className="py-3 px-4 leading-relaxed font-bold text-slate-900 dark:text-white whitespace-nowrap"
+                        >
+                          {cell}
+                        </th>
+                      ) : (
+                        <td
+                          key={cellIdx}
+                          className="py-3 px-4 leading-relaxed text-slate-700 dark:text-slate-300"
+                        >
+                          {cell}
+                        </td>
+                      )
+                    )}
                   </tr>
                 ))}
               </tbody>
