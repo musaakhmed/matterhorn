@@ -517,12 +517,12 @@ export function buildGuideArticleJsonLd(
         },
         isBasedOn: [
           {
-            '@type': 'Dataset',
+            '@type': 'WebSite',
             name: 'Open-Meteo High-Altitude Alpine Weather Forecast API (3,089m & 3,883m)',
             url: 'https://open-meteo.com/',
           },
           {
-            '@type': 'Dataset',
+            '@type': 'WebSite',
             name: 'MeteoSwiss 30-Year Zermatt Climatology & Sunshine Normals',
             url: 'https://www.meteoswiss.admin.ch/',
           },
@@ -605,12 +605,12 @@ export function buildStaticGuideJsonLd(input: {
       },
       isBasedOn: [
         {
-          '@type': 'Dataset',
+          '@type': 'WebSite',
           name: 'Open-Meteo High-Altitude Alpine Weather Forecast API (3,089m & 3,883m)',
           url: 'https://open-meteo.com/',
         },
         {
-          '@type': 'Dataset',
+          '@type': 'WebSite',
           name: 'MeteoSwiss 30-Year Zermatt Climatology & Sunshine Normals',
           url: 'https://www.meteoswiss.admin.ch/',
         },
