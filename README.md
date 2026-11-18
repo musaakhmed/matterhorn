@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Architecture & Caching Notes
+
+- **No Middleware / Proxy**: Requests do not run through `src/proxy.ts`.
+- **Canonical Locale Redirects**: `/en`, `/en/:path*`, and retired locale prefixes are redirected (`308`) at the routing layer via `redirects()` in `next.config.ts`.
+- **Static-Friendly Root Layouts & ISR**: `src/app/(default)/layout.tsx` (default English routes) and `src/app/[locale]/layout.tsx` (localized routes, `dynamicParams = false`) share `src/app/_components/RootShell.tsx` to set `<html lang>` without reading request `headers()`, allowing 15-minute ISR (`revalidate = 900`) to cache rendered pages.

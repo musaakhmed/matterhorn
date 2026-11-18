@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import WidgetPage from '@/app/widget/page';
+import WidgetPage from '@/app/(default)/widget/page';
 import { LOCALES, DEFAULT_LOCALE, isValidLocale, getAlternateUrls, Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { getSeo, openGraphLocale } from '@/lib/i18n/seo';

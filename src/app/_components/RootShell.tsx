@@ -1,18 +1,19 @@
+import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { headers } from 'next/headers';
 import { buildRootLayoutJsonLd, serializeJsonLd } from '@/lib/schema';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { I18nProvider } from '@/lib/i18n/context';
-import { getAlternateUrls, isValidLocale, LOCALE_METAS } from '@/lib/i18n/config';
-import './globals.css';
+import { getAlternateUrls, LOCALE_METAS, Locale } from '@/lib/i18n/config';
+import type { Dictionary } from '@/lib/i18n/types';
+import '@/app/globals.css';
 
-export const viewport: Viewport = {
+export const rootViewport: Viewport = {
   themeColor: '#f0f9ff',
   width: 'device-width',
   initialScale: 1,
 };
 
-export const metadata: Metadata = {
+export const rootMetadata: Metadata = {
   metadataBase: new URL('https://isthematterhornvisible.com'),
   title: 'Is the Matterhorn Visible? | Zermatt Webcam & Weather',
   description:
@@ -95,15 +96,16 @@ export const metadata: Metadata = {
 
 const rootJsonLd = buildRootLayoutJsonLd();
 
-export default async function RootLayout({
+export function RootShell({
+  locale,
+  dict,
   children,
 }: Readonly<{
+  locale: Locale;
+  dict?: Dictionary;
   children: React.ReactNode;
 }>) {
-  const headerStore = await headers();
-  const requested = headerStore.get('x-locale');
-  const htmlLang =
-    requested && isValidLocale(requested) ? LOCALE_METAS[requested].htmlLang : 'en';
+  const htmlLang = LOCALE_METAS[locale]?.htmlLang ?? 'en';
 
   return (
     <html lang={htmlLang} className="h-full antialiased" suppressHydrationWarning>
@@ -120,9 +122,10 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 alpine-backdrop selection:bg-sky-500/20 selection:text-sky-900 dark:selection:text-sky-100 transition-colors duration-200">
         <ThemeProvider>
-          <I18nProvider locale="en">{children}</I18nProvider>
+          <I18nProvider locale={locale} dict={dict}>{children}</I18nProvider>
         </ThemeProvider>
         <script
+          defer
           type="module"
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "d3456b94d4da4b72a9616a39ab473d40"}'

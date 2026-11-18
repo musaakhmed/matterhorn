@@ -1,4 +1,4 @@
-import Page, { generateMetadata as localizedMetadata } from './[locale]/page';
+import Page, { generateMetadata as localizedMetadata } from '@/app/[locale]/page';
 
 export const revalidate = 900;
 
