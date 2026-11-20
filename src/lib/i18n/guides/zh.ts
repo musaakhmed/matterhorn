@@ -4,7 +4,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
     title: '戈尔内格拉特 vs 冰川天堂',
     shortTitle: '戈尔内格拉特 vs 冰川天堂',
-    description: '海拔高度、齿轨火车与缆车对比、观赏角度与天气云层抗风险能力：采尔马特两大王牌观景台终极对比指南。',
+    description:
+      '全面对比采尔马特两大王牌观景台：戈尔内格拉特（3,089米东壁经典三角巧克力山型、抗风齿轨火车）与马特洪峰冰川天堂（3,883米南壁冰川、3S缆车），涵盖票价、云层差异与选站建议。',
     category: 'Viewpoints',
     heroStat: {
       label: '海拔差',
@@ -91,7 +92,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'best-time-to-see-matterhorn': {
     title: '采尔马特逐月天气 | 看马特洪峰的最佳时间',
     shortTitle: '最佳观赏月份与时间',
-    description: '历史气象数据统计：为什么12月与1月能见度高达88%+，而夏季午后却经常被对流积云完全遮蔽。',
+    description:
+      '基于30年采尔马特高山气象数据统计：解析为什么12月（89%）与1月（88%）马特洪峰晴空率最高，而夏季午后常被热对流积云遮蔽，附全年逐月能见度、清晨黄金时段与最佳停留天数建议。',
     category: 'Climatology',
     heroStat: {
       label: '黄金观赏窗口',
@@ -187,7 +189,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'zermatt-cloudy-rainy-day-guide': {
     title: '采尔马特阴雨多云备用方案：马特洪峰被云遮住时的实用指南',
     shortTitle: '阴雨天气备选指南',
-    description: '当马特洪峰能见度跌破4/10分时，不必花费上百瑞郎在云雾中坐缆车。探索采尔马特最棒的山谷峡谷、博物馆与温泉体验。',
+    description:
+      '当马特洪峰能见度跌破4/10分时，别花上百瑞郎在浓雾中白跑山顶。本文教您先分辨山谷云海逆温层，再规划戈尔内峡谷、马特洪峰博物馆、高山温泉水疗与晴朗罗纳河谷一日逃离方案。',
     category: 'Bad Weather',
     heroStat: {
       label: '单人可节省',
@@ -263,7 +266,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'best-matterhorn-photo-viewpoints': {
     title: '采尔马特拍摄马特洪峰与日出金山的最佳机位指南',
     shortTitle: '最佳摄影机位与日出金山',
-    description: '机位坐标、步行耗时与最佳光照方位：教堂桥日出、施泰利湖、利菲尔湖、芬德尔恩与Mürini全景机位全解析。',
+    description:
+      '采尔马特马特洪峰摄影机位坐标、步行耗时与最佳光线时段全解析：涵盖教堂桥免费日出霞光、施泰利湖与利菲尔湖镜面倒影（风速低于12 km/h条件）、芬德尔恩古村与Mürini高地全景。',
     category: 'Photography',
     heroStat: {
       label: '两大倒影神湖',
@@ -335,7 +339,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'matterhorn-banner-cloud-fohn-wind': {
     title: '为什么马特洪峰山顶总挂着一片云？（旗状云与阿尔卑斯焚风物理学）',
     shortTitle: '旗状云成因与焚风物理',
-    description: '深度解析马特洪峰著名的背风“旗状云”形成原理：南向焚风如何在晴空万里时凭空造云，以及我们的算法如何提前预测。',
+    description:
+      '深度解析马特洪峰4,478米峰顶著名的背风“旗状云”大气物理学原理：说明南向焚风如何在晴空万里时凭空造云、为何普通手机天气App频频失准，以及本站高空算法如何提前预警。',
     category: 'Meteorology',
     heroStat: {
       label: '山顶海拔',
@@ -402,7 +407,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'zurich-geneva-to-zermatt-day-trip': {
     title: '苏黎世到采尔马特火车 | 时刻、菲斯普换乘',
     shortTitle: '苏黎世与日内瓦一日游指南',
-    description: '菲斯普（Visp）SBB换乘攻略、火车耗时与实时Go/No-Go决策法则：从苏黎世（3小时14分）或日内瓦（3小时45分）出发的最佳一日路线。',
+    description:
+      '从苏黎世（3小时14分）或日内瓦（3小时45分）出发前往采尔马特的一日游攻略：含菲斯普（Visp）SBB站台换乘技巧、早6点实时能见度Go/No-Go决策法则、瑞士旅行通票折扣与上下午行程表。',
     category: 'Day Trips',
     heroStat: {
       label: '往返火车总耗时',
@@ -493,7 +499,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
     title: '采尔马特圣诞：冬日雪境、温暖木屋与晴空下的马特洪峰',
     shortTitle: '采尔马特圣诞指南',
     description:
-      '在采尔马特过圣诞需要知道的一切：童话般的积雪木屋、12月89%的晴空概率、壁炉边的奶酪火锅、马拉雪橇，以及节日期间的高山行程。',
+      '在采尔马特过圣诞节完整指南：无车童话雪村与积雪老木屋、全年最高12月89%马特洪峰晴空率、壁炉奶酪火锅预订时机、马拉雪橇路线，以及圣诞节当天照常运行的戈尔内格拉特与冰川行程。',
     category: 'Winter & Seasons',
     heroStat: {
       label: '12月晴空率',
@@ -642,7 +648,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
     title: '戈尔内格拉特铁路 vs. 冰川快车：瑞士两列最著名的山地火车怎么选',
     shortTitle: '戈尔内格拉特 vs. 冰川快车',
     description:
-      '对比采尔马特两列传奇铁路：33分钟爬上3,089米的戈尔内格拉特齿轨，以及约8小时的冰川快车全景越岭。含瑞士旅行通票规则、订座费、最佳座位侧与实时状态。',
+      '全面对比采尔马特两列传奇铁路：33分钟直达海拔3,089米的戈尔内格拉特齿轨火车，与约8小时纵贯阿尔卑斯的冰川快车全景列车。详解瑞士旅行通票优惠、强制订座费、右侧观景座与实时能见度。',
     category: 'Day Trips',
     heroStat: {
       label: '旅程类型差',
@@ -873,7 +879,7 @@ export const zhGuides: Record<string, GuideTranslation> = {
     title: '马特洪峰是什么？| 高度、位置，以及今天怎么看',
     shortTitle: '马特洪峰是什么？',
     description:
-      '马特洪峰是瑞士与意大利边境、采尔马特上方一座4,478米的金字塔。这里说明它的高度、位置，以及如何确认今天是否看得见。',
+      '马特洪峰矗立在瑞士与意大利边境、采尔马特山谷上方，海拔4,478米，以四面陡峭的三角金字塔山型闻名。本文详解它的准确高度、地理位置、经典东壁观景点，以及如何实时确认今天山顶是否清晰。',
     category: 'Viewpoints',
     heroStat: {
       label: '山顶高度',
@@ -933,7 +939,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'zermatt-weather-december': {
     title: '采尔马特十二月天气',
     shortTitle: '十二月天气',
-    description: '十二月是采尔马特最晴朗的月份，看到清晰马特洪峰的概率为89%。这里说明积雪、结冰的湖，以及如何确认今天的山顶。',
+    description:
+      '十二月是采尔马特30年气象记录中最晴朗的月份，马特洪峰山顶清晰可见的概率高达89%。详解十二月干冷气温、无午后积云优势、积雪与结冰湖泊实况、圣诞滑雪安排及实时能见度查询方法。',
     category: 'Climatology',
     heroStat: {
       label: '晴空概率',
@@ -971,7 +978,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'zermatt-weather-september': {
     title: '采尔马特九月天气',
     shortTitle: '九月天气',
-    description: '采尔马特九月大约72%的日子山顶放晴。徒步道仍然开放，利菲尔湖也已解冻，可以拍马特洪峰倒影。',
+    description:
+      '九月采尔马特约72%的日子马特洪峰山顶晴朗，是兼顾徒步与倒影摄影的黄金季节。此时高山步道无积雪、利菲尔湖与施泰利湖完全解冻、落叶松渐染金黄，附清晨无风拍摄窗口与实时天气查看方法。',
     category: 'Climatology',
     heroStat: {
       label: '晴空概率',
@@ -1009,7 +1017,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'zermatt-weather-may': {
     title: '采尔马特五月天气',
     shortTitle: '五月天气',
-    description: '采尔马特五月有48–58%的早晨放晴。午后云堆得很快，利菲尔湖仍然结冰。',
+    description:
+      '五月是采尔马特春夏交替的过渡季，约48–58%的早晨马特洪峰晴朗，但融雪水汽使午后积云快速堆积，利菲尔湖仍处于结冰状态。详解五月看峰早起策略、开放观景点与山谷替代行程建议。',
     category: 'Climatology',
     heroStat: {
       label: '晴空概率',
@@ -1047,7 +1056,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'glacier-express': {
     title: '冰川快车票价、路线与订座',
     shortTitle: '冰川快车',
-    description: '冰川快车的票价、必须另付的订座费、采尔马特到圣莫里茨的路线，以及它和伯尔尼纳快车的差别。',
+    description:
+      '冰川快车（Glacier Express）完整乘车指南：详解采尔马特至圣莫里茨约8小时全景路线、车票价格与必须另付的订座费、瑞士旅行通票适用规则、最佳观景车厢，以及与伯尔尼纳快车的路线差异。',
     category: 'Day Trips',
     heroStat: {
       label: '订座费',
@@ -1123,7 +1133,8 @@ export const zhGuides: Record<string, GuideTranslation> = {
   'hotels-with-matterhorn-view': {
     title: '能看到马特洪峰的酒店',
     shortTitle: '带山景的酒店',
-    description: '哪些采尔马特酒店真正看得到马特洪峰东壁，哪些靠近倒影湖，哪些在山谷云遮住村子时仍然晴朗。',
+    description:
+      '采尔马特马特洪峰景观酒店挑选指南：按朝向与海拔解析哪些酒店房间真正直面马特洪峰东壁，哪些紧邻利菲尔湖等倒影步道，以及当山谷雾云笼罩村镇时，哪些高海拔山顶酒店仍沐浴在晴空阳光中。',
     category: 'Viewpoints',
     heroStat: {
       label: '最先消失的视野',

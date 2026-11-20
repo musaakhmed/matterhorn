@@ -4,7 +4,8 @@ export const jaGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
     title: 'ゴルナーグラートとグレイシャーパラダイス',
     shortTitle: 'ゴルナーグラート vs グレイシャー',
-    description: '標高差、登山鉄道とロープウェイの比較、角度と雲耐性：ツェルマットの二大展望台を徹底比較。',
+    description:
+      'ゴルナーグラート（標高3,089m・東壁）とマッターホルン・グレイシャー・パラダイス（標高3,883m・南壁）を標高差、登山鉄道と3Sロープウェイの耐風性、山容の角度、料金、雲の出やすさで徹底比較。',
     category: 'Viewpoints',
     heroStat: {
       label: '標高差',
@@ -91,7 +92,8 @@ export const jaGuides: Record<string, GuideTranslation> = {
   'best-time-to-see-matterhorn': {
     title: 'ツェルマットの月別天気 | マッターホルンを見る最良の時期',
     shortTitle: 'ベストな月と時間帯',
-    description: 'なぜ12月と1月は快晴率88%+で、夏の午後は積雲に覆われやすいのか？30年の高山気象データから読み解く完全ガイド。',
+    description:
+      'なぜ12月（89%）と1月（88%）はマッターホルンの快晴率が最も高く、夏の午後は積雲に覆われやすいのか？30年のツェルマット高山気象データから最適な月・午前時間帯・滞在日数を解説する完全ガイド。',
     category: 'Climatology',
     heroStat: {
       label: '最高の観賞時間',
@@ -187,7 +189,8 @@ export const jaGuides: Record<string, GuideTranslation> = {
   'zermatt-cloudy-rainy-day-guide': {
     title: 'マッターホルンが雲に隠れた時のツェルマット雨天観光ガイド',
     shortTitle: '雨天・曇天時の過ごし方',
-    description: '視界スコアが4/10以下の日は100フラン超のロープウェイを見送り、渓谷、博物館、極上スパで賢く楽しむ代替プラン。',
+    description:
+      'マッターホルン視界スコアが4/10以下の曇天・雨天時は100スイスフラン超のロープウェイを見送り、ゴルナー渓谷、マッターホルン博物館、極上スパやローヌ渓谷の日帰りで賢く楽しむ代替観光プランを解説。',
     category: 'Bad Weather',
     heroStat: {
       label: '節約できる金額',
@@ -263,7 +266,8 @@ export const jaGuides: Record<string, GuideTranslation> = {
   'best-matterhorn-photo-viewpoints': {
     title: 'ツェルマットのマッターホルン絶景撮影スポット＆朝焼けスポット',
     shortTitle: 'ベスト撮影地＆朝焼けスポット',
-    description: 'キルヒ橋の朝焼け、シュテッリ湖、リッフェル湖、フィンデルン、ミュリーニ展望台の撮影ポイントと最適な太陽高度。',
+    description:
+      'キルヒ橋の無料朝焼け、シュテッリ湖とリッフェル湖の逆さマッターホルン、フィンデルン村、ミュリーニ展望台まで、ツェルマット主要撮影スポットへの行き方・最適な太陽高度・風速12km/h未満の撮影条件を解説。',
     category: 'Photography',
     heroStat: {
       label: '2大逆さ湖',
@@ -335,7 +339,8 @@ export const jaGuides: Record<string, GuideTranslation> = {
   'matterhorn-banner-cloud-fohn-wind': {
     title: 'なぜマッターホルンの頂上にはいつも雲がかかるのか？（旗雲とフェーン現象）',
     shortTitle: '旗雲の仕組みとフェーン現象',
-    description: '青空に突然たなびく有名な「旗雲（バナークラウド）」の大気物理学。イタリアからの南風フェーンが快晴時に雲を生む理由。',
+    description:
+      '青空のマッターホルン山頂（4,478m）に突然たなびく「旗雲（バナークラウド）」の大気物理学を解説。イタリア側からの南風フェーンが快晴時に雲を生む仕組みと、一般天気アプリが外れる理由・予測方法を案内。',
     category: 'Meteorology',
     heroStat: {
       label: '山頂標高',
@@ -493,7 +498,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: 'ツェルマットのクリスマス：冬の魔法、暖炉のシャレー、快晴のマッターホルン',
     shortTitle: 'ツェルマットのクリスマスガイド',
     description:
-      'ツェルマットのクリスマスに必要なことすべて。雪をかぶった童話のようなシャレー、12月の快晴率89%、暖炉のフォンデュ、鈴のつく馬そり、祝日の山岳散策まで。',
+      'ツェルマットのクリスマス旅行ガイド。雪をかぶった童話のような歩行者村とシャレー、年間最高89%を誇る12月の快晴率、暖炉のチーズフォンデュ、馬そり、クリスマス当日も運行する山岳鉄道まで網羅。',
     category: 'Winter & Seasons',
     heroStat: {
       label: '12月の快晴率',
@@ -642,7 +647,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: 'マッターホルンとは？｜標高・場所・今日の見え方',
     shortTitle: 'マッターホルンとは？',
     description:
-      'マッターホルンは、ツェルマットの上、スイスとイタリアの国境に立つ4,478mのピラミッドです。標高、場所、そして今日見えるかどうかの確かめ方。',
+      'マッターホルンはツェルマットの上、スイスとイタリアの国境にそびえる標高4,478mの象徴的なピラミッド峰です。正確な標高・場所・トブラローネ形の東壁、そして今日山頂が見えるかどうかの確かめ方を解説。',
     category: 'Viewpoints',
     heroStat: {
       label: '山頂の標高',
@@ -704,7 +709,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: '12月のツェルマットの天気',
     shortTitle: '12月の天気',
     description:
-      '12月はツェルマットで最も晴れやすい月で、マッターホルンが晴れる確率は89%です。雪、凍った湖、そして今日の山頂の確かめ方。',
+      '12月はツェルマットで最も晴れやすい月で、30年統計でマッターホルン山頂が晴れる確率は89%に達します。冷たく乾いた冬の気温、雪景色と凍ったリッフェル湖の状況、今日の視界と服装のポイントを解説。',
     category: 'Climatology',
     heroStat: {
       label: '快晴の確率',
@@ -744,7 +749,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: '9月のツェルマットの天気',
     shortTitle: '9月の天気',
     description:
-      '9月のツェルマットは約72%の日で晴れます。登山道は開いており、リッフェルゼーは溶けてマッターホルンを映します。',
+      '9月のツェルマットは約72%の日でマッターホルン山頂が晴れるハイキングと撮影の好季です。雪のない登山道、解氷したリッフェル湖とステリ湖の逆さマッターホルン、黄金色のカラマツの時期と朝の出発時間を解説。',
     category: 'Climatology',
     heroStat: {
       label: '快晴の確率',
@@ -785,7 +790,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: '5月のツェルマットの天気',
     shortTitle: '5月の天気',
     description:
-      '5月のツェルマットは、朝の48–58%で晴れます。午後の雲は早く湧き、リッフェルゼーはまだ凍っています。',
+      '5月のツェルマットは端境期で、朝の晴天率は48〜58%です。雪解けの湿気で午後早くに積雲が湧きやすく、リッフェル湖はまだ凍結しています。5月にマッターホルンを見るための早朝作戦と代替スポットを解説。',
     category: 'Climatology',
     heroStat: {
       label: '快晴の確率',
@@ -1049,7 +1054,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: 'グレイシャー・エクスプレスの運賃・路線・座席指定',
     shortTitle: 'グレイシャー・エクスプレス',
     description:
-      'グレイシャー・エクスプレスの切符、必須の座席指定、ツェルマットからサンモリッツまでの路線、そしてベルニナ・エクスプレスとの違い。',
+      '氷河特急（グレイシャー・エクスプレス）の切符料金、別途必須の座席指定料、ツェルマット〜サンモリッツ間約8時間のパノラマ路線、スイストラベルパス適用ルールとベルニナ・エクスプレスとの違いを徹底解説。',
     category: 'Day Trips',
     heroStat: {
       label: '座席指定',
@@ -1127,7 +1132,7 @@ export const jaGuides: Record<string, GuideTranslation> = {
     title: 'マッターホルンが見えるホテル',
     shortTitle: '眺望のあるホテル',
     description:
-      'ツェルマットのどのホテルがマッターホルン東壁を本当に見るか、反射の湖のそばはどこか、谷の雲が村を隠しても晴れるのはどこか。',
+      'ツェルマットでマッターホルン東壁を本当に客室から望めるホテルの選び方を解説。村内で視界が開けるエリア、リッフェル湖など逆さ湖に近い山岳ホテル、谷霧や雲海が村を覆っても晴れる高地宿の違いを比較。',
     category: 'Viewpoints',
     heroStat: {
       label: '最初に消える眺め',

@@ -2525,7 +2525,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '戈尔内格拉特观景台',
       shortName: '戈尔内格拉特',
       title: '戈尔内格拉特观景台：实时能见度、网络摄像头与马特洪峰全景指南',
-      description: '海拔3,089米实时气象读数、策马特齿轨火车时刻、利菲尔湖倒影拍摄最佳时段及360°雪山全景全攻略。',
+      description:
+        '海拔3,089米戈尔内格拉特实时能见度评分与气象读数，每15分钟更新。提供策马特齿轨火车时刻与右侧观景座建议、罗滕博登站利菲尔湖倒影拍摄时段及360°雪山全景指南。',
       aspectLabel: '东面 / 东北面（经典三角巧克力标志视角）',
       transportSummary: '从策马特火车站乘坐戈尔内格拉特登山齿轨火车 (GGB)',
       journeyTime: '单程约33分钟',
@@ -2606,7 +2607,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '马特洪峰冰川天堂 (小马特洪峰)',
       shortName: '冰川天堂',
       title: '马特洪峰冰川天堂：海拔3,883米实时高空能见度与实况摄像头',
-      description: '全欧洲海拔最高缆车站（3,883米）。实时峰顶云层高度监测、3S超快缆车体验及马特洪峰南坡险峻岩壁近景。',
+      description:
+        '全欧洲海拔最高缆车站小马特洪峰（3,883米）实时能见度与实况摄像头。提供高空云层高度与焚风停运预警、3S全景缆车接驳指南、冰川宫殿及马特洪峰南壁壮观视角。',
       aspectLabel: '南面 / 西南面（高海拔冰川俯瞰视角）',
       transportSummary: '从策马特富里 (Furi) 换乘马特洪峰特快线及3S全景缆车',
       journeyTime: '单程约40–45分钟',
@@ -2683,7 +2685,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '苏内加与利菲尔湖高山倒影',
       shortName: '湖面倒影',
       title: '利菲尔湖与苏内加：拍摄马特洪峰湖面倒影实时风力与水况诊断',
-      description: '实时表面风速与水面平静度监测，助您在利菲尔湖 (2,757米) 与施泰利湖 (2,537米) 捕捉完美的马特洪峰镜面倒影。',
+      description:
+        '实时表面风速（12 km/h无风阈值）与水面平静度诊断，助您在利菲尔湖（2,757米）与施泰利湖（2,537米）捕捉马特洪峰完美镜面倒影，含6–10月解冻季与背风池攻略。',
       aspectLabel: '东面湖面倒影（晨曦黄金时刻镜面）',
       transportSummary: '乘齿轨火车至罗滕博登 (利菲尔湖) 或地下缆车至苏内加 (施泰利湖)',
       journeyTime: '单程约25–35分钟',
@@ -2761,7 +2764,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '苏内加',
       shortName: '苏内加',
       title: '苏内加缆索铁路与马特洪峰东壁',
-      description: '苏内加缆索铁路是马特洪峰东壁、施泰利湖和五湖步道的低处平台。想要轻松的起点、而不是最近的倒影时，选这里。',
+      description:
+        '策马特苏内加地下缆索铁路4.5分钟直达2,288米观景平台，眺望马特洪峰东壁、莱湖（Leisee）、施泰利湖倒影与五湖徒步起点，含实时能见度评分及与利菲尔湖路线对比。',
       aspectLabel: '从低处平台看东壁',
       transportSummary: '从策马特乘坐苏内加缆索铁路',
       journeyTime: '4.5分钟',
@@ -2827,7 +2831,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '策马特村（教堂桥与里德路）',
       shortName: '策马特村',
       title: '今天从策马特村能看见马特洪峰吗？教堂桥实时能见度与摄像头',
-      description: '从策马特村（教堂桥与里德路）查看马特洪峰实时能见度。直播摄像头、日出霞光和谷雾，无需山地车票。',
+      description:
+        '无需购买山地火车或缆车票，直接从策马特村教堂桥与里德路（Mürini）查看马特洪峰实时能见度与直播摄像头。含日出金色霞光时间、低空谷雾判断与村内免费机位指南。',
       aspectLabel: '东北山脊与东壁的谷地取景',
       transportSummary: '从策马特火车站 / 教堂广场步行5分钟（无需车票）',
       journeyTime: '步行0–10分钟（免费公共观景点）',
@@ -2899,7 +2904,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '高納葛拉特觀景台',
       shortName: '高納葛拉特',
       title: '高納葛拉特觀景台：即時能見度、實況鏡頭與馬特洪峰全景攻略',
-      description: '海拔3,089公尺即時能見度數據、策馬特齒軌登山火車接駁指南、利菲爾湖倒影攝影時刻及360°阿爾卑斯全景。',
+      description:
+        '海拔3,089公尺高納葛拉特即時能見度評分與氣象數據，每15分鐘更新。提供策馬特齒軌火車接駁與右側觀景座建議、羅滕博登站利菲爾湖倒影拍攝時段及360°阿爾卑斯全景指南。',
       aspectLabel: '東面 / 東北面（經典瑞士三角巧克力視角）',
       transportSummary: '從策馬特車站搭乘高納葛拉特登山齒軌鐵路 (GGB)',
       journeyTime: '單程約33分鐘',
@@ -2980,7 +2986,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '馬特洪峰冰川天堂 (小馬特洪峰)',
       shortName: '冰川天堂',
       title: '馬特洪峰冰川天堂：海拔3,883公尺即時高空能見度與鏡頭直播',
-      description: '歐洲最高纜車站（3,883公尺）。即時頂峰雲層診斷、3S全景纜車接駁及馬特洪峰南面壯麗冰川視角。',
+      description:
+        '歐洲最高纜車站小馬特洪峰（3,883公尺）即時能見度與實況鏡頭。提供高空雲層高度與焚風停駛預警、3S全景纜車轉乘指南、冰川宮殿及馬特洪峰南壁壯麗冰川視角。',
       aspectLabel: '南面 / 西南面（高海拔冰原俯瞰視角）',
       transportSummary: '從策馬特富里 (Furi) 搭乘馬特洪峰快線轉乘3S纜車',
       journeyTime: '單程約40–45分鐘',
@@ -3057,7 +3064,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '蘇內加與利菲爾湖高山倒影',
       shortName: '湖面倒影',
       title: '利菲尔湖與蘇內加：拍攝馬特洪峰湖水鏡面倒影即時風速與水況監測',
-      description: '即時風速與水面平靜度診斷，助您在利菲爾湖 (2,757公尺) 與施泰利湖 (2,537公尺) 拍下絕美倒影。',
+      description:
+        '即時表面風速（12 km/h無風門檻）與水面平靜度診斷，助您在利菲爾湖（2,757公尺）與施泰利湖（2,537公尺）拍下馬特洪峰絕美鏡面倒影，含6–10月解凍季與背風池攻略。',
       aspectLabel: '東面湖面倒影（日出晨曦金色倒影）',
       transportSummary: '搭火車至羅滕博登 (利菲爾湖) 或地下纜車至蘇內加 (施泰利湖)',
       journeyTime: '單程約25–35分鐘',
@@ -3135,7 +3143,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '蘇內加',
       shortName: '蘇內加',
       title: '蘇內加纜索鐵路與馬特洪峰東壁',
-      description: '蘇內加纜索鐵路是馬特洪峰東壁、施泰利湖和五湖步道的低處平台。想要輕鬆的起點、而不是最近的倒影時，選這裡。',
+      description:
+        '策馬特蘇內加地下纜索鐵路4.5分鐘直達2,288公尺觀景平台，眺望馬特洪峰東壁、萊湖（Leisee）、施泰利湖倒影與五湖健行起點，含即時能見度評分及與利菲爾湖路線比較。',
       aspectLabel: '從低處平台看東壁',
       transportSummary: '從策馬特搭乘蘇內加纜索鐵路',
       journeyTime: '4.5分鐘',
@@ -3201,7 +3210,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '策馬特村（教堂橋與里德路）',
       shortName: '策馬特村',
       title: '今天從策馬特村能看見馬特洪峰嗎？教堂橋即時能見度與攝影機',
-      description: '從策馬特村（教堂橋與里德路）查看馬特洪峰即時能見度。直播攝影機、日出霞光和谷霧，無需山地車票。',
+      description:
+        '無需購買登山火車或纜車票，直接從策馬特村教堂橋與里德路（Mürini）查看馬特洪峰即時能見度與直播攝影機。含日出金色霞光時間、低空谷霧判斷與村內免費機位指南。',
       aspectLabel: '東北山脊與東壁的谷地取景',
       transportSummary: '從策馬特火車站／教堂廣場步行5分鐘（無需車票）',
       journeyTime: '步行0–10分鐘（免費公共觀景點）',
@@ -3273,7 +3283,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: 'ゴルナーグラート展望台',
       shortName: 'ゴルナーグラート',
       title: 'ゴルナーグラート展望台：マッターホルン視界スコア・ライブカメラ＆パノラマ案内',
-      description: '標高3,089mのリアルタイム気象テレメトリ、ツェルマット発登山鉄道ガイド、リッフェル湖の逆さマッターホルン撮影時間。',
+      description:
+        '標高3,089mゴルナーグラート展望台のリアルタイム視界スコアとライブカメラを15分ごとに更新。ツェルマット発登山鉄道のおすすめ右側座席、ローテンボーデン下車のリッフェル湖撮影時間、360°パノラマを案内。',
       aspectLabel: '東壁・北東壁（トブラローネのロゴで有名なクラシックアングル）',
       transportSummary: 'ツェルマット駅前よりゴルナーグラート鉄道 (GGB) 登山列車利用',
       journeyTime: '片道約33分',
@@ -3354,7 +3365,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: 'マッターホルン・グレイシャー・パラダイス（クライン・マッターホルン）',
       shortName: 'グレイシャー・パラダイス',
       title: 'マッターホルン・グレイシャー・パラダイス：標高3,883mの視界とライブカメラ',
-      description: 'ヨーロッパ最高地点の展望台（標高3,883m）。リアルタイム雲高診断、最新3Sロープウェイ、迫力の南壁氷河パノラマ。',
+      description:
+        'ヨーロッパ最高所の展望台クライン・マッターホルン（標高3,883m）のリアルタイム視界とライブカメラ。標高別の雲高診断、南風フェーンによる3Sロープウェイ運休リスク、氷の宮殿と南壁パノラマを解説。',
       aspectLabel: '南壁・南西壁（高地氷原から見上げる大迫力アングル）',
       transportSummary: 'ツェルマットよりマッターホルン・エクスプレス＋3Sロープウェイ乗り継ぎ',
       journeyTime: '片道約40〜45分',
@@ -3431,7 +3443,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: 'スネガ＆リッフェル湖の逆さマッターホルン',
       shortName: '湖の逆さ富士',
       title: 'リッフェル湖＆スネガ：逆さマッターホルン湖面反射のリアルタイム風速診断',
-      description: 'リッフェル湖（2,757m）とステリ湖（2,537m）で美しい水面反射を捉えるための風速と湖面状態のリアルタイム診断。',
+      description:
+        'リッフェル湖（2,757m）とステリ湖（2,537m）で逆さマッターホルンを撮影するための風速（12km/h未満基準）と湖面状態をリアルタイム診断。ローテンボーデン駅からの徒歩ルート、解凍時期と風裏の池も案内。',
       aspectLabel: '東壁の湖面反射（朝焼けのゴールドリフレクション）',
       transportSummary: '登山列車でローテンボーデン（リッフェル湖）または地下ケーブルカーでスネガ（ステリ湖）',
       journeyTime: '片道約25〜35分',
@@ -3509,7 +3522,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: 'スネガ',
       shortName: 'スネガ',
       title: 'スネガのケーブルカーとマッターホルン東壁',
-      description: 'スネガのケーブルカーは、マッターホルン東壁、ステリ湖、5つの湖歩きの低いテラスです。いちばん近い反射ではなく、楽な出発が欲しいときに使います。',
+      description:
+        'ツェルマットから地下ケーブルカーで4.5分のスネガ展望台（標高2,288m）。マッターホルン東壁の眺望、家族向けのライ湖、ブラウヘルト経由ステリ湖や5つの湖ハイキング、リッフェル湖との違いを解説。',
       aspectLabel: '低いテラスから見る東壁',
       transportSummary: 'ツェルマットからスネガのケーブルカー',
       journeyTime: '4.5分',
@@ -3575,7 +3589,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: 'ツェルマット村（キルヒブリュッケとリードヴェーク）',
       shortName: 'ツェルマット村',
       title: '今日、ツェルマット村からマッターホルンは見える？キルヒブリュッケのライブ視界とカメラ',
-      description: 'ツェルマット村（キルヒブリュッケとリードヴェーク）からマッターホルンのリアルタイム視界。ライブカメラ、日の出のアルペングロー、谷霧。登山鉄道の切符は不要です。',
+      description:
+        '登山鉄道の切符不要でツェルマット村（キルヒ橋・リードヴェーク／ミュリーニ）から望むマッターホルンのリアルタイム視界。ライブカメラ、日の出の朝焼け（アルペングロー）時刻、低層谷霧の確認方法を案内。',
       aspectLabel: '北東稜と東壁を谷から見る構図',
       transportSummary: 'ツェルマット駅／教会広場から徒歩5分（切符不要）',
       journeyTime: '徒歩0〜10分（無料の公共展望）',
@@ -3647,7 +3662,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '고르너그라트 전망대',
       shortName: '고르너그라트',
       title: '고르너그라트 전망대: 실시간 시야 스코어, 웹캠 및 마터호른 파노라마 가이드',
-      description: '해발 3,089m 실시간 기상 관측 데이터, 체르마트 산악 열차 정보, 리펠제 호수 반영 촬영 팁 및 360° 알프스 파노라마.',
+      description:
+        '해발 3,089m 고르너그라트 실시간 가시성 스코어와 라이브 웹캠을 15분마다 업데이트합니다. 체르마트 산악 열차 오른쪽 좌석 팁, 로텐보덴 역 리펠제 호수 반영 시간과 360° 알프스 파노라마를 확인하세요.',
       aspectLabel: '동벽 / 북동벽 (토블론 초콜릿의 상징적인 뷰)',
       transportSummary: '체르마트 역 앞에서 고르너그라트 톱니바퀴 산악 열차(GGB) 탑승',
       journeyTime: '편도 약 33분',
@@ -3728,7 +3744,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '마터호른 글래시어 파라다이스 (클라인 마터호른)',
       shortName: '글래시어 파라다이스',
       title: '마터호른 글래시어 파라다이스: 해발 3,883m 실시간 시야와 고산 웹캠',
-      description: '유럽에서 가장 높은 케이블카 역(3,883m). 실시간 구름 높이 진단, 최신 3S 곤돌라 및 마터호른 남벽 뷰.',
+      description:
+        '유럽 최고 고도 케이블카 역 클라인 마터호른(해발 3,883m) 실시간 시야와 라이브 웹캠. 고도별 구름 높이 진단, 남풍 푄 강풍 시 3S 곤돌라 운행 중단 위험, 빙하 궁전과 마터호른 남벽 뷰를 안내합니다.',
       aspectLabel: '남벽 / 남서벽 (고산 빙하 고원에서 바라보는 웅장한 뷰)',
       transportSummary: '체르마트 푸리(Furi)에서 마터호른 익스프레스 + 3S 케이블카 환승',
       journeyTime: '편도 약 40–45분',
@@ -3805,7 +3822,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '수네가 & 리펠제 호수 반영',
       shortName: '호수 반영 뷰',
       title: '리펠제 & 수네가: 마터호른 거울 반영 촬영을 위한 실시간 바람 및 수면 진단',
-      description: '리펠제(2,757m)와 슈텔리제(2,537m)에서 호수에 비치는 완벽한 마터호른 반영 사진을 찍기 위한 실시간 풍속 데이터.',
+      description:
+        '리펠제(2,757m)와 슈텔리제(2,537m)에서 마터호른 거울 반영 사진을 찍기 위한 실시간 풍속(12km/h 미만 기준)과 수면 상태를 진단합니다. 로텐보덴 도보 접근, 6~10월 해빙 시기와 바람 피하는 연못까지 안내.',
       aspectLabel: '동벽 호수 거울 반영 (일출 골든아워)',
       transportSummary: '로텐보덴행 열차(리펠제) 또는 지하 푸니쿨라로 수네가(슈텔리제) 이동',
       journeyTime: '편도 약 25–35분',
@@ -3883,7 +3901,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '수네가',
       shortName: '수네가',
       title: '수네가 푸니쿨라와 마터호른 동벽',
-      description: '수네가 푸니쿨라는 마터호른 동벽, 슈텔리제, 5호수 걷기의 낮은 테라스입니다. 가장 가까운 반영이 아니라 쉬운 출발이 필요할 때 이용합니다.',
+      description:
+        '체르마트에서 지하 푸니쿨라로 4.5분 만에 오르는 수네가 전망대(해발 2,288m). 마터호른 동벽 뷰, 가족용 라이제 호수, 블라우헤르트 경유 슈텔리제·5호수 하이킹과 리펠제와의 차이점을 비교합니다.',
       aspectLabel: '낮은 테라스에서 보는 동벽',
       transportSummary: '체르마트에서 수네가 푸니쿨라',
       journeyTime: '4.5분',
@@ -3949,7 +3968,8 @@ const VIEWPOINT_TRANSLATIONS: Partial<Record<Locale, Partial<Record<ViewpointPag
       name: '체르마트 마을(키르히브뤼케와 리드베크)',
       shortName: '체르마트 마을',
       title: '오늘 체르마트 마을에서 마터호른이 보입니까? 키르히브뤼케 실시간 시야와 카메라',
-      description: '체르마트 마을(키르히브뤼케와 리드베크)에서 마터호른 실시간 시야. 라이브 카메라, 일출 알펜글로, 계곡 안개. 산악 열차 표는 필요 없습니다.',
+      description:
+        '산악 열차 표 없이 체르마트 마을(키르히브뤼케 다리와 리드베크/뮈리니)에서 보는 마터호른 실시간 시야. 라이브 웹캠, 일출 알펜글로 시간대, 저층 계곡 안개 판별법과 마을 무료 촬영 포인트를 확인하세요.',
       aspectLabel: '북동 능선과 동벽을 계곡에서 보는 구도',
       transportSummary: '체르마트 역 / 교회 광장에서 도보 5분(표 불필요)',
       journeyTime: '도보 0–10분(무료 공공 전망)',

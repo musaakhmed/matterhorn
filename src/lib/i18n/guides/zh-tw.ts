@@ -4,7 +4,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
     title: '高納葛拉特 vs 冰川天堂',
     shortTitle: '高納葛拉特 vs 冰川天堂',
-    description: '海拔高度、齒軌火車與纜車比較、觀賞視角與天氣雲層抗風能力：策馬特兩大經典觀景台終極評比指南。',
+    description:
+      '全面比較策馬特兩大經典觀景台：高納葛拉特（3,089公尺東壁經典三角巧克力山型、抗風齒軌火車）與馬特洪峰冰川天堂（3,883公尺南壁冰川、3S纜車），涵蓋票價、雲層差異與選站建議。',
     category: 'Viewpoints',
     heroStat: {
       label: '海拔落差',
@@ -91,7 +92,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'best-time-to-see-matterhorn': {
     title: '策馬特逐月天氣 | 看馬特洪峰的最佳時間',
     shortTitle: '最佳觀賞月份與時間',
-    description: '歷史氣象統計數據分析：為什麼12月與1月晴空率高達88%+，而夏季午後卻經常被對流積雲遮蔽。',
+    description:
+      '根據30年策馬特高山氣象數據統計：解析為何12月（89%）與1月（88%）馬特洪峰晴空率最高，而夏季午後常被熱對流積雲遮蔽，附全年逐月能見度、清晨黃金時段與最佳停留天數建議。',
     category: 'Climatology',
     heroStat: {
       label: '黃金晴空時段',
@@ -187,7 +189,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'zermatt-cloudy-rainy-day-guide': {
     title: '策馬特雨天與濃霧備用計畫：馬特洪峰藏在雲霧時的行程指南',
     shortTitle: '雨天與濃霧備選方案',
-    description: '當能見度跌破4/10分時，不必浪費百元瑞郎在濃霧中搭纜車。探索策馬特最精彩的峽谷、博物館與溫泉體驗。',
+    description:
+      '當馬特洪峰能見度跌破4/10分時，別花上百瑞郎在濃霧中白跑山頂。本文教您先分辨山谷雲海逆溫層，再規劃高納峽谷、馬特洪峰博物館、高山溫泉水療與晴朗隆河河谷一日避雨行程。',
     category: 'Bad Weather',
     heroStat: {
       label: '每人可節省',
@@ -263,7 +266,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'best-matterhorn-photo-viewpoints': {
     title: '策馬特拍攝馬特洪峰與日出金山的最佳攝影機位全攻略',
     shortTitle: '最佳攝影機位與日出攻略',
-    description: '攝影機位座標、步行時間與最佳採光角度：教堂橋日出、史蒂利湖、利菲爾湖、芬德爾恩與Mürini機位大公開。',
+    description:
+      '策馬特馬特洪峰攝影機位座標、步行時間與最佳採光時段全解析：涵蓋教堂橋免費日出霞光、史蒂利湖與利菲爾湖鏡面倒影（風速低於12 km/h條件）、芬德爾恩古村與Mürini高地全景。',
     category: 'Photography',
     heroStat: {
       label: '兩大倒影名湖',
@@ -335,7 +339,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'matterhorn-banner-cloud-fohn-wind': {
     title: '為什麼馬特洪峰山頂常常掛著一面雲？（旗狀雲與阿爾卑斯焚風物理學）',
     shortTitle: '旗狀雲成因與焚風物理',
-    description: '深入剖析馬特洪峰著名的背風「旗狀雲」形成機制：南向焚風如何在晴空萬里時憑空產雲，以及我們的演算法如何精準預警。',
+    description:
+      '深入剖析馬特洪峰4,478公尺峰頂著名的背風「旗狀雲」大氣物理學原理：說明南向焚風如何在晴空萬里時憑空產雲、為何一般手機天氣App頻頻失準，以及本站高空演算法如何精準預警。',
     category: 'Meteorology',
     heroStat: {
       label: '山峰海拔',
@@ -402,7 +407,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'zurich-geneva-to-zermatt-day-trip': {
     title: '蘇黎世到策馬特火車 | 時刻、菲斯普轉乘',
     shortTitle: '蘇黎世與日內瓦一日遊攻略',
-    description: '菲斯普（Visp）SBB轉乘指南、搭車時間與即時Go/No-Go決策法則：自蘇黎世（3小時14分）或日內瓦（3小時45分）出發的最佳一日遊規劃。',
+    description:
+      '從蘇黎世（3小時14分）或日內瓦（3小時45分）出發前往策馬特的一日遊攻略：含菲斯普（Visp）SBB月台轉乘技巧、早6點即時能見度Go/No-Go決策法則、瑞士旅行通行證折扣與上下午行程表。',
     category: 'Day Trips',
     heroStat: {
       label: '往返火車總車程',
@@ -493,7 +499,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
     title: '策馬特聖誕：冬日雪境、暖木屋與晴空下的馬特洪峰',
     shortTitle: '策馬特聖誕指南',
     description:
-      '在策馬特過聖誕該掌握的事：童話般的積雪木屋、12月89%的晴空機率、壁爐邊的起司鍋、馬拉雪橇，以及節日期間仍然開行的高山行程。',
+      '在策馬特過聖誕節完整指南：無車童話雪村與積雪木屋、全年最高12月89%馬特洪峰晴空機率、壁爐起司鍋訂位時機、馬拉雪橇路線，以及聖誕節當天照常行駛的高納葛拉特與冰川行程。',
     category: 'Winter & Seasons',
     heroStat: {
       label: '12月晴空率',
@@ -642,7 +648,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
     title: '高納葛拉特鐵路 vs. 冰川快車：瑞士兩列最著名的山地火車怎麼選',
     shortTitle: '高納葛拉特 vs. 冰川快車',
     description:
-      '比較策馬特兩條傳奇鐵路：33分鐘爬上3,089公尺的高納葛拉特齒軌，以及約8小時的冰川快車全景越嶺。含瑞士旅行通行證規則、訂位費、最佳座位側與即時狀態。',
+      '全面比較策馬特兩條傳奇鐵路：33分鐘直達海拔3,089公尺的高納葛拉特齒軌火車，與約8小時縱貫阿爾卑斯的冰川快車全景列車。詳解瑞士旅行通行證優惠、強制訂位費、右側觀景座與即時能見度。',
     category: 'Day Trips',
     heroStat: {
       label: '旅程類型差',
@@ -873,7 +879,7 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
     title: '馬特洪峰是什麼？| 高度、位置，以及今天怎麼看',
     shortTitle: '馬特洪峰是什麼？',
     description:
-      '馬特洪峰是瑞士與義大利邊境、策馬特上方一座4,478公尺的金字塔。這裡說明它的高度、位置，以及如何確認今天看不看得見。',
+      '馬特洪峰矗立在瑞士與義大利邊境、策馬特山谷上方，海拔4,478公尺，以四面陡峭的三角金字塔山型聞名。本文詳解它的準確高度、地理位置、經典東壁觀景點，以及如何即時確認今天山頂是否清晰。',
     category: 'Viewpoints',
     heroStat: {
       label: '山頂高度',
@@ -933,7 +939,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'zermatt-weather-december': {
     title: '策馬特十二月天氣',
     shortTitle: '十二月天氣',
-    description: '十二月是策馬特最晴朗的月份，看到清晰馬特洪峰的機率為89%。這裡說明積雪、結冰的湖，以及如何確認今天的山頂。',
+    description:
+      '十二月是策馬特30年氣象紀錄中最晴朗的月份，馬特洪峰山頂清晰可見的機率高達89%。詳解十二月乾冷氣溫、無午後積雲優勢、積雪與結冰湖泊實況、聖誕滑雪安排及即時能見度查詢方法。',
     category: 'Climatology',
     heroStat: {
       label: '晴空機率',
@@ -971,7 +978,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'zermatt-weather-september': {
     title: '策馬特九月天氣',
     shortTitle: '九月天氣',
-    description: '策馬特九月大約72%的日子山頂放晴。健行步道仍然開放，利菲爾湖也已解凍，可以拍馬特洪峰倒影。',
+    description:
+      '九月策馬特約72%的日子馬特洪峰山頂晴朗，是兼顧健行與倒影攝影的黃金季節。此時高山步道無積雪、利菲爾湖與施泰利湖完全解凍、落葉松漸染金黃，附清晨無風拍攝窗口與即時天氣查看方法。',
     category: 'Climatology',
     heroStat: {
       label: '晴空機率',
@@ -1009,7 +1017,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'zermatt-weather-may': {
     title: '策馬特五月天氣',
     shortTitle: '五月天氣',
-    description: '策馬特五月有48–58%的早晨放晴。午後雲堆得很快，利菲爾湖仍然結冰。',
+    description:
+      '五月是策馬特春夏交替的過渡季，約48–58%的早晨馬特洪峰晴朗，但融雪水氣使午後積雲快速堆積，利菲爾湖仍處於結冰狀態。詳解五月賞峰早起策略、開放觀景點與山谷替代行程建議。',
     category: 'Climatology',
     heroStat: {
       label: '晴空機率',
@@ -1047,7 +1056,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'glacier-express': {
     title: '冰川快車票價、路線與訂位',
     shortTitle: '冰川快車',
-    description: '冰川快車的票價、必須另付的訂位費、策馬特到聖莫里茲的路線，以及它和伯爾尼納快車的差別。',
+    description:
+      '冰川快車（Glacier Express）完整乘車指南：詳解策馬特至聖莫里茲約8小時全景路線、票價與必須另付的訂位費、瑞士旅行通行證適用規則、最佳景觀車廂，以及與伯爾尼納快車的路線差異。',
     category: 'Day Trips',
     heroStat: {
       label: '訂位費',
@@ -1123,7 +1133,8 @@ export const zhTwGuides: Record<string, GuideTranslation> = {
   'hotels-with-matterhorn-view': {
     title: '看得到馬特洪峰的飯店',
     shortTitle: '帶山景的飯店',
-    description: '哪些策馬特飯店真正看得到馬特洪峰東壁，哪些靠近倒影湖，哪些在山谷雲遮住村子時仍然晴朗。',
+    description:
+      '策馬特馬特洪峰景觀飯店挑選指南：按朝向與海拔解析哪些飯店房間真正直面馬特洪峰東壁，哪些緊鄰利菲爾湖等倒影步道，以及當山谷霧雲籠罩村鎮時，哪些高海拔山頂飯店仍沐浴在晴空陽光中。',
     category: 'Viewpoints',
     heroStat: {
       label: '最先消失的視野',

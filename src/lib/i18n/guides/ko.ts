@@ -4,7 +4,8 @@ export const koGuides: Record<string, GuideTranslation> = {
   'gornergrat-vs-glacier-paradise': {
     title: '고르너그라트 vs 글래시어 파라다이스',
     shortTitle: '고르너그라트 vs 글래시어 파라다이스',
-    description: '해발 고도, 톱니바퀴 산악열차와 케이블카 비교, 뷰 앵글과 날씨 운해 구름 내성까지: 체르마트 양대 전망대 완벽 비교.',
+    description:
+      '체르마트 양대 전망대 고르너그라트(해발 3,089m 동벽 토블론 뷰·산악열차)와 마터호른 글래시어 파라다이스(3,883m 남벽 빙하·3S 케이블카)를 고도, 강풍 내성, 구름 패턴과 티켓 가격으로 완벽 비교합니다.',
     category: 'Viewpoints',
     heroStat: {
       label: '고도차',
@@ -91,7 +92,8 @@ export const koGuides: Record<string, GuideTranslation> = {
   'best-time-to-see-matterhorn': {
     title: '체르마트 월별 날씨 | 마터호른을 보기 가장 좋은 때',
     shortTitle: '최적의 관람 월 & 시간대',
-    description: '역사적 기상 통계: 12월과 1월의 쾌청률이 88%+에 달하는 이유와 여름철 오후에 뭉게구름이 몰려오는 과학적 원리 분석.',
+    description:
+      '30년 체르마트 고산 기상 통계 분석: 12월(89%)과 1월(88%) 마터호른 쾌청률이 가장 높은 이유와 여름 오후 대류 뭉게구름 원리를 밝히고, 월별 시야 확률과 오전 황금 시간대, 최적 체류 일수를 안내합니다.',
     category: 'Climatology',
     heroStat: {
       label: '황금 관측 시간대',
@@ -187,7 +189,8 @@ export const koGuides: Record<string, GuideTranslation> = {
   'zermatt-cloudy-rainy-day-guide': {
     title: '체르마트 흐리고 비 오는 날 대처법: 마터호른이 구름에 가렸을 때의 가이드',
     shortTitle: '흐린 날 & 비 오는 날 가이드',
-    description: '가시성 점수가 4/10점 이하일 때 100프랑이 넘는 안갯속 케이블카를 타지 마세요. 협곡 트레킹, 박물관, 온천 스파로 알차게 즐기는 꿀팁.',
+    description:
+      '마터호른 가시성 점수가 4/10 이하인 흐린 날, 100프랑 넘는 안갯속 케이블카 대신 먼저 운해 역전층을 확인하고 고르너 협곡, 마터호른 박물관, 알파인 스파와 맑은 론 계곡 당일치기로 알차게 즐기는 대안 가이드.',
     category: 'Bad Weather',
     heroStat: {
       label: '절약 가능한 비용',
@@ -263,7 +266,8 @@ export const koGuides: Record<string, GuideTranslation> = {
   'best-matterhorn-photo-viewpoints': {
     title: '체르마트 마터호른 최고의 사진 명소와 일출 황금 호른 포인트',
     shortTitle: '최고의 사진 스팟 & 일출 포인트',
-    description: '키르히브뤼케 성당 다리 일출, 슈텔리제, 리펠제, 핀델른, 뮈리니 전망대까지 정확한 위치 좌표와 최적의 일광 시간대 안내.',
+    description:
+      '키르히브뤼케 다리 무료 일출 알펜글로, 슈텔리제와 리펠제 호수 거울 반영(풍속 12km/h 미만 기준), 핀델른 마을, 뮈리니 전망대까지 체르마트 마터호른 최고의 촬영 포인트와 최적 일광 시간대를 안내합니다.',
     category: 'Photography',
     heroStat: {
       label: '2대 반영 호수',
@@ -335,7 +339,8 @@ export const koGuides: Record<string, GuideTranslation> = {
   'matterhorn-banner-cloud-fohn-wind': {
     title: '마터호른 정상에는 왜 항상 구름이 걸려 있을까? (깃발 구름과 푄 현상)',
     shortTitle: '깃발 구름과 푄 현상 과학',
-    description: '청명한 하늘에도 피어오르는 마터호른의 배너 클라우드(깃발 구름) 대기물리학 원리와 남풍 푄 현상이 만드는 기상 현상 예측법.',
+    description:
+      '청명한 하늘에도 해발 4,478m 마터호른 정상에 피어오르는 배너 클라우드(깃발 구름)의 대기물리학 원리를 설명합니다. 남풍 푄 현상이 맑은 날 구름을 만드는 과정, 일반 날씨 앱 오차 이유와 예측법을 확인하세요.',
     category: 'Meteorology',
     heroStat: {
       label: '정상 해발 고도',
@@ -642,7 +647,7 @@ export const koGuides: Record<string, GuideTranslation> = {
     title: '마터호른이란? | 높이, 위치, 오늘 보는 법',
     shortTitle: '마터호른이란?',
     description:
-      '마터호른은 체르마트 위, 스위스와 이탈리아 국경에 선 4,478m 피라미드입니다. 높이, 위치, 그리고 오늘 보이는지 확인하는 방법.',
+      '마터호른은 체르마트 위 스위스와 이탈리아 국경에 솟은 해발 4,478m의 상징적인 피라미드 봉우리입니다. 정확한 높이와 위치, 토블론 모양 동벽 전망대, 그리고 오늘 정상이 맑은지 실시간으로 확인하는 법을 안내합니다.',
     category: 'Viewpoints',
     heroStat: {
       label: '정상 높이',
@@ -704,7 +709,7 @@ export const koGuides: Record<string, GuideTranslation> = {
     title: '12월 체르마트 날씨',
     shortTitle: '12월 날씨',
     description:
-      '12월은 체르마트에서 가장 맑은 달로, 마터호른이 맑을 확률은 89%입니다. 눈, 언 호수, 그리고 오늘 정상을 확인하는 방법.',
+      '12월은 30년 기상 통계상 체르마트에서 가장 맑은 달로, 마터호른 정상이 쾌청할 확률이 89%에 달합니다. 차갑고 건조한 겨울 기온, 설경과 얼어붙은 리펠제 호수 현황, 크리스마스 스키와 실시간 시야 확인법을 정리했습니다.',
     category: 'Climatology',
     heroStat: {
       label: '쾌청 확률',
@@ -744,7 +749,7 @@ export const koGuides: Record<string, GuideTranslation> = {
     title: '9월 체르마트 날씨',
     shortTitle: '9월 날씨',
     description:
-      '9월 체르마트는 약 72%의 날에 맑습니다. 등산로는 열려 있고 리펠제는 녹아 마터호른을 비춥니다.',
+      '9월 체르마트는 약 72%의 날에 마터호른 정상이 맑아 하이킹과 반영 촬영에 최적입니다. 눈 없는 등산로가 열려 있고 리펠제와 슈텔리제가 완전히 녹아 거울 반영을 담을 수 있는 이른 아침 출발 시간과 날씨를 안내합니다.',
     category: 'Climatology',
     heroStat: {
       label: '쾌청 확률',
@@ -785,7 +790,7 @@ export const koGuides: Record<string, GuideTranslation> = {
     title: '5월 체르마트 날씨',
     shortTitle: '5월 날씨',
     description:
-      '5월 체르마트는 아침의 48–58%에서 맑습니다. 오후 구름은 빨리 자라고, 리펠제는 아직 얼어 있습니다.',
+      '5월 체르마트는 봄·여름 전환기로 아침의 48–58%만 맑습니다. 해빙기 습기 때문에 오후 구름이 빠르게 자라고 리펠제는 아직 얼어 있어 반영 촬영이 어렵습니다. 5월 이른 아침 고르너그라트 및 마을 관람 전략을 소개합니다.',
     category: 'Climatology',
     heroStat: {
       label: '쾌청 확률',
@@ -1049,7 +1054,7 @@ export const koGuides: Record<string, GuideTranslation> = {
     title: '글래시어 익스프레스 요금, 노선, 좌석 예약',
     shortTitle: '글래시어 익스프레스',
     description:
-      '글래시어 익스프레스 승차권, 필수 좌석 예약, 체르마트에서 생모리츠까지의 노선, 그리고 베르니나 익스프레스와의 차이.',
+      '글래시어 익스프레스(빙하특급) 완벽 가이드: 체르마트에서 생모리츠까지 약 8시간 파노라마 노선, 승차권 요금과 별도 필수 좌석 예약비, 스위스 트래블 패스 할인 규칙, 그리고 베르니나 익스프레스와의 차이점을 비교합니다.',
     category: 'Day Trips',
     heroStat: {
       label: '좌석 예약',
@@ -1127,7 +1132,7 @@ export const koGuides: Record<string, GuideTranslation> = {
     title: '마터호른이 보이는 호텔',
     shortTitle: '전망이 있는 호텔',
     description:
-      '체르마트의 어느 호텔이 마터호른 동벽을 실제로 보는지, 반영 호수 옆은 어디인지, 계곡 구름이 마을을 가려도 맑은 곳은 어디인지.',
+      '체르마트 마터호른 뷰 호텔 선택 가이드: 객실에서 실제로 마터호른 동벽이 보이는 숙소 위치, 리펠제·슈텔리제 반영 호수와 가까운 산악 호텔, 계곡 구름이 마을을 가려도 맑은 고지대 숙소를 고도별로 비교합니다.',
     category: 'Viewpoints',
     heroStat: {
       label: '가장 먼저 사라지는 전망',
