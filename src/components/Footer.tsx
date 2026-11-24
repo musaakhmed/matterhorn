@@ -60,7 +60,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
                 alt="Is The Matterhorn Visible? logo"
                 width={44}
                 height={44}
-                unoptimized
+                sizes="44px"
                 className="w-full h-full object-cover pointer-events-none"
               />
             </Link>
@@ -416,7 +416,7 @@ export default function Footer({ locale: propLocale, className = '' }: FooterPro
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 shrink-0">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 text-slate-600 dark:text-slate-300 font-mono text-xs whitespace-nowrap">
               <Compass className="w-3 h-3 text-sky-600 dark:text-sky-400 shrink-0" aria-hidden="true" />
-              <span>45.9765° N, 7.7491° E</span>
+              <span>45.9766° N, 7.6585° E</span>
             </div>
 
             <div className="inline-flex items-center gap-2 font-mono text-xs whitespace-nowrap text-slate-500 dark:text-slate-400">

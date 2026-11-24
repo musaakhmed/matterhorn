@@ -42,14 +42,12 @@ const GUIDE_TRANSLATIONS: Partial<Record<Locale, Record<string, GuideTranslation
   pt: ptGuides,
 };
 
-/**
- * Returns a localized guide article with fallback to English default.
- */
-export function getLocalizedGuideArticle(
+export function findLocalizedGuideArticle(
   slug: string,
   locale: Locale = 'en'
-): GuideArticle {
-  const base = GUIDES.find((g) => g.slug === slug) || GUIDES[0];
+): GuideArticle | undefined {
+  const base = GUIDES.find((g) => g.slug === slug);
+  if (!base) return undefined;
   if (locale === 'en') return base;
 
   const translation = GUIDE_TRANSLATIONS[locale]?.[slug];
@@ -68,4 +66,14 @@ export function getLocalizedGuideArticle(
     sections: translation.sections || base.sections,
     faqs: translation.faqs || base.faqs,
   };
+}
+
+/**
+ * Returns a localized guide article with fallback to English default for known slugs.
+ */
+export function getLocalizedGuideArticle(
+  slug: string,
+  locale: Locale = 'en'
+): GuideArticle {
+  return findLocalizedGuideArticle(slug, locale) || GUIDES[0];
 }

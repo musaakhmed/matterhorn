@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
+import { fetchMatterhornVisibility } from '@/lib/weather';
 
 export const runtime = 'nodejs';
 export const revalidate = 900;
@@ -7,44 +8,6 @@ export const alt =
   'Is The Matterhorn Visible Today? Live Alpine Visibility Score';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-
-const OPEN_METEO_SUMMIT_URL =
-  'https://api.open-meteo.com/v1/forecast?latitude=45.9765&longitude=7.7491&elevation=4478&hourly=cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility,precipitation_probability&timezone=Europe%2FZurich&forecast_days=1';
-
-interface OpenMeteoOgHourly {
-  time?: string[];
-  cloud_cover?: number[];
-  cloud_cover_low?: number[];
-  cloud_cover_mid?: number[];
-  cloud_cover_high?: number[];
-  visibility?: number[];
-  precipitation_probability?: number[];
-}
-
-function computeHourlyRaw(
-  cLow: number,
-  cMid: number,
-  cHigh: number,
-  visMeters: number,
-  precipProb: number
-): number {
-  let penalties = 0;
-  if (visMeters < 10000) {
-    penalties += 25;
-  } else if (visMeters < 20000) {
-    penalties += 10;
-  }
-  if (precipProb > 30) {
-    penalties += 20;
-  }
-
-  const raw = 100 - (0.6 * cMid + 0.25 * cLow + 0.15 * cHigh) - penalties;
-  return Math.max(0, Math.min(100, raw));
-}
-
-function rawToTenScore(raw: number): number {
-  return Math.max(1, Math.min(10, Math.round(raw / 10)));
-}
 
 function getStatusMeta(score: number): {
   label: string;
@@ -93,21 +56,6 @@ function getStatusMeta(score: number): {
   };
 }
 
-function getCurrentSwissHour(): number {
-  try {
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Zurich',
-      hour: '2-digit',
-      hour12: false,
-    }).formatToParts(new Date());
-    const hourPart = parts.find((p) => p.type === 'hour')?.value ?? '9';
-    const parsed = parseInt(hourPart, 10);
-    return Number.isNaN(parsed) ? 9 : parsed % 24;
-  } catch {
-    return 9;
-  }
-}
-
 function arrayBufferToBase64DataUrl(
   buffer: ArrayBuffer,
   mimeType: string
@@ -146,57 +94,13 @@ export default async function Image() {
   }
 
   try {
-    const response = await fetch(OPEN_METEO_SUMMIT_URL, {
-      next: { revalidate: 900 },
-    });
-
-    if (response.ok) {
-      const json = (await response.json()) as { hourly?: OpenMeteoOgHourly };
-      const hourly = json.hourly;
-
-      if (hourly && Array.isArray(hourly.cloud_cover_mid)) {
-        const hourCount = Math.min(24, hourly.cloud_cover_mid.length);
-        const hourlyRaws: number[] = [];
-
-        for (let h = 0; h < hourCount; h++) {
-          const cLow = hourly.cloud_cover_low?.[h] ?? 15;
-          const cMid = hourly.cloud_cover_mid?.[h] ?? 10;
-          const cHigh = hourly.cloud_cover_high?.[h] ?? 15;
-          const vis = hourly.visibility?.[h] ?? 24000;
-          const precipProb = hourly.precipitation_probability?.[h] ?? 5;
-          hourlyRaws.push(computeHourlyRaw(cLow, cMid, cHigh, vis, precipProb));
-        }
-
-        const swissHour = Math.min(
-          Math.max(0, getCurrentSwissHour()),
-          Math.max(0, hourlyRaws.length - 1)
-        );
-
-        currentScore = rawToTenScore(hourlyRaws[swissHour] ?? 90);
-        midCloudPct = Math.round(hourly.cloud_cover_mid?.[swissHour] ?? 10);
-        visibilityKm = Math.max(
-          1,
-          Math.round(((hourly.visibility?.[swissHour] ?? 24000) / 1000) * 10) /
-            10
-        );
-
-        // AM window: 06:00 - 12:00 (hours 6..11)
-        const amSlice = hourlyRaws.slice(6, 12);
-        if (amSlice.length > 0) {
-          const amAvgRaw =
-            amSlice.reduce((acc, val) => acc + val, 0) / amSlice.length;
-          amScore = rawToTenScore(amAvgRaw);
-        }
-
-        // PM window: 12:00 - 18:00 (hours 12..17)
-        const pmSlice = hourlyRaws.slice(12, 18);
-        if (pmSlice.length > 0) {
-          const pmAvgRaw =
-            pmSlice.reduce((acc, val) => acc + val, 0) / pmSlice.length;
-          pmScore = rawToTenScore(pmAvgRaw);
-        }
-      }
-    }
+    const telemetry = await fetchMatterhornVisibility();
+    const gornergrat = telemetry.viewpoints.gornergrat;
+    currentScore = gornergrat.currentScore;
+    amScore = gornergrat.today.morning.score;
+    pmScore = gornergrat.today.afternoon.score;
+    midCloudPct = gornergrat.metrics.cloudCoverMid;
+    visibilityKm = gornergrat.metrics.visibilityKm;
   } catch {
     // Fallback to default clear alpine telemetry if upstream fetch fails
   }

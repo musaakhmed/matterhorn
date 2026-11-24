@@ -131,6 +131,7 @@ export interface ViewpointForecastData {
   metrics: AtmosphericMetrics;
   banner: BannerCloudReport;
   sectorRecommendations: ViewpointRecommendation[];
+  isFallback?: boolean;
   bestBlockNext48h: {
     dayLabel: string;
     period: 'AM' | 'PM';
@@ -147,6 +148,7 @@ export interface VisibilityApiResponse {
   banner: BannerCloudReport;
   updatedAt: string;
   swissTimeFormatted: string;
+  isFallback?: boolean;
 }
 
 export interface OpenMeteoHourlyResponse {

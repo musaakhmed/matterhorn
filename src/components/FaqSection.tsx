@@ -6,7 +6,7 @@ import {
   ArrowUpRight,
   CheckCircle2,
 } from 'lucide-react';
-import { RichFaqItem } from '@/lib/schema';
+import type { RichFaqItem } from '@/lib/schema';
 
 interface FaqSectionProps {
   title?: string;

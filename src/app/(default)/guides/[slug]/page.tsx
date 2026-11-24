@@ -1,10 +1,12 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { GUIDES, getGuideBySlug } from '@/lib/guides';
 import { getAlternateUrls } from '@/lib/i18n/config';
 import GuideArticleView from '@/components/GuideArticleView';
 
 export const revalidate = 900; // Refresh live banner every 15 minutes
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return GUIDES.map((guide) => ({
@@ -21,9 +23,7 @@ export async function generateMetadata({
   const guide = getGuideBySlug(slug);
 
   if (!guide) {
-    return {
-      title: 'Guide Not Found | Is The Matterhorn Visible?',
-    };
+    return {};
   }
 
   return {
@@ -63,5 +63,8 @@ export default async function GuideArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (!getGuideBySlug(slug)) {
+    notFound();
+  }
   return <GuideArticleView slug={slug} locale="en" />;
 }

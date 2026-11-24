@@ -10,8 +10,8 @@ import type {
 
 /** Matterhorn summit. Open-Meteo interpolates the model to this elevation. */
 export const MATTERHORN_SUMMIT = {
-  latitude: 45.9765,
-  longitude: 7.7491,
+  latitude: 45.9766,
+  longitude: 7.6585,
   elevation: 4478,
 } as const;
 
@@ -121,6 +121,7 @@ async function fetchSummitSample(now: Date): Promise<SummitSample> {
   const res = await fetch(url, {
     next: { revalidate: 900 },
     headers: { Accept: 'application/json' },
+    signal: AbortSignal.timeout(5000),
   });
   if (!res.ok) throw new Error(`Open-Meteo summit HTTP ${res.status}`);
 

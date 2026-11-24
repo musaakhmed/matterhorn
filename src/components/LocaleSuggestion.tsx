@@ -49,9 +49,9 @@ export default function LocaleSuggestion() {
     <div
       role="region"
       aria-label={`Continue in ${name}`}
-      className="border-b border-sky-200 bg-sky-50 text-sky-950 dark:border-sky-900 dark:bg-sky-950/60 dark:text-sky-100"
+      className="fixed bottom-4 inset-x-4 z-50 mx-auto max-w-xl rounded-2xl border border-sky-300 bg-white/95 text-slate-900 shadow-lg backdrop-blur-md dark:border-sky-800 dark:bg-slate-900/95 dark:text-slate-100"
     >
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-2.5 sm:px-6 lg:px-8">
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
         <p className="text-sm">
           You previously chose {name}. This page stays in English.
         </p>
@@ -59,14 +59,14 @@ export default function LocaleSuggestion() {
           <button
             type="button"
             onClick={() => switchLanguage(saved)}
-            className="rounded-full bg-sky-700 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+            className="min-h-10 rounded-full bg-sky-700 px-3.5 py-2 text-xs font-bold text-white transition-colors hover:bg-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 cursor-pointer"
           >
             Continue in {name}
           </button>
           <button
             type="button"
             onClick={dismiss}
-            className="text-xs font-semibold text-sky-800 underline-offset-2 hover:underline dark:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded"
+            className="min-h-10 px-2 text-xs font-semibold text-sky-800 underline-offset-2 hover:underline dark:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded cursor-pointer"
           >
             Stay in English
           </button>

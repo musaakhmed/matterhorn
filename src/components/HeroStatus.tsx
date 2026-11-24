@@ -151,7 +151,7 @@ function DualPeriodCard({
           </div>
 
           {isActive ? (
-            <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-xs font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-sky-700 text-white text-xs font-bold uppercase tracking-wider">
               {dict.hero.activeNow}
             </span>
           ) : (
@@ -249,11 +249,19 @@ export default function HeroStatus({ data, photo, queryHeading = false }: HeroSt
       />
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        {data.isFallback && (
+          <div
+            role="status"
+            className="lg:col-span-12 rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50/95 dark:bg-amber-950/60 px-3.5 py-2 text-xs font-medium text-amber-950 dark:text-amber-200"
+          >
+            Upstream Open-Meteo feed is temporarily unreachable — showing baseline alpine profile. Verify on live webcams below before buying lift tickets.
+          </div>
+        )}
+
         {/* Gauge is supporting. On small screens the sentence comes first. */}
         <div className="order-2 lg:order-1 lg:col-span-5 min-w-0">
           <FramedPhoto
             photo={photo}
-            preload
             sizes="(max-width: 1024px) 100vw, 460px"
             aspectClass="aspect-[16/10]"
           >
@@ -295,7 +303,6 @@ export default function HeroStatus({ data, photo, queryHeading = false }: HeroSt
                         badgeColor={data.currentBadgeColor}
                         size="sm"
                         decorative={true}
-                        preload={true}
                         className="shadow-2xs ring-2 ring-white dark:ring-slate-800"
                       />
                     </div>
@@ -341,6 +348,27 @@ export default function HeroStatus({ data, photo, queryHeading = false }: HeroSt
         {/* Right: Verdict, Today's AM/PM Dual Index & Guide Dispatch */}
         <div className="order-1 lg:order-2 lg:col-span-7 min-w-0 flex flex-col justify-between space-y-4 text-center lg:text-left">
           <div className="space-y-2">
+            {/* Above-the-fold compact live score & status pill on mobile (< lg) */}
+            <div className="flex flex-wrap items-center justify-center gap-2 lg:hidden">
+              <span
+                className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 font-mono text-sm font-extrabold ${style.pillBg} ${style.pillBorder} ${style.scoreText}`}
+              >
+                <span>{data.currentScore}/10</span>
+                <span className="text-[11px] font-bold uppercase opacity-80">
+                  {data.activePeriod}
+                </span>
+              </span>
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${style.pillBg} ${style.pillBorder} ${style.pillText}`}
+              >
+                <StatusGlyph badgeColor={data.currentBadgeColor} />
+                <span>{currentStatusLabel}</span>
+              </span>
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                • {vpLabel.name}
+              </span>
+            </div>
+
             <p className="text-sm text-slate-600 dark:text-slate-400">{dict.common.siteTagline}</p>
             {queryHeading ? (
               <h1 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight text-balance">
@@ -361,7 +389,7 @@ export default function HeroStatus({ data, photo, queryHeading = false }: HeroSt
           </div>
 
           {/* Today's Morning (AM) & Afternoon (PM) Dual Index Split */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-left">
             <DualPeriodCard
               block={data.today.morning}
               isActive={data.activePeriod === 'AM'}

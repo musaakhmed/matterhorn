@@ -213,10 +213,9 @@ export default function Header({
                 <Image
                   src={logoImg}
                   alt="Matterhorn Visibility Logo"
-                  width={176}
-                  height={176}
-                  unoptimized
-                  priority
+                  width={44}
+                  height={44}
+                  sizes="44px"
                   className="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-300"
                 />
               </span>
@@ -476,10 +475,10 @@ export default function Header({
           </Link>
 
           {/* Multilingual Selector */}
-          <LanguageSelector />
+          <LanguageSelector className="hidden sm:inline-block" />
 
           {/* Theme Toggle Button */}
-          <ThemeToggle variant="dropdown" className="inline-block" />
+          <ThemeToggle variant="dropdown" className="hidden sm:inline-block" />
 
           {/* Mobile/Tablet Hamburger Button */}
           <button
@@ -661,7 +660,7 @@ export default function Header({
                 <Link
                   href={getLocalizedHref('/', locale)}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-xs transition-colors ml-auto"
+                  className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-sky-700 hover:bg-sky-800 text-white text-xs font-bold shadow-xs transition-colors ml-auto"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-sky-200" aria-hidden="true" />
                   <span>{dict.common.today}</span>

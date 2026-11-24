@@ -69,6 +69,8 @@ export function calculateHourlyRawScore(metrics: {
   precipitationMm: number;
   windSpeedKmh: number;
   windDirectionDeg: number;
+  viewpointId?: ViewpointId;
+  summitFohnActive?: boolean;
 }): number {
   const {
     cloudCoverLow,
@@ -79,11 +81,14 @@ export function calculateHourlyRawScore(metrics: {
     precipitationMm,
     windSpeedKmh,
     windDirectionDeg,
+    viewpointId = 'gornergrat',
+    summitFohnActive = false,
   } = metrics;
 
+  const lowCloudWeight = viewpointId === 'glacier-paradise' ? 0.05 : 0.25;
   let raw =
     100 -
-    (0.6 * cloudCoverMid + 0.25 * cloudCoverLow + 0.15 * cloudCoverHigh);
+    (0.6 * cloudCoverMid + lowCloudWeight * cloudCoverLow + 0.15 * cloudCoverHigh);
 
   if (visibilityMeters < 10000) {
     raw -= 25;
@@ -95,8 +100,15 @@ export function calculateHourlyRawScore(metrics: {
     raw -= 20;
   }
 
-  if (isSoutherlyFohnWind(windDirectionDeg, windSpeedKmh)) {
-    raw -= 15;
+  if (summitFohnActive || isSoutherlyFohnWind(windDirectionDeg, windSpeedKmh)) {
+    // Glacier Paradise (3,883m South) takes direct Italian Stau cloud; Gornergrat (3,089m East) sees leeward banner
+    raw -= viewpointId === 'glacier-paradise' ? 22 : 15;
+  }
+
+  if (precipitationMm >= 1.0) {
+    raw = Math.min(raw, 20);
+  } else if (precipitationMm >= 0.4) {
+    raw = Math.min(raw, 40);
   }
 
   return Math.max(0, Math.min(100, raw));
@@ -207,32 +219,34 @@ export function generateAlpineGuideAdvice(
 }
 
 export function generateSectorRecommendations(
-  score: number,
-  metrics: AtmosphericMetrics
+  gornergratScore: number,
+  gornergratMetrics: AtmosphericMetrics,
+  glacierScore: number = gornergratScore,
+  glacierMetrics: AtmosphericMetrics = gornergratMetrics
 ): ViewpointRecommendation[] {
-  const { cloudCoverLow, cloudCoverMid, windSpeedKmh } = metrics;
+  const { cloudCoverLow, cloudCoverMid, windSpeedKmh } = gornergratMetrics;
 
   let gornergratSuitability: 'Optimal' | 'Fair' | 'Poor' = 'Optimal';
   let gornergratColor: BadgeColor = 'emerald';
   let gornergratAdvice =
     'Unbeatable panoramic view of the East & North faces plus Monte Rosa massif. Riffelsee reflection trail is prime.';
 
-  if (score <= 3 || cloudCoverMid > 75) {
+  if (gornergratScore <= 3 || cloudCoverMid > 75) {
     gornergratSuitability = 'Poor';
     gornergratColor = 'rose';
     gornergratAdvice =
       'Mid-level clouds (3,000m+) are sitting directly across the Gornergrat line of sight. Verify on the Roundshot cam before boarding.';
   } else if (
-    score <= 6 ||
-    metrics.bannerStatus === 'likely' ||
-    metrics.bannerStatus === 'seen'
+    gornergratScore <= 6 ||
+    gornergratMetrics.bannerStatus === 'likely' ||
+    gornergratMetrics.bannerStatus === 'seen'
   ) {
     gornergratSuitability = 'Fair';
     gornergratColor = 'amber';
     gornergratAdvice =
-      metrics.bannerStatus === 'seen'
+      gornergratMetrics.bannerStatus === 'seen'
         ? 'The Zermatt camera shows a banner on the summit. The east ridge often stays clearer than Klein Matterhorn.'
-        : metrics.bannerStatus === 'likely'
+        : gornergratMetrics.bannerStatus === 'likely'
           ? 'Summit wind and humidity favor a banner. The camera has not confirmed it. The east ridge often stays clearer than Klein Matterhorn.'
           : 'Good elevated vantage above valley haze, though passing cloud may kiss the upper Hörnli ridge.';
   }
@@ -242,12 +256,12 @@ export function generateSectorRecommendations(
   let sunneggaAdvice =
     'Best classic Toblerone angle and Stellisee mirror reflection. Calm air makes for glass-like lake water.';
 
-  if (score <= 3 || (cloudCoverLow > 70 && cloudCoverMid > 60)) {
+  if (gornergratScore <= 3 || (cloudCoverLow > 70 && cloudCoverMid > 60)) {
     sunneggaSuitability = 'Poor';
     sunneggaColor = 'rose';
     sunneggaAdvice =
       'Cloud ceiling is burying the Matterhorn profile from the Findeln/Stellisee angle. Skip the lake hike for now.';
-  } else if (windSpeedKmh > 25 || score <= 7) {
+  } else if (windSpeedKmh > 25 || gornergratScore <= 7) {
     sunneggaSuitability = 'Fair';
     sunneggaColor = 'amber';
     sunneggaAdvice =
@@ -261,21 +275,21 @@ export function generateSectorRecommendations(
   let glacierAdvice =
     'Crystal-clear eye-level perspective of the Southern & Breuil faces at 3,883m with views into Italy.';
 
-  if (windSpeedKmh > 55) {
+  if (glacierMetrics.windSpeedKmh > 55) {
     glacierSuitability = 'Poor';
     glacierColor = 'rose';
-    glacierAdvice = `High winds (${windSpeedKmh} km/h) at 3,883m risk upper 3S cableway holds and spindrift on the viewing platform.`;
-  } else if (cloudCoverLow > 60 && cloudCoverMid < 40) {
+    glacierAdvice = `High winds (${glacierMetrics.windSpeedKmh} km/h) at 3,883m risk upper 3S cableway holds and spindrift on the viewing platform.`;
+  } else if (cloudCoverLow > 60 && glacierMetrics.cloudCoverMid < 40) {
     glacierSuitability = 'Optimal';
     glacierColor = 'emerald';
     glacierAdvice =
       'Secret weapon today: ride above the low valley fog layer to stand in sunshine above a sea of clouds at 3,883m.';
-  } else if (score <= 4) {
+  } else if (glacierScore <= 4) {
     glacierSuitability = 'Poor';
     glacierColor = 'rose';
     glacierAdvice =
       'Upper-level moisture envelopes the 3,800m–4,478m crest. Zero visibility on the glacier deck.';
-  } else if (score <= 7) {
+  } else if (glacierScore <= 7) {
     glacierSuitability = 'Fair';
     glacierColor = 'amber';
     glacierAdvice =
@@ -292,12 +306,12 @@ export function generateSectorRecommendations(
     villageColor = 'rose';
     villageAdvice =
       'Low valley fog (<1,800m) settles in Zermatt village. Ascend via Gornergrat or Glacier Paradise to rise above the fog deck.';
-  } else if (score <= 4) {
+  } else if (gornergratScore <= 4) {
     villageSuitability = 'Poor';
     villageColor = 'rose';
     villageAdvice =
       'Summit enveloped in clouds from the valley perspective. Stroll through the village or visit Zermatlantis museum instead.';
-  } else if (score <= 7) {
+  } else if (gornergratScore <= 7) {
     villageSuitability = 'Fair';
     villageColor = 'amber';
     villageAdvice =
@@ -475,7 +489,9 @@ function buildFallback10DayData(
 function computeScoreBlock(
   hourly: OpenMeteoHourlyResponse['hourly'],
   indices: number[],
-  period: 'AM' | 'PM'
+  period: 'AM' | 'PM',
+  viewpointId: ViewpointId = 'gornergrat',
+  summitFohnActive: boolean = false
 ): ScoreBlock {
   const safeIndices = indices.length > 0 ? indices : [0];
 
@@ -488,7 +504,8 @@ function computeScoreBlock(
   let maxPrecipProb = 0;
   let sumPrecipMm = 0;
   let sumWindSpeed = 0;
-  let lastWindDir = 240;
+  let sumWindSin = 0;
+  let sumWindCos = 0;
 
   for (const idx of safeIndices) {
     const cloudCoverTotal = hourly.cloud_cover[idx] ?? 0;
@@ -511,6 +528,8 @@ function computeScoreBlock(
       precipitationMm,
       windSpeedKmh,
       windDirectionDeg,
+      viewpointId,
+      summitFohnActive,
     });
 
     sumRaw += raw;
@@ -524,7 +543,9 @@ function computeScoreBlock(
     }
     sumPrecipMm += precipitationMm;
     sumWindSpeed += windSpeedKmh;
-    lastWindDir = windDirectionDeg;
+    const rad = (windDirectionDeg * Math.PI) / 180;
+    sumWindSin += Math.sin(rad);
+    sumWindCos += Math.cos(rad);
   }
 
   const count = safeIndices.length;
@@ -535,7 +556,9 @@ function computeScoreBlock(
 
   const avgVisMeters = Math.round(sumVis / count);
   const avgWindSpeed = Math.round(sumWindSpeed / count);
-  const windDeg = Math.round(lastWindDir);
+  const meanAngleDeg =
+    (Math.atan2(sumWindSin / count, sumWindCos / count) * 180) / Math.PI;
+  const windDeg = Math.round(((meanAngleDeg % 360) + 360) % 360);
 
   const metrics: AtmosphericMetrics = {
     cloudCoverTotal: Math.round(sumTotal / count),
@@ -549,7 +572,7 @@ function computeScoreBlock(
     windSpeedKmh: avgWindSpeed,
     windDirectionDeg: windDeg,
     windCardinal: degreesToCardinal(windDeg),
-    isFohnRisk: isSoutherlyFohnWind(windDeg, avgWindSpeed),
+    isFohnRisk: summitFohnActive || isSoutherlyFohnWind(windDeg, avgWindSpeed),
     bannerStatus: 'none',
   };
 
@@ -594,14 +617,17 @@ async function fetchSingleViewpointForecast(
   viewpoint: Viewpoint,
   now: Date,
   todayDateIso: string,
-  currentHour: number
+  currentHour: number,
+  banner: Awaited<ReturnType<typeof loadBannerCloud>>
 ): Promise<ViewpointForecastData> {
   let rawData: OpenMeteoHourlyResponse;
+  let isFallback = false;
 
   try {
     const res = await fetch(buildOpenMeteoUrl(viewpoint), {
       next: { revalidate: 900 },
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(6000),
     });
     if (!res.ok) {
       throw new Error(`Open-Meteo HTTP ${res.status}`);
@@ -613,6 +639,7 @@ async function fetchSingleViewpointForecast(
       err
     );
     rawData = buildFallback10DayData(viewpoint, now);
+    isFallback = true;
   }
 
   const { hourly } = rawData;
@@ -639,17 +666,31 @@ async function fetchSingleViewpointForecast(
   });
 
   const days: DayForecast[] = [];
+  const activePeriod: 'AM' | 'PM' = currentHour < 12 ? 'AM' : 'PM';
   for (const [dateIso, buckets] of dayMap.entries()) {
     if (days.length >= 10) break;
-    const morning = computeScoreBlock(hourly, buckets.am, 'AM');
-    const afternoon = computeScoreBlock(hourly, buckets.pm, 'PM');
+    const isCurrentDay = dateIso === todayDateIso || days.length === 0;
+    const morning = computeScoreBlock(
+      hourly,
+      buckets.am,
+      'AM',
+      viewpoint.id,
+      isCurrentDay && activePeriod === 'AM' && banner.windFavorable
+    );
+    const afternoon = computeScoreBlock(
+      hourly,
+      buckets.pm,
+      'PM',
+      viewpoint.id,
+      isCurrentDay && activePeriod === 'PM' && banner.windFavorable
+    );
     const { dayOfWeek, dateFormatted } = formatDayLabels(dateIso);
 
     days.push({
       dateIso,
       dayOfWeek,
       dateFormatted,
-      isToday: dateIso === todayDateIso || days.length === 0,
+      isToday: isCurrentDay,
       morning,
       afternoon,
       dailyPeakScore: Math.max(morning.score, afternoon.score),
@@ -663,10 +704,8 @@ async function fetchSingleViewpointForecast(
   });
 
   const today = days.find((d) => d.isToday) || days[0];
-  const activePeriod: 'AM' | 'PM' = currentHour < 12 ? 'AM' : 'PM';
   const activeBlock =
     activePeriod === 'AM' ? today.morning : today.afternoon;
-  const banner = await loadBannerCloud(now);
   activeBlock.metrics.bannerStatus = banner.status;
 
   // Find best block over the next 3 days for actionable advice
@@ -710,11 +749,6 @@ async function fetchSingleViewpointForecast(
     bestBlock
   );
 
-  const sectorRecommendations = generateSectorRecommendations(
-    activeBlock.score,
-    activeBlock.metrics
-  );
-
   return {
     viewpoint,
     activePeriod,
@@ -729,7 +763,8 @@ async function fetchSingleViewpointForecast(
     days,
     metrics: activeBlock.metrics,
     banner,
-    sectorRecommendations,
+    sectorRecommendations: [],
+    isFallback,
     bestBlockNext48h: bestBlock,
   };
 }
@@ -738,21 +773,33 @@ export const fetchMatterhornVisibility = cache(
   async (): Promise<VisibilityApiResponse> => {
     const now = new Date();
     const { dateIso, hourNumber, formattedClock } = getSwissClockParts(now);
+    const banner = await loadBannerCloud(now);
 
     const [gornergratData, glacierParadiseData] = await Promise.all([
       fetchSingleViewpointForecast(
         VIEWPOINTS.gornergrat,
         now,
         dateIso,
-        hourNumber
+        hourNumber,
+        banner
       ),
       fetchSingleViewpointForecast(
         VIEWPOINTS['glacier-paradise'],
         now,
         dateIso,
-        hourNumber
+        hourNumber,
+        banner
       ),
     ]);
+
+    const sharedSectors = generateSectorRecommendations(
+      gornergratData.currentScore,
+      gornergratData.metrics,
+      glacierParadiseData.currentScore,
+      glacierParadiseData.metrics
+    );
+    gornergratData.sectorRecommendations = sharedSectors;
+    glacierParadiseData.sectorRecommendations = sharedSectors;
 
     return {
       defaultViewpoint: 'gornergrat',
@@ -760,9 +807,10 @@ export const fetchMatterhornVisibility = cache(
         gornergrat: gornergratData,
         'glacier-paradise': glacierParadiseData,
       },
-      banner: gornergratData.banner,
+      banner,
       updatedAt: now.toISOString(),
       swissTimeFormatted: formattedClock,
+      isFallback: Boolean(gornergratData.isFallback || glacierParadiseData.isFallback),
     };
   }
 );

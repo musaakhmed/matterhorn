@@ -23,6 +23,19 @@ function weatherForecastId(locale: Locale): string {
   return `${base}/#weather-forecast`;
 }
 
+function swissIsoOffset(nowIso: string): string {
+  const parsed = new Date(nowIso);
+  const date = Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+  const tzPart = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Zurich',
+    timeZoneName: 'shortOffset',
+  })
+    .formatToParts(date)
+    .find((p) => p.type === 'timeZoneName')?.value;
+  if (tzPart === 'GMT+2') return '+02:00';
+  return '+01:00';
+}
+
 export interface RichFaqItem extends GuideFaq {
   guideHref?: string;
   guideLabel?: string;
@@ -219,18 +232,18 @@ export function buildWeatherForecastNode(
     );
   }
 
+  const tzOffset = swissIsoOffset(nowIso);
+
   return {
-    '@type': 'WeatherForecast',
+    '@type': 'WebPage',
     '@id': weatherForecastId(locale),
     name: 'Matterhorn 10-Day AM/PM Visibility Forecast (Gornergrat & Glacier Paradise)',
     alternateName: 'Zermatt Matterhorn Summit (4,478m) Live Visibility Index',
     url: locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`,
     inLanguage: schemaLanguage(locale),
-    dateIssued: nowIso,
     datePublished: nowIso,
     dateModified: nowIso,
-    validFrom: `${todayIso}T06:00:00+01:00`,
-    validThrough: `${lastDayIso}T18:00:00+01:00`,
+    temporalCoverage: `${todayIso}T06:00:00${tzOffset}/${lastDayIso}T18:00:00${tzOffset}`,
     description,
     provider: {
       '@id': `${SITE_URL}/#organization`,
@@ -242,8 +255,8 @@ export function buildWeatherForecastNode(
       elevation: '4478 m',
       geo: {
         '@type': 'GeoCoordinates',
-        latitude: 45.9765,
-        longitude: 7.7491,
+        latitude: 45.9766,
+        longitude: 7.6585,
         elevation: '4478 m',
       },
     },
@@ -253,8 +266,8 @@ export function buildWeatherForecastNode(
         name: 'Matterhorn, Zermatt, Valais, Switzerland',
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 45.9765,
-          longitude: 7.7491,
+          latitude: 45.9766,
+          longitude: 7.6585,
           elevation: '4478 m',
         },
       },
@@ -310,7 +323,9 @@ export function buildFaqPageNode(
 /**
  * Root site-level JSON-LD (`WebSite`, `Organization`, `WebApplication`).
  */
-export function buildRootLayoutJsonLd() {
+export function buildRootLayoutJsonLd(locale: Locale = 'en') {
+  const lang = schemaLanguage(locale);
+  const localUrl = locale === 'en' ? SITE_URL : `${SITE_URL}/${locale}`;
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -320,7 +335,7 @@ export function buildRootLayoutJsonLd() {
         '@id': `${SITE_URL}/#website`,
         name: SITE_NAME,
         url: SITE_URL,
-        inLanguage: 'en-CH',
+        inLanguage: lang,
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },
@@ -329,7 +344,8 @@ export function buildRootLayoutJsonLd() {
         '@type': 'WebApplication',
         '@id': `${SITE_URL}/#webapp`,
         name: SITE_NAME,
-        url: SITE_URL,
+        url: localUrl,
+        inLanguage: lang,
         image: `${SITE_URL}/logo.jpeg`,
         applicationCategory: 'WeatherApplication',
         operatingSystem: 'All',
@@ -348,8 +364,8 @@ export function buildRootLayoutJsonLd() {
           name: 'Matterhorn Summit, Zermatt, Switzerland',
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: 45.9765,
-            longitude: 7.7491,
+            latitude: 45.9766,
+            longitude: 7.6585,
             elevation: '4478 m',
           },
         },
@@ -596,7 +612,10 @@ export function buildStaticGuideJsonLd(input: {
           }
         : {}),
       inLanguage: 'en-CH',
-      mainEntityOfPage: pageUrl,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': pageUrl,
+      },
       author: { '@id': `${SITE_URL}/#organization` },
       publisher: { '@id': `${SITE_URL}/#organization` },
       speakable: {
@@ -1026,8 +1045,8 @@ export function buildSkiPageJsonLd(data?: VisibilityApiResponse, locale: string 
         isAccessibleForFree: false,
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 45.9765,
-          longitude: 7.7491,
+          latitude: 45.9383,
+          longitude: 7.7297,
           elevation: 3883,
         },
         address: {

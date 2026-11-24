@@ -31,7 +31,7 @@ const PILL_STYLES: Record<
     bg: 'bg-emerald-50/90 dark:bg-emerald-950/40',
     border: 'border-emerald-200 dark:border-emerald-800/80',
     text: 'text-emerald-900 dark:text-emerald-200',
-    scoreBadge: 'bg-emerald-600 text-white',
+    scoreBadge: 'bg-emerald-700 text-white',
     dot: 'bg-emerald-500',
   },
   amber: {
@@ -45,7 +45,7 @@ const PILL_STYLES: Record<
     bg: 'bg-orange-50/90 dark:bg-orange-950/40',
     border: 'border-orange-200 dark:border-orange-800/80',
     text: 'text-orange-900 dark:text-orange-200',
-    scoreBadge: 'bg-orange-600 text-white',
+    scoreBadge: 'bg-orange-700 text-white',
     dot: 'bg-orange-500',
   },
   rose: {
@@ -84,7 +84,7 @@ function PeriodPill({ block }: { block: ScoreBlock }) {
           )}
           <span>{block.period === 'AM' ? dict.hero.morningLabel : dict.hero.afternoonLabel}</span>
         </span>
-        <span className="font-mono text-xs text-slate-400 dark:text-slate-500">
+        <span className="font-mono text-xs text-slate-600 dark:text-slate-300">
           {block.period === 'AM' ? '06–12' : '12–18'}
         </span>
       </div>
@@ -104,7 +104,7 @@ function PeriodPill({ block }: { block: ScoreBlock }) {
         </span>
       </div>
 
-      <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200/50 dark:border-slate-800/80">
+      <div className="flex items-center justify-between text-xs font-mono text-slate-600 dark:text-slate-300 pt-1 border-t border-slate-200/50 dark:border-slate-800/80">
         <span className="inline-flex items-center gap-1">
           <Cloud className="w-2.5 h-2.5 text-slate-400" aria-hidden="true" />
           <span>Mid {block.metrics.cloudCoverMid}%</span>
@@ -194,7 +194,7 @@ export default function HourlyTimeline({
                       {localizedDayName}
                     </span>
                     {day.isToday && (
-                      <span className="px-2 py-0.5 rounded-full bg-sky-600 text-white text-xs font-extrabold uppercase tracking-wider">
+                      <span className="px-2 py-0.5 rounded-full bg-sky-700 text-white text-xs font-extrabold uppercase tracking-wider">
                         {dict.timeline.today.toUpperCase()}
                       </span>
                     )}

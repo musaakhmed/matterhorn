@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { PLANNING_GUIDES } from '@/lib/planning-guides';
-import { getLocalizedGuideArticle } from '@/lib/i18n/guides';
+import { getPlanningGuideCopy } from '@/lib/i18n/planning-links';
 import { getLocalizedHref } from '@/lib/i18n/config';
 import { useTranslation } from '@/lib/i18n/context';
 
@@ -12,16 +12,16 @@ export default function AlpinePlanningLinks({
   variant?: 'home' | 'footer';
 }) {
   const { locale } = useTranslation();
-  const comparison = getLocalizedGuideArticle('gornergrat-vs-glacier-paradise', locale);
-  const dayTrip = getLocalizedGuideArticle('zurich-geneva-to-zermatt-day-trip', locale);
+  const comparison = getPlanningGuideCopy('gornergrat-vs-glacier-paradise', locale);
+  const dayTrip = getPlanningGuideCopy('zurich-geneva-to-zermatt-day-trip', locale);
   const riffelsee = PLANNING_GUIDES[0];
 
   const links = [
     {
-      href: getLocalizedHref(`/guides/${comparison.slug}`, locale),
+      href: getLocalizedHref('/guides/gornergrat-vs-glacier-paradise', locale),
       title: comparison.shortTitle,
       linkTitle: comparison.shortTitle,
-      blurb: comparison.heroStat.detail,
+      blurb: comparison.detail,
     },
     {
       href: riffelsee.path,
@@ -30,10 +30,10 @@ export default function AlpinePlanningLinks({
       blurb: riffelsee.blurb,
     },
     {
-      href: getLocalizedHref(`/guides/${dayTrip.slug}`, locale),
+      href: getLocalizedHref('/guides/zurich-geneva-to-zermatt-day-trip', locale),
       title: dayTrip.shortTitle,
       linkTitle: dayTrip.shortTitle,
-      blurb: dayTrip.heroStat.detail,
+      blurb: dayTrip.detail,
     },
   ];
 

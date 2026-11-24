@@ -25,7 +25,7 @@ const WALK_STEPS = [
   {
     anchor: 'downhill-to-shore',
     name: 'Walk downhill to the shore',
-    text: 'The path drops about 300 metres and takes about 10 minutes. The shore sits near 2,757 m.',
+    text: 'The 300-metre path drops 58 vertical metres and takes about 10 minutes. The shore sits near 2,757 m.',
   },
   {
     anchor: 'face-the-peak',

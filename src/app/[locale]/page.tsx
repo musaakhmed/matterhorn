@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import VisibilityClientShell from '@/components/VisibilityClientShell';
 import { fetchMatterhornVisibility } from '@/lib/weather';
-import { buildHomePageJsonLd, serializeJsonLd } from '@/lib/schema';
+import { buildHomePageJsonLd, getDashboardFaqs, serializeJsonLd } from '@/lib/schema';
 import { LOCALES, Locale, isValidLocale, DEFAULT_LOCALE, getAlternateUrls } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { openGraphLocale } from '@/lib/i18n/seo';
@@ -68,8 +68,10 @@ export default async function LocalizedHomePage({
     notFound();
   }
 
+  const locale = rawLocale as Locale;
   const data = await fetchMatterhornVisibility();
-  const jsonLd = buildHomePageJsonLd(data, rawLocale as Locale);
+  const jsonLd = buildHomePageJsonLd(data, locale);
+  const dashboardFaqs = getDashboardFaqs(data, locale);
 
   return (
     <>
@@ -77,7 +79,7 @@ export default async function LocalizedHomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <VisibilityClientShell initialData={data} />
+      <VisibilityClientShell initialData={data} dashboardFaqs={dashboardFaqs} />
     </>
   );
 }

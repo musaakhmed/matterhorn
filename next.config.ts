@@ -19,9 +19,99 @@ const consolidatedGuides = [
   },
 ] as const;
 
+const isDev = process.env.NODE_ENV === "development";
+
+function buildCsp(frameAncestors: string): string {
+  return [
+    "default-src 'self'",
+    `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://static.cloudflareinsights.com`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' blob: data:",
+    "font-src 'self' data:",
+    "connect-src 'self' https://cloudflareinsights.com https://api.open-meteo.com",
+    "frame-src 'self' https://gornergrat.roundshot.com https://zermatt.roundshot.com",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    `frame-ancestors ${frameAncestors}`,
+    "upgrade-insecure-requests",
+  ].join("; ");
+}
+
 const nextConfig: NextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    inlineCss: true,
+  },
+  async headers() {
+    return [
+      {
+        source: "/((?!embed/widget).*)",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: buildCsp("'self'"),
+          },
+        ],
+      },
+      {
+        source: "/embed/widget",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: buildCsp("*"),
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.isthematterhornvisible.com",
+          },
+        ],
+        destination: "https://isthematterhornvisible.com/:path*",
+        statusCode: 301,
+      },
       {
         source: "/en",
         destination: "/",
@@ -52,6 +142,11 @@ const nextConfig: NextConfig = {
         source: `/${locale}/viewpoints/sunnegga-riffelsee`,
         destination: `/${locale}/viewpoints/riffelsee`,
         permanent: true,
+      })),
+      ...localePrefixes.map((locale) => ({
+        source: `/${locale}/guides/riffelsee-lake-matterhorn-reflection-guide`,
+        destination: "/guides/riffelsee-lake-matterhorn-reflection-guide",
+        statusCode: 301,
       })),
       ...RETIRED_LOCALES.map((locale) => ({
         source: `/${locale}/viewpoints/sunnegga-riffelsee`,

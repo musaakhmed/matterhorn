@@ -4,7 +4,7 @@ import React, { createContext, useContext, useMemo, useEffect, useCallback } fro
 import { usePathname, useRouter } from 'next/navigation';
 import { Locale, DEFAULT_LOCALE, LOCALE_METAS, switchLocalePath } from './config';
 import { Dictionary } from './types';
-import { dictionaries, getDictionary } from './dictionaries';
+import { en } from './dictionaries/en';
 
 interface I18nContextValue {
   locale: Locale;
@@ -14,7 +14,7 @@ interface I18nContextValue {
 
 const I18nContext = createContext<I18nContextValue>({
   locale: DEFAULT_LOCALE,
-  dict: dictionaries[DEFAULT_LOCALE],
+  dict: en,
   switchLanguage: () => {},
 });
 
@@ -29,8 +29,8 @@ export function I18nProvider({ locale, dict, children }: I18nProviderProps) {
   const pathname = usePathname() || '/';
 
   const activeDict = useMemo(() => {
-    return dict || getDictionary(locale);
-  }, [dict, locale]);
+    return dict || en;
+  }, [dict]);
 
   useEffect(() => {
     const meta = LOCALE_METAS[locale];
@@ -66,7 +66,7 @@ export function useTranslation() {
   if (!context) {
     return {
       locale: DEFAULT_LOCALE,
-      dict: dictionaries[DEFAULT_LOCALE],
+      dict: en,
       switchLanguage: () => {},
     };
   }

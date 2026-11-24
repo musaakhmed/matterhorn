@@ -11,12 +11,14 @@ import {
 import VisibilityIcon from './VisibilityIcon';
 import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref } from '@/lib/i18n/config';
+import { getPlanningGuideCopy } from '@/lib/i18n/planning-links';
 
 interface ContingencyCardProps {
   currentScore: number;
   morningScore: number;
   afternoonScore: number;
   viewpointLabel: string;
+  alwaysVisible?: boolean;
 }
 
 export default function ContingencyCard({
@@ -24,10 +26,13 @@ export default function ContingencyCard({
   morningScore,
   afternoonScore,
   viewpointLabel,
+  alwaysVisible = false,
 }: ContingencyCardProps) {
   const { dict, locale } = useTranslation();
   const isLowVisibilityTriggered =
-    currentScore <= 4 || Math.min(morningScore, afternoonScore) <= 4;
+    alwaysVisible ||
+    currentScore <= 4 ||
+    Math.min(morningScore, afternoonScore) <= 4;
 
   if (!isLowVisibilityTriggered) {
     return null;
@@ -91,7 +96,7 @@ export default function ContingencyCard({
           href={getLocalizedHref('/guides/zermatt-cloudy-rainy-day-guide', locale)}
           className="inline-flex items-center gap-1 self-start sm:self-auto px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200/80 dark:bg-amber-950/60 dark:hover:bg-amber-900/80 border border-amber-300 dark:border-amber-700 text-xs font-bold text-amber-950 dark:text-amber-200 transition-colors shrink-0"
         >
-          <span>{dict.common.guides}</span>
+          <span>{getPlanningGuideCopy('zermatt-cloudy-rainy-day-guide', locale).shortTitle}</span>
           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
         </Link>
       </div>

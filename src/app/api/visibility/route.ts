@@ -7,7 +7,6 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Accept',
-  'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=300',
 };
 
 export async function OPTIONS() {
@@ -20,15 +19,21 @@ export async function OPTIONS() {
 export async function GET() {
   try {
     const data = await fetchMatterhornVisibility();
+    const cacheControl = data.isFallback
+      ? 'public, s-maxage=60, stale-while-revalidate=30'
+      : 'public, s-maxage=900, stale-while-revalidate=60';
     return NextResponse.json(data, {
       status: 200,
-      headers: CORS_HEADERS,
+      headers: {
+        ...CORS_HEADERS,
+        'Cache-Control': cacheControl,
+      },
     });
   } catch (error) {
     console.error('Error in /api/visibility:', error);
     return NextResponse.json(
       { error: 'Failed to compute Matterhorn visibility metrics' },
-      { status: 500, headers: CORS_HEADERS }
+      { status: 500, headers: { ...CORS_HEADERS, 'Cache-Control': 'no-store' } }
     );
   }
 }

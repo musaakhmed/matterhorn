@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { buildRootLayoutJsonLd, serializeJsonLd } from '@/lib/schema';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { I18nProvider } from '@/lib/i18n/context';
@@ -94,8 +95,6 @@ export const rootMetadata: Metadata = {
   },
 };
 
-const rootJsonLd = buildRootLayoutJsonLd();
-
 export function RootShell({
   locale,
   dict,
@@ -106,6 +105,7 @@ export function RootShell({
   children: React.ReactNode;
 }>) {
   const htmlLang = LOCALE_METAS[locale]?.htmlLang ?? 'en';
+  const rootJsonLd = buildRootLayoutJsonLd(locale);
 
   return (
     <html lang={htmlLang} className="h-full antialiased" suppressHydrationWarning>
@@ -124,10 +124,9 @@ export function RootShell({
         <ThemeProvider>
           <I18nProvider locale={locale} dict={dict}>{children}</I18nProvider>
         </ThemeProvider>
-        <script
-          defer
-          type="module"
+        <Script
           src="https://static.cloudflareinsights.com/beacon.min.js"
+          strategy="lazyOnload"
           data-cf-beacon='{"token": "d3456b94d4da4b72a9616a39ab473d40"}'
         />
       </body>

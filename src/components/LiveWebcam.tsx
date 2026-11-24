@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
+import Image from 'next/image';
 import {
   Camera,
   ExternalLink,
@@ -10,9 +11,10 @@ import {
   ThumbsUp,
   ThumbsDown,
   CheckCircle2,
-  MapPin,
+  Play,
 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/context';
+import { PLACE_PHOTOS, type PlacePhoto } from '@/lib/place-photos';
 
 interface WebcamFeed {
   id: 'gornergrat' | 'rothorn' | 'trockener-steg' | 'kirchbruecke';
@@ -22,6 +24,7 @@ interface WebcamFeed {
   coordinates: string;
   embedUrl: string;
   directUrl: string;
+  previewPhoto: PlacePhoto;
 }
 
 const WEBCAM_FEEDS: WebcamFeed[] = [
@@ -33,6 +36,7 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
     coordinates: '45.9836° N, 7.7847° E',
     embedUrl: 'https://gornergrat.roundshot.com/',
     directUrl: 'https://gornergrat.roundshot.com/',
+    previewPhoto: PLACE_PHOTOS.gornergrat,
   },
   {
     id: 'rothorn',
@@ -42,6 +46,7 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
     coordinates: '46.0203° N, 7.7989° E',
     embedUrl: 'https://zermatt.roundshot.com/rothorn/',
     directUrl: 'https://zermatt.roundshot.com/rothorn/',
+    previewPhoto: PLACE_PHOTOS.sunnegga,
   },
   {
     id: 'trockener-steg',
@@ -51,6 +56,7 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
     coordinates: '45.9688° N, 7.7106° E',
     embedUrl: 'https://zermatt.roundshot.com/trockener-steg/',
     directUrl: 'https://zermatt.roundshot.com/trockener-steg/',
+    previewPhoto: PLACE_PHOTOS.glacierParadise,
   },
   {
     id: 'kirchbruecke',
@@ -60,6 +66,7 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
     coordinates: '46.0242° N, 7.7511° E',
     embedUrl: 'https://zermatt.roundshot.com/schonegg/',
     directUrl: 'https://zermatt.roundshot.com/schonegg/',
+    previewPhoto: PLACE_PHOTOS.zermattVillage,
   },
 ];
 
@@ -67,26 +74,57 @@ interface LiveWebcamProps {
   defaultCamId?: WebcamFeed['id'];
 }
 
+function subscribeToPollStorage(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener('matterhorn-poll-change', callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener('matterhorn-poll-change', callback);
+  };
+}
+
 export default function LiveWebcam({
   defaultCamId = 'gornergrat',
 }: LiveWebcamProps = {}) {
   const { dict } = useTranslation();
   const [selectedId, setSelectedId] = useState<WebcamFeed['id']>(defaultCamId);
+  const [isLiveLoaded, setIsLiveLoaded] = useState<boolean>(false);
   const [iframeKey, setIframeKey] = useState<number>(0);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [userVote, setUserVote] = useState<'yes' | 'no' | null>(null);
 
   const activeCam =
     WEBCAM_FEEDS.find((cam) => cam.id === selectedId) || WEBCAM_FEEDS[0];
 
+  const voteStorageKey = `matterhorn-poll-${activeCam.id}-${new Date().toISOString().slice(0, 13)}`;
+  const userVote = useSyncExternalStore<'yes' | 'no' | null>(
+    subscribeToPollStorage,
+    () => {
+      try {
+        const saved = localStorage.getItem(voteStorageKey);
+        return saved === 'yes' || saved === 'no' ? saved : null;
+      } catch {
+        return null;
+      }
+    },
+    () => null
+  );
+
   const handleRefresh = () => {
+    setIsLiveLoaded(true);
     setIsRefreshing(true);
     setIframeKey((k) => k + 1);
     setTimeout(() => setIsRefreshing(false), 600);
   };
 
   const handleVote = (choice: 'yes' | 'no') => {
-    setUserVote((current) => (current === choice ? null : choice));
+    const next = userVote === choice ? null : choice;
+    try {
+      if (next) localStorage.setItem(voteStorageKey, next);
+      else localStorage.removeItem(voteStorageKey);
+      window.dispatchEvent(new Event('matterhorn-poll-change'));
+    } catch {
+      // Ignore storage errors in private browsing
+    }
   };
 
   return (
@@ -117,7 +155,7 @@ export default function LiveWebcam({
           <button
             type="button"
             onClick={handleRefresh}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            className="inline-flex min-h-11 items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition-all duration-150 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
             title="Reload active Roundshot camera feed"
           >
             <RefreshCw
@@ -133,7 +171,7 @@ export default function LiveWebcam({
             href={activeCam.directUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-xs font-bold text-white shadow-2xs transition-all duration-150 active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+            className="inline-flex min-h-11 items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 text-xs font-bold text-white shadow-2xs transition-all duration-150 active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
           >
             <span>{dict.webcams.fullScreen}</span>
             <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
@@ -169,7 +207,7 @@ export default function LiveWebcam({
                 <span
                   className={`px-2 py-0.5 rounded-md font-mono text-[11px] font-bold shrink-0 ${
                     isSelected
-                      ? 'bg-sky-600 text-white'
+                      ? 'bg-sky-700 text-white'
                       : 'bg-slate-200/80 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
                   }`}
                 >
@@ -185,32 +223,59 @@ export default function LiveWebcam({
       </div>
 
       {/* Active Webcam Frame */}
-      <div className="relative w-full aspect-video 2xl:aspect-[21/9] max-h-[75vh] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 shadow-inner">
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-sky-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
-          <MountainSnow className="w-10 h-10 text-sky-600/60 dark:text-sky-400/60 mb-2" aria-hidden="true" />
-          <p className="text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
-            Connecting to {activeCam.name} ({activeCam.elevation}) Live Roundshot Panorama…
-          </p>
-          <a
-            href={activeCam.directUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-slate-700 shadow-2xs"
-          >
-            <span>View live 360° Roundshot stream</span>
-            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-          </a>
-        </div>
+      <div className="relative w-full aspect-video 2xl:aspect-[21/9] max-h-[75vh] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-inner">
+        {isLiveLoaded ? (
+          <>
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-sky-50 to-slate-100 dark:from-slate-900 dark:to-slate-950">
+              <MountainSnow className="w-10 h-10 text-sky-600/60 dark:text-sky-400/60 mb-2" aria-hidden="true" />
+              <p className="text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
+                Connecting to {activeCam.name} ({activeCam.elevation}) Live Roundshot Panorama…
+              </p>
+              <a
+                href={activeCam.directUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-slate-700 shadow-2xs"
+              >
+                <span>View live 360° Roundshot stream</span>
+                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
+            </div>
 
-        <iframe
-          key={`${activeCam.id}-${iframeKey}`}
-          src={activeCam.embedUrl}
-          title={`${activeCam.name} (${activeCam.elevation}) 360° Live Webcam`}
-          className="relative z-10 w-full h-full border-0"
-          loading="lazy"
-          allow="fullscreen"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+            <iframe
+              key={`${activeCam.id}-${iframeKey}`}
+              src={activeCam.embedUrl}
+              title={`${activeCam.name} (${activeCam.elevation}) 360° Live Webcam`}
+              className="relative z-10 w-full h-full border-0"
+              allow="fullscreen"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </>
+        ) : (
+          <div className="relative w-full h-full">
+            <Image
+              src={activeCam.previewPhoto.src}
+              alt={`${activeCam.name} (${activeCam.elevation}) webcam preview`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 1180px"
+              className="object-cover"
+              style={{ objectPosition: activeCam.previewPhoto.objectPosition }}
+            />
+            <div className="absolute inset-0 bg-slate-950/55 backdrop-blur-[1px] flex flex-col items-center justify-center p-6 text-center">
+              <button
+                type="button"
+                onClick={() => setIsLiveLoaded(true)}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-sky-700 hover:bg-sky-800 text-white text-sm font-bold shadow-lg transition-all duration-150 active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+              >
+                <Play className="w-4 h-4 fill-current shrink-0" aria-hidden="true" />
+                <span>Load {activeCam.name} Live 360° Webcam</span>
+              </button>
+              <p className="mt-2.5 text-xs text-slate-200 max-w-md">
+                {dict.webcams.opticalSensorNote}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* HUD Telemetry Corner Badge */}
         <div className="pointer-events-none absolute bottom-2 left-2 right-2 sm:right-auto z-20 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-300 dark:border-slate-700 text-[10px] sm:text-[11px] font-mono font-semibold text-slate-800 dark:text-slate-200 shadow-xs truncate">
@@ -229,6 +294,11 @@ export default function LiveWebcam({
             <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
               {dict.webcams.seePeak}
             </span>
+            {userVote && (
+              <p className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400 mt-0.5" role="status">
+                Recorded for {activeCam.name} this hour — thanks for verifying live optical conditions.
+              </p>
+            )}
           </div>
         </div>
 
@@ -237,7 +307,7 @@ export default function LiveWebcam({
             type="button"
             onClick={() => handleVote('yes')}
             aria-pressed={userVote === 'yes'}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold transition-all duration-150 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 ${
+            className={`inline-flex min-h-11 items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-bold transition-all duration-150 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 ${
               userVote === 'yes'
                 ? 'bg-emerald-600 border-emerald-700 text-white shadow-2xs'
                 : 'bg-white dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'
@@ -251,7 +321,7 @@ export default function LiveWebcam({
             type="button"
             onClick={() => handleVote('no')}
             aria-pressed={userVote === 'no'}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold transition-all duration-150 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 ${
+            className={`inline-flex min-h-11 items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-bold transition-all duration-150 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600 ${
               userVote === 'no'
                 ? 'bg-rose-600 border-rose-700 text-white shadow-2xs'
                 : 'bg-white dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950/40 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'

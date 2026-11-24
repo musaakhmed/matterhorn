@@ -4,11 +4,12 @@ import { notFound } from 'next/navigation';
 import GuideArticleView from '@/components/GuideArticleView';
 import { LOCALES, DEFAULT_LOCALE, isValidLocale, getAlternateUrls, Locale } from '@/lib/i18n/config';
 import { GUIDES } from '@/lib/guides';
-import { getLocalizedGuideArticle } from '@/lib/i18n/guides';
+import { findLocalizedGuideArticle } from '@/lib/i18n/guides';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { openGraphLocale } from '@/lib/i18n/seo';
 
 export const revalidate = 900;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   const nonDefaultLocales = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
@@ -28,7 +29,8 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) return {};
   const typed = locale as Locale;
-  const guide = getLocalizedGuideArticle(slug, typed);
+  const guide = findLocalizedGuideArticle(slug, typed);
+  if (!guide) return {};
   const dict = getDictionary(typed);
   const metaTitle =
     guide.seoTitle && guide.seoTitle !== guide.title
@@ -70,5 +72,6 @@ export default async function LocalizedGuideArticlePage({
 }) {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) notFound();
+  if (!findLocalizedGuideArticle(slug, locale as Locale)) notFound();
   return <GuideArticleView slug={slug} locale={locale as Locale} />;
 }

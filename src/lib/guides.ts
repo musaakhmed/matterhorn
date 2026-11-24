@@ -197,11 +197,11 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'best-time-to-see-matterhorn',
-    title: 'Zermatt Weather by Month | Best Time to See the Matterhorn',
+    title: 'Best Time to See the Matterhorn (30-Year Monthly & Hourly Clarity Data)',
     shortTitle: 'Zermatt Weather by Month',
-    seoTitle: 'Zermatt Weather by Month | Best Time to See the Matterhorn',
+    seoTitle: 'Best Time to See the Matterhorn: Clear-Sky Odds by Month',
     description:
-      'Zermatt weather in December, September, and May, and the best time of day to see the Matterhorn. December hits 89% clear skies.',
+      'Morning (06:00–10:30) beats afternoon 78% of the year. Compare 30-year Matterhorn clear-sky odds from July (52%) to Sep (72%) & Dec (89%) + 10-day tracker.',
     category: 'Climatology',
     publishedAt: '2026-01-20',
     updatedAt: '2026-10-25',
@@ -219,7 +219,7 @@ export const GUIDES: GuideArticle[] = [
     keyTakeaways: [
       'December (89%) and January (88%) statistically offer the highest daily probability of a crystal-clear Matterhorn summit window.',
       'June (48%) and July (52%) record the lowest full-day visibility due to afternoon solar heating and convective cumulus clouds.',
-      'Regardless of season, the 06:00–11:00 CET Morning (AM) window is dramatically clearer than the 12:00–18:00 CET Afternoon (PM) block.',
+      'Regardless of season, the 06:00–11:00 CET Morning (AM) window is dramatically clearer than the 12:00–18:00 CET Afternoon (PM) block—verify your dates on our [10-Day AM/PM Visibility Horizon](/#forecast).',
       'September and October ("Golden Autumn") provide the best balance of snow-free hiking trails and 72%–79% clear-sky reliability.',
     ],
     embeddedWidget: 'historical-table',
@@ -229,11 +229,11 @@ export const GUIDES: GuideArticle[] = [
         heading: '1. The Golden Rule of Zermatt: Why Morning (AM) Always Beats Afternoon (PM)',
         paragraphs: [
           'If you take only one piece of advice before visiting Zermatt, make it this: set an early alarm. Throughout spring, summer, and early autumn, the Matterhorn regularly wakes up against a spotless cobalt-blue sky at 06:30 CET, only to be completely swallowed by boiling cumulus clouds by 13:30 CET.',
-          'As soon as the sun heats the dark gneiss and schist rock walls of the Mattertal valley, warm air rises up the mountain flanks (anabatic thermal winds). When that rising air crosses the 3,000-meter freezing level, moisture condenses directly onto the summit ridges. Our dashboard separates every day into a 6-hour Morning (AM) and Afternoon (PM) score specifically so you don’t waste a clear morning sleeping in.',
+          'As soon as the sun heats the dark gneiss and schist rock walls of the Mattertal valley, warm air rises up the mountain flanks (anabatic thermal winds). When that rising air crosses the 3,000-meter freezing level, moisture condenses directly onto the summit ridges. Our [Live Matterhorn Visibility Tracker](/) separates every day into a 6-hour Morning (AM) and Afternoon (PM) score specifically so you don’t waste a clear morning sleeping in.',
         ],
         proTip: {
           label: 'First Train Strategy',
-          text: 'Book the 07:00 or 07:36 CET Gornergrat cogwheel departure in summer to reach Riffelsee before thermal clouds and daytime breezes ripple the water.',
+          text: 'Book the 07:00 or 07:36 CET Gornergrat cogwheel departure in summer to reach [Riffelsee](/viewpoints/riffelsee) before thermal clouds and daytime breezes ripple the water.',
         },
       },
       {
@@ -287,6 +287,20 @@ export const GUIDES: GuideArticle[] = [
         paragraphs: [
           'Based on 30-year Zermatt probability curves, a 1-night stay in July gives you roughly a coin-flip chance of a clean view. Staying 3 full mornings raises your cumulative probability of catching at least one ≥8/10 viewing window to over 88% in summer and 98% in autumn/winter.',
         ],
+        bulletPoints: [
+          {
+            bold: '1 Morning in Summer (Jun–Jul):',
+            text: '~50% chance of catching an unobstructed ≥8/10 summit window.',
+          },
+          {
+            bold: '3 Full Mornings in Summer:',
+            text: '88%+ cumulative probability of at least one bluebird morning window.',
+          },
+          {
+            bold: '3 Full Mornings in Autumn/Winter:',
+            text: '98% cumulative probability of crisp East Face and Southern Crest clarity.',
+          },
+        ],
       },
     ],
     faqs: [
@@ -304,12 +318,12 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'zermatt-cloudy-rainy-day-guide',
-    title: 'What to Do in Zermatt When the Matterhorn is Hid in Clouds (Bad Weather Guide)',
+    title: 'What to Do in Zermatt When the Matterhorn Is Hidden in Clouds',
     shortTitle: 'Cloudy & Rainy Day Guide',
     seoTitle:
-      'What to Do in Zermatt in Bad Weather or Clouds | Save YourCHF 100+ Lift Ticket',
+      'Zermatt in Rain or Clouds: 7 Plan B Ideas (Save CHF 110+)',
     description:
-      'Is the Matterhorn visibility score 4/10 or lower today? Skip the CHF 100+ whiteout cable car ride and explore Zermatt’s best rainy-day activities, gorges, museums, and spas.',
+      'Matterhorn hidden in clouds today? Check if 3,089m is above the valley fog first—or skip the CHF 110+ whiteout lift for Gorner Gorge, Zermatlantis & spas.',
     category: 'Bad Weather',
     publishedAt: '2026-02-02',
     updatedAt: '2026-10-25',
@@ -325,7 +339,7 @@ export const GUIDES: GuideArticle[] = [
       detail: 'Per person saved by skipping a 1/10 whiteout summit ride',
     },
     keyTakeaways: [
-      'Never buy a summit pass to Gornergrat or Glacier Paradise when our live visibility index is ≤ 4/10—you will only see the inside of a cloud.',
+      'Never buy a summit pass to Gornergrat or Glacier Paradise when our [Live 1–10 Visibility Score](/) is ≤ 4/10—you will only see the inside of a cloud.',
       'Check if the cloud cover is a "Low Valley Inversion": occasionally Zermatt (1,608m) is overcast while 3,089m+ is sunny (our atmospheric layer cards reveal this immediately).',
       'Gorner Gorge (Gornerschlucht) actually looks more dramatic in light rain or overcast light thanks to roaring glacial waterfalls and vivid green serpentinite rock.',
       'Zermatlantis (the subterranean Matterhorn Museum) and village alpine day spas turn a socked-in day into a highlight.',
@@ -334,14 +348,14 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         id: 'check-inversion-first',
-        heading: '1. Wait: Is It Truly Sock-In Weather, or Just a Low Valley Cloud Inversion?',
+        heading: '1. Wait: Is It Truly Socked-In Weather, or Just a Low Valley Cloud Inversion?',
         paragraphs: [
-          'Before writing off the mountain completely, look upward—or check the 3-Layer Cloud Breakdown on our main dashboard. If Low Cloud (2,000m) is 90% but Mid Cloud (3,000m) and High Cloud (5,000m) are under 15%, Zermatt village is trapped beneath a temperature inversion.',
-          'In that specific scenario, riding the cogwheel train up to Gornergrat (3,089m) or the gondola to Glacier Paradise (3,883m) will launch you right through the cloud ceiling into blazing sunshine above a sea of white fog. Confirm on our embedded live Roundshot webcams before boarding.',
+          'Before writing off the mountain completely, check the [3-Layer Cloud Breakdown on the Live Dashboard](/#metrics). If Low Cloud (<2,000m) is 90% but Mid Cloud (2,000m–6,000m) is under 20%, Zermatt village is simply trapped beneath a valley temperature inversion.',
+          'In that scenario, riding up to [Gornergrat (3,089m)](/viewpoints/gornergrat) or [Glacier Paradise (3,883m)](/viewpoints/glacier-paradise) launches you right through the cloud ceiling into sunshine above a sea of fog. Always confirm on our [Live Zermatt Roundshot Webcams](/#webcams) before boarding.',
         ],
         proTip: {
           label: 'Webcam Verification',
-          text: 'Always cross-check our Mid-Level Cloud % with the live Gornergrat 3,100m webcam. If both Mid Cloud > 75% and the webcam is white, stay in the valley.',
+          text: 'Always cross-check Mid-Level Cloud % with the [live Gornergrat 3,089m webcam](/#webcams). If both Mid Cloud > 75% and the webcam is white, stay in the valley.',
         },
       },
       {
@@ -513,9 +527,9 @@ export const GUIDES: GuideArticle[] = [
     title: 'Why Does the Matterhorn Always Have a Cloud on Top? (Banner Clouds & Föhn Winds)',
     shortTitle: 'Banner Clouds & Föhn Physics',
     seoTitle:
-      'Why the Matterhorn Has a Cloud on Top | Banner Clouds, Föhn Winds & Visibility Scoring',
+      'Why Does the Matterhorn Have a Cloud on Top? (Banner Cloud)',
     description:
-      'Learn the atmospheric physics behind the Matterhorn’s famous lee-wave "banner cloud," how southerly Föhn winds form it on otherwise clear days, and how we score it.',
+      'Clear blue sky except one cloud stuck to the Matterhorn? How Föhn lee-vortex banner clouds form, when they clear at dusk, and today’s live summit cam.',
     category: 'Meteorology',
     publishedAt: '2026-02-18',
     updatedAt: '2026-10-28',
@@ -534,7 +548,7 @@ export const GUIDES: GuideArticle[] = [
       'The Matterhorn’s isolated pyramidal geometry acts like an aerodynamic wing in high-altitude airflow, creating a low-pressure vortex on its downwind (leeward) side.',
       'Air sucked upward into this leeward vortex cools adiabatically, condensing invisible moisture into a stationary "banner cloud" attached to the summit.',
       'Standard weather apps report "Sunny / 0% Rain" in Zermatt (1,608m) even when a dense banner cloud hides the top 500m of the peak.',
-      'Our scoring algorithm specifically penalizes mid-level (3,000m) moisture and southerly Föhn wind vectors (150°–210° above 30 km/h) to predict banner clouds.',
+      'Our [Live Banner Cloud & Visibility Tracker](/) combines summit LCL humidity, southerly Föhn wind vectors (150°–210° above 30 km/h), and the Hotel Schönegg camera to flag banner plumes in real time.',
     ],
     embeddedWidget: 'scoring-formula',
     sections: [
@@ -545,6 +559,16 @@ export const GUIDES: GuideArticle[] = [
           'Every visitor to Zermatt eventually witnesses a baffling sight: the entire sky over Switzerland is deep blue without a single cloud—except for a thick white plume streaming horizontally off the Matterhorn’s summit like smoke from a volcano.',
           'Unlike ordinary drifting clouds, a banner cloud is continuously born and dissolved in place. Because the Matterhorn stands as an isolated, steep-sided pyramid rising to 4,478 meters, winds striking its windward face are forced sharply around and over the ridges. On the sheltered leeward (downwind) face, aerodynamic separation creates a pocket of markedly lower atmospheric pressure.',
           'Moist air from 500 to 800 meters lower down the mountain is drawn rapidly upward into this low-pressure wake. As that air rises and expands, its temperature drops below the dew point, flashing water vapor into liquid cloud droplets right against the lee face. A few hundred meters downwind, the air sinks, warms up, and the cloud vanishes back into clear air.',
+        ],
+        bulletPoints: [
+          {
+            bold: 'Southerly Föhn Trigger (150°–210°, >30 km/h):',
+            text: 'Pushes moist Italian air across the crest, forming a windward Stau wall at [Glacier Paradise (3,883m)](/viewpoints/glacier-paradise) and a leeward plume facing [Gornergrat (3,089m)](/viewpoints/gornergrat).',
+          },
+          {
+            bold: 'Lifting Condensation Level (LCL ≤ 800m):',
+            text: 'When the summit temperature–dewpoint spread is ~6.4°C or less, the 500–800m leeward vortex lift condenses a visible plume even under blue skies.',
+          },
         ],
         proTip: {
           label: 'How to Read a Banner Cloud',
@@ -890,12 +914,12 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: 'gornergrat-railway-vs-glacier-express',
     title:
-      'Gornergrat vs Glacier Express: Which Should You Take? (Full Comparison)',
+      'Gornergrat Railway vs. Glacier Express: Which Train Actually Shows You the Matterhorn?',
     shortTitle: 'Gornergrat vs. Glacier Express',
     seoTitle:
-      'Gornergrat vs Glacier Express: Which Should You Take? (Full Comparison)',
+      'Gornergrat Railway vs Glacier Express: 2026 Price & Views',
     description:
-      'Gornergrat vs Glacier Express: 33-minute Matterhorn summit climb (3,089m) or 8-hour panoramic Alps train? Compare prices, Swiss Travel Pass rules & views.',
+      '33-min Matterhorn summit climb (CHF 51–66 w/ Swiss Pass) vs 8h St. Moritz scenic train (free w/ Pass + CHF 49 seat fee). Which gives real Matterhorn views?',
     category: 'Day Trips',
     publishedAt: '2026-11-05',
     updatedAt: '2026-11-05',
@@ -913,7 +937,7 @@ export const GUIDES: GuideArticle[] = [
         'Vertical summit cogwheel climb (3,089m) vs. 291km panoramic trans-alpine rail',
     },
     keyTakeaways: [
-      'Gornergrat Railway (GGB) is a vertical cogwheel ascent taking 33 minutes from Zermatt (1,604m) straight to the 3,089m summit ridge, providing the front-row iconic East Face Matterhorn view.',
+      'Gornergrat Railway (GGB) is a 33-minute vertical cogwheel ascent from Zermatt (1,604m) to 3,089m for front-row Matterhorn East Face views—check today’s [Live 1–10 Summit Visibility Score](/) before buying.',
       'The Glacier Express (GEX) is an 8-hour, 291-kilometer trans-alpine scenic journey crossing 291 bridges and 91 tunnels between Zermatt and St. Moritz.',
       'Swiss Travel Pass rules differ sharply: Gornergrat offers a 50% discount with no seat reservations required, whereas the Glacier Express has 100% ticket coverage but MANDATORY paid seat reservations (CHF 39–49).',
       'You do not need to choose between them: both trains meet directly opposite each other at Zermatt Bahnhof square, making it effortless to ride the Glacier Express into town and then ride Gornergrat to the summit.',
@@ -1106,10 +1130,21 @@ export const GUIDES: GuideArticle[] = [
           'Which Train Should You Ride? (Or How to Combine Both)',
         paragraphs: [
           'Because both trains depart from the same central hub at Zermatt Bahnhof square, they are natural companions rather than direct rivals. Choosing which one to prioritize depends on your itinerary length and sightseeing priorities:',
-          '1. If you only have 1 or 2 days in Zermatt: Ride the Gornergrat Bahn. Your primary goal is seeing and photographing the Matterhorn, hiking the Riffelsee reflection trail, and reaching 3,089 meters. In just over half an hour, Gornergrat puts you directly in front of the mountain.',
-          '2. If you are traveling between eastern Switzerland and Zermatt: Take the Glacier Express as your scenic long-distance transit. Instead of taking standard regional trains through the long Lötschberg Base Tunnel, riding the Glacier Express transforms your transit day into a world-class scenic experience.',
-          '3. The Ultimate 48-Hour Alpine Itinerary: Arrive in Zermatt aboard the Glacier Express in the late afternoon, marveling at the Mattertal valley cliffs. Check into your Zermatt hotel, enjoy a fondue dinner in the village, and board the first morning Gornergrat train at 08:00 to catch pristine golden-hour light reflecting across the Gorner Glacier and Matterhorn.',
           'Explore live weather scores and contingency routes before booking on our [Matterhorn Visibility Live Dashboard](/).',
+        ],
+        bulletPoints: [
+          {
+            bold: '1–2 Days in Zermatt → Ride Gornergrat Bahn:',
+            text: 'If your goal is seeing and photographing the Matterhorn, walking to [Riffelsee](/viewpoints/riffelsee), and reaching 3,089m, Gornergrat puts you directly in front of the pyramid in 33 minutes.',
+          },
+          {
+            bold: 'Transit Between St. Moritz / Chur & Zermatt → Ride Glacier Express:',
+            text: 'Use the Glacier Express as a scenic overland transfer day across Oberalp Pass and Landwasser Viaduct—it only glimpses the Matterhorn inside the Zermatt valley.',
+          },
+          {
+            bold: 'The 48-Hour Combo Itinerary:',
+            text: 'Arrive in Zermatt on the late-afternoon Glacier Express, sleep in the village, and catch the 08:00 Gornergrat cogwheel when morning East Face clarity peaks.',
+          },
         ],
       },
       {

@@ -106,31 +106,38 @@ const SIZE_CONFIG: Record<
   {
     containerClass: string;
     pixelSize: number;
+    sizes: string;
   }
 > = {
   xs: {
     containerClass: 'w-7 h-7 rounded-[20%]',
-    pixelSize: 112,
+    pixelSize: 28,
+    sizes: '28px',
   },
   sm: {
     containerClass: 'w-9 h-9 rounded-[20%]',
-    pixelSize: 144,
+    pixelSize: 36,
+    sizes: '36px',
   },
   md: {
     containerClass: 'w-11 h-11 rounded-[20%]',
-    pixelSize: 176,
+    pixelSize: 44,
+    sizes: '44px',
   },
   lg: {
     containerClass: 'w-14 h-14 rounded-[20%]',
-    pixelSize: 224,
+    pixelSize: 56,
+    sizes: '56px',
   },
   xl: {
     containerClass: 'w-20 h-20 sm:w-24 sm:h-24 rounded-[20%]',
-    pixelSize: 384,
+    pixelSize: 96,
+    sizes: '(max-width: 640px) 80px, 96px',
   },
   '2xl': {
     containerClass: 'w-24 h-24 sm:w-28 sm:h-28 rounded-[20%]',
-    pixelSize: 448,
+    pixelSize: 112,
+    sizes: '(max-width: 640px) 96px, 112px',
   },
 };
 
@@ -174,7 +181,7 @@ export default function VisibilityIcon({
         alt={decorative ? '' : meta.alt}
         width={sizeSpec.pixelSize}
         height={sizeSpec.pixelSize}
-        unoptimized
+        sizes={sizeSpec.sizes}
         preload={preload}
         className="w-full h-full object-cover pointer-events-none"
       />

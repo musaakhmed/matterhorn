@@ -6,6 +6,7 @@ import { Mountain, TrainFront, CableCar, Compass, ArrowUpRight, MapPin, Camera }
 import { BadgeColor, ViewpointRecommendation } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n/context';
 import { getLocalizedHref } from '@/lib/i18n/config';
+import { getPlanningGuideCopy } from '@/lib/i18n/planning-links';
 
 interface ViewpointAdviceProps {
   viewpoints: ViewpointRecommendation[];
@@ -79,7 +80,7 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
             href={getLocalizedHref('/guides/gornergrat-vs-glacier-paradise', locale)}
             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 border border-sky-200 dark:border-sky-800 text-xs font-bold text-sky-800 dark:text-sky-300 transition-colors"
           >
-            <span>{dict.common.guides}</span>
+            <span>{getPlanningGuideCopy('gornergrat-vs-glacier-paradise', locale).shortTitle}</span>
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
           <Link
@@ -176,7 +177,7 @@ export default function ViewpointAdvice({ viewpoints }: ViewpointAdviceProps) {
 
         <Link
           href={getLocalizedHref('/guides/best-matterhorn-photo-viewpoints', locale)}
-          className="shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white text-xs font-bold shadow-xs transition-colors"
+          className="shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-sky-700 hover:bg-sky-800 dark:bg-sky-700 dark:hover:bg-sky-600 text-white text-xs font-bold shadow-xs transition-colors"
         >
           <span>View Zermatt Photo Spots</span>
           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

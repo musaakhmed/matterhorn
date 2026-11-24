@@ -15,11 +15,10 @@ import ViewpointAdvice from './ViewpointAdvice';
 import ScenicTrainsCard from './ScenicTrainsCard';
 import FaqSection from './FaqSection';
 import Footer from './Footer';
-import AlpinePlanningLinks from '@/components/AlpinePlanningLinks';
 import LocaleSuggestion from '@/components/LocaleSuggestion';
 import VisibilityIcon, { VISIBILITY_SCALE_TIERS } from './VisibilityIcon';
 import { ViewpointId, VisibilityApiResponse } from '@/lib/types';
-import { getDashboardFaqs } from '@/lib/schema';
+import type { RichFaqItem } from '@/lib/schema';
 import { getViewpointScoreMap, VIEWPOINT_PAGES } from '@/lib/viewpoints';
 import { Info, BookOpen, ArrowUpRight, Camera, MountainSnow, TrainFront } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/context';
@@ -30,10 +29,12 @@ import { photoForViewpoint } from '@/lib/place-photos';
 
 interface VisibilityClientShellProps {
   initialData: VisibilityApiResponse;
+  dashboardFaqs: RichFaqItem[];
 }
 
 export default function VisibilityClientShell({
   initialData,
+  dashboardFaqs,
 }: VisibilityClientShellProps) {
   const { dict, locale } = useTranslation();
   const [activeViewpointId, setActiveViewpointId] = useState<ViewpointId>(
@@ -44,7 +45,6 @@ export default function VisibilityClientShell({
   const inactiveViewpointId: ViewpointId =
     activeViewpointId === 'gornergrat' ? 'glacier-paradise' : 'gornergrat';
   const inactiveData = initialData.viewpoints[inactiveViewpointId];
-  const dashboardFaqs = getDashboardFaqs(initialData, locale);
   const borderStatus = evaluateCrossBorderLink(initialData);
   const trainsLive = getTrainsLiveStatus(initialData);
 
@@ -347,8 +347,6 @@ export default function VisibilityClientShell({
             </div>
           </div>
         </section>
-
-        <AlpinePlanningLinks />
 
         <FaqSection
           faqs={dashboardFaqs}
